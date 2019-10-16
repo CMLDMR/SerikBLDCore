@@ -38,7 +38,7 @@ mongocxx::database *DB::db()
     return this->mDB;
 }
 
-QString DB::downloadFile(const QString &fileOid, bool forceFilename)
+std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
 {
     auto bucket = this->mDB->gridfs_bucket ();
 
@@ -88,7 +88,7 @@ QString DB::downloadFile(const QString &fileOid, bool forceFilename)
 
     if( QFile::exists(fullFilename) )
     {
-        return fullFilename;
+        return fullFilename.toStdString ();
     }else{
         std::cout << "FILE NOT FOUND: " << fullFilename.toStdString() << std::endl;
     }
@@ -120,7 +120,7 @@ QString DB::downloadFile(const QString &fileOid, bool forceFilename)
         std::cout << "Error Can Not Open File: " <<fullFilename.toStdString() << std::endl;
     }
 
-    return fullFilename;
+    return fullFilename.toStdString ();
 }
 
 bsoncxx::types::value DB::uploadfile(QString filepath)

@@ -24,7 +24,7 @@ public:
 
     mongocxx::database* db();
 
-    QString downloadFile(const QString &fileOid , bool forceFilename = false);
+    std::string downloadFile(const QString &fileOid , bool forceFilename = false);
 
     bsoncxx::types::value uploadfile(QString filepath );
 
