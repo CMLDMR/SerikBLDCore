@@ -20,14 +20,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     db.cpp \
     item.cpp \
-    serikbldcore.cpp
+    serikbldcore.cpp \
+    user.cpp
 
 HEADERS += \
     SerikBLDCore_global.h \
     db.h \
     item.h \
     mongoheaders.h \
-    serikbldcore.h
+    serikbldcore.h \
+    user.h
 
 # Default rules for deployment.
 unix {
