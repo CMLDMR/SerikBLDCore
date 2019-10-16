@@ -1,12 +1,21 @@
 #ifndef DB_H
 #define DB_H
 
-#include "mongoheaders.h"
-#include "../url.h"
 #include <iostream>
 #include <QString>
 
-class DB
+#include <QtGlobal>
+#include "SerikBLDCore_global.h"
+
+
+#ifdef Q_OS_WINDOWS
+#include "../url.h"
+#include "mongoheaders.h"
+#include <boost/optional.hpp>
+
+#endif
+
+class SERIKBLDCORE_EXPORT DB
 {
 public:
     explicit DB();
