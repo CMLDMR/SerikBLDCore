@@ -15,4 +15,9 @@
 #  define SERIKBLDCORE_EXPORT Q_DECL_IMPORT
 #endif
 
+
+
+
+
+
 #endif // SERIKBLDCORE_GLOBAL_H

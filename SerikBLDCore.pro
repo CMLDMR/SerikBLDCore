@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     db.cpp \
+    dilekce.cpp \
     item.cpp \
     serikbldcore.cpp \
     user.cpp
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     SerikBLDCore_global.h \
     db.h \
+    dilekce.h \
     item.h \
     mongoheaders.h \
     serikbldcore.h \
