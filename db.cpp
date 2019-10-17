@@ -33,6 +33,12 @@ DB::DB(DB *_db)
 
 }
 
+DB::~DB()
+{
+    std::cout << "Destructor " << std::endl;
+    delete mClient;
+}
+
 mongocxx::database *DB::db()
 {
     return this->mDB;
