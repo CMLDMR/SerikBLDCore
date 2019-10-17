@@ -20,13 +20,18 @@ class SERIKBLDCORE_EXPORT Dilekce : public Item , public DB
     const std::string KeyTCOid{"TCOid"};
     const std::string KeyBirim{"Birim"};
 public:
-    explicit Dilekce(DB* _db);
+    explicit Dilekce();
+    Dilekce(Dilekce* other);
 
-    static boost::optional<Dilekce*> Create_Dilekce(DB* _db);
+
+    static boost::optional<Dilekce*> Create_Dilekce();
 
     void SetSayi( const int &sayi );
 
     bool Update();
+
+private:
+
 };
 
 #endif // DILEKCE_H

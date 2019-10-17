@@ -3,17 +3,22 @@
 
  const std::string Dilekce::Collection = "Dilekce";
 
-Dilekce::Dilekce(DB *_db) : Item() , DB()
+Dilekce::Dilekce() : Item() , DB()
 {
 
 }
 
-boost::optional<Dilekce *> Dilekce::Create_Dilekce(DB *_db)
+Dilekce::Dilekce(Dilekce *other) : Item() , DB()
 {
-    auto item = new Dilekce(_db);
+    this->setDocumentView (other->view ());
+}
+
+boost::optional<Dilekce *> Dilekce::Create_Dilekce()
+{
+    auto item = new Dilekce();
 
     try {
-        auto ins = _db->db ()->collection (Collection).insert_one (item->view ());
+        auto ins = item->db ()->collection (Collection).insert_one (item->view ());
         if( ins )
         {
             item->append("_id",ins.value ().inserted_id ().get_oid ().value );

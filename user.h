@@ -14,7 +14,7 @@ class SERIKBLDCORE_EXPORT User : public Item , public DB
     const std::string KeyBirimi{"Birimi"};
     const std::string KeyFotoid{"fotooid"};
 public:
-    User(DB* _db);
+    User();
 
     bool Login( const std::string &_mTel , const std::string &_mPassword);
 

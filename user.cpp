@@ -1,6 +1,6 @@
 #include "user.h"
 
-User::User(DB *_db) : Item () , DB()
+User::User() : Item () , DB()
 {
 
 }
