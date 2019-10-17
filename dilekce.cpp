@@ -1,16 +1,16 @@
 #include "dilekce.h"
 
 
- const std::string Dilekce::Collection = "Dilekce";
+const std::string Dilekce::Collection = "Dilekce";
 
-Dilekce::Dilekce() : Item() , DB()
-{
 
-}
 
 Dilekce::Dilekce(Dilekce *other) : Item() , DB()
 {
-    this->setDocumentView (other->view ());
+    if( !other )
+    {
+        this->setDocumentView (other->view ());
+    }
 }
 
 boost::optional<Dilekce *> Dilekce::Create_Dilekce()
@@ -38,34 +38,39 @@ void Dilekce::SetSayi(const int &sayi)
     this->append(KeySayi,sayi);
 }
 
-void Dilekce::SetKonu(const std::string &konu)
+void Dilekce::SetKonu(const QString &konu)
 {
     this->append(KeyKonu,konu);
 }
 
-void Dilekce::SetTCOid(const std::string &oid)
+void Dilekce::SetTCOid(const QString &oid)
 {
-    this->append(KeyTCOid,bsoncxx::oid{oid});
+    this->append(KeyTCOid,bsoncxx::oid{oid.toStdString ()});
 }
 
-void Dilekce::SetBirim(const std::string &birim)
+void Dilekce::SetBirim(const QString &birim)
 {
     this->append(KeyBirim,birim);
 }
 
-void Dilekce::SetIcerikTipi(const std::string &icerikTipi)
+void Dilekce::SetIcerikTipi(const QString &icerikTipi)
 {
     this->append(KeyIcerikTipi,icerikTipi);
 }
 
-void Dilekce::SetIcerik(const std::string &icerik)
+void Dilekce::SetIcerik(const QString &icerik)
 {
     this->append(KeyIcerik,icerik);
 }
 
-void Dilekce::SetDilekceOid(const std::string &dilekceOid)
+void Dilekce::SetDilekceOid(const QString &dilekceOid)
 {
-    this->append(KeyDilekceOid,dilekceOid);
+    this->append(KeyDilekceOid,dilekceOid.toStdString ());
+}
+
+void Dilekce::AddEkOid(const QString &ekOid)
+{
+    //TODO: Array Eklenecek
 }
 
 void Dilekce::SetTarih(const int &julianDay)

@@ -4,7 +4,7 @@
 #include <QtGlobal>
 #include "item.h"
 #include "db.h"
-
+#include <QString>
 #include "SerikBLDCore_global.h"
 
 
@@ -23,24 +23,24 @@ class SERIKBLDCORE_EXPORT Dilekce : public Item , public DB
     const std::string KeyTarihJulian{"TarihJulian"};
     const std::string KeySaat{"Saat"};
 public:
-    explicit Dilekce();
-    Dilekce(Dilekce* other);
+    explicit Dilekce(Dilekce* other = nullptr);
 
 
     static boost::optional<Dilekce*> Create_Dilekce();
 
     void SetSayi( const int &sayi );
-    void SetKonu( const std::string &konu);
-    void SetTCOid( const std::string &oid);
-    void SetBirim( const std::string &birim);
-    void SetIcerikTipi( const std::string &icerikTipi);
-    void SetIcerik( const std::string &icerik);
-    void SetDilekceOid( const std::string &dilekceOid);
-    void AddEkOid( const std::string &ekOid );
+    void SetKonu( const QString &konu);
+    void SetTCOid( const QString &oid);
+    void SetBirim( const QString &birim);
+    void SetIcerikTipi(const QString &icerikTipi);
+    void SetIcerik( const QString &icerik);
+    void SetDilekceOid( const QString &dilekceOid);
+    void AddEkOid( const QString &ekOid );
     void SetTarih( const int &julianDay );
     void SetSaat( const int &mSecsFromBeginDay );
 
     int sayi();
+
 
     bool Update();
 
