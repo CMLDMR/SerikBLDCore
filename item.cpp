@@ -37,6 +37,7 @@ void Item::operator=(const Item &value)
 
 }
 
+
 void Item::setDocumentView(const bsoncxx::document::view &view)
 {
     mDoc.clear ();
@@ -60,9 +61,20 @@ boost::optional<bsoncxx::types::value> Item::element(std::string key)
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
         std::cout << str << std::endl;
+        ErrorList.append (str.c_str ());
         return boost::none;
     }
 
 
+}
+
+QString Item::getLastError()
+{
+    if( ErrorList.count () )
+    {
+        return ErrorList.last ();
+    }else{
+        return "No Error";
+    }
 }
 

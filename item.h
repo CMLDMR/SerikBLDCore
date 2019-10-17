@@ -1,10 +1,13 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include <QtGlobal>
 #include "SerikBLDCore_global.h"
 
 #include <iostream>
+#include <QString>
+#include <QVector>
+#include <QtGlobal>
+#include "db.h"
 
 #ifdef Q_OS_WINDOWS
 
@@ -14,13 +17,11 @@
 #endif
 
 
+
 class SERIKBLDCORE_EXPORT Item
 {
 public:
     Item();
-
-
-
 
     void operator=(const document &value);
     void operator=(const bsoncxx::document::view &view);
@@ -34,20 +35,51 @@ public:
 
     template<typename T>
     void append(std::string key ,const T &value){
+
+        auto tempDoc = document{};
+
+
+        for( auto item : mDoc.view () )
+        {
+            if( key != item.key ().to_string() )
+            {
+                try {
+                    tempDoc.append( kvp( item.key ().to_string() , item.get_value () ) );
+                } catch (bsoncxx::exception &e) {
+                    std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                    std::cout << str << std::endl;
+                }
+            }
+        }
+
+        mDoc.clear ();
+
+
         try {
             mDoc.append (kvp(key,value));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
         }
+
+
+
+        for( auto item : tempDoc.view () )
+        {
+            mDoc.append(kvp(item.key ().to_string(),item.get_value ()));
+        }
     }
+
+    QString getLastError();
 
 
 private:
 
 #ifdef Q_OS_WINDOWS
-document mDoc;
+    document mDoc;
 #endif
+
+    QVector<QString> ErrorList;
 
 };
 
