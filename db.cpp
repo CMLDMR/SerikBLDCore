@@ -17,21 +17,10 @@ DB::DB()
 
     _mDB = mClient->database (DB__);
 
-    this->mDB = &_mDB;
 
 }
 
-DB::DB(mongocxx::database *_db)
-    :mDB(_db)
-{
 
-}
-
-DB::DB(DB *_db)
-    :mDB(_db->db ())
-{
-
-}
 
 DB::~DB()
 {
@@ -41,12 +30,12 @@ DB::~DB()
 
 mongocxx::database *DB::db()
 {
-    return this->mDB;
+    return &_mDB;
 }
 
 std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
 {
-    auto bucket = this->mDB->gridfs_bucket ();
+    auto bucket = this->_mDB.gridfs_bucket ();
 
     auto doc = bsoncxx::builder::basic::document{};
 
@@ -131,7 +120,7 @@ std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
 
 bsoncxx::types::value DB::uploadfile(QString filepath)
 {
-    auto bucket = this->mDB->gridfs_bucket ();
+    auto bucket = this->_mDB.gridfs_bucket ();
     QFile file( filepath );
     if( file.open( QIODevice::ReadOnly ) )
     {

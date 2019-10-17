@@ -3,7 +3,7 @@
 
  const std::string Dilekce::Collection = "Dilekce";
 
-Dilekce::Dilekce(DB *_db) : Item() , DB(_db)
+Dilekce::Dilekce(DB *_db) : Item() , DB()
 {
 
 }

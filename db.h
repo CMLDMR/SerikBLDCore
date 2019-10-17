@@ -19,8 +19,6 @@ class SERIKBLDCORE_EXPORT DB
 {
 public:
     explicit DB();
-    DB(mongocxx::database* _db);
-    DB(DB* _db);
     ~DB();
 
     mongocxx::database* db();
@@ -30,7 +28,6 @@ public:
     bsoncxx::types::value uploadfile(QString filepath );
 
 private:
-    mongocxx::database* mDB;
 
 
 
