@@ -38,6 +38,46 @@ void Dilekce::SetSayi(const int &sayi)
     this->append(KeySayi,sayi);
 }
 
+void Dilekce::SetKonu(const std::string &konu)
+{
+    this->append(KeyKonu,konu);
+}
+
+void Dilekce::SetTCOid(const std::string &oid)
+{
+    this->append(KeyTCOid,bsoncxx::oid{oid});
+}
+
+void Dilekce::SetBirim(const std::string &birim)
+{
+    this->append(KeyBirim,birim);
+}
+
+void Dilekce::SetIcerikTipi(const std::string &icerikTipi)
+{
+    this->append(KeyIcerikTipi,icerikTipi);
+}
+
+void Dilekce::SetIcerik(const std::string &icerik)
+{
+    this->append(KeyIcerik,icerik);
+}
+
+void Dilekce::SetDilekceOid(const std::string &dilekceOid)
+{
+    this->append(KeyDilekceOid,dilekceOid);
+}
+
+void Dilekce::SetTarih(const int &julianDay)
+{
+    this->append(KeyTarihJulian,julianDay);
+}
+
+void Dilekce::SetSaat(const int &mSecsFromBeginDay)
+{
+    this->append(KeySaat,mSecsFromBeginDay);
+}
+
 bool Dilekce::Update()
 {
 
