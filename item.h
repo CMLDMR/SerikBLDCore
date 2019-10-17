@@ -33,6 +33,8 @@ public:
 
     boost::optional<bsoncxx::types::value> element(std::string key);
 
+    void append( const std::string &key ,const QString &value );
+
     template<typename T>
     void append(std::string key ,const T &value){
 
