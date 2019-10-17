@@ -78,6 +78,17 @@ void Dilekce::SetSaat(const int &mSecsFromBeginDay)
     this->append(KeySaat,mSecsFromBeginDay);
 }
 
+int Dilekce::sayi()
+{
+    auto sayi = this->element (KeySayi);
+    if( sayi )
+    {
+        return sayi->get_int32 ().value;
+    }else{
+        return -1;
+    }
+}
+
 bool Dilekce::Update()
 {
 

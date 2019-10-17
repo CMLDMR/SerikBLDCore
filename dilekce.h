@@ -40,6 +40,8 @@ public:
     void SetTarih( const int &julianDay );
     void SetSaat( const int &mSecsFromBeginDay );
 
+    int sayi();
+
     bool Update();
 
 private:
