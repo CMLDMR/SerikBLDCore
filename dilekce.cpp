@@ -5,7 +5,7 @@ const std::string Dilekce::Collection = "Dilekce";
 
 
 
-Dilekce::Dilekce(Dilekce *other) : Item() , DB()
+Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection) , DB()
 {
     if( other != nullptr )
     {
