@@ -6,7 +6,7 @@
 
 class SERIKBLDCORE_EXPORT User : public Item , public DB
 {
-    const std::string Collection{"Personel"};
+    static const std::string Collection;
     const std::string KeyTel = "telefon";
     const std::string KeyPassword = "password";
     const std::string KeyAdSoyad{"ad soyad"};
