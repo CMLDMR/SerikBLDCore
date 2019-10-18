@@ -4,7 +4,7 @@
 const std::string TC::Collection = "TC";
 
 
-TC::TC(TC *other) : Item() , DB()
+TC::TC(TC *other) : Item(TC::Collection) , DB()
 {
 
     if( other != nullptr )
