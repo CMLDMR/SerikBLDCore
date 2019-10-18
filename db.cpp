@@ -21,12 +21,25 @@ DB::DB()
 
 }
 
+DB::DB(const DB &db)
+    :mClient(db.mClient)
+{
+    _mDB = mClient->database (DB__);
+}
+
 
 
 DB::~DB()
 {
     std::cout << "Destructor " << std::endl;
     delete mClient;
+}
+
+DB &DB::operator=(const DB &otherDB)
+{
+    mClient = otherDB.mClient;
+    _mDB = mClient->database (DB__);
+    return *this;
 }
 
 mongocxx::database *DB::db()

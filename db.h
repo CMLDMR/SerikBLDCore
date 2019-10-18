@@ -21,7 +21,10 @@ class SERIKBLDCORE_EXPORT DB
 {
 public:
     explicit DB();
+    DB( const DB &db);
     ~DB();
+
+    DB& operator=(const DB& otherDB);
 
     mongocxx::database* db();
 
