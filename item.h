@@ -74,7 +74,9 @@ public:
 
     QString getLastError();
 
-    boost::optional<bsoncxx::oid> oid();
+    boost::optional<bsoncxx::oid> oid() const;
+
+    boost::optional<document> ItemFilter() const;
 
     std::string getCollection() const;
 

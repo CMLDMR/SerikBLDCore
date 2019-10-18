@@ -86,7 +86,7 @@ QString Item::getLastError()
     }
 }
 
-boost::optional<bsoncxx::oid> Item::oid()
+boost::optional<bsoncxx::oid> Item::oid() const
 {
     std::string _oid;
     for( auto item : this->view () )
@@ -103,6 +103,28 @@ boost::optional<bsoncxx::oid> Item::oid()
         return boost::none;
     }else{
         return bsoncxx::oid{_oid};
+    }
+
+}
+
+boost::optional<bsoncxx::builder::basic::document> Item::ItemFilter() const
+{
+
+    auto oid = this->oid ();
+
+    if( oid )
+    {
+        auto doc = document{};
+
+        try {
+            doc.append (kvp("_id",oid.value ()));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            return boost::none;
+        }
+    }else{
+        return boost::none;
     }
 
 }
