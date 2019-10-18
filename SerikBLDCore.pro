@@ -22,6 +22,7 @@ SOURCES += \
     dilekce.cpp \
     item.cpp \
     serikbldcore.cpp \
+    tc.cpp \
     user.cpp
 
 HEADERS += \
@@ -31,6 +32,7 @@ HEADERS += \
     item.h \
     mongoheaders.h \
     serikbldcore.h \
+    tc.h \
     user.h
 
 # Default rules for deployment.
