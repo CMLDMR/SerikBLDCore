@@ -1,9 +1,14 @@
 #include "item.h"
 
-Item::Item()
-    :mDoc(document{})
+Item::Item(const std::string &collection)
+    :mDoc(document{}),mCollection(collection)
 {
     mDoc.clear ();
+}
+
+Item::Item(const Item &other) : mCollection(other.getCollection ())
+{
+    this->setDocumentView (other.view ());
 }
 
 void Item::operator=(const bsoncxx::builder::basic::document &value)
@@ -26,7 +31,7 @@ void Item::operator=(const bsoncxx::document::view &view)
     }
 }
 
-void Item::operator=(const Item &value)
+Item Item::operator=(const Item &value)
 {
     mDoc.clear ();
 
@@ -34,6 +39,7 @@ void Item::operator=(const Item &value)
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
+    return *this;
 
 }
 
@@ -78,5 +84,31 @@ QString Item::getLastError()
     }else{
         return "No Error";
     }
+}
+
+boost::optional<bsoncxx::oid> Item::oid()
+{
+    std::string _oid;
+    for( auto item : this->view () )
+    {
+        if( item.key ().to_string() == "_id" )
+        {
+            _oid = item.get_oid ().value.to_string ();
+            break;
+        }
+    }
+
+    if( _oid.empty () )
+    {
+        return boost::none;
+    }else{
+        return bsoncxx::oid{_oid};
+    }
+
+}
+
+std::string Item::getCollection() const
+{
+    return mCollection;
 }
 

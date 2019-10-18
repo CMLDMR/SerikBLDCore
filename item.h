@@ -21,11 +21,12 @@
 class SERIKBLDCORE_EXPORT Item
 {
 public:
-    Item();
+    Item(const std::string &collection);
+    Item(const Item& other);
 
     void operator=(const document &value);
     void operator=(const bsoncxx::document::view &view);
-    void operator=(const Item &value);
+    Item operator=(const Item &value);
 
     void setDocumentView( const bsoncxx::document::view &view);
 
@@ -73,12 +74,17 @@ public:
 
     QString getLastError();
 
+    boost::optional<bsoncxx::oid> oid();
+
+    std::string getCollection() const;
 
 private:
 
 #ifdef Q_OS_WINDOWS
     document mDoc;
 #endif
+
+    const std::string mCollection;
 
     QVector<QString> ErrorList;
 
