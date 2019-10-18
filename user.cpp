@@ -1,6 +1,8 @@
 #include "user.h"
 
-User::User() : Item () , DB()
+const std::string User::Collection{"Personel"};
+
+User::User() : Item (User::Collection) , DB()
 {
 
 }
