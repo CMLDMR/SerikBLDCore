@@ -167,3 +167,27 @@ mongocxx::stdx::optional<mongocxx::result::update> DB::updateItem(const Item &it
     }
 
 }
+
+mongocxx::stdx::optional<bsoncxx::document::value> DB::findOneItem(const Item &item)
+{
+    try {
+        auto value = this->db ()->collection (item.getCollection ()).find_one (item.view ());
+        return value;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
+std::int64_t DB::countItem(const Item &item)
+{
+    try {
+        auto count = this->db ()->collection (item.getCollection ()).count_documents (item.view ());
+        return count;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return -1;
+    }
+}

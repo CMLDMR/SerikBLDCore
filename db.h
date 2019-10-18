@@ -26,11 +26,18 @@ public:
     mongocxx::database* db();
 
     std::string downloadFile(const QString &fileOid , bool forceFilename = false);
-
     bsoncxx::types::value uploadfile(QString filepath );
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
     mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);
+    mongocxx::stdx::optional<bsoncxx::document::value> findOneItem( const Item &item );
+
+    ///
+    /// \brief countItem
+    /// \param item
+    /// \return
+    /// return item matched Count else if error return -1
+    int64_t countItem( const Item &item );
 
 private:
 
