@@ -29,6 +29,15 @@ public:
     void setPassword( const QString &password = QString("") );
     void setNormalTelefon( const QString &normalTelefon );
     void setCalismaSMS( const bool &smsgitsin = false );
+
+    QString TCNO();
+    QString AdSoyad();
+    QString CepTelefonu();
+    QString Mahalle();
+    QString TamAdres();
+    QString Password();
+    QString NormalTelefon();
+    bool    CalismaSMS();
 };
 
 #endif // TC_H

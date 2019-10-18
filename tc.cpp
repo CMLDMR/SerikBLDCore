@@ -63,3 +63,91 @@ void TC::setCalismaSMS(const bool &smsgitsin)
     this->append(KeyCalismaSMS,smsgitsin);
 
 }
+
+QString TC::TCNO()
+{
+    auto value = this->element (KeyTC);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::AdSoyad()
+{
+    auto value = this->element (KeyAdSoyad);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::CepTelefonu()
+{
+    auto value = this->element (KeyCepTelefonu);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::Mahalle()
+{
+    auto value = this->element (KeyMahalle);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::TamAdres()
+{
+    auto value = this->element (KeyAdres);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::Password()
+{
+    auto value = this->element (KeyPassword);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString TC::NormalTelefon()
+{
+    auto value = this->element (KeyNormalTelefon);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+bool TC::CalismaSMS()
+{
+    auto value = this->element (KeyCalismaSMS);
+    if( value )
+    {
+        return value->get_bool ().value;
+    }else{
+        return false;
+    }
+}
