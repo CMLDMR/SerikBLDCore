@@ -40,6 +40,8 @@ public:
     void SetSaat( const int &mSecsFromBeginDay );
 
     int sayi();
+    QString konu();
+
 
 
     bool Update();

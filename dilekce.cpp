@@ -7,7 +7,7 @@ const std::string Dilekce::Collection = "Dilekce";
 
 Dilekce::Dilekce(Dilekce *other) : Item() , DB()
 {
-    if( !other )
+    if( other != nullptr )
     {
         this->setDocumentView (other->view ());
     }
@@ -40,7 +40,7 @@ void Dilekce::SetSayi(const int &sayi)
 
 void Dilekce::SetKonu(const QString &konu)
 {
-    this->append(KeyKonu,konu);
+    this->append(KeyKonu,konu.toStdString ());
 }
 
 void Dilekce::SetTCOid(const QString &oid)
@@ -50,17 +50,17 @@ void Dilekce::SetTCOid(const QString &oid)
 
 void Dilekce::SetBirim(const QString &birim)
 {
-    this->append(KeyBirim,birim);
+    this->append(KeyBirim,birim.toStdString ());
 }
 
 void Dilekce::SetIcerikTipi(const QString &icerikTipi)
 {
-    this->append(KeyIcerikTipi,icerikTipi);
+    this->append(KeyIcerikTipi,icerikTipi.toStdString ());
 }
 
 void Dilekce::SetIcerik(const QString &icerik)
 {
-    this->append(KeyIcerik,icerik);
+    this->append(KeyIcerik,icerik.toStdString ());
 }
 
 void Dilekce::SetDilekceOid(const QString &dilekceOid)
@@ -91,6 +91,17 @@ int Dilekce::sayi()
         return sayi->get_int32 ().value;
     }else{
         return -1;
+    }
+}
+
+QString Dilekce::konu()
+{
+    auto value = this->element (KeyKonu);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
     }
 }
 
