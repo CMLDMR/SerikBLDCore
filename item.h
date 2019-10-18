@@ -34,6 +34,13 @@ public:
 
     boost::optional<bsoncxx::types::value> element(std::string key);
 
+    QString getLastError();
+
+    boost::optional<bsoncxx::oid> oid() const;
+
+    boost::optional<document> ItemFilter() const;
+
+    std::string getCollection() const;
 
     template<typename T>
     void append(std::string key ,const T &value){
@@ -72,13 +79,7 @@ public:
         }
     }
 
-    QString getLastError();
 
-    boost::optional<bsoncxx::oid> oid() const;
-
-    boost::optional<document> ItemFilter() const;
-
-    std::string getCollection() const;
 
 private:
 
