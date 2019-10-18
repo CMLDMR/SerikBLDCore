@@ -4,6 +4,7 @@
 #include <QFileInfo>
 #include <fstream>
 #include <QDir>
+#include "item.h"
 
 DB::DB()
 {
@@ -132,4 +133,18 @@ bsoncxx::types::value DB::uploadfile(QString filepath)
         file.close();
         return res.id();
     }
+}
+
+mongocxx::stdx::optional<mongocxx::result::insert_one> DB::insertItem(const Item &item)
+{
+
+    try {
+        auto ins = this->db ()->collection (item.getCollection ()).insert_one (item.view ());
+        return ins;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+
 }

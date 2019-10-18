@@ -15,6 +15,8 @@
 #include <boost/optional.hpp>
 #endif
 
+class Item;
+
 class SERIKBLDCORE_EXPORT DB
 {
 public:
@@ -26,6 +28,8 @@ public:
     std::string downloadFile(const QString &fileOid , bool forceFilename = false);
 
     bsoncxx::types::value uploadfile(QString filepath );
+
+    mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
 
 private:
 
