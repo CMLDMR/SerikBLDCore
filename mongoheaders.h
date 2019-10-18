@@ -24,6 +24,8 @@
 #include <mongocxx/stdx.hpp>
 #include <mongocxx/gridfs/bucket.hpp>
 #include <mongocxx/pipeline.hpp>
+#include <mongocxx/result/insert_one.hpp>
+#include <mongocxx/collection.hpp>
 
 
 using bsoncxx::builder::basic::document;
