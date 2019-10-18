@@ -30,6 +30,7 @@ public:
     bsoncxx::types::value uploadfile(QString filepath );
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
+    mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);
 
 private:
 

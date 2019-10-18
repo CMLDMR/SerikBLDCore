@@ -146,5 +146,24 @@ mongocxx::stdx::optional<mongocxx::result::insert_one> DB::insertItem(const Item
         std::cout << str << std::endl;
         return mongocxx::stdx::nullopt;
     }
+}
+
+mongocxx::stdx::optional<mongocxx::result::update> DB::updateItem(const Item &item)
+{
+    auto filter = item.ItemFilter();
+
+    if( filter )
+    {
+        try {
+            auto upt = this->db ()->collection (item.getCollection ()).update_one (filter.value ().view (),item.view ());
+            return upt;
+        } catch (mongocxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            return mongocxx::stdx::nullopt;
+        }
+    }else{
+        return mongocxx::stdx::nullopt;
+    }
 
 }
