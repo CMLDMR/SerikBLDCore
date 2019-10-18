@@ -7,7 +7,7 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 
-class TC : public Item , public DB
+class SERIKBLDCORE_EXPORT TC : public Item , public DB
 {
     static const std::string Collection;
     const std::string KeyTC{"TCNO"};
