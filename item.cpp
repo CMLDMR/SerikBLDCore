@@ -31,7 +31,7 @@ void Item::operator=(const bsoncxx::document::view &view)
     }
 }
 
-Item Item::operator=(const Item &value)
+Item& Item::operator=(const Item &value)
 {
     mDoc.clear ();
 
@@ -133,4 +133,6 @@ std::string Item::getCollection() const
 {
     return mCollection;
 }
+
+
 

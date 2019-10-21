@@ -21,12 +21,12 @@
 class SERIKBLDCORE_EXPORT Item
 {
 public:
-    Item(const std::string &collection);
+    explicit Item(const std::string &collection);
     Item(const Item& other);
 
     void operator=(const document &value);
     void operator=(const bsoncxx::document::view &view);
-    Item operator=(const Item &value);
+    Item& operator=(const Item &value);
 
     void setDocumentView( const bsoncxx::document::view &view);
 
