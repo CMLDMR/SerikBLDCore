@@ -18,6 +18,7 @@ class SERIKBLDCORE_EXPORT TC : public Item , public DB
     const std::string KeyAdres{"Tam Adres"};
     const std::string KeyPassword{"password"};
     const std::string KeyCalismaSMS{"CalismaSMS"};
+
 public:
     TC(TC* other = nullptr );
 
