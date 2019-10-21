@@ -71,6 +71,7 @@ void Dilekce::SetDilekceOid(const QString &dilekceOid)
 void Dilekce::AddEkOid(const QString &ekOid)
 {
     //TODO: Array Eklenecek
+    this->pushArray(KeyEkler,bsoncxx::types::b_utf8{ekOid.toStdString ()});
 }
 
 void Dilekce::SetTarih(const int &julianDay)
@@ -81,6 +82,11 @@ void Dilekce::SetTarih(const int &julianDay)
 void Dilekce::SetSaat(const int &mSecsFromBeginDay)
 {
     this->append(KeySaat,mSecsFromBeginDay);
+}
+
+void Dilekce::AddBilgiBirim(const QString &bilgiBirim)
+{
+    this->pushArray(KeyBilgiBirimler,bilgiBirim.toStdString ());
 }
 
 int Dilekce::sayi()

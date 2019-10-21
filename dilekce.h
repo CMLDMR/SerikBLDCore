@@ -22,6 +22,7 @@ class SERIKBLDCORE_EXPORT Dilekce : public Item , public DB
     const std::string KeyEkler{"Ekler"};
     const std::string KeyTarihJulian{"TarihJulian"};
     const std::string KeySaat{"Saat"};
+    const std::string KeyBilgiBirimler{"BilgiBirimler"};
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
@@ -38,6 +39,7 @@ public:
     void AddEkOid( const QString &ekOid );
     void SetTarih( const int &julianDay );
     void SetSaat( const int &mSecsFromBeginDay );
+    void AddBilgiBirim( const QString &bilgiBirim );
 
     int sayi();
     QString konu();
