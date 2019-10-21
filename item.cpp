@@ -134,5 +134,31 @@ std::string Item::getCollection() const
     return mCollection;
 }
 
+void Item::removeElement(const std::string &key)
+{
+    auto tempDoc = document{};
+
+    for( auto item : mDoc.view () )
+    {
+        if( key != item.key ().to_string() )
+        {
+            try {
+                tempDoc.append( kvp( item.key ().to_string() , item.get_value () ) );
+
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                std::cout << str << std::endl;
+            }
+        }
+    }
+    mDoc.clear ();
+
+    for( auto item : tempDoc.view () )
+    {
+        mDoc.append(kvp(item.key ().to_string(),item.get_value ()));
+    }
+
+}
+
 
 

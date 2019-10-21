@@ -42,18 +42,23 @@ public:
 
     std::string getCollection() const;
 
+    void removeElement( const std::string &key );
+
     template<typename T>
-    void append(std::string key ,const T &value){
+    void pushArray(std::string key ,const T &value){
 
-        auto tempDoc = document{};
+        auto arr = array{};
 
+        auto existArray = this->element (key);
 
-        for( auto item : mDoc.view () )
+        if( existArray )
         {
-            if( key != item.key ().to_string() )
+            this->removeElement ( key );
+
+            for( auto item : existArray.value ().get_array ().value )
             {
                 try {
-                    tempDoc.append( kvp( item.key ().to_string() , item.get_value () ) );
+                    arr.append (item.get_value ());
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
                     std::cout << str << std::endl;
@@ -61,8 +66,28 @@ public:
             }
         }
 
-        mDoc.clear ();
+        try {
+            arr.append (value);
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
 
+        try {
+            mDoc.append (kvp(key,arr));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
+
+
+    }
+
+    template<typename T>
+    void append( std::string key ,const T &value ){
+
+
+        this->removeElement (key);
 
         try {
             mDoc.append (kvp(key,value));
@@ -71,12 +96,6 @@ public:
             std::cout << str << std::endl;
         }
 
-
-
-        for( auto item : tempDoc.view () )
-        {
-            mDoc.append(kvp(item.key ().to_string(),item.get_value ()));
-        }
     }
 
 
