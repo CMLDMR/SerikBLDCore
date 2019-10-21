@@ -31,7 +31,7 @@ DB::DB(const DB &db)
 
 DB::~DB()
 {
-    std::cout << "Destructor " << std::endl;
+    std::cout << "DB Destructor " << std::endl;
     delete mClient;
 }
 
