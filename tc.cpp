@@ -3,7 +3,6 @@
 
 const std::string TC::Collection = "TC";
 
-
 TC::TC(TC *other) : Item(TC::Collection) , DB()
 {
 
@@ -150,4 +149,19 @@ bool TC::CalismaSMS()
     }else{
         return false;
     }
+}
+
+bool TC::LoadTC()
+{
+    auto val = this->findOneItem (*this);
+
+    if( val )
+    {
+        this->setDocumentView (val.value ().view ());
+        return true;
+    }
+
+    return false;
+
+
 }

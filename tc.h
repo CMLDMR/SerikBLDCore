@@ -38,6 +38,8 @@ public:
     QString Password();
     QString NormalTelefon();
     bool    CalismaSMS();
+
+    bool LoadTC();
 };
 
 #endif // TC_H
