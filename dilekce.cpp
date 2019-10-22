@@ -1,5 +1,6 @@
 #include "dilekce.h"
-
+#include <QDate>
+#include <QTime>
 
 const std::string Dilekce::Collection = "Dilekce";
 
@@ -71,7 +72,7 @@ void Dilekce::SetDilekceOid(const QString &dilekceOid)
 void Dilekce::AddEkOid(const QString &ekOid)
 {
     //TODO: Array Eklenecek
-    this->pushArray(KeyEkler,bsoncxx::types::b_utf8{ekOid.toStdString ()});
+    this->pushArray(KeyEkler,bsoncxx::oid{ekOid.toStdString ()});
 }
 
 void Dilekce::SetTarih(const int &julianDay)
@@ -108,6 +109,94 @@ QString Dilekce::konu()
         return QString::fromStdString (value->get_utf8 ().value.to_string());
     }else{
         return "";
+    }
+}
+
+QString Dilekce::tcoid()
+{
+    auto value = this->element (KeyTCOid);
+    if( value )
+    {
+        return QString::fromStdString (value->get_oid ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString Dilekce::birim()
+{
+    auto value = this->element (KeyBirim);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString Dilekce::icerikTipi()
+{
+    auto value = this->element (KeyIcerikTipi);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString Dilekce::icerik()
+{
+    auto value = this->element (KeyIcerik);
+    if( value )
+    {
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+int Dilekce::tarihJulian()
+{
+    auto value = this->element (KeyTarihJulian);
+    if( value )
+    {
+        return  (value->get_int32 ().value);
+    }else{
+        return -1;
+    }
+}
+
+QString Dilekce::tarihText()
+{
+    auto value = this->element (KeyTarihJulian);
+    if( value )
+    {
+        return QDate::fromJulianDay (value->get_int32 ().value).toString ("dd/MM/yyyy");
+    }else{
+        return "Tarih Yok";
+    }
+}
+
+int Dilekce::saatMSecStartofDay()
+{
+    auto value = this->element (KeySaat);
+    if( value )
+    {
+        return  (value->get_int32 ().value);
+    }else{
+        return -1;
+    }
+}
+
+QString Dilekce::saatText()
+{
+    auto value = this->element (KeySaat);
+    if( value )
+    {
+        return  QTime::fromMSecsSinceStartOfDay ((value->get_int32 ().value)).toString ("hh:mm");
+    }else{
+        return "Saat Yok";
     }
 }
 

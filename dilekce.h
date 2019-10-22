@@ -18,11 +18,11 @@ class SERIKBLDCORE_EXPORT Dilekce : public Item , public DB
     const std::string KeyBirim{"Birim"};
     const std::string KeyIcerikTipi{"IcerikTipi"};
     const std::string KeyIcerik{"Icerik"};
-    const std::string KeyDilekceOid{"dilekceOid"};
-    const std::string KeyEkler{"Ekler"};
+    const std::string KeyDilekceOid{"dilekceOid"};      // TODO: dilekçe oid eklenecek
+    const std::string KeyEkler{"Ekler"};                // TODO: Ekler Eklenecek
     const std::string KeyTarihJulian{"TarihJulian"};
     const std::string KeySaat{"Saat"};
-    const std::string KeyBilgiBirimler{"BilgiBirimler"};
+    const std::string KeyBilgiBirimler{"BilgiBirimler"};// TODO: BilgiBirimler Eklenecek
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
@@ -43,6 +43,15 @@ public:
 
     int sayi();
     QString konu();
+    QString tcoid();
+    QString birim();
+    QString icerikTipi();
+    QString icerik();
+    int tarihJulian();
+    QString tarihText();
+    int saatMSecStartofDay();
+    QString saatText();
+
 
 
 
