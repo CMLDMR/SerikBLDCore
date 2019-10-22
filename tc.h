@@ -9,15 +9,16 @@
 
 class SERIKBLDCORE_EXPORT TC : public Item , public DB
 {
+public:
     static const std::string Collection;
-    const std::string KeyTC{"TCNO"};
-    const std::string KeyAdSoyad{"İsimSoyisim"};
-    const std::string KeyCepTelefonu{"Cep Telefonu"};
-    const std::string KeyNormalTelefon{"Normal Telefonu"};
-    const std::string KeyMahalle{"Mahalle"};
-    const std::string KeyAdres{"Tam Adres"};
-    const std::string KeyPassword{"password"};
-    const std::string KeyCalismaSMS{"CalismaSMS"};
+    static const std::string KeyTC;
+    static const std::string KeyAdSoyad;
+    static const std::string KeyCepTelefonu;
+    static const std::string KeyNormalTelefon;
+    static const std::string KeyMahalle;
+    static const std::string KeyAdres;
+    static const std::string KeyPassword;
+    static const std::string KeyCalismaSMS;
 
 public:
     TC(TC* other = nullptr );

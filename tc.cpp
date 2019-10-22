@@ -2,6 +2,14 @@
 #include <QRandomGenerator>
 
 const std::string TC::Collection = "TC";
+const std::string TC::KeyTC{"TCNO"};
+const std::string TC::KeyAdSoyad{"İsimSoyisim"};
+const std::string TC::KeyCepTelefonu{"Cep Telefonu"};
+const std::string TC::KeyNormalTelefon{"Normal Telefonu"};
+const std::string TC::KeyMahalle{"Mahalle"};
+const std::string TC::KeyAdres{"Tam Adres"};
+const std::string TC::KeyPassword{"password"};
+const std::string TC::KeyCalismaSMS{"CalismaSMS"};
 
 TC::TC(TC *other) : Item(TC::Collection) , DB()
 {
