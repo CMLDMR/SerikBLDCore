@@ -65,7 +65,7 @@ boost::optional<bsoncxx::types::value> Item::element(std::string key)
     try {
         return mDoc.view ()[key].get_value ();
     } catch (bsoncxx::exception &e) {
-        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
         std::cout << str << std::endl;
         ErrorList.append (str.c_str ());
         return boost::none;
