@@ -142,3 +142,61 @@ QVector<Dilekce> DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
     }
     return list;
 }
+
+QVector<Dilekce> DilekceManager::findByTCNO(const QString &mTCNO)
+{
+    QVector<Dilekce> list;
+    std::string TCOid;
+
+    {
+        TC item;
+        item.setTCNO (mTCNO);
+
+        auto val = this->findOneItem (item);
+
+        if( val )
+        {
+            item.setDocumentView (val.value ().view ());
+            TCOid = item.oid ().value ().to_string ();
+        }else{
+            return list;
+        }
+
+    }
+
+
+
+    Dilekce item;
+    item.SetTCOid (TCOid.c_str ());
+
+    auto cursor = this->find (item);
+    if( cursor )
+    {
+        for( auto doc : cursor.get () )
+        {
+            Dilekce _dilekce;
+            _dilekce.setDocumentView (doc);
+            list.append (_dilekce);
+        }
+    }
+    return list;
+}
+
+QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
+{
+    QVector<Dilekce> list;
+    Dilekce item;
+    item.SetSayi (sayi);
+
+    auto cursor = this->find (item);
+    if( cursor )
+    {
+        for( auto doc : cursor.get () )
+        {
+            Dilekce _dilekce;
+            _dilekce.setDocumentView (doc);
+            list.append (_dilekce);
+        }
+    }
+    return list;
+}

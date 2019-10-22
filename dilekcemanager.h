@@ -24,6 +24,10 @@ public:
 
     QVector<Dilekce> findByTelefon(const QString &mTelefonNumarasi );
 
+    QVector<Dilekce> findByTCNO( const QString &mTCNO );
+
+    QVector<Dilekce> findBySayi( const int &sayi );
+
 
 };
 
