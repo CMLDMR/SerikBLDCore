@@ -15,10 +15,7 @@ DB::DB()
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
         std::cout << str << std::endl;
     }
-
     _mDB = mClient->database (DB__);
-
-
 }
 
 DB::DB(const DB &db)
