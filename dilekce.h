@@ -1,4 +1,4 @@
-#ifndef DILEKCE_H
+﻿#ifndef DILEKCE_H
 #define DILEKCE_H
 
 #include <QtGlobal>
@@ -9,25 +9,25 @@
 
 
 
-class SERIKBLDCORE_EXPORT Dilekce : public Item , public DB
+class SERIKBLDCORE_EXPORT Dilekce : public Item /*, public DB*/
 {
+public:
     static const std::string Collection;
-    const std::string KeySayi{"Sayı"};
-    const std::string KeyKonu{"Konu"};
-    const std::string KeyTCOid{"TCOid"};
-    const std::string KeyBirim{"Birim"};
-    const std::string KeyIcerikTipi{"IcerikTipi"};
-    const std::string KeyIcerik{"Icerik"};
-    const std::string KeyDilekceOid{"dilekceOid"};      // TODO: dilekçe oid eklenecek
-    const std::string KeyEkler{"Ekler"};                // TODO: Ekler Eklenecek
-    const std::string KeyTarihJulian{"TarihJulian"};
-    const std::string KeySaat{"Saat"};
-    const std::string KeyBilgiBirimler{"BilgiBirimler"};// TODO: BilgiBirimler Eklenecek
+    static const std::string KeySayi;
+    static const std::string KeyKonu;
+    static const std::string KeyTCOid;
+    static const std::string KeyBirim;
+    static const std::string KeyIcerikTipi;
+    static const std::string KeyIcerik;
+    static const std::string KeyDilekceOid;
+    static const std::string KeyEkler;
+    static const std::string KeyTarihJulian;
+    static const std::string KeySaat;
+    static const std::string KeyBilgiBirimler;
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
 
-    static boost::optional<Dilekce*> Create_Dilekce();
 
     void SetSayi( const int &sayi );
     void SetKonu( const QString &konu);
@@ -55,7 +55,6 @@ public:
 
 
 
-    bool Update();
 
 private:
 
