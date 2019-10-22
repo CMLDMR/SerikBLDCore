@@ -190,6 +190,20 @@ mongocxx::stdx::optional<bsoncxx::document::value> DB::findOneItem(const Item &i
     }
 }
 
+mongocxx::stdx::optional<mongocxx::cursor> DB::find(const Item &item)
+{
+    try {
+        auto cursor = this->db ()->collection (item.getCollection ()).find (item.view ());
+        return std::move(cursor);
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
+
+
 std::int64_t DB::countItem(const Item &item)
 {
     try {

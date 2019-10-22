@@ -34,6 +34,7 @@ public:
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
     mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);
     mongocxx::stdx::optional<bsoncxx::document::value> findOneItem( const Item &item );
+    mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item );
 
     ///
     /// \brief countItem
