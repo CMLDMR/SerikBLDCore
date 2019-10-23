@@ -67,7 +67,21 @@ windows{
         }
 
     } else {
-        message("x86_64 build")
+        message("x64 build")
+
+
+            INCLUDEPATH += $$PWD/../boost/boost
+            DEPENDPATH += $$PWD/../boost/boost
+
+            win32: LIBS += -L$$PWD/../Mongo/msvc2015x64/install/lib/ -lbsoncxx
+
+            INCLUDEPATH += $$PWD/../Mongo/msvc2015x64/install/include/bsoncxx/v_noabi
+            DEPENDPATH += $$PWD/../Mongo/msvc2015x64/include/bsoncxx/v_noabi
+
+            win32: LIBS += -L$$PWD/../Mongo/msvc2015x64/install/lib/ -lmongocxx
+
+            INCLUDEPATH += $$PWD/../Mongo/msvc2015x64/install/include/mongocxx/v_noabi
+            DEPENDPATH += $$PWD/../Mongo/msvc2015x64/install/include/mongocxx/v_noabi
 
         ## Windows x64 (64bit) specific build here
 
@@ -75,5 +89,8 @@ windows{
 
 
 }
+
+
+
 
 
