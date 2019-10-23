@@ -33,6 +33,8 @@ public:
 
     bsoncxx::document::view view() const;
 
+    void printView() const;
+
     boost::optional<bsoncxx::types::value> element(std::string key) const;
 
     QString getLastError();
