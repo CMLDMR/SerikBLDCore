@@ -214,7 +214,7 @@ QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
 boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
 {
     Dilekce *item = new Dilekce();
-    item->SetDilekceOid (QString::fromStdString (oid));
+    item->SetOid (QString::fromStdString (oid));
 
     auto val = this->findOneItem (*item);
     if( val )

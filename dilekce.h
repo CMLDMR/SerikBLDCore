@@ -24,6 +24,8 @@ public:
     static const std::string KeyTarihJulian;
     static const std::string KeySaat;
     static const std::string KeyBilgiBirimler;
+    static const std::string KeyOid;
+
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 

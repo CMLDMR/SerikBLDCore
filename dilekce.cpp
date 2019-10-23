@@ -14,6 +14,7 @@ const std::string Dilekce::KeyEkler{"Ekler"};
 const std::string Dilekce::KeyTarihJulian{"TarihJulian"};
 const std::string Dilekce::KeySaat{"Saat"};
 const std::string Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
+const std::string Dilekce::KeyOid{"_id"};
 
 
 Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
@@ -90,7 +91,7 @@ void Dilekce::AddBilgiBirim(const QString &bilgiBirim)
 
 void Dilekce::SetOid(const QString &oid)
 {
-    this->append(KeyDilekceOid,bsoncxx::oid{oid.toStdString ()});
+    this->append(KeyOid,bsoncxx::oid{oid.toStdString ()});
 
 }
 
