@@ -27,6 +27,7 @@ public:
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
+    operator bool() const;
 
 
     void SetSayi( const int &sayi );
@@ -40,6 +41,7 @@ public:
     void SetTarih( const int &julianDay );
     void SetSaat( const int &mSecsFromBeginDay );
     void AddBilgiBirim( const QString &bilgiBirim );
+    void SetOid( const QString &oid );
 
     int sayi();
     QString konu();
@@ -57,6 +59,7 @@ public:
 
 
 private:
+
 
 };
 

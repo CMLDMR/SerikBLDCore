@@ -24,6 +24,13 @@ Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
     }
 }
 
+Dilekce::operator bool() const
+{
+    return !this->view ().empty ();
+}
+
+
+
 
 void Dilekce::SetSayi(const int &sayi)
 {
@@ -79,6 +86,12 @@ void Dilekce::SetSaat(const int &mSecsFromBeginDay)
 void Dilekce::AddBilgiBirim(const QString &bilgiBirim)
 {
     this->pushArray(KeyBilgiBirimler,bilgiBirim.toStdString ());
+}
+
+void Dilekce::SetOid(const QString &oid)
+{
+    this->append(KeyDilekceOid,bsoncxx::oid{oid.toStdString ()});
+
 }
 
 int Dilekce::sayi()
