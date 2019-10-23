@@ -72,7 +72,6 @@ void Item::printView() const
 
 boost::optional<bsoncxx::types::value> Item::element(std::string key) const
 {
-
     try {
         return mDoc.view ()[key].get_value ();
     } catch (bsoncxx::exception &e) {
@@ -80,8 +79,6 @@ boost::optional<bsoncxx::types::value> Item::element(std::string key) const
         std::cout << str << std::endl;
         return boost::none;
     }
-
-
 }
 
 
@@ -115,6 +112,11 @@ boost::optional<bsoncxx::oid> Item::oid() const
         return bsoncxx::oid{_oid};
     }
 
+}
+
+void Item::setOid(const std::string &oid)
+{
+    this->append("_id",bsoncxx::oid{oid});
 }
 
 boost::optional<bsoncxx::builder::basic::document> Item::ItemFilter() const

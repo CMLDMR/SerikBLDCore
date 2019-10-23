@@ -41,6 +41,8 @@ public:
 
     boost::optional<bsoncxx::oid> oid() const;
 
+    void setOid( const std::string &oid );
+
     boost::optional<document> ItemFilter() const;
 
     std::string getCollection() const;
