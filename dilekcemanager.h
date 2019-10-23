@@ -12,6 +12,7 @@ class SERIKBLDCORE_EXPORT DilekceManager : public DB
 {
 public:
     explicit DilekceManager();
+    DilekceManager( DB* mDB );
 
 
     boost::optional<Dilekce*> Create_Dilekce();

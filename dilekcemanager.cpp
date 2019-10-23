@@ -7,6 +7,11 @@ DilekceManager::DilekceManager() : DB()
 
 }
 
+DilekceManager::DilekceManager(DB *mDB) : DB(mDB)
+{
+
+}
+
 
 
 boost::optional<Dilekce *> DilekceManager::Create_Dilekce()
