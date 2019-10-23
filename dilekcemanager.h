@@ -31,6 +31,8 @@ public:
 
     QVector<Dilekce> findBySayi( const int &sayi );
 
+    boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
+
 };
 
 #endif // DILEKCEMANAGER_H

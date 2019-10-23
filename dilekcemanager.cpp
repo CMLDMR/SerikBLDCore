@@ -210,3 +210,18 @@ QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
     }
     return list;
 }
+
+boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
+{
+    Dilekce *item = new Dilekce();
+    item->SetDilekceOid (QString::fromStdString (oid));
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
