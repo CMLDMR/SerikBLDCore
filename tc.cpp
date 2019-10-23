@@ -21,6 +21,22 @@ TC::TC(TC *other) : Item(TC::Collection) /*, DB()*/
     }
 }
 
+TC::TC(const TC &other) : Item(TC::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+TC::TC(const TC &&other) : Item(TC::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+TC *TC::operator=(const bsoncxx::document::value &value)
+{
+    this->setDocumentView (value.view ());
+    return this;
+}
+
 void TC::setTCNO(const QString &tcno)
 {
     this->append(KeyTC,tcno.toStdString ());

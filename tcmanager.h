@@ -6,7 +6,7 @@
 
 
 
-class SERIKBLDCORE_EXPORT TCManager : public DB
+class SERIKBLDCORE_EXPORT TCManager : virtual public DB
 {
 public:
     explicit TCManager();
@@ -14,6 +14,11 @@ public:
     TCManager( mongocxx::database* _db );
 
     boost::optional<TC> Create_TC();
+
+    boost::optional<TC*> Load_byTCNO( const std::string &tcno );
+
+    boost::optional<TC*> Load_byOID( const std::string &oid );
+    boost::optional<TC*> Load_byOID( const bsoncxx::oid &oid );
 };
 
 #endif // TCMANAGER_H

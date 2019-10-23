@@ -8,7 +8,7 @@
 #include "SerikBLDCore_global.h"
 #include <QVector>
 
-class SERIKBLDCORE_EXPORT DilekceManager : public DB
+class SERIKBLDCORE_EXPORT DilekceManager : virtual public DB
 {
 public:
     explicit DilekceManager();

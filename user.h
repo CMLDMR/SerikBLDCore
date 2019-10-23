@@ -9,7 +9,7 @@
 #endif
 
 
-class SERIKBLDCORE_EXPORT User : public Item , public DB
+class SERIKBLDCORE_EXPORT User : public Item , virtual private DB
 {
     static const std::string Collection;
     const std::string KeyTel = "telefon";

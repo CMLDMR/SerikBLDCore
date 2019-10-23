@@ -23,6 +23,11 @@ public:
 
 public:
     TC(TC* other = nullptr );
+    TC( const TC &other );
+    TC( const TC &&other);
+
+    TC* operator=(const bsoncxx::document::value &value);
+
 
     void setTCNO( const QString &tcno );
     void setAdSoyad( const QString &adsoyad );

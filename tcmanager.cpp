@@ -38,3 +38,49 @@ boost::optional<TC> TCManager::Create_TC()
 
 
 }
+
+boost::optional<TC *> TCManager::Load_byTCNO(const std::string &tcno)
+{
+    TC* item = new TC();
+    item->setTCNO (tcno.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+
+}
+
+boost::optional<TC *> TCManager::Load_byOID(const std::string &oid)
+{
+    TC* item = new TC();
+    item->setOid (oid.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<TC *> TCManager::Load_byOID(const bsoncxx::oid &oid)
+{
+    TC* item = new TC();
+    item->setOid (oid.to_string ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
