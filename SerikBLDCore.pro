@@ -24,6 +24,7 @@ SOURCES += \
     item.cpp \
     serikbldcore.cpp \
     tc.cpp \
+    tcmanager.cpp \
     user.cpp
 
 HEADERS += \
@@ -35,6 +36,7 @@ HEADERS += \
     mongoheaders.h \
     serikbldcore.h \
     tc.h \
+    tcmanager.h \
     user.h
 
 # Default rules for deployment.
