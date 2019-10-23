@@ -6,9 +6,13 @@
 #include <QDir>
 #include "item.h"
 
+static int DBConnectionCount = 0;
+
 DB::DB()
 {
 
+    std::cout << "Connection Count: " << ++DBConnectionCount << std::endl;
+    mConstructWithNewClient = true;
     try {
         mClient = new mongocxx::client(mongocxx::uri(_url));
     } catch (mongocxx::exception &e) {
@@ -19,9 +23,20 @@ DB::DB()
 }
 
 DB::DB(const DB &db)
-    :mClient(db.mClient)
+    :mDB(db.mDB)
 {
-    _mDB = mClient->database (DB__);
+    mConstructWithNewClient = false;
+}
+
+DB::DB(mongocxx::database *_db)
+    :mDB( _db )
+{
+    mConstructWithNewClient = false;
+}
+
+DB::DB(DB *_db) : mDB(_db->db ())
+{
+    mConstructWithNewClient = false;
 }
 
 
@@ -29,7 +44,11 @@ DB::DB(const DB &db)
 DB::~DB()
 {
     std::cout << "DB Destructor " << std::endl;
-    delete mClient;
+    if( mConstructWithNewClient )
+    {
+        std::cout << "Delete DB Connection, CurrentConnection Count: " <<  --DBConnectionCount << std::endl;
+        delete mClient;
+    }
 }
 
 DB &DB::operator=(const DB &otherDB)
@@ -41,12 +60,17 @@ DB &DB::operator=(const DB &otherDB)
 
 mongocxx::database *DB::db()
 {
-    return &_mDB;
+    if( mConstructWithNewClient )
+    {
+        return &_mDB;
+    }else{
+        return mDB;
+    }
 }
 
 std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
 {
-    auto bucket = this->_mDB.gridfs_bucket ();
+    auto bucket = this->db ()->gridfs_bucket ();
 
     auto doc = bsoncxx::builder::basic::document{};
 
@@ -131,7 +155,7 @@ std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
 
 bsoncxx::types::value DB::uploadfile(QString filepath)
 {
-    auto bucket = this->_mDB.gridfs_bucket ();
+    auto bucket = this->db ()->gridfs_bucket ();
     QFile file( filepath );
     if( file.open( QIODevice::ReadOnly ) )
     {

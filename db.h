@@ -22,6 +22,8 @@ class SERIKBLDCORE_EXPORT DB
 public:
     explicit DB();
     DB( const DB &db);
+    DB( mongocxx::database* _db );
+    DB( DB* _db );
     ~DB();
 
     DB& operator=(const DB& otherDB);
@@ -51,6 +53,9 @@ private:
 private:
     mongocxx::database _mDB;
     mongocxx::client* mClient;
+
+    bool mConstructWithNewClient;
+    mongocxx::database* mDB;
 };
 
 #endif // DB_H
