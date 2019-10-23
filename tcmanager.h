@@ -1,11 +1,19 @@
 #ifndef TCMANAGER_H
 #define TCMANAGER_H
 
+#include "db.h"
+#include "tc.h"
 
-class TCManager : public DB
+
+
+class SERIKBLDCORE_EXPORT TCManager : public DB
 {
 public:
-    TCManager();
+    explicit TCManager();
+    TCManager( DB* mDB );
+    TCManager( mongocxx::database* _db );
+
+    boost::optional<TC> Create_TC();
 };
 
 #endif // TCMANAGER_H
