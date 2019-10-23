@@ -23,6 +23,7 @@ class SERIKBLDCORE_EXPORT Item
 public:
     explicit Item(const std::string &collection);
     Item(const Item& other);
+    Item(const bsoncxx::document::view mView , const std::string _Collection);
 
     void operator=(const document &value);
     void operator=(const bsoncxx::document::view &view);

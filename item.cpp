@@ -11,6 +11,12 @@ Item::Item(const Item &other) : mCollection(other.getCollection ())
     this->setDocumentView (other.view ());
 }
 
+Item::Item(const bsoncxx::document::view mView, const std::string _Collection)
+    :mCollection(_Collection)
+{
+    this->setDocumentView (mView);
+}
+
 void Item::operator=(const bsoncxx::builder::basic::document &value)
 {
     mDoc.clear ();
