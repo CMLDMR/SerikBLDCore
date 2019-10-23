@@ -33,7 +33,7 @@ public:
 
     bsoncxx::document::view view() const;
 
-    boost::optional<bsoncxx::types::value> element(std::string key);
+    boost::optional<bsoncxx::types::value> element(std::string key) const;
 
     QString getLastError();
 
