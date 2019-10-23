@@ -31,6 +31,7 @@ DB::DB(const DB &db)
 DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
+    std::cout << "DB::DB(mongocxx::database *_db)" << std::endl;
     mConstructWithNewClient = false;
 }
 
@@ -214,10 +215,10 @@ mongocxx::stdx::optional<bsoncxx::document::value> DB::findOneItem(const Item &i
     }
 }
 
-mongocxx::stdx::optional<mongocxx::cursor> DB::find(const Item &item)
+mongocxx::stdx::optional<mongocxx::cursor> DB::find(const Item &item, const mongocxx::options::find findOptions)
 {
     try {
-        auto cursor = this->db ()->collection (item.getCollection ()).find (item.view ());
+        auto cursor = this->db ()->collection (item.getCollection ()).find (item.view (),findOptions);
         return std::move(cursor);
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
