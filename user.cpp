@@ -1,8 +1,23 @@
 #include "user.h"
 
 const std::string User::Collection{"Personel"};
+const std::string User::Baskan{"Başkan"};
+const std::string User::BaskanYardimcisi{"Başkan Yardımcısı"};
+const std::string User::Mudur{"Müdür"};
+const std::string User::Sef{"Şef"};
+const std::string User::Personel{"Personel"};
 
 User::User() : Item (User::Collection) , DB()
+{
+
+}
+
+User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
+{
+
+}
+
+User::User(mongocxx::database *_db, bsoncxx::document::value _userValue) : Item(_userValue.view (),User::Collection) , DB(_db)
 {
 
 }
