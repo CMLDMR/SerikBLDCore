@@ -12,6 +12,11 @@ DilekceManager::DilekceManager(DB *mDB) : DB(mDB)
 
 }
 
+DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
+{
+
+}
+
 
 
 boost::optional<Dilekce *> DilekceManager::Create_Dilekce()
@@ -93,7 +98,7 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
 
 }
 
-QVector<Dilekce> DilekceManager::findDilekce(const Item &itemFilter)
+QVector<Dilekce> DilekceManager::findDilekce(const Item &itemFilter, const mongocxx::options::find findOptions)
 {
     QVector<Dilekce> list;
     auto cursor = this->find (itemFilter);
