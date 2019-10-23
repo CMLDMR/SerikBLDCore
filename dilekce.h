@@ -9,7 +9,7 @@
 
 
 
-class SERIKBLDCORE_EXPORT Dilekce : public Item /*, public DB*/
+class SERIKBLDCORE_EXPORT Dilekce : public Item
 {
 public:
     static const std::string Collection;

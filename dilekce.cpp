@@ -16,7 +16,7 @@ const std::string Dilekce::KeySaat{"Saat"};
 const std::string Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
 
 
-Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection) /*, DB()*/
+Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
 {
     if( other != nullptr )
     {
