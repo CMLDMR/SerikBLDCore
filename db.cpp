@@ -31,7 +31,7 @@ DB::DB(const DB &db)
 DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
-    std::cout << "DB::DB(mongocxx::database *_db)" << std::endl;
+    std::cout << "DB::DB(mongocxx::database *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
