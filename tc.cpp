@@ -10,8 +10,9 @@ const std::string TC::KeyMahalle{"Mahalle"};
 const std::string TC::KeyAdres{"Tam Adres"};
 const std::string TC::KeyPassword{"password"};
 const std::string TC::KeyCalismaSMS{"CalismaSMS"};
+const std::string TC::KeyOid{"_id"};
 
-TC::TC(TC *other) : Item(TC::Collection) , DB()
+TC::TC(TC *other) : Item(TC::Collection) /*, DB()*/
 {
 
     if( other != nullptr )
@@ -159,17 +160,17 @@ bool TC::CalismaSMS()
     }
 }
 
-bool TC::LoadTC()
-{
-    auto val = this->findOneItem (*this);
+//bool TC::LoadTC()
+//{
+//    auto val = this->findOneItem (*this);
 
-    if( val )
-    {
-        this->setDocumentView (val.value ().view ());
-        return true;
-    }
+//    if( val )
+//    {
+//        this->setDocumentView (val.value ().view ());
+//        return true;
+//    }
 
-    return false;
+//    return false;
 
 
-}
+//}

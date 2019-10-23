@@ -7,7 +7,7 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 
-class SERIKBLDCORE_EXPORT TC : public Item , public DB
+class SERIKBLDCORE_EXPORT TC : public Item /*, public DB*/
 {
 public:
     static const std::string Collection;
@@ -19,6 +19,7 @@ public:
     static const std::string KeyAdres;
     static const std::string KeyPassword;
     static const std::string KeyCalismaSMS;
+    static const std::string KeyOid;
 
 public:
     TC(TC* other = nullptr );
@@ -41,7 +42,7 @@ public:
     QString NormalTelefon();
     bool    CalismaSMS();
 
-    bool LoadTC();
+//    bool LoadTC();
 };
 
 #endif // TC_H
