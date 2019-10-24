@@ -98,6 +98,21 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
 
 }
 
+bool DilekceManager::insertAciklama(const DilekceAciklama *aciklama)
+{
+    try {
+        auto ins = this->insertItem (*aciklama);
+        if( ins )
+        {
+            return true;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return false;
+    }
+}
+
 QVector<Dilekce> DilekceManager::findDilekce(const Item &itemFilter, const mongocxx::options::find findOptions)
 {
     QVector<Dilekce> list;
@@ -206,6 +221,26 @@ QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
             Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
             list.append (_dilekce);
+        }
+    }
+    return list;
+}
+
+QVector<DilekceAciklama> DilekceManager::findAciklama(const std::string &dilekceOid )
+{
+    QVector<DilekceAciklama> list;
+    DilekceAciklama item;
+    item.setDilekceOid (dilekceOid);
+    {
+        auto cursor = this->find (item);
+        if( cursor )
+        {
+            for( auto doc : cursor.get () )
+            {
+                DilekceAciklama *_dilekce = new DilekceAciklama;
+                _dilekce->setDocumentView (doc);
+                list.append (*_dilekce);
+            }
         }
     }
     return list;
