@@ -9,7 +9,7 @@
 #endif
 
 
-class SERIKBLDCORE_EXPORT User : public Item , virtual private DB
+class SERIKBLDCORE_EXPORT User : public Item , public DB
 {
     static const std::string Collection;
     const std::string KeyTel = "telefon";
@@ -32,14 +32,19 @@ public:
 
     User(mongocxx::database* _db );
     User(mongocxx::database* _db , bsoncxx::document::value _userValue );
+    User( User* _user);
 
 
     bool Login( const std::string &_mTel , const std::string &_mPassword);
+
+
+    bsoncxx::document::value Value() const;
 
     std::string PhotoFilePath();
     std::string AdSoyad();
     std::string Statu() const;
     std::string Birimi();
+
 };
 
 #endif // USER_H

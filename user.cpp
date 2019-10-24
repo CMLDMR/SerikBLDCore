@@ -9,7 +9,6 @@ const std::string User::Personel{"Personel"};
 
 User::User() : Item (User::Collection) , DB()
 {
-
 }
 
 User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
@@ -19,7 +18,10 @@ User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
 
 User::User(mongocxx::database *_db, bsoncxx::document::value _userValue) : Item(_userValue.view (),User::Collection) , DB(_db)
 {
+}
 
+User::User(User *_user) : Item(_user->view (),User::Collection) , DB(_user->db())
+{
 }
 
 bool User::Login(const std::string &_mTel, const std::string &_mPassword)
@@ -27,8 +29,9 @@ bool User::Login(const std::string &_mTel, const std::string &_mPassword)
     this->append(this->KeyTel,_mTel);
     this->append(this->KeyPassword,_mPassword);
 
+
     try {
-        auto val = this->db ()->collection (Collection).find_one (this->view ());
+        auto val = this->findOneItem (*this);
 
         if( val )
         {
@@ -42,6 +45,11 @@ bool User::Login(const std::string &_mTel, const std::string &_mPassword)
     }
 
     return false;
+}
+
+bsoncxx::document::value User::Value() const
+{
+    return bsoncxx::document::value(this->view ());
 }
 
 std::string User::PhotoFilePath()
