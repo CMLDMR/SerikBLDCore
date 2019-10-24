@@ -59,6 +59,7 @@ boost::optional<TC *> TCManager::Load_byOID(const std::string &oid)
 {
     TC* item = new TC();
     item->setOid (oid.c_str ());
+    item->printView ();
 
     auto val = this->findOneItem (*item);
     if( val )
@@ -74,6 +75,7 @@ boost::optional<TC *> TCManager::Load_byOID(const bsoncxx::oid &oid)
 {
     TC* item = new TC();
     item->setOid (oid.to_string ());
+    item->printView ();
 
     auto val = this->findOneItem (*item);
     if( val )
