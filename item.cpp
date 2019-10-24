@@ -67,7 +67,7 @@ bsoncxx::document::view Item::view() const
 
 void Item::printView() const
 {
-    std::cout << bsoncxx::to_json (this->view ()) << std::endl;
+    std::cout << this->getCollection () << " " <<bsoncxx::to_json (this->view ()) << std::endl;
 }
 
 boost::optional<bsoncxx::types::value> Item::element(std::string key) const
