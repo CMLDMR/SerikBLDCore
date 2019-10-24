@@ -31,7 +31,6 @@ public:
 
     operator bool() const;
 
-
     void SetSayi( const int &sayi );
     void SetKonu( const QString &konu);
     void SetTCOid( const QString &oid);
@@ -55,14 +54,8 @@ public:
     QString tarihText();
     int saatMSecStartofDay();
     QString saatText();
-
-
-
-
-
-private:
-
-
+    QString dilekceOid();
+    QStringList EkOidList();
 };
 
 #endif // DILEKCE_H

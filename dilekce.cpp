@@ -205,3 +205,28 @@ QString Dilekce::saatText()
     }
 }
 
+QString Dilekce::dilekceOid()
+{
+    auto value = this->element (KeyDilekceOid);
+    if( value )
+    {
+        return  QString::fromStdString (value->get_utf8 ().value.to_string ());
+    }else{
+        return "";
+    }
+}
+
+QStringList Dilekce::EkOidList()
+{
+    QStringList list;
+
+    auto _list = this->element (KeyEkler).value ().get_array ().value;
+
+    for( auto item : _list )
+    {
+        list.push_back (item.get_oid ().value.to_string ().c_str ());
+    }
+
+    return list;
+}
+
