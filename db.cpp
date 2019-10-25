@@ -272,21 +272,59 @@ mongocxx::stdx::optional<mongocxx::result::insert_one> DB::insertItem(const Item
 
 mongocxx::stdx::optional<mongocxx::result::update> DB::updateItem(const Item &item)
 {
-    auto filter = item.ItemFilter();
 
-    if( filter )
+    auto filter = document{};
+
+    try {
+        filter.append (kvp("_id",item.view ()["_id"].get_oid ().value));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return boost::none;
+    }
+
+    auto doc = document{};
+
+    bool _errorOccured = false;
+    for( auto element : item.view () )
     {
-        try {
-            auto upt = this->db ()->collection (item.getCollection ()).update_one (filter.value ().view (),item.view ());
-            return upt;
-        } catch (mongocxx::exception &e) {
-            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
-            return mongocxx::stdx::nullopt;
+        if( element.key ().to_string() != "_id" )
+        {
+            try {
+                doc.append (kvp(element.key (),element.get_value ()));
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                std::cout << str << std::endl;
+                _errorOccured = true;
+                break;
+            }
         }
-    }else{
+    }
+
+
+    if( _errorOccured ) return boost::none;
+
+    auto setDoc = document{};
+
+
+    try {
+        setDoc.append (kvp("$set",doc));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return boost::none;
+    }
+
+
+    try {
+        auto upt = this->db ()->collection (item.getCollection ()).update_one (filter.view (),setDoc.view ());
+        return upt;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
         return mongocxx::stdx::nullopt;
     }
+
 
 }
 
