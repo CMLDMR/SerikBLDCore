@@ -314,6 +314,18 @@ mongocxx::stdx::optional<mongocxx::cursor> DB::find(const Item &item, const mong
     }
 }
 
+mongocxx::stdx::optional<mongocxx::result::delete_result> DB::deleteItem(const Item &item)
+{
+    try {
+        auto del = this->db ()->collection (item.getCollection ()).delete_one (item.view ());
+        return del;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
 
 
 std::int64_t DB::countItem(const Item &item)
