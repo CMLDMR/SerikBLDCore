@@ -95,23 +95,13 @@ QString Item::getLastError()
 
 boost::optional<bsoncxx::oid> Item::oid() const
 {
-    std::string _oid;
-    for( auto item : this->view () )
-    {
-        if( item.key ().to_string() == "_id" )
-        {
-            _oid = item.get_oid ().value.to_string ();
-            break;
-        }
-    }
-
-    if( _oid.empty () )
-    {
+    try {
+        return this->view ()["_id"].get_oid ().value;
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
         return boost::none;
-    }else{
-        return bsoncxx::oid{_oid};
     }
-
 }
 
 void Item::setOid(const std::string &oid)
