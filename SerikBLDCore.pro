@@ -23,6 +23,8 @@ SOURCES += \
     dilekceaciklama.cpp \
     dilekcemanager.cpp \
     item.cpp \
+    personel.cpp \
+    personelmanager.cpp \
     serikbldcore.cpp \
     tc.cpp \
     tcmanager.cpp \
@@ -36,6 +38,8 @@ HEADERS += \
     dilekcemanager.h \
     item.h \
     mongoheaders.h \
+    personel.h \
+    personelmanager.h \
     serikbldcore.h \
     tc.h \
     tcmanager.h \
