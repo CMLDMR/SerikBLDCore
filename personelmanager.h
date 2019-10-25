@@ -1,11 +1,18 @@
 #ifndef PERSONELMANAGER_H
 #define PERSONELMANAGER_H
 
+#include "personel.h"
+#include "db.h"
 
-class PersonelManager : public DB
+
+class SERIKBLDCORE_EXPORT PersonelManager : virtual public DB
 {
 public:
     PersonelManager();
+    PersonelManager( DB* _mDB );
+    PersonelManager( mongocxx::database* _db );
+
+    QVector<Personel> PersonelList( const std::string &birim );
 };
 
 #endif // PERSONELMANAGER_H
