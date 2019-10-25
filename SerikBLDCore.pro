@@ -21,6 +21,7 @@ SOURCES += \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
+    dilekcecevap.cpp \
     dilekcemanager.cpp \
     item.cpp \
     personel.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
+    dilekcecevap.h \
     dilekcemanager.h \
     item.h \
     mongoheaders.h \
