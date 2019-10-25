@@ -24,6 +24,8 @@ public:
 
     bool insertDilekce( const Dilekce* dilekce );
 
+    bool updateDilekce( const Dilekce* dilekce );
+
     bool insertAciklama( const DilekceAciklama* aciklama  );
 
     QVector<Dilekce> findDilekce(const Item &itemFilter , const mongocxx::options::find findOptions = mongocxx::options::find() );

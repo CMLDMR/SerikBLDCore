@@ -88,7 +88,14 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
         auto ins = this->insertItem (*dilekce);
         if( ins )
         {
-            return true;
+            if( ins.value ().result ().inserted_count () )
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
@@ -96,6 +103,31 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
         return false;
     }
 
+}
+
+bool DilekceManager::updateDilekce(const Dilekce *dilekce)
+{
+    try {
+        auto upt = this->updateItem (*dilekce);
+        if( upt )
+        {
+            std::cout << upt.value ().modified_count () << std::endl;
+            if( upt.value ().modified_count () )
+            {
+                return true;
+            }else{
+
+                return false;
+            }
+        }else{
+            std::cout << "No Returned Value" << std::endl;
+            return false;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return false;
+    }
 }
 
 bool DilekceManager::insertAciklama(const DilekceAciklama *aciklama)
