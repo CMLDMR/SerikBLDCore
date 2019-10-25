@@ -71,4 +71,9 @@ public:
     QString Durum() const;
 };
 
+
+
+
+
+
 #endif // DILEKCE_H
