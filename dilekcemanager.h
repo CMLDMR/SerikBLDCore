@@ -36,6 +36,8 @@ public:
 
     QVector<DilekceAciklama> findAciklama(const std::string &dilekceOid );
 
+    bool deleteAciklama( const std::string &oid );
+
     boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
 
 };

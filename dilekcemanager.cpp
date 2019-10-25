@@ -246,6 +246,26 @@ QVector<DilekceAciklama> DilekceManager::findAciklama(const std::string &dilekce
     return list;
 }
 
+bool DilekceManager::deleteAciklama(const std::string &oid)
+{
+    DilekceAciklama item;
+    item.setOid (oid);
+
+    auto del = this->deleteItem (item);
+    if( del )
+    {
+        if( del.value ().deleted_count () )
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+
+}
+
 boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
 {
     Dilekce *item = new Dilekce();
