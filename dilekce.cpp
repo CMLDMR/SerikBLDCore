@@ -15,6 +15,8 @@ const std::string Dilekce::KeyTarihJulian{"TarihJulian"};
 const std::string Dilekce::KeySaat{"Saat"};
 const std::string Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
 const std::string Dilekce::KeyOid{"_id"};
+const std::string Dilekce::KeyGorevliPersonel{"GorevliPersonel"};
+const std::string Dilekce::KeyDilekceDurum{"DilekceDurum"};
 
 
 Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
@@ -22,6 +24,9 @@ Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
     if( other != nullptr )
     {
         this->setDocumentView (other->view ());
+    }else{
+        //TODO: Bu Kod Açılacak
+//        SetDurum (DilekceDurum::Acik);
     }
 }
 
@@ -93,6 +98,36 @@ void Dilekce::SetOid(const QString &oid)
 {
     this->append(KeyOid,bsoncxx::oid{oid.toStdString ()});
 
+}
+
+void Dilekce::AddGorevliPersonel(const Personel &personel)
+{
+    this->pushArray(KeyGorevliPersonel,bsoncxx::document::value(personel.view ()));
+}
+
+void Dilekce::DeleteGorevliPersonel(const Personel &personel)
+{
+    auto pList = this->GorevliList ();
+    this->removeElement (KeyGorevliPersonel);
+
+    if( pList.count () == 1 )
+    {
+        this->append(KeyGorevliPersonel,array{});
+        return;
+    }
+
+    for( auto item : pList )
+    {
+        if( item.oid ().value ().to_string () != personel.oid ().value ().to_string () )
+        {
+            this->AddGorevliPersonel (item);
+        }
+    }
+}
+
+void Dilekce::SetDurum(const QString &dilekceDurum)
+{
+    this->append(KeyDilekceDurum,dilekceDurum.toStdString ());
 }
 
 int Dilekce::sayi()
@@ -228,5 +263,35 @@ QStringList Dilekce::EkOidList()
     }
 
     return list;
+}
+
+QVector<Personel> Dilekce::GorevliList() const
+{
+    QVector<Personel> list;
+
+    auto _list = this->element (KeyGorevliPersonel);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            Personel personelItem;
+            personelItem.setDocumentView (item.get_document ().view ());
+            list.push_back (std::move(personelItem));
+        }
+    }
+    return list;
+}
+
+QString Dilekce::Durum() const
+{
+    auto value = this->element (KeyDilekceDurum);
+    if( value )
+    {
+        return  QString::fromStdString (value->get_utf8 ().value.to_string());
+    }else{
+        return "Durum Grçersiz";
+    }
 }
 

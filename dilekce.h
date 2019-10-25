@@ -6,7 +6,14 @@
 #include "db.h"
 #include <QString>
 #include "SerikBLDCore_global.h"
+#include "personel.h"
 
+
+namespace DilekceDurum {
+static const QString Acik{"Açik"};
+static const QString Cevaplandi{"Cevaplandı"};
+static const QString RedEdildi{"RedEdildi"};
+} // namespace DilekceDurum
 
 
 class SERIKBLDCORE_EXPORT Dilekce : public Item
@@ -25,7 +32,8 @@ public:
     static const std::string KeySaat;
     static const std::string KeyBilgiBirimler;
     static const std::string KeyOid;
-
+    static const std::string KeyGorevliPersonel;
+    static const std::string KeyDilekceDurum;
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
@@ -43,6 +51,9 @@ public:
     void SetSaat( const int &mSecsFromBeginDay );
     void AddBilgiBirim( const QString &bilgiBirim );
     void SetOid( const QString &oid );
+    void AddGorevliPersonel(const Personel &personel );
+    void DeleteGorevliPersonel( const Personel &personel );
+    void SetDurum( const QString &dilekceDurum);
 
     int sayi();
     QString konu();
@@ -56,6 +67,8 @@ public:
     QString saatText();
     QString dilekceOid();
     QStringList EkOidList();
+    QVector<Personel> GorevliList() const;
+    QString Durum() const;
 };
 
 #endif // DILEKCE_H
