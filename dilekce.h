@@ -34,6 +34,7 @@ public:
     static const std::string KeyOid;
     static const std::string KeyGorevliPersonel;
     static const std::string KeyDilekceDurum;
+    static const std::string KeyCevapOid;
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
@@ -54,6 +55,7 @@ public:
     void AddGorevliPersonel(const Personel &personel );
     void DeleteGorevliPersonel( const Personel &personel );
     void SetDurum( const QString &dilekceDurum);
+    void SetCevapOid( const QString &cevapOid );
 
     int sayi();
     QString konu();
@@ -69,6 +71,7 @@ public:
     QStringList EkOidList();
     QVector<Personel> GorevliList() const;
     QString Durum() const;
+    QString cevapOid() const;
 };
 
 

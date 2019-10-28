@@ -17,6 +17,8 @@ const std::string Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
 const std::string Dilekce::KeyOid{"_id"};
 const std::string Dilekce::KeyGorevliPersonel{"GorevliPersonel"};
 const std::string Dilekce::KeyDilekceDurum{"DilekceDurum"};
+const std::string Dilekce::KeyCevapOid{"CevapOid"};
+
 
 
 Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
@@ -129,6 +131,12 @@ void Dilekce::SetDurum(const QString &dilekceDurum)
 {
     this->append(KeyDilekceDurum,dilekceDurum.toStdString ());
 }
+
+void Dilekce::SetCevapOid(const QString &cevapOid)
+{
+    this->append(KeyCevapOid,bsoncxx::oid{cevapOid.toStdString ()});
+}
+
 
 int Dilekce::sayi()
 {
@@ -291,7 +299,18 @@ QString Dilekce::Durum() const
     {
         return  QString::fromStdString (value->get_utf8 ().value.to_string());
     }else{
-        return "Durum Grçersiz";
+        return "";
+    }
+}
+
+QString Dilekce::cevapOid() const
+{
+    auto value = this->element (KeyCevapOid);
+    if( value )
+    {
+        return  QString::fromStdString (value->get_oid ().value.to_string());
+    }else{
+        return "";
     }
 }
 
