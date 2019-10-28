@@ -8,6 +8,7 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 #include <QVector>
+#include "dilekcecevap.h"
 
 class SERIKBLDCORE_EXPORT DilekceManager : virtual public DB
 {
@@ -22,7 +23,10 @@ public:
 
     bool Update( Dilekce* dilekce );
 
+
     bool insertDilekce( const Dilekce* dilekce );
+
+    boost::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
 
     bool updateDilekce( const Dilekce* dilekce );
 
@@ -41,6 +45,8 @@ public:
     bool deleteAciklama( const std::string &oid );
 
     boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
+
+    boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
 
 };
 

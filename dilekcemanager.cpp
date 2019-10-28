@@ -105,22 +105,41 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
 
 }
 
+boost::optional<bsoncxx::oid> DilekceManager::insertCevap(const DilekceCevap *cevap)
+{
+    try {
+        auto ins = this->insertItem (*cevap);
+        if( ins )
+        {
+            if( ins.value ().result ().inserted_count () )
+            {
+                return ins.value ().inserted_id ().get_oid ().value;
+            }else{
+                return boost::none;
+            }
+        }else{
+            return boost::none;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return boost::none;
+    }
+}
+
 bool DilekceManager::updateDilekce(const Dilekce *dilekce)
 {
     try {
         auto upt = this->updateItem (*dilekce);
         if( upt )
         {
-            std::cout << upt.value ().modified_count () << std::endl;
             if( upt.value ().modified_count () )
             {
                 return true;
             }else{
-
                 return false;
             }
         }else{
-            std::cout << "No Returned Value" << std::endl;
             return false;
         }
     } catch (mongocxx::exception &e) {
@@ -300,9 +319,29 @@ bool DilekceManager::deleteAciklama(const std::string &oid)
 
 boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
 {
-    Dilekce *item = new Dilekce();
-    item->SetOid (QString::fromStdString (oid));
+    if( oid.size () == 24 )
+    {
+        Dilekce *item = new Dilekce();
+        item->SetOid (QString::fromStdString (oid));
 
+        auto val = this->findOneItem (*item);
+        if( val )
+        {
+            item->setDocumentView (val.value ().view ());
+            return item;
+        }else{
+            return boost::none;
+        }
+    }else{
+        return boost::none;
+    }
+}
+
+
+boost::optional<DilekceCevap *> DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
+{
+    DilekceCevap* item = new DilekceCevap();
+    item->setOid (cevapOid);
     auto val = this->findOneItem (*item);
     if( val )
     {
