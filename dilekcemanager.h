@@ -10,7 +10,7 @@
 #include <QVector>
 #include "dilekcecevap.h"
 
-class SERIKBLDCORE_EXPORT DilekceManager : virtual public DB
+class SERIKBLDCORE_EXPORT DilekceManager : public DB
 {
 public:
     explicit DilekceManager();
