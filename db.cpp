@@ -11,7 +11,7 @@ static int DBConnectionCount = 0;
 DB::DB()
 {
 
-    std::cout << "Connection Count: " << ++DBConnectionCount << std::endl;
+    std::cout << "New Connect: Connection Count: " << ++DBConnectionCount << std::endl;
     mConstructWithNewClient = true;
     try {
         mClient = new mongocxx::client(mongocxx::uri(_url));
@@ -25,6 +25,7 @@ DB::DB()
 DB::DB(const DB &db)
     :mDB(db.mDB)
 {
+    std::cout << "DB::DB(const DB &db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
@@ -37,6 +38,7 @@ DB::DB(mongocxx::database *_db)
 
 DB::DB(DB *_db) : mDB(_db->db ())
 {
+    std::cout << "DB::DB(DB *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
@@ -54,6 +56,8 @@ DB::~DB()
 
 DB &DB::operator=(const DB &otherDB)
 {
+    std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
+
     mClient = otherDB.mClient;
     _mDB = mClient->database (DB__);
     return *this;
@@ -250,10 +254,13 @@ bsoncxx::types::value DB::uploadfile(QString filepath)
         QFileInfo info(filepath);
         auto uploader = bucket.open_upload_stream(info.fileName().toStdString().c_str());
         QByteArray ar = file.readAll();
+        file.close();
+
         uploader.write((std::uint8_t*)ar.data(),ar.size());
         auto res = uploader.close();
-        file.close();
         return res.id();
+    }else{
+        std::cout << "Can not open File " << filepath.toStdString () << std::endl;
     }
 }
 

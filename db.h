@@ -28,6 +28,11 @@ public:
 
     DB& operator=(const DB& otherDB);
 
+    const DB* getDB() const{
+        return this;
+    }
+
+
     mongocxx::database* db();
 
     std::string downloadFile(const QString &fileOid , bool forceFilename = false);
