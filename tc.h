@@ -24,7 +24,7 @@ public:
 public:
     TC(TC* other = nullptr );
     TC( const TC &other );
-    TC( const TC &&other);
+    TC( TC &&other);
 
     TC* operator=(const bsoncxx::document::value &value);
 

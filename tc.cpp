@@ -26,7 +26,7 @@ TC::TC(const TC &other) : Item(TC::Collection)
     this->setDocumentView (other.view ());
 }
 
-TC::TC(const TC &&other) : Item(TC::Collection)
+TC::TC(TC &&other) : Item(TC::Collection)
 {
     this->setDocumentView (other.view ());
 }
