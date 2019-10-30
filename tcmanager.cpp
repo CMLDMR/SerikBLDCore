@@ -4,18 +4,29 @@
 
 TCManager::TCManager() : DB()
 {
+    std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager()" << std::endl;
 
 }
 
-TCManager::TCManager(DB *mDB) : DB(mDB)
+
+
+TCManager::TCManager(DB *mDB)
+    : DB(mDB)
 {
+    std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager(DB *mDB)" << std::endl;
 
 }
+
+//TCManager::TCManager(const DB *mDB) : DB(*mDB)
+//{
+
+//}
 
 TCManager::TCManager(mongocxx::database *_db) : DB(_db)
 {
 
 }
+
 
 boost::optional<TC> TCManager::Create_TC()
 {
@@ -53,6 +64,21 @@ boost::optional<TC *> TCManager::Load_byTCNO(const std::string &tcno)
         return boost::none;
     }
 
+}
+
+boost::optional<TC *> TCManager::Load_byTEL(const std::string &tel)
+{
+    TC* item = new TC();
+    item->setCepTelefonu (tel.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
 }
 
 boost::optional<TC *> TCManager::Load_byOID(const std::string &oid)
