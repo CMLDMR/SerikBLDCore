@@ -76,7 +76,7 @@ std::string User::AdSoyad()
     }
 }
 
-std::string User::Statu() const
+std::string User::Statu()
 {
     auto element = this->element (KeyStatu);
 

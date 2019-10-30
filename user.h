@@ -42,7 +42,7 @@ public:
 
     std::string PhotoFilePath();
     std::string AdSoyad();
-    std::string Statu() const;
+    std::string Statu();
     std::string Birimi();
 
 };
