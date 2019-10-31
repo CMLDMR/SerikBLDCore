@@ -351,3 +351,10 @@ boost::optional<DilekceCevap *> DilekceManager::LoadDilekceCevap(const std::stri
         return boost::none;
     }
 }
+
+
+QString DilekceManager::TaranmisDilekcePath(const QString &taranmisdilekceOid)
+{
+    auto val = this->downloadFile (taranmisdilekceOid);
+    return QString::fromStdString (val);
+}

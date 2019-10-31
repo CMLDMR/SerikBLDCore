@@ -48,6 +48,8 @@ public:
 
     boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
 
+    QString TaranmisDilekcePath( const QString &taranmisdilekceOid );
+
 };
 
 #endif // DILEKCEMANAGER_H
