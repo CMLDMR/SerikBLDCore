@@ -7,7 +7,7 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 
-class SERIKBLDCORE_EXPORT TC : public Item /*, public DB*/
+class SERIKBLDCORE_EXPORT TC : public Item
 {
 public:
     static const std::string Collection;
@@ -47,7 +47,6 @@ public:
     QString NormalTelefon();
     bool    CalismaSMS();
 
-//    bool LoadTC();
 };
 
 #endif // TC_H
