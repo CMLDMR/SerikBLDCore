@@ -10,10 +10,8 @@
 #include "db.h"
 
 #ifdef Q_OS_WINDOWS
-
 #include "mongoheaders.h"
 #include <boost/optional.hpp>
-
 #endif
 
 
@@ -23,11 +21,15 @@ class SERIKBLDCORE_EXPORT Item
 public:
     explicit Item(const std::string &collection);
     Item(const Item& other);
+    Item( Item &&other );
     Item(const bsoncxx::document::view mView , const std::string _Collection);
+
+    ~Item();
 
     void operator=(const document &value);
     void operator=(const bsoncxx::document::view &view);
     Item& operator=(const Item &value);
+    Item& operator=( Item &&other );
 
     void setDocumentView( const bsoncxx::document::view &view);
 
@@ -36,8 +38,6 @@ public:
     void printView() const;
 
     boost::optional<bsoncxx::types::value> element(std::string key) const;
-
-    QString getLastError();
 
     boost::optional<bsoncxx::oid> oid() const;
 
@@ -112,8 +112,6 @@ private:
 #endif
 
     const std::string mCollection;
-
-    QVector<QString> ErrorList;
 
 };
 

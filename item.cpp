@@ -11,10 +11,20 @@ Item::Item(const Item &other) : mCollection(other.getCollection ())
     this->setDocumentView (other.view ());
 }
 
+Item::Item(Item &&other)
+{
+    this->setDocumentView (other.view ());
+}
+
 Item::Item(const bsoncxx::document::view mView, const std::string _Collection)
     :mCollection(_Collection)
 {
     this->setDocumentView (mView);
+}
+
+Item::~Item()
+{
+    mDoc.clear ();
 }
 
 void Item::operator=(const bsoncxx::builder::basic::document &value)
@@ -47,6 +57,16 @@ Item& Item::operator=(const Item &value)
     }
     return *this;
 
+}
+
+Item &Item::operator=(Item &&other)
+{
+    mDoc.clear ();
+    for( auto item : other.view () )
+    {
+        this->append(item.key ().to_string().c_str (),item.get_value ());
+    }
+    return *this;
 }
 
 
@@ -83,15 +103,7 @@ boost::optional<bsoncxx::types::value> Item::element(std::string key) const
 
 
 
-QString Item::getLastError()
-{
-    if( ErrorList.count () )
-    {
-        return ErrorList.last ();
-    }else{
-        return "No Error";
-    }
-}
+
 
 boost::optional<bsoncxx::oid> Item::oid() const
 {
