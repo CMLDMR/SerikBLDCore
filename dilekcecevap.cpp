@@ -134,7 +134,7 @@ QString DilekceCevap::Tarih() const
     auto val = this->element (KeyJulianDay);
     if( val )
     {
-        return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("hh:mm");
+        return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("dd/MM/yyyy");
     }else{
         return "";
     }
