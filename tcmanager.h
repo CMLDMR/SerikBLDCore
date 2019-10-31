@@ -17,6 +17,8 @@ public:
 
     boost::optional<TC> Create_TC();
 
+    bool insertTC( TC* item );
+
     boost::optional<TC*> Load_byTCNO( const std::string &tcno );
     boost::optional<TC*> Load_byTEL( const std::string &tel );
 

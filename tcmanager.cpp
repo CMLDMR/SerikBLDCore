@@ -50,6 +50,49 @@ boost::optional<TC> TCManager::Create_TC()
 
 }
 
+bool TCManager::insertTC(TC *item)
+{
+
+    {
+        TC _item;
+        _item.setTCNO (item->TCNO ());
+        auto exist = this->countItem (*item);
+
+        if( exist > 0 )
+        {
+            std::cout << TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
+            return false;
+        }
+    }
+
+    {
+        TC _item;
+        _item.setCepTelefonu (item->CepTelefonu ());
+        auto exist = this->countItem (*item);
+
+        if( exist > 0 )
+        {
+            std::cout << TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
+            return false;
+        }
+    }
+
+    auto val = this->insertItem (*item);
+
+    if( val )
+    {
+        if( val.value ().result ().inserted_count () ){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+
+
+}
+
 boost::optional<TC *> TCManager::Load_byTCNO(const std::string &tcno)
 {
     TC* item = new TC();
