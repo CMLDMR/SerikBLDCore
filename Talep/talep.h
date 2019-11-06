@@ -1,27 +1,42 @@
-#ifndef TALEPITEM_H
-#define TALEPITEM_H
+#ifndef TALEP_H
+#define TALEP_H
 
 #include "Config.h"
 #include "item.h"
 #include "SerikBLDCore_global.h"
 
-namespace Talep {
 
-namespace Key {
-static const std::string Collection{"Talep"};
-}
-
-
-class SERIKBLDCORE_EXPORT TalepItem : public Item
+class SERIKBLDCORE_EXPORT Talep : public Item
 {
+    static const std::string Collection;
+    static const std::string KeyTCOID;
+    static const std::string KeyMahalle;
+    static const std::string KeyAdres;
+    static const std::string KeyKonu;
+    static const std::string KeySecStartOfDay;
+    static const std::string KeyJulianDay;
+
+
 public:
-    TalepItem(TalepItem* other = nullptr );
+    Talep(Talep* other = nullptr );
+
+    void setTCOID( const QString &tcoid );
+    void setMahalle( const QString &mahalle );
+    void setAddress( const QString &address );
+    void setKonu( const QString &konu );
+    void setSec( const int &mSecStartOfDay );
+    void setJulianDay( const int &julianDay );
+
+
+    QString tcOid() const;
+    QString mahalle() const;
+    QString adres() const;
+    QString konu() const;
+    QString saat() const;
+    QString tarih() const;
+
 };
 
-
-
-
-}
 
 
 
