@@ -4,7 +4,8 @@
 
 
 #include <QtGlobal>
-
+#include <QString>
+#include <QVector>
 
 //#ifdef Q_OS_WIN
 //#define MOBILE
