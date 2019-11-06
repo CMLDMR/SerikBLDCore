@@ -2,6 +2,7 @@
 #define ITEM_H
 
 #include "SerikBLDCore_global.h"
+#include "Config.h"
 
 #include <iostream>
 #include <QString>
@@ -9,9 +10,11 @@
 #include <QtGlobal>
 #include "db.h"
 
-#ifdef Q_OS_WINDOWS
+#ifdef DESKTOP
 #include "mongoheaders.h"
 #include <boost/optional.hpp>
+#else
+#include "qbson/qelement.h"
 #endif
 
 
@@ -22,28 +25,35 @@ public:
     explicit Item(const std::string &collection);
     Item(const Item& other);
     Item( Item &&other );
-    Item(const bsoncxx::document::view mView , const std::string _Collection);
-
     ~Item();
 
-    void operator=(const document &value);
-    void operator=(const bsoncxx::document::view &view);
+
+
     Item& operator=(const Item &value);
     Item& operator=( Item &&other );
 
-    void setDocumentView( const bsoncxx::document::view &view);
 
+#ifdef DESKTOP
+    Item(const bsoncxx::document::view mView , const std::string _Collection);
+    void operator=(const document &value);
+    void operator=(const bsoncxx::document::view &view);
+    void setDocumentView( const bsoncxx::document::view &view);
     bsoncxx::document::view view() const;
+    boost::optional<bsoncxx::types::value> element(std::string key) const;
+    boost::optional<bsoncxx::oid> oid() const;
+    boost::optional<document> ItemFilter() const;
+#else
+
+
+#endif
+
 
     void printView() const;
 
-    boost::optional<bsoncxx::types::value> element(std::string key) const;
 
-    boost::optional<bsoncxx::oid> oid() const;
 
     void setOid( const std::string &oid );
 
-    boost::optional<document> ItemFilter() const;
 
     std::string getCollection() const;
 
@@ -52,6 +62,7 @@ public:
     template<typename T>
     void pushArray(std::string key ,const T &value){
 
+#ifdef DESKTOP
         auto arr = array{};
 
         auto existArray = this->element (key);
@@ -84,33 +95,40 @@ public:
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
         }
+#else
 
 
+#endif
     }
+
+
 
     template<typename T>
     void append( std::string key ,const T &value ){
-
-
+#ifdef DESKTOP
         this->removeElement (key);
-
         try {
             mDoc.append (kvp(key,value));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
         }
+#else
 
+
+#endif
     }
 
 
 
 private:
 
-#ifdef Q_OS_WINDOWS
+#ifdef DESKTOP
     document mDoc;
-#endif
+#else
 
+
+#endif
     const std::string mCollection;
 
 };
