@@ -1,6 +1,9 @@
 #include "talepitem.h"
 
-TalepItem::TalepItem()
+Talep::TalepItem::TalepItem(TalepItem *other) : Item(Key::Collection)
 {
-
+    if( other != nullptr )
+    {
+        this->setDocumentView (other->view ());
+    }
 }
