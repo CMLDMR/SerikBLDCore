@@ -42,6 +42,11 @@ DB::DB(DB *_db) : mDB(_db->db ())
     mConstructWithNewClient = false;
 }
 
+DB::DB(const DB *_db) : mDB( _db->getDB ()->mDB )
+{
+
+}
+
 
 
 DB::~DB()
