@@ -18,7 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Talep/talepitem.cpp \
+    Talep/talep.cpp \
+    Talep/talepmanager.cpp \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
@@ -39,7 +40,8 @@ SOURCES += \
 HEADERS += \
     Config.h \
     SerikBLDCore_global.h \
-    Talep/talepitem.h \
+    Talep/talep.h \
+    Talep/talepmanager.h \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
