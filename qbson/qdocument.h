@@ -1,6 +1,10 @@
 #ifndef QDOCUMENT_H
 #define QDOCUMENT_H
 
+#include "Config.h"
+
+#ifdef MOBILE
+
 #include <QObject>
 
 class QDocument : public QObject
@@ -13,5 +17,7 @@ signals:
 
 public slots:
 };
+
+#endif
 
 #endif // QDOCUMENT_H

@@ -1,6 +1,10 @@
 #ifndef QARRAY_H
 #define QARRAY_H
 
+#include "Config.h"
+
+#ifdef MOBILE
+
 #include <QObject>
 
 class QArray : public QObject
@@ -13,5 +17,7 @@ signals:
 
 public slots:
 };
+
+#endif
 
 #endif // QARRAY_H

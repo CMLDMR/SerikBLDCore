@@ -1,9 +1,14 @@
 #ifndef QOID_H
 #define QOID_H
 
-#include <QObject>
+#include "Config.h"
 
-class QOid : public QObject
+#ifdef MOBILE
+
+#include <QObject>
+#include <QJsonValue>
+
+class QOid : public QJsonValue
 {
     Q_OBJECT
 public:
@@ -13,5 +18,7 @@ signals:
 
 public slots:
 };
+
+#endif
 
 #endif // QOID_H
