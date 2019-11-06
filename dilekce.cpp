@@ -26,9 +26,6 @@ Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
     if( other != nullptr )
     {
         this->setDocumentView (other->view ());
-    }else{
-        //TODO: Bu Kod Açılacak
-//        SetDurum (DilekceDurum::Acik);
     }
 }
 
