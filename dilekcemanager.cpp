@@ -324,6 +324,8 @@ boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
         Dilekce *item = new Dilekce();
         item->SetOid (QString::fromStdString (oid));
 
+        item->printView ();
+
         auto val = this->findOneItem (*item);
         if( val )
         {
