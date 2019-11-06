@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Talep/talepitem.cpp \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
@@ -26,13 +27,19 @@ SOURCES += \
     item.cpp \
     personel.cpp \
     personelmanager.cpp \
+    qbson/qarray.cpp \
+    qbson/qdocument.cpp \
+    qbson/qelement.cpp \
+    qbson/qoid.cpp \
     serikbldcore.cpp \
     tc.cpp \
     tcmanager.cpp \
     user.cpp
 
 HEADERS += \
+    Config.h \
     SerikBLDCore_global.h \
+    Talep/talepitem.h \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
@@ -42,6 +49,10 @@ HEADERS += \
     mongoheaders.h \
     personel.h \
     personelmanager.h \
+    qbson/qarray.h \
+    qbson/qdocument.h \
+    qbson/qelement.h \
+    qbson/qoid.h \
     serikbldcore.h \
     tc.h \
     tcmanager.h \
