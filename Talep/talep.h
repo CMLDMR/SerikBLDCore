@@ -16,6 +16,20 @@ public:
     static const std::string SecStartOfDay;
     static const std::string JulianDay;
     static const std::string Birim;
+    static const std::string Durum;
+
+
+    class SERIKBLDCORE_EXPORT DurumKey
+    {
+    public:
+        static const std::string DevamEdiyor;
+        static const std::string Tamamlandi;
+        static const std::string TeyitEdilmemis;
+        static const std::string Beklemede;
+        static const std::string RedEdildi;
+    };
+
+
 
 };
 
@@ -31,6 +45,7 @@ public:
     void setKonu( const QString &konu );
     void setSec( const int &mSecStartOfDay );
     void setJulianDay( const int &julianDay );
+    void setDurum( const QString &durum );
 
 
     QString tcOid() const;
@@ -41,6 +56,7 @@ public:
     QString tarih() const;
     int julianDay() const;
     int mSecStartOfDay() const;
+    QString durum() const;
 
 };
 

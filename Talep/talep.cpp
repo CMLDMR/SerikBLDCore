@@ -10,7 +10,13 @@ const std::string TalepKey::Adres{"Adress"};
 const std::string TalepKey::Konu{"Konu"};
 const std::string TalepKey::SecStartOfDay{"SecStartOfDay"};
 const std::string TalepKey::JulianDay{"julianday"};
+const std::string TalepKey::Durum{"Durum"};
 
+const std::string TalepKey::DurumKey::DevamEdiyor{"DevamEdiyor"};
+const std::string TalepKey::DurumKey::Tamamlandi{"Tamamlandi"};
+const std::string TalepKey::DurumKey::TeyitEdilmemis{"TeyitEdilmemis"};
+const std::string TalepKey::DurumKey::Beklemede{"Beklemede"};
+const std::string TalepKey::DurumKey::RedEdildi{"RedEdildi"};
 
 
 Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
@@ -49,6 +55,11 @@ void Talep::setSec(const int &mSecStartOfDay)
 void Talep::setJulianDay(const int &julianDay)
 {
     this->append(TalepKey::JulianDay,julianDay);
+}
+
+void Talep::setDurum(const QString &durum)
+{
+    this->append(TalepKey::Durum,durum.toStdString ());
 }
 
 QString Talep::tcOid() const
@@ -129,4 +140,14 @@ int Talep::mSecStartOfDay() const
         return  (val->get_int32 ().value);
     }
     return -1;
+}
+
+QString Talep::durum() const
+{
+    auto val = this->element (TalepKey::Durum);
+    if( val )
+    {
+        return QString::fromStdString (val->get_utf8 ().value.to_string());
+    }
+    return "";
 }
