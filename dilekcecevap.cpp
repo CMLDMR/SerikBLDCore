@@ -56,7 +56,7 @@ void DilekceCevap::setSaat(const QString &saat)
 
 void DilekceCevap::setJulianDay(const int &julianDay)
 {
-    this->append(KeyJulianDay,julianDay);
+    this->append(JulianDay,julianDay);
 }
 
 void DilekceCevap::setCevapOid(const QString &cevapOid)
@@ -120,7 +120,7 @@ QString DilekceCevap::saat() const
 
 int DilekceCevap::julianDay() const
 {
-    auto val = this->element (KeyJulianDay);
+    auto val = this->element (JulianDay);
     if( val )
     {
         return val.value ().get_int32 ().value;
@@ -131,7 +131,7 @@ int DilekceCevap::julianDay() const
 
 QString DilekceCevap::Tarih() const
 {
-    auto val = this->element (KeyJulianDay);
+    auto val = this->element (JulianDay);
     if( val )
     {
         return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("dd/MM/yyyy");

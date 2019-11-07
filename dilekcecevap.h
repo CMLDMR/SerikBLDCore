@@ -11,7 +11,7 @@ class SERIKBLDCORE_EXPORT DilekceCevap : public Item
     const std::string KeyPersonelOid{"PersonelOid"};
     const std::string KeyPersonelName{"PersonelName"};
     const std::string KeySaat{"Saat"};
-    const std::string KeyJulianDay{"JulianDay"};
+    const std::string JulianDay{"JulianDay"};
     const std::string KeyCevapOid{"CevapOid"};
     const std::string KeyCevapIcerik{"CevapIcerik"};
     const std::string KeyEkler{"EklerOid"};
