@@ -15,6 +15,8 @@ public:
 
     bool insertTalep( const Talep* item );
 
+    QVector<Talep> findTalep( const Talep &filter , int limit = 20 , int skip = 0);
+
 
 };
 
