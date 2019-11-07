@@ -11,7 +11,7 @@ class SERIKBLDCORE_EXPORT DilekceAciklama : public Item
     const std::string Keyaciklama{"aciklama"};
     const std::string KeypersonelOid{"personelOid"};
     const std::string KeyGorunur{"Gorunur"};
-    const std::string KeyJulianDay{"julianDay"};
+    const std::string JulianDay{"julianDay"};
     const std::string KeyPersonelName{"PersonelName"};
     const std::string KeySaat{"Saat"};
 public:

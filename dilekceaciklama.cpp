@@ -60,7 +60,7 @@ void DilekceAciklama::setGorunur(const bool &gorunur)
 
 void DilekceAciklama::setJulianDay(const int &julianDay)
 {
-    this->append(KeyJulianDay,julianDay);
+    this->append(JulianDay,julianDay);
 }
 
 void DilekceAciklama::setSaat(const std::string &saat)
@@ -114,7 +114,7 @@ bool DilekceAciklama::Gorunur() const
 
 QString DilekceAciklama::Tarih() const
 {
-    auto val = this->element (KeyJulianDay);
+    auto val = this->element (JulianDay);
     if( val )
     {
         return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("dd/MM/yyyy");
