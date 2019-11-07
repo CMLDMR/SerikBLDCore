@@ -5,18 +5,23 @@
 #include "item.h"
 #include "SerikBLDCore_global.h"
 
+class SERIKBLDCORE_EXPORT TalepKey
+{
+public:
+    static const std::string Collection;
+    static const std::string TCOID;
+    static const std::string Mahalle;
+    static const std::string Adres;
+    static const std::string Konu;
+    static const std::string SecStartOfDay;
+    static const std::string JulianDay;
+    static const std::string Birim;
+
+};
+
 
 class SERIKBLDCORE_EXPORT Talep : public Item
 {
-    static const std::string Collection;
-    static const std::string KeyTCOID;
-    static const std::string KeyMahalle;
-    static const std::string KeyAdres;
-    static const std::string KeyKonu;
-    static const std::string KeySecStartOfDay;
-    static const std::string KeyJulianDay;
-
-
 public:
     Talep(Talep* other = nullptr );
 
@@ -34,6 +39,8 @@ public:
     QString konu() const;
     QString saat() const;
     QString tarih() const;
+    int julianDay() const;
+    int mSecStartOfDay() const;
 
 };
 
