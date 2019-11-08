@@ -11,12 +11,21 @@ const std::string TalepKey::Konu{"Konu"};
 const std::string TalepKey::SecStartOfDay{"SecStartOfDay"};
 const std::string TalepKey::JulianDay{"julianday"};
 const std::string TalepKey::Durum{"Durum"};
+const std::string TalepKey::Kaynak{"Kaynak"};
+
 
 const std::string TalepKey::DurumKey::DevamEdiyor{"DevamEdiyor"};
 const std::string TalepKey::DurumKey::Tamamlandi{"Tamamlandi"};
 const std::string TalepKey::DurumKey::TeyitEdilmemis{"TeyitEdilmemis"};
 const std::string TalepKey::DurumKey::Beklemede{"Beklemede"};
 const std::string TalepKey::DurumKey::RedEdildi{"RedEdildi"};
+
+const std::string TalepKey::KaynakKey::Sms{"SMS"};
+const std::string TalepKey::KaynakKey::Beyazmasa{"BEYAZMASA"};
+const std::string TalepKey::KaynakKey::Telefon{"TELEFON"};
+const std::string TalepKey::KaynakKey::Web{"WEB"};
+const std::string TalepKey::KaynakKey::Mobil{"MOBIL"};
+const std::string TalepKey::KaynakKey::SosyalMedya{"SOSYALMEDYA"};
 
 
 Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
@@ -60,6 +69,21 @@ void Talep::setJulianDay(const int &julianDay)
 void Talep::setDurum(const QString &durum)
 {
     this->append(TalepKey::Durum,durum.toStdString ());
+}
+
+void Talep::setKaynak(const QString &kaynak)
+{
+    this->append(TalepKey::Kaynak,kaynak.toStdString ());
+}
+
+QString Talep::oid() const
+{
+    auto val = this->element ("_id");
+    if( val )
+    {
+        return QString::fromStdString (val->get_oid ().value.to_string ());
+    }
+    return "";
 }
 
 QString Talep::tcOid() const
@@ -147,7 +171,55 @@ QString Talep::durum() const
     auto val = this->element (TalepKey::Durum);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
     }
     return "";
+}
+
+QString Talep::durumColor() const
+{
+    auto durum_ = this->durum ();
+
+    if( durum_ == "DevamEdiyor" )
+    {
+        return "LightSeaGreen";
+    }else if (durum_ == "Tamamlandi") {
+        return "DodgerBlue";
+    }else if (durum_ == "TeyitEdilmemis") {
+        return "PaleVioletRed";
+    }else if (durum_ == "Beklemede") {
+        return "GoldenRod";
+    }else if (durum_ == "RedEdildi") {
+        return "crimson";
+    }
+
+}
+
+QString Talep::kaynak() const
+{
+    auto val = this->element (TalepKey::Kaynak);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";}
+
+QString Talep::kaynakColor() const
+{
+    auto kaynak_ = this->kaynak ();
+
+    if( kaynak_ == "SMS" )
+    {
+        return "MediumVioletRed";
+    }else if (kaynak_ == "BEYAZMASA") {
+        return "MintCream";
+    }else if (kaynak_ == "TELEFON") {
+        return "MediumTurquoise";
+    }else if (kaynak_ == "WEB") {
+        return "MediumOrchid";
+    }else if (kaynak_ == "MOBIL") {
+        return "LightSteelBlue";
+    }else if (kaynak_ == "SOSYALMEDYA") {
+        return "DarkSlateBlue";
+    }
 }

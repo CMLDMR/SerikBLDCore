@@ -5,8 +5,9 @@
 #include "item.h"
 #include "SerikBLDCore_global.h"
 
-class SERIKBLDCORE_EXPORT TalepKey
+class SERIKBLDCORE_EXPORT TalepKey : public QObject
 {
+    Q_OBJECT
 public:
     static const std::string Collection;
     static const std::string TCOID;
@@ -17,16 +18,26 @@ public:
     static const std::string JulianDay;
     static const std::string Birim;
     static const std::string Durum;
+    static const std::string Kaynak;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
     {
-    public:
         static const std::string DevamEdiyor;
         static const std::string Tamamlandi;
         static const std::string TeyitEdilmemis;
         static const std::string Beklemede;
         static const std::string RedEdildi;
+    };
+
+    class SERIKBLDCORE_EXPORT KaynakKey
+    {
+        static const std::string Sms;
+        static const std::string Beyazmasa;
+        static const std::string Telefon;
+        static const std::string Web;
+        static const std::string Mobil;
+        static const std::string SosyalMedya;
     };
 
 
@@ -46,8 +57,10 @@ public:
     void setSec( const int &mSecStartOfDay );
     void setJulianDay( const int &julianDay );
     void setDurum( const QString &durum );
+    void setKaynak( const QString &kaynak );
 
 
+    QString oid() const;
     QString tcOid() const;
     QString mahalle() const;
     QString adres() const;
@@ -57,6 +70,11 @@ public:
     int julianDay() const;
     int mSecStartOfDay() const;
     QString durum() const;
+    QString durumColor() const;
+    QString kaynak() const;
+    QString kaynakColor() const;
+
+
 
 };
 
