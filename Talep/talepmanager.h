@@ -2,6 +2,7 @@
 #define TALEPMANAGER_H
 
 #include "talep.h"
+#include "talepsubitem.h"
 #include "db.h"
 #include "Config.h"
 
@@ -16,6 +17,12 @@ public:
     bool insertTalep( const Talep* item );
 
     QVector<Talep> findTalep( const Talep &filter , int limit = 20 , int skip = 0);
+
+    Talep findOneTalep( const Talep &filter );
+
+    bool insertTalepSubItem( const TalepSubItem* item );
+
+    QVector<TalepSubItem> findTalepSubItem( const QString &talepOid );
 
 
 };
