@@ -6,7 +6,8 @@
 #include <QtGlobal>
 #include <QString>
 #include <QVector>
-
+#include <QMetaEnum>
+#include <QObject>
 //#ifdef Q_OS_WIN
 //#define MOBILE
 
