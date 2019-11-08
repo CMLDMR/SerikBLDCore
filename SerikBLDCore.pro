@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Talep/talep.cpp \
     Talep/talepmanager.cpp \
+    Talep/talepsubitem.cpp \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     SerikBLDCore_global.h \
     Talep/talep.h \
     Talep/talepmanager.h \
+    Talep/talepsubitem.h \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
