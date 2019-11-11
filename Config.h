@@ -8,6 +8,8 @@
 #include <QVector>
 #include <QMetaEnum>
 #include <QObject>
+#include <QJsonObject>
+#include <QJsonDocument>
 //#ifdef Q_OS_WIN
 //#define MOBILE
 
