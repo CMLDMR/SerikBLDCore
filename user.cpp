@@ -99,3 +99,14 @@ std::string User::Birimi()
         return (KeyBirimi + " Bilgisi Eksik");
     }
 }
+
+QString User::UserOid() const
+{
+    auto element = this->element ("_id");
+    if( element )
+    {
+        return  QString::fromStdString (element->get_oid ().value.to_string());
+    }
+    return ("Bilgisi Eksik");
+
+}

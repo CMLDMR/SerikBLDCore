@@ -11,6 +11,7 @@
 
 class SERIKBLDCORE_EXPORT User : public Item , public DB
 {
+public:
     static const std::string Collection;
     const std::string KeyTel = "telefon";
     const std::string KeyPassword = "password";
@@ -19,7 +20,6 @@ class SERIKBLDCORE_EXPORT User : public Item , public DB
     const std::string KeyBirimi{"Birimi"};
     const std::string KeyFotoid{"fotooid"};
 
-public:
     static const std::string Baskan;
     static const std::string BaskanYardimcisi;
     static const std::string Mudur;
@@ -44,6 +44,7 @@ public:
     std::string AdSoyad();
     std::string Statu();
     std::string Birimi();
+    QString UserOid() const;
 
 };
 
