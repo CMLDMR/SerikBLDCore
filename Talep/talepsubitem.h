@@ -52,6 +52,19 @@ public:
     void setSms( const QString& sms );
     QString sms() const;
 
+    void setPersonelName( const QString& personelName );
+    QString personelName() const;
+
+    void setPersonelOid( const QString& personelOid );
+    QString personelOid() const;
+
+    QString tarih() const;
+    int julianDay() const;
+    QString saat() const;
+
+
+    QJsonObject toJson() const;
+
 public:
     static const std::string Collection;
     static const std::string Type;
@@ -62,6 +75,8 @@ public:
     static const std::string Konum;
     static const std::string Video;
     static const std::string Sms;
+    static const std::string PersonelName;
+    static const std::string PersonelOid;
 };
 
 #endif // TALEPITEM_H

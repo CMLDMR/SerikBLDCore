@@ -1,5 +1,6 @@
 #include "talepsubitem.h"
-
+#include "user.h"
+#include <QDateTime>
 
 const std::string TalepSubItem::Collection{"TalepSubItem"};
 const std::string TalepSubItem::Type{"Tip"};
@@ -10,6 +11,8 @@ const std::string TalepSubItem::Pdf{"pdf"};
 const std::string TalepSubItem::Konum{"Konum"};
 const std::string TalepSubItem::Video{"Video"};
 const std::string TalepSubItem::Sms{"Sms"};
+const std::string TalepSubItem::PersonelName{"PersonelName"};
+const std::string TalepSubItem::PersonelOid{"PersonelOid"};
 
 TalepSubItem::TalepSubItem() : Item (Collection)
 {
@@ -107,7 +110,7 @@ QString TalepSubItem::pdfOid() const
     auto val = this->element (Pdf);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_oid ().value.to_string());
     }
     return "";
 }
@@ -193,4 +196,69 @@ QString TalepSubItem::sms() const
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
     }
     return "";
+}
+
+void TalepSubItem::setPersonelName(const QString &personelName)
+{
+    this->append(PersonelName,personelName.toStdString ());
+}
+
+QString TalepSubItem::personelName() const
+{
+    auto val = this->element (PersonelName);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
+void TalepSubItem::setPersonelOid(const QString &personelOid)
+{
+    this->append(PersonelOid,bsoncxx::types::b_dbpointer{User::Collection,bsoncxx::oid{personelOid.toStdString ()}});
+}
+
+QString TalepSubItem::personelOid() const
+{
+    auto val = this->element (PersonelOid);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_dbpointer ().value.to_string ());
+    }
+    return "";
+}
+
+QString TalepSubItem::tarih() const
+{
+    auto val = this->oid ();
+    if( val )
+    {
+        return QDateTime::fromTime_t (val.value ().get_time_t ()).date ().toString ("dd/MM/yyyy");
+    }
+    return "";
+}
+
+int TalepSubItem::julianDay() const
+{
+    auto val = this->oid ();
+    if( val )
+    {
+        return QDateTime::fromTime_t (val.value ().get_time_t ()).date ().toJulianDay ();
+    }
+    return 0;
+}
+
+QString TalepSubItem::saat() const
+{
+    auto val = this->oid ();
+    if( val )
+    {
+        return QDateTime::fromTime_t (val.value ().get_time_t ()).time ().toString ("hh:mm");
+    }
+    return "";
+}
+
+QJsonObject TalepSubItem::toJson() const
+{
+    return QJsonDocument::fromJson (bsoncxx::to_json (this->view ()).c_str ()).object ();
 }
