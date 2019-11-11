@@ -47,13 +47,9 @@ public:
 
 #endif
 
-
     void printView() const;
 
-
-
     void setOid( const std::string &oid );
-
 
     std::string getCollection() const;
 
