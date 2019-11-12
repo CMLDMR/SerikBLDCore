@@ -58,6 +58,7 @@ public:
     void setJulianDay( const int &julianDay );
     void setDurum( const QString &durum );
     void setKaynak( const QString &kaynak );
+    void setBirim( const QString &birim );
 
 
     QString oid() const;
@@ -73,6 +74,7 @@ public:
     QString durumColor() const;
     QString kaynak() const;
     QString kaynakColor() const;
+    QString birim() const;
 
 
 

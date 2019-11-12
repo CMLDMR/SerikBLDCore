@@ -12,6 +12,8 @@ const std::string TalepKey::SecStartOfDay{"SecStartOfDay"};
 const std::string TalepKey::JulianDay{"julianday"};
 const std::string TalepKey::Durum{"Durum"};
 const std::string TalepKey::Kaynak{"Kaynak"};
+const std::string TalepKey::Birim{"Birim"};
+
 
 
 const std::string TalepKey::DurumKey::DevamEdiyor{"DevamEdiyor"};
@@ -74,6 +76,11 @@ void Talep::setDurum(const QString &durum)
 void Talep::setKaynak(const QString &kaynak)
 {
     this->append(TalepKey::Kaynak,kaynak.toStdString ());
+}
+
+void Talep::setBirim(const QString &birim)
+{
+    this->append(TalepKey::Birim,birim.toStdString ());
 }
 
 QString Talep::oid() const
@@ -222,4 +229,14 @@ QString Talep::kaynakColor() const
     }else if (kaynak_ == "SOSYALMEDYA") {
         return "DarkSlateBlue";
     }
+}
+
+QString Talep::birim() const
+{
+    auto val = this->element (TalepKey::Birim);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
 }
