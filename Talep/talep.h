@@ -23,6 +23,7 @@ public:
 
     class SERIKBLDCORE_EXPORT DurumKey
     {
+    public:
         static const std::string DevamEdiyor;
         static const std::string Tamamlandi;
         static const std::string TeyitEdilmemis;
@@ -32,12 +33,32 @@ public:
 
     class SERIKBLDCORE_EXPORT KaynakKey
     {
+    public:
         static const std::string Sms;
         static const std::string Beyazmasa;
         static const std::string Telefon;
         static const std::string Web;
         static const std::string Mobil;
         static const std::string SosyalMedya;
+    };
+
+    struct DurumPipelineResult
+    {
+        int DevamEdiyor;
+        int Tamamlandi;
+        int RedEdildi;
+        int Beklemede;
+        int TeyitEdilmemis;
+    };
+
+    struct KaynakPipelineResult
+    {
+        int Sms;
+        int Beyazmasa;
+        int Telefon;
+        int Web;
+        int Mobil;
+        int SosyalMedya;
     };
 
 
