@@ -146,3 +146,173 @@ QVector<TalepSubItem> TalepManager::findTalepSubItem(const QString &talepOid)
     }
     return list;
 }
+
+TalepKey::DurumPipelineResult TalepManager::durumPipeLine(const QString &birim)
+{
+    TalepKey::DurumPipelineResult result;
+    mongocxx::pipeline stage;
+
+    stage.match (make_document(kvp(TalepKey::Birim,birim.toStdString ())));
+
+    stage.group (make_document(kvp("_id","$Durum"),
+                               kvp("count",make_document(kvp("$sum",1)))));
+
+    // Mahalle Mahalle Devam Ediyor Tamamlandı Olarak Ayırıyor.
+//    stage.group (make_document(kvp("_id",make_document(kvp("Durum","$Durum"),kvp("Mahalle","$Mahalle"))),
+//                               kvp("count",make_document(kvp("$sum",1)))));
+
+
+
+    auto cursor = this->db ()->collection (TalepKey::Collection).aggregate (stage);
+
+    for( auto doc : cursor )
+    {
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Beklemede)
+            {
+                result.Beklemede = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Beklemede = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::RedEdildi)
+            {
+                result.RedEdildi = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.RedEdildi = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Tamamlandi)
+            {
+                result.Tamamlandi = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Tamamlandi = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::DevamEdiyor)
+            {
+                result.DevamEdiyor = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.DevamEdiyor = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::TeyitEdilmemis){
+                result.TeyitEdilmemis = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.TeyitEdilmemis = 0;
+        }
+    }
+    return result;
+}
+
+TalepKey::KaynakPipelineResult TalepManager::kaynakPipeLine(const QString &birim)
+{
+    TalepKey::KaynakPipelineResult result;
+    mongocxx::pipeline stage;
+
+    stage.match (make_document(kvp(TalepKey::Birim,birim.toStdString ())));
+
+    stage.group (make_document(kvp("_id","$Kaynak"),
+                               kvp("count",make_document(kvp("$sum",1)))));
+
+    // Mahalle Mahalle Devam Ediyor Tamamlandı Olarak Ayırıyor.
+//    stage.group (make_document(kvp("_id",make_document(kvp("Durum","$Durum"),kvp("Mahalle","$Mahalle"))),
+//                               kvp("count",make_document(kvp("$sum",1)))));
+
+
+    result.Sms = 0;
+    result.Web = 0;
+    result.Mobil = 0;
+    result.Telefon = 0;
+    result.Beyazmasa = 0;
+    result.SosyalMedya = 0;
+
+    auto cursor = this->db ()->collection (TalepKey::Collection).aggregate (stage);
+
+    for( auto doc : cursor )
+    {
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Sms)
+            {
+                result.Sms = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Sms = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Web)
+            {
+                result.Web = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Web = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Mobil)
+            {
+                result.Mobil = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Mobil = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Telefon)
+            {
+                result.Telefon = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Telefon = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Beyazmasa){
+                result.Beyazmasa = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.Beyazmasa = 0;
+        }
+
+        try {
+            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::SosyalMedya){
+                result.SosyalMedya = doc["count"].get_int32 ().value;
+            }
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.SosyalMedya = 0;
+        }
+    }
+    return result;
+}

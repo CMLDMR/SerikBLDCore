@@ -26,6 +26,10 @@ public:
 
     QVector<TalepSubItem> findTalepSubItem( const QString &talepOid );
 
+    TalepKey::DurumPipelineResult durumPipeLine(const QString &birim );
+
+    TalepKey::KaynakPipelineResult kaynakPipeLine( const QString &birim );
+
 
 };
 
