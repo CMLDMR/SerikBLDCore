@@ -77,9 +77,9 @@ public:
     void setKonu( const QString &konu );
     void setSec( const int &mSecStartOfDay );
     void setJulianDay( const int &julianDay );
-    void setDurum( const QString &durum );
-    void setKaynak( const QString &kaynak );
-    void setBirim( const QString &birim );
+    Talep& setDurum( const QString &durum );
+    Talep& setKaynak( const QString &kaynak );
+    Talep& setBirim( const QString &birim );
 
 
     QString oid() const;

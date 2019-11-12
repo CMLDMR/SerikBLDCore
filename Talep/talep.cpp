@@ -68,19 +68,22 @@ void Talep::setJulianDay(const int &julianDay)
     this->append(TalepKey::JulianDay,julianDay);
 }
 
-void Talep::setDurum(const QString &durum)
+Talep &Talep::setDurum(const QString &durum)
 {
     this->append(TalepKey::Durum,durum.toStdString ());
+    return *this;
 }
 
-void Talep::setKaynak(const QString &kaynak)
+Talep &Talep::setKaynak(const QString &kaynak)
 {
     this->append(TalepKey::Kaynak,kaynak.toStdString ());
+    return *this;
 }
 
-void Talep::setBirim(const QString &birim)
+Talep &Talep::setBirim(const QString &birim)
 {
     this->append(TalepKey::Birim,birim.toStdString ());
+    return *this;
 }
 
 QString Talep::oid() const
