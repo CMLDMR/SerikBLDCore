@@ -234,11 +234,6 @@ TalepKey::KaynakPipelineResult TalepManager::kaynakPipeLine(const QString &birim
     stage.group (make_document(kvp("_id","$Kaynak"),
                                kvp("count",make_document(kvp("$sum",1)))));
 
-    // Mahalle Mahalle Devam Ediyor Tamamlandı Olarak Ayırıyor.
-//    stage.group (make_document(kvp("_id",make_document(kvp("Durum","$Durum"),kvp("Mahalle","$Mahalle"))),
-//                               kvp("count",make_document(kvp("$sum",1)))));
-
-
     result.Sms = 0;
     result.Web = 0;
     result.Mobil = 0;
