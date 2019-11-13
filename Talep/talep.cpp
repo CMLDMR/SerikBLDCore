@@ -13,6 +13,7 @@ const std::string TalepKey::JulianDay{"julianday"};
 const std::string TalepKey::Durum{"Durum"};
 const std::string TalepKey::Kaynak{"Kaynak"};
 const std::string TalepKey::Birim{"Birim"};
+const std::string TalepKey::GorevliPersonel{"GorevliPersonel"};
 
 
 
@@ -110,6 +111,32 @@ Talep &Talep::setKaynak(const QString &kaynak)
 Talep &Talep::setBirim(const QString &birim)
 {
     this->append(TalepKey::Birim,birim.toStdString ());
+    return *this;
+}
+
+Talep &Talep::AddGorevliPersonel(const Personel &personel)
+{
+    this->pushArray(TalepKey::GorevliPersonel,bsoncxx::document::value(personel.view ()));
+}
+
+Talep &Talep::DeleteGorevliPersonel(const Personel &personel)
+{
+    auto pList = this->GorevliList ();
+    this->removeElement (TalepKey::GorevliPersonel);
+
+    if( pList.count () == 1 )
+    {
+        this->append(TalepKey::GorevliPersonel,array{});
+        return *this;
+    }
+
+    for( auto item : pList )
+    {
+        if( item.oid ().value ().to_string () != personel.oid ().value ().to_string () )
+        {
+            this->AddGorevliPersonel (item);
+        }
+    }
     return *this;
 }
 
@@ -269,4 +296,23 @@ QString Talep::birim() const
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
     }
     return "";
+}
+
+QVector<Personel> Talep::GorevliList() const
+{
+    QVector<Personel> list;
+
+    auto _list = this->element (TalepKey::GorevliPersonel);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            Personel personelItem;
+            personelItem.setDocumentView (item.get_document ().view ());
+            list.push_back (std::move(personelItem));
+        }
+    }
+    return list;
 }

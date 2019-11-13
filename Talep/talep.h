@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "item.h"
 #include "SerikBLDCore_global.h"
+#include "personel.h"
 
 class SERIKBLDCORE_EXPORT TalepKey
 {
@@ -18,6 +19,7 @@ public:
     static const std::string Birim;
     static const std::string Durum;
     static const std::string Kaynak;
+    static const std::string GorevliPersonel;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
@@ -86,7 +88,8 @@ public:
     Talep& setDurum( const QString &durum );
     Talep& setKaynak( const QString &kaynak );
     Talep& setBirim( const QString &birim );
-
+    Talep& AddGorevliPersonel(const Personel &personel );
+    Talep& DeleteGorevliPersonel( const Personel &personel );
 
     QString oid() const;
     QString tcOid() const;
@@ -102,6 +105,7 @@ public:
     QString kaynak() const;
     QString kaynakColor() const;
     QString birim() const;
+    QVector<Personel> GorevliList() const;
 
 
 
