@@ -62,6 +62,9 @@ public:
     int julianDay() const;
     QString saat() const;
 
+    QString typeColor() const;
+    QString typeStr() const;
+
 
     QJsonObject toJson() const;
 

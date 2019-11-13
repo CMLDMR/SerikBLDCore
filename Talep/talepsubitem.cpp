@@ -258,6 +258,46 @@ QString TalepSubItem::saat() const
     return "";
 }
 
+QString TalepSubItem::typeColor() const
+{
+    switch (this->type ()) {
+    case ItemType::Aciklama:
+        return "lightgray";
+        break;
+    case ItemType::Fotograf:
+        return "orange";
+        break;
+    case ItemType::Pdf:
+        return "steelblue";
+        break;
+    case ItemType::Sms:
+        return "crimson";
+        break;
+    default:
+        break;
+    }
+}
+
+QString TalepSubItem::typeStr() const
+{
+    switch (this->type ()) {
+    case ItemType::Aciklama:
+        return "Aciklama";
+        break;
+    case ItemType::Fotograf:
+        return "Fotograf";
+        break;
+    case ItemType::Pdf:
+        return "Pdf";
+        break;
+    case ItemType::Sms:
+        return "Sms";
+        break;
+    default:
+        break;
+    }
+}
+
 QJsonObject TalepSubItem::toJson() const
 {
     return QJsonDocument::fromJson (bsoncxx::to_json (this->view ()).c_str ()).object ();
