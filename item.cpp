@@ -167,10 +167,11 @@ void Item::printView() const
 #endif
 }
 
-void Item::setOid(const std::string &oid)
+Item &Item::setOid(const std::string &oid)
 {
 #ifdef DESKTOP
     this->append("_id",bsoncxx::oid{oid});
+    return *this;
 #else
 
 
