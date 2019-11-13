@@ -5,9 +5,8 @@
 #include "item.h"
 #include "SerikBLDCore_global.h"
 
-class SERIKBLDCORE_EXPORT TalepKey : public QObject
+class SERIKBLDCORE_EXPORT TalepKey
 {
-    Q_OBJECT
 public:
     static const std::string Collection;
     static const std::string TCOID;
@@ -70,6 +69,13 @@ class SERIKBLDCORE_EXPORT Talep : public Item
 {
 public:
     Talep(Talep* other = nullptr );
+    Talep( const Talep& other );
+    Talep( Talep&& other );
+
+    Talep& operator=( const Talep& other );
+    Talep& operator=( Talep&& other );
+
+    operator bool() const;
 
     void setTCOID( const QString &tcoid );
     void setMahalle( const QString &mahalle );

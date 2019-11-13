@@ -38,6 +38,33 @@ Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
     }
 }
 
+Talep::Talep(const Talep &other) : Item(TalepKey::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+Talep::Talep(Talep &&other) : Item(TalepKey::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+Talep &Talep::operator=(const Talep &other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+Talep &Talep::operator=(Talep &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+Talep::operator bool() const
+{
+    return !this->view ().empty ();
+}
+
 void Talep::setTCOID(const QString &tcoid)
 {
     this->append(TalepKey::TCOID,bsoncxx::types::b_dbpointer{TC::Collection,bsoncxx::oid{tcoid.toStdString ()}});
