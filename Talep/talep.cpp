@@ -117,6 +117,7 @@ Talep &Talep::setBirim(const QString &birim)
 Talep &Talep::AddGorevliPersonel(const Personel &personel)
 {
     this->pushArray(TalepKey::GorevliPersonel,bsoncxx::document::value(personel.view ()));
+    return *this;
 }
 
 Talep &Talep::DeleteGorevliPersonel(const Personel &personel)
@@ -155,6 +156,7 @@ QString Talep::tcOid() const
     auto val = this->element (TalepKey::TCOID);
     if( val )
     {
+        std::cout << "QString Talep::tcOid() const: "<<val.value ().get_dbpointer ().value.to_string ()<< std::endl;
         return QString::fromStdString (val->get_dbpointer ().value.to_string ());
     }
     return "";
