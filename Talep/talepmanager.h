@@ -30,7 +30,6 @@ public:
 
     TalepKey::KaynakPipelineResult kaynakPipeLine( const QString &birim );
 
-
 };
 
 

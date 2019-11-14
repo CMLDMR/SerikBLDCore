@@ -165,8 +165,18 @@ TalepKey::DurumPipelineResult TalepManager::durumPipeLine(const QString &birim)
 
     auto cursor = this->db ()->collection (TalepKey::Collection).aggregate (stage);
 
+
+    result.Beklemede = 0;
+    result.RedEdildi = 0;
+    result.Tamamlandi = 0;
+    result.DevamEdiyor = 0;
+    result.TeyitEdilmemis = 0;
+
     for( auto doc : cursor )
     {
+
+        std::cout << __LINE__ << " " << __FUNCTION__ << " docView: " << bsoncxx::to_json (doc) << std::endl;
+
         try {
             if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Beklemede)
             {
