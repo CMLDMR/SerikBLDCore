@@ -11,6 +11,7 @@ const std::string TalepSubItem::Pdf{"pdf"};
 const std::string TalepSubItem::Konum{"Konum"};
 const std::string TalepSubItem::Video{"Video"};
 const std::string TalepSubItem::Sms{"Sms"};
+const std::string TalepSubItem::Log{"Log"};
 const std::string TalepSubItem::PersonelName{"PersonelName"};
 const std::string TalepSubItem::PersonelOid{"PersonelOid"};
 
@@ -73,6 +74,7 @@ QString TalepSubItem::talepOid() const
 void TalepSubItem::setAciklama(const QString &aciklama)
 {
     this->append(Aciklama,aciklama.toStdString ());
+    this->setType (ItemType::Aciklama);
 }
 
 QString TalepSubItem::aciklama() const
@@ -85,9 +87,26 @@ QString TalepSubItem::aciklama() const
     return "";
 }
 
+void TalepSubItem::setLog(const QString &log)
+{
+    this->append(Log,log.toStdString ());
+    this->setType (ItemType::Log);
+}
+
+QString TalepSubItem::log() const
+{
+    auto val = this->element (Log);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
 void TalepSubItem::setFotograf(const QString &fotoOid)
 {
     this->append(Fotograf,bsoncxx::oid{fotoOid.toStdString ()});
+    this->setType (ItemType::Fotograf);
 }
 
 QString TalepSubItem::fotografOid() const
@@ -103,6 +122,7 @@ QString TalepSubItem::fotografOid() const
 void TalepSubItem::setPdf(const QString &pdfOid)
 {
     this->append(Pdf,bsoncxx::oid{pdfOid.toStdString ()});
+    this->setType (ItemType::Pdf);
 }
 
 QString TalepSubItem::pdfOid() const
@@ -134,6 +154,7 @@ void TalepSubItem::setKonum(double x, double y)
     }
 
     this->append(Konum,doc);
+    this->setType (ItemType::Konum);
 }
 
 double TalepSubItem::xCoordinate() const
@@ -171,6 +192,7 @@ double TalepSubItem::yCoordinate() const
 void TalepSubItem::setVideoOid(const QString &videoOid)
 {
     this->append(Video,bsoncxx::oid{videoOid.toStdString ()});
+    this->setType (ItemType::Video);
 }
 
 QString TalepSubItem::videoOid() const
@@ -186,6 +208,7 @@ QString TalepSubItem::videoOid() const
 void TalepSubItem::setSms(const QString &sms)
 {
     this->append(Sms,sms.toStdString ());
+    this->setType (ItemType::Sms);
 }
 
 QString TalepSubItem::sms() const
@@ -262,7 +285,7 @@ QString TalepSubItem::typeColor() const
 {
     switch (this->type ()) {
     case ItemType::Aciklama:
-        return "lightgray";
+        return "dimgray";
         break;
     case ItemType::Fotograf:
         return "orange";
@@ -272,6 +295,9 @@ QString TalepSubItem::typeColor() const
         break;
     case ItemType::Sms:
         return "crimson";
+        break;
+    case ItemType::Log:
+        return "cornflowerblue";
         break;
     default:
         break;
@@ -293,7 +319,11 @@ QString TalepSubItem::typeStr() const
     case ItemType::Sms:
         return "Sms";
         break;
+    case ItemType::Log:
+        return "Log";
+        break;
     default:
+        return "";
         break;
     }
 }

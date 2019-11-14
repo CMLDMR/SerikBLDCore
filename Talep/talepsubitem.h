@@ -17,7 +17,8 @@ public:
         Pdf,
         Konum,
         Video,
-        Sms
+        Sms,
+        Log
     };
 
     TalepSubItem();
@@ -35,6 +36,9 @@ public:
 
     void setAciklama( const QString& aciklama );
     QString aciklama() const;
+
+    void setLog( const QString& log );
+    QString log() const;
 
     void setFotograf( const QString& fotoOid );
     QString fotografOid() const;
@@ -78,6 +82,7 @@ public:
     static const std::string Konum;
     static const std::string Video;
     static const std::string Sms;
+    static const std::string Log;
     static const std::string PersonelName;
     static const std::string PersonelOid;
 };
