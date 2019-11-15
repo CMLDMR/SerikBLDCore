@@ -238,7 +238,7 @@ QString TalepSubItem::personelName() const
 
 void TalepSubItem::setPersonelOid(const QString &personelOid)
 {
-    this->append(PersonelOid,bsoncxx::types::b_dbpointer{User::Collection,bsoncxx::oid{personelOid.toStdString ()}});
+    this->append(PersonelOid,bsoncxx::oid{personelOid.toStdString ()});
 }
 
 QString TalepSubItem::personelOid() const
@@ -246,7 +246,7 @@ QString TalepSubItem::personelOid() const
     auto val = this->element (PersonelOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_dbpointer ().value.to_string ());
+        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
     }
     return "";
 }
