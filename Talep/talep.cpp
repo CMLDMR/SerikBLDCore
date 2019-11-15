@@ -14,6 +14,8 @@ const std::string TalepKey::Durum{"Durum"};
 const std::string TalepKey::Kaynak{"Kaynak"};
 const std::string TalepKey::Birim{"Birim"};
 const std::string TalepKey::GorevliPersonel{"GorevliPersonel"};
+const std::string TalepKey::Yil{"Yıl"};
+const std::string TalepKey::Ay{"Ay"};
 
 
 
@@ -138,6 +140,18 @@ Talep &Talep::DeleteGorevliPersonel(const Personel &personel)
             this->AddGorevliPersonel (item);
         }
     }
+    return *this;
+}
+
+Talep &Talep::setYil(const int &yil)
+{
+    this->append(TalepKey::Yil,yil);
+    return *this;
+}
+
+Talep &Talep::setAy(const QString &ay)
+{
+    this->append(TalepKey::Ay,ay.toStdString ());
     return *this;
 }
 

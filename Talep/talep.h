@@ -20,6 +20,8 @@ public:
     static const std::string Durum;
     static const std::string Kaynak;
     static const std::string GorevliPersonel;
+    static const std::string Yil;
+    static const std::string Ay;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
@@ -90,6 +92,8 @@ public:
     Talep& setBirim( const QString &birim );
     Talep& AddGorevliPersonel(const Personel &personel );
     Talep& DeleteGorevliPersonel( const Personel &personel );
+    Talep& setYil( const int& yil );
+    Talep& setAy( const QString& ay );
 
     QString oid() const;
     QString tcOid() const;
