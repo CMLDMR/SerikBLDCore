@@ -35,6 +35,8 @@ public:
     static const std::string KeyGorevliPersonel;
     static const std::string KeyDilekceDurum;
     static const std::string KeyCevapOid;
+    static const std::string KeyYil;
+    static const std::string KeyAy;
 public:
     explicit Dilekce(Dilekce* other = nullptr);
 
@@ -56,6 +58,8 @@ public:
     void DeleteGorevliPersonel( const Personel &personel );
     void SetDurum( const QString &dilekceDurum);
     void SetCevapOid( const QString &cevapOid );
+    Dilekce& setYil( const int& yil );
+    Dilekce& setAy( const QString& ay);
 
     int sayi();
     QString konu();

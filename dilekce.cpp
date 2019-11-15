@@ -18,6 +18,8 @@ const std::string Dilekce::KeyOid{"_id"};
 const std::string Dilekce::KeyGorevliPersonel{"GorevliPersonel"};
 const std::string Dilekce::KeyDilekceDurum{"DilekceDurum"};
 const std::string Dilekce::KeyCevapOid{"CevapOid"};
+const std::string Dilekce::KeyYil{"Yıl"};
+const std::string Dilekce::KeyAy{"Ay"};
 
 
 
@@ -132,6 +134,18 @@ void Dilekce::SetDurum(const QString &dilekceDurum)
 void Dilekce::SetCevapOid(const QString &cevapOid)
 {
     this->append(KeyCevapOid,bsoncxx::oid{cevapOid.toStdString ()});
+}
+
+Dilekce &Dilekce::setYil(const int &yil)
+{
+    this->append(KeyYil,yil);
+    return *this;
+}
+
+Dilekce &Dilekce::setAy(const QString &ay)
+{
+    this->append(KeyAy,ay.toStdString ());
+    return *this;
 }
 
 
