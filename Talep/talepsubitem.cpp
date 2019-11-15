@@ -58,7 +58,7 @@ TalepSubItem::ItemType TalepSubItem::type() const
 
 void TalepSubItem::setTalepOid(const QString &talepOid)
 {
-    this->append(TalepOid,bsoncxx::types::b_dbpointer{TalepKey::Collection,bsoncxx::oid{talepOid.toStdString ()}});
+    this->append(TalepOid,bsoncxx::oid{talepOid.toStdString ()});
 }
 
 QString TalepSubItem::talepOid() const
@@ -66,7 +66,7 @@ QString TalepSubItem::talepOid() const
     auto val = this->element (TalepOid);
     if( val )
     {
-        return QString::fromStdString (val->get_dbpointer ().value.to_string ());
+        return QString::fromStdString (val->get_oid ().value.to_string ());
     }
     return "";
 }

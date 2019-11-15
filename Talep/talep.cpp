@@ -70,7 +70,7 @@ Talep::operator bool() const
 
 void Talep::setTCOID(const QString &tcoid)
 {
-    this->append(TalepKey::TCOID,bsoncxx::types::b_dbpointer{TC::Collection,bsoncxx::oid{tcoid.toStdString ()}});
+    this->append(TalepKey::TCOID,bsoncxx::oid{tcoid.toStdString ()});
 }
 
 void Talep::setMahalle(const QString &mahalle)
@@ -170,8 +170,7 @@ QString Talep::tcOid() const
     auto val = this->element (TalepKey::TCOID);
     if( val )
     {
-        std::cout << "QString Talep::tcOid() const: "<<val.value ().get_dbpointer ().value.to_string ()<< std::endl;
-        return QString::fromStdString (val->get_dbpointer ().value.to_string ());
+        return QString::fromStdString (val->get_oid ().value.to_string ());
     }
     return "";
 }
