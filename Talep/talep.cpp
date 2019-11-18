@@ -16,6 +16,7 @@ const std::string SerikBLDCore::TalepKey::Birim{"Birim"};
 const std::string SerikBLDCore::TalepKey::GorevliPersonel{"GorevliPersonel"};
 const std::string SerikBLDCore::TalepKey::Yil{"Yıl"};
 const std::string SerikBLDCore::TalepKey::Ay{"Ay"};
+const std::string SerikBLDCore::TalepKey::FotoOid{"FotoOid"};
 
 
 
@@ -152,6 +153,12 @@ SerikBLDCore::Talep &SerikBLDCore::Talep::setYil(const int &yil)
 SerikBLDCore::Talep &SerikBLDCore::Talep::setAy(const QString &ay)
 {
     this->append(TalepKey::Ay,ay.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::Talep &SerikBLDCore::Talep::setFoto(const QString &fotooid)
+{
+    this->append(TalepKey::FotoOid,bsoncxx::oid{fotooid.toStdString ()});
     return *this;
 }
 
@@ -330,4 +337,14 @@ QVector<SerikBLDCore::Personel> SerikBLDCore::Talep::GorevliList() const
         }
     }
     return list;
+}
+
+QString SerikBLDCore::Talep::fotoOid() const
+{
+    auto val = this->element (TalepKey::FotoOid);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+    }
+    return "";
 }

@@ -7,6 +7,10 @@
 #include "personel.h"
 
 namespace SerikBLDCore {
+
+
+
+
 class SERIKBLDCORE_EXPORT TalepKey
 {
 public:
@@ -23,6 +27,7 @@ public:
     static const std::string GorevliPersonel;
     static const std::string Yil;
     static const std::string Ay;
+    static const std::string FotoOid;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
@@ -95,6 +100,7 @@ public:
     Talep& DeleteGorevliPersonel( const Personel &personel );
     Talep& setYil( const int& yil );
     Talep& setAy( const QString& ay );
+    Talep& setFoto( const QString& fotooid );
 
     QString oid() const;
     QString tcOid() const;
@@ -111,7 +117,7 @@ public:
     QString kaynakColor() const;
     QString birim() const;
     QVector<Personel> GorevliList() const;
-
+    QString fotoOid() const;
 
 
 };
