@@ -29,6 +29,15 @@ public:
 
     QVector<TalepSubItem> findTalepSubItem( const QString &talepOid );
 
+    ///
+    /// \brief Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri
+    /// Geri Döndürür.<BR>Örnek Kode<BR> <BLOCKQUOTE><CODE>auto container = this->Header ()->addWidget (cpp14::make_unique<WContainerWidget>());<BR>
+    /// container->addStyleClass (Bootstrap::Grid::col_full_12);<BR>
+    /// container->setMargin (15,Side::Top|Side::Bottom);<BR>
+    /// auto toolbarWidget = container->addWidget (cpp14::make_unique<WToolBar>()); </BLOCKQUOTE></CODE><BR>
+    /// \param birim
+    /// \return
+    ///
     TalepKey::DurumPipelineResult durumPipeLine(const QString &birim );
 
     TalepKey::KaynakPipelineResult kaynakPipeLine( const QString &birim );

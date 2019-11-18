@@ -57,6 +57,11 @@ public:
     QString TamAdres();
     QString Password();
     QString NormalTelefon();
+
+    ///
+    /// \brief Çalışmalarla ilgili Vatandaşa SMS Gidip Gitmeyeceğini Belirler
+    /// \return Eğer Gönderilecekse <b>true</b> yoksa <b>false</b> Döndürür.
+    ///
     bool    CalismaSMS();
 
 };

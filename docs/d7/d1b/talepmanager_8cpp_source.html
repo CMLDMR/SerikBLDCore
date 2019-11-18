@@ -219,9 +219,9 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">return</span> list;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<a class="code" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">SerikBLDCore::TalepKey::DurumPipelineResult</a> SerikBLDCore::TalepManager::durumPipeLine(<span class="keyword">const</span> QString &amp;birim)</div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">  172</a></span>&#160;<a class="code" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">SerikBLDCore::TalepKey::DurumPipelineResult</a> <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">SerikBLDCore::TalepManager::durumPipeLine</a>(<span class="keyword">const</span> QString &amp;birim)</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;{</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    TalepKey::DurumPipelineResult result;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <a class="code" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">TalepKey::DurumPipelineResult</a> result;</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    mongocxx::pipeline stage;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    stage.match (make_document(kvp(TalepKey::Birim,birim.toStdString ())));</div>
@@ -308,7 +308,7 @@ $(function() {
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<a class="code" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">SerikBLDCore::TalepKey::KaynakPipelineResult</a> SerikBLDCore::TalepManager::kaynakPipeLine(<span class="keyword">const</span> QString &amp;birim)</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;{</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    TalepKey::KaynakPipelineResult result;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <a class="code" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">TalepKey::KaynakPipelineResult</a> result;</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    mongocxx::pipeline stage;</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    stage.match (make_document(kvp(TalepKey::Birim,birim.toStdString ())));</div>
@@ -396,6 +396,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result_html"><div class="ttname"><a href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">SerikBLDCore::TalepKey::DurumPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00054">talep.h:54</a></div></div>
 <div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result_html"><div class="ttname"><a href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">SerikBLDCore::TalepKey::KaynakPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00063">talep.h:63</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_manager_html_a859dcb854d6330c75ee6086db5f8853b"><div class="ttname"><a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">SerikBLDCore::TalepManager::durumPipeLine</a></div><div class="ttdeci">TalepKey::DurumPipelineResult durumPipeLine(const QString &amp;birim)</div><div class="ttdoc">Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri Geri Döndürür. Örnek Kode   auto container = t...</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d1b/talepmanager_8cpp_source.html#l00172">talepmanager.cpp:172</a></div></div>
 <div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_html"><div class="ttname"><a href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">SerikBLDCore::Talep</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00078">talep.h:78</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
