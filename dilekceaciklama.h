@@ -4,6 +4,7 @@
 #include "item.h"
 #include "db.h"
 
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT DilekceAciklama : public Item
 {
     static const std::string Collection;
@@ -39,5 +40,8 @@ public:
     QString Saat() const;
     operator bool() const;
 };
+}
+
+
 
 #endif // DILEKCEACIKLAMA_H

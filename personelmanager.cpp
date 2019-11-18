@@ -1,21 +1,21 @@
 #include "personelmanager.h"
 
-PersonelManager::PersonelManager() : DB()
+SerikBLDCore::PersonelManager::PersonelManager() : DB()
 {
 
 }
 
-PersonelManager::PersonelManager(DB *_mDB) : DB(_mDB)
+SerikBLDCore::PersonelManager::PersonelManager(DB *_mDB) : DB(_mDB)
 {
 
 }
 
-PersonelManager::PersonelManager(mongocxx::database *_db) : DB(_db)
+SerikBLDCore::PersonelManager::PersonelManager(mongocxx::database *_db) : DB(_db)
 {
 
 }
 
-QVector<Personel> PersonelManager::PersonelList(const std::string &birim)
+QVector<SerikBLDCore::Personel> SerikBLDCore::PersonelManager::PersonelList(const std::string &birim)
 {
     QVector<Personel> list;
     Personel personel;

@@ -1,18 +1,18 @@
 #include "tc.h"
 #include <QRandomGenerator>
 
-const std::string TC::Collection = "TC";
-const std::string TC::KeyTC{"TCNO"};
-const std::string TC::KeyAdSoyad{"İsimSoyisim"};
-const std::string TC::KeyCepTelefonu{"Cep Telefonu"};
-const std::string TC::KeyNormalTelefon{"Normal Telefonu"};
-const std::string TC::KeyMahalle{"Mahalle"};
-const std::string TC::KeyAdres{"Tam Adres"};
-const std::string TC::KeyPassword{"password"};
-const std::string TC::KeyCalismaSMS{"CalismaSMS"};
-const std::string TC::KeyOid{"_id"};
+const std::string SerikBLDCore::TC::Collection = "TC";
+const std::string SerikBLDCore::TC::KeyTC{"TCNO"};
+const std::string SerikBLDCore::TC::KeyAdSoyad{"İsimSoyisim"};
+const std::string SerikBLDCore::TC::KeyCepTelefonu{"Cep Telefonu"};
+const std::string SerikBLDCore::TC::KeyNormalTelefon{"Normal Telefonu"};
+const std::string SerikBLDCore::TC::KeyMahalle{"Mahalle"};
+const std::string SerikBLDCore::TC::KeyAdres{"Tam Adres"};
+const std::string SerikBLDCore::TC::KeyPassword{"password"};
+const std::string SerikBLDCore::TC::KeyCalismaSMS{"CalismaSMS"};
+const std::string SerikBLDCore::TC::KeyOid{"_id"};
 
-TC::TC(TC *other) : Item(TC::Collection)
+SerikBLDCore::TC::TC(TC *other) : Item(TC::Collection)
 {
 
     if( other != nullptr )
@@ -21,51 +21,87 @@ TC::TC(TC *other) : Item(TC::Collection)
     }
 }
 
-TC::TC(const TC &other) : Item(TC::Collection)
+SerikBLDCore::TC::TC(bsoncxx::document::value *mValue) : Item(TC::Collection)
+{
+    if( mValue )
+    {
+        this->setDocumentView (mValue->view ());
+    }
+}
+
+SerikBLDCore::TC::TC(const TC &other) : Item(TC::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-TC::TC(TC &&other) : Item(TC::Collection)
+SerikBLDCore::TC::TC(TC &&other) : Item(TC::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-TC *TC::operator=(const bsoncxx::document::value &value)
+SerikBLDCore::TC &SerikBLDCore::TC::operator=(const bsoncxx::document::value &value)
 {
     this->setDocumentView (value.view ());
-    return this;
+    return *this;
 }
 
-void TC::setTCNO(const QString &tcno)
+SerikBLDCore::TC &SerikBLDCore::TC::operator=(bsoncxx::document::value *value)
+{
+    this->setDocumentView (value->view ());
+    return *this;
+}
+
+
+
+SerikBLDCore::TC &SerikBLDCore::TC::operator=(const bsoncxx::document::view &view)
+{
+    setDocumentView (view);
+    return *this;
+}
+
+SerikBLDCore::TC &SerikBLDCore::TC::operator=(const SerikBLDCore::TC &other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+SerikBLDCore::TC &SerikBLDCore::TC::operator=(SerikBLDCore::TC &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+SerikBLDCore::TC &SerikBLDCore::TC::setTCNO(const QString &tcno)
 {
     this->append(KeyTC,tcno.toStdString ());
+    return *this;
 }
 
-void TC::setAdSoyad(const QString &adsoyad)
+SerikBLDCore::TC& SerikBLDCore::TC::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
+    return *this;
 }
 
-void TC::setCepTelefonu(const QString &cepTelefonu)
+SerikBLDCore::TC& SerikBLDCore::TC::setCepTelefonu(const QString &cepTelefonu)
 {
     this->append(KeyCepTelefonu,cepTelefonu.toStdString ());
-
+    return *this;
 }
 
-void TC::setMahalle(const QString &mahalle)
+SerikBLDCore::TC& SerikBLDCore::TC::setMahalle(const QString &mahalle)
 {
     this->append(KeyMahalle,mahalle.toStdString ());
-
+    return *this;
 }
 
-void TC::setTamAdress(const QString &adres)
+SerikBLDCore::TC& SerikBLDCore::TC::setTamAdress(const QString &adres)
 {
     this->append(KeyAdres,adres.toStdString ());
-
+    return *this;
 }
 
-void TC::setPassword(const QString &password)
+SerikBLDCore::TC& SerikBLDCore::TC::setPassword(const QString &password)
 {
     if( password == "" )
     {
@@ -74,21 +110,22 @@ void TC::setPassword(const QString &password)
     }else{
         this->append(KeyPassword,password.toStdString ());
     }
-
+    return *this;
 }
 
-void TC::setNormalTelefon(const QString &normalTelefon)
+SerikBLDCore::TC& SerikBLDCore::TC::setNormalTelefon(const QString &normalTelefon)
 {
     this->append(KeyNormalTelefon,normalTelefon.toStdString ());
+    return *this;
 }
 
-void TC::setCalismaSMS(const bool &smsgitsin)
+SerikBLDCore::TC& SerikBLDCore::TC::setCalismaSMS(const bool &smsgitsin)
 {
     this->append(KeyCalismaSMS,smsgitsin);
-
+    return *this;
 }
 
-QString TC::TCNO()
+QString SerikBLDCore::TC::TCNO()
 {
     auto value = this->element (KeyTC);
     if( value )
@@ -99,7 +136,7 @@ QString TC::TCNO()
     }
 }
 
-QString TC::AdSoyad()
+QString SerikBLDCore::TC::AdSoyad()
 {
     auto value = this->element (KeyAdSoyad);
     if( value )
@@ -110,7 +147,7 @@ QString TC::AdSoyad()
     }
 }
 
-QString TC::CepTelefonu()
+QString SerikBLDCore::TC::CepTelefonu()
 {
     auto value = this->element (KeyCepTelefonu);
     if( value )
@@ -121,7 +158,7 @@ QString TC::CepTelefonu()
     }
 }
 
-QString TC::Mahalle()
+QString SerikBLDCore::TC::Mahalle()
 {
     auto value = this->element (KeyMahalle);
     if( value )
@@ -132,7 +169,7 @@ QString TC::Mahalle()
     }
 }
 
-QString TC::TamAdres()
+QString SerikBLDCore::TC::TamAdres()
 {
     auto value = this->element (KeyAdres);
     if( value )
@@ -143,7 +180,7 @@ QString TC::TamAdres()
     }
 }
 
-QString TC::Password()
+QString SerikBLDCore::TC::Password()
 {
     auto value = this->element (KeyPassword);
     if( value )
@@ -154,7 +191,7 @@ QString TC::Password()
     }
 }
 
-QString TC::NormalTelefon()
+QString SerikBLDCore::TC::NormalTelefon()
 {
     auto value = this->element (KeyNormalTelefon);
     if( value )
@@ -165,7 +202,7 @@ QString TC::NormalTelefon()
     }
 }
 
-bool TC::CalismaSMS()
+bool SerikBLDCore::TC::CalismaSMS()
 {
     auto value = this->element (KeyCalismaSMS);
     if( value )

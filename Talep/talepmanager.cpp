@@ -1,21 +1,21 @@
 #include "talepmanager.h"
 
-TalepManager::TalepManager() : DB()
+SerikBLDCore::TalepManager::TalepManager() : DB()
 {
 
 }
 
-TalepManager::TalepManager(DB *mDB) : DB(mDB)
+SerikBLDCore::TalepManager::TalepManager(DB *mDB) : DB(mDB)
 {
 
 }
 
-TalepManager::TalepManager(mongocxx::database *_db) : DB(_db)
+SerikBLDCore::TalepManager::TalepManager(mongocxx::database *_db) : DB(_db)
 {
 
 }
 
-bool TalepManager::insertTalep(const Talep *item)
+bool SerikBLDCore::TalepManager::insertTalep(const Talep *item)
 {
     try {
         auto ins = this->insertItem (*item);
@@ -37,7 +37,29 @@ bool TalepManager::insertTalep(const Talep *item)
     }
 }
 
-bool TalepManager::updateTalep(const Talep *item)
+std::string SerikBLDCore::TalepManager::insertTalep(const Talep &item)
+{
+    try {
+        auto ins = this->insertItem (item);
+        if( ins )
+        {
+            if( ins.value ().result ().inserted_count () )
+            {
+                return ins.value ().inserted_id ().get_oid ().value.to_string ();
+            }else{
+                return "";
+            }
+        }else{
+            return "";
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return "";
+    }
+}
+
+bool SerikBLDCore::TalepManager::updateTalep(const Talep *item)
 {
     try {
         auto ins = this->updateItem (*item);
@@ -59,7 +81,7 @@ bool TalepManager::updateTalep(const Talep *item)
     }
 }
 
-QVector<Talep> TalepManager::findTalep(const Talep &filter, int limit, int skip)
+QVector<SerikBLDCore::Talep> SerikBLDCore::TalepManager::findTalep(const Talep &filter, int limit, int skip)
 {
     QVector<Talep> list;
 
@@ -86,7 +108,7 @@ QVector<Talep> TalepManager::findTalep(const Talep &filter, int limit, int skip)
     return list;
 }
 
-Talep TalepManager::findOneTalep(const Talep &filter)
+SerikBLDCore::Talep SerikBLDCore::TalepManager::findOneTalep(const Talep &filter)
 {
     Talep item;
 
@@ -98,7 +120,7 @@ Talep TalepManager::findOneTalep(const Talep &filter)
     return item;
 }
 
-bool TalepManager::insertTalepSubItem(const TalepSubItem *item)
+bool SerikBLDCore::TalepManager::insertTalepSubItem(const TalepSubItem *item)
 {
     try {
         auto ins = this->insertItem (*item);
@@ -120,7 +142,7 @@ bool TalepManager::insertTalepSubItem(const TalepSubItem *item)
     }
 }
 
-QVector<TalepSubItem> TalepManager::findTalepSubItem(const QString &talepOid)
+QVector<SerikBLDCore::TalepSubItem> SerikBLDCore::TalepManager::findTalepSubItem(const QString &talepOid)
 {
     TalepSubItem filter;
     filter.setTalepOid (talepOid);
@@ -147,7 +169,7 @@ QVector<TalepSubItem> TalepManager::findTalepSubItem(const QString &talepOid)
     return list;
 }
 
-TalepKey::DurumPipelineResult TalepManager::durumPipeLine(const QString &birim)
+SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPipeLine(const QString &birim)
 {
     TalepKey::DurumPipelineResult result;
     mongocxx::pipeline stage;
@@ -163,7 +185,7 @@ TalepKey::DurumPipelineResult TalepManager::durumPipeLine(const QString &birim)
 
 
 
-    auto cursor = this->db ()->collection (TalepKey::Collection).aggregate (stage);
+    auto cursor = this->db ()->collection (SerikBLDCore::TalepKey::Collection).aggregate (stage);
 
 
     result.Beklemede = 0;
@@ -234,7 +256,7 @@ TalepKey::DurumPipelineResult TalepManager::durumPipeLine(const QString &birim)
     return result;
 }
 
-TalepKey::KaynakPipelineResult TalepManager::kaynakPipeLine(const QString &birim)
+SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakPipeLine(const QString &birim)
 {
     TalepKey::KaynakPipelineResult result;
     mongocxx::pipeline stage;

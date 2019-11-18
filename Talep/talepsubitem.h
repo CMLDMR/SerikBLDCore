@@ -6,6 +6,7 @@
 #include "SerikBLDCore_global.h"
 #include "talep.h"
 
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT TalepSubItem : public Item
 {
 public:
@@ -86,5 +87,8 @@ public:
     static const std::string PersonelName;
     static const std::string PersonelOid;
 };
+
+}
+
 
 #endif // TALEPITEM_H

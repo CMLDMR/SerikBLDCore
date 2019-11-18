@@ -5,6 +5,8 @@
 #include "item.h"
 #include "SerikBLDCore_global.h"
 
+namespace SerikBLDCore {
+
 class SERIKBLDCORE_EXPORT Personel : public Item
 {
     static const std::string Collection;
@@ -37,5 +39,9 @@ public:
     void setFotoOid( const QString &fotoOid );
     void setBirim( const QString &birim );
 };
+
+}
+
+
 
 #endif // PERSONEL_H

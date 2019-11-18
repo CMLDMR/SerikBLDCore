@@ -2,10 +2,10 @@
 #include <QDate>
 
 
-const std::string DilekceCevap::Collection{"DilekceCevap"};
+const std::string SerikBLDCore::DilekceCevap::Collection{"DilekceCevap"};
 
 
-DilekceCevap::DilekceCevap(DilekceCevap *other) : Item (Collection)
+SerikBLDCore::DilekceCevap::DilekceCevap(DilekceCevap *other) : Item (Collection)
 {
     if( other != nullptr )
     {
@@ -13,68 +13,68 @@ DilekceCevap::DilekceCevap(DilekceCevap *other) : Item (Collection)
     }
 }
 
-DilekceCevap::DilekceCevap(const DilekceCevap &other) : Item (Collection)
+SerikBLDCore::DilekceCevap::DilekceCevap(const DilekceCevap &other) : Item (Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-DilekceCevap::DilekceCevap(DilekceCevap &&other) : Item (Collection)
+SerikBLDCore::DilekceCevap::DilekceCevap(DilekceCevap &&other) : Item (Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-DilekceCevap &DilekceCevap::operator=(const DilekceCevap &other)
+SerikBLDCore::DilekceCevap &SerikBLDCore::DilekceCevap::operator=(const DilekceCevap &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-DilekceCevap &DilekceCevap::operator=(DilekceCevap &&other)
+SerikBLDCore::DilekceCevap &SerikBLDCore::DilekceCevap::operator=(DilekceCevap &&other)
 {
     this->setDocumentView (other.view ());
     return *this;}
 
-void DilekceCevap::setDilekceOid(const QString &dilekceOid)
+void SerikBLDCore::DilekceCevap::setDilekceOid(const QString &dilekceOid)
 {
     this->append(KeyDilekceOid,bsoncxx::oid{dilekceOid.toStdString ()});
 }
 
-void DilekceCevap::setPersonelOid(const QString &personelOid)
+void SerikBLDCore::DilekceCevap::setPersonelOid(const QString &personelOid)
 {
     this->append(KeyPersonelOid,bsoncxx::oid{personelOid.toStdString ()});
 }
 
-void DilekceCevap::setPersonelName(const QString &personelName)
+void SerikBLDCore::DilekceCevap::setPersonelName(const QString &personelName)
 {
     this->append(KeyPersonelName,personelName.toStdString ());
 }
 
-void DilekceCevap::setSaat(const QString &saat)
+void SerikBLDCore::DilekceCevap::setSaat(const QString &saat)
 {
     this->append(KeySaat,saat.toStdString ());
 }
 
-void DilekceCevap::setJulianDay(const int &julianDay)
+void SerikBLDCore::DilekceCevap::setJulianDay(const int &julianDay)
 {
     this->append(JulianDay,julianDay);
 }
 
-void DilekceCevap::setCevapOid(const QString &cevapOid)
+void SerikBLDCore::DilekceCevap::setCevapOid(const QString &cevapOid)
 {
     this->append(KeyCevapOid,bsoncxx::oid{cevapOid.toStdString ()});
 }
 
-void DilekceCevap::setCevapIcerik(const QString &cevapIcerik)
+void SerikBLDCore::DilekceCevap::setCevapIcerik(const QString &cevapIcerik)
 {
     this->append(KeyCevapIcerik,cevapIcerik.toStdString ());
 }
 
-void DilekceCevap::addEkOid(const QString &ekOid)
+void SerikBLDCore::DilekceCevap::addEkOid(const QString &ekOid)
 {
     this->pushArray(KeyEkler,bsoncxx::oid{ekOid.toStdString ()});
 }
 
-QString DilekceCevap::dilekceOid() const
+QString SerikBLDCore::DilekceCevap::dilekceOid() const
 {
     auto val = this->element (KeyDilekceOid);
     if( val )
@@ -85,7 +85,7 @@ QString DilekceCevap::dilekceOid() const
     }
 }
 
-QString DilekceCevap::personelOid() const
+QString SerikBLDCore::DilekceCevap::personelOid() const
 {
     auto val = this->element (KeyPersonelOid);
     if( val )
@@ -96,7 +96,7 @@ QString DilekceCevap::personelOid() const
     }
 }
 
-QString DilekceCevap::personelName() const
+QString SerikBLDCore::DilekceCevap::personelName() const
 {
     auto val = this->element (KeyPersonelName);
     if( val )
@@ -107,7 +107,7 @@ QString DilekceCevap::personelName() const
     }
 }
 
-QString DilekceCevap::saat() const
+QString SerikBLDCore::DilekceCevap::saat() const
 {
     auto val = this->element (KeySaat);
     if( val )
@@ -118,7 +118,7 @@ QString DilekceCevap::saat() const
     }
 }
 
-int DilekceCevap::julianDay() const
+int SerikBLDCore::DilekceCevap::julianDay() const
 {
     auto val = this->element (JulianDay);
     if( val )
@@ -129,7 +129,7 @@ int DilekceCevap::julianDay() const
     }
 }
 
-QString DilekceCevap::Tarih() const
+QString SerikBLDCore::DilekceCevap::Tarih() const
 {
     auto val = this->element (JulianDay);
     if( val )
@@ -140,7 +140,7 @@ QString DilekceCevap::Tarih() const
     }
 }
 
-QString DilekceCevap::cevapOid() const
+QString SerikBLDCore::DilekceCevap::cevapOid() const
 {
     auto val = this->element (KeyCevapOid);
     if( val )
@@ -151,7 +151,7 @@ QString DilekceCevap::cevapOid() const
     }
 }
 
-QString DilekceCevap::cevapIcerik() const
+QString SerikBLDCore::DilekceCevap::cevapIcerik() const
 {
     auto val = this->element (KeyCevapIcerik);
     if( val )
@@ -162,7 +162,7 @@ QString DilekceCevap::cevapIcerik() const
     }
 }
 
-QVector<QString> DilekceCevap::ekList() const
+QVector<QString> SerikBLDCore::DilekceCevap::ekList() const
 {
     QVector<QString> list;
     auto cursor = this->element (KeyEkler);

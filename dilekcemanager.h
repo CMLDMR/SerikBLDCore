@@ -10,6 +10,9 @@
 #include <QVector>
 #include "dilekcecevap.h"
 
+
+namespace SerikBLDCore {
+
 class SERIKBLDCORE_EXPORT DilekceManager : public DB
 {
 public:
@@ -51,5 +54,9 @@ public:
     QString TaranmisDilekcePath( const QString &taranmisdilekceOid );
 
 };
+
+
+}
+
 
 #endif // DILEKCEMANAGER_H

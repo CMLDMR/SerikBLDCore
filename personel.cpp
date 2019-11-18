@@ -1,38 +1,38 @@
 #include "personel.h"
 
 
-const std::string Personel::Collection{"Personel"};
+const std::string SerikBLDCore::Personel::Collection{"Personel"};
 
 
 
-Personel::Personel() : Item(Collection)
+SerikBLDCore::Personel::Personel() : Item(Collection)
 {
 
 }
 
-Personel::Personel(const Personel &other) : Item(Collection)
-{
-    this->setDocumentView (other.view ());
-}
-
-Personel::Personel(Personel &&other) : Item(Collection)
+SerikBLDCore::Personel::Personel(const Personel &other) : Item(Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-Personel &Personel::operator=(const Personel &other)
+SerikBLDCore::Personel::Personel(Personel &&other) : Item(Collection)
 {
     this->setDocumentView (other.view ());
-    return *this;
 }
 
-Personel &Personel::operator=(Personel &&other)
+SerikBLDCore::Personel &SerikBLDCore::Personel::operator=(const Personel &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-QString Personel::AdSoyad() const
+SerikBLDCore::Personel &SerikBLDCore::Personel::operator=(Personel &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+QString SerikBLDCore::Personel::AdSoyad() const
 {
     auto val = this->element (KeyAdSoyad);
     if( val )
@@ -43,7 +43,7 @@ QString Personel::AdSoyad() const
     }
 }
 
-bool Personel::BuroPersoneli() const
+bool SerikBLDCore::Personel::BuroPersoneli() const
 {
     auto val = this->element (KeyBuroPersonel);
     if( val )
@@ -54,7 +54,7 @@ bool Personel::BuroPersoneli() const
     }
 }
 
-QString Personel::FotoOid() const
+QString SerikBLDCore::Personel::FotoOid() const
 {
     auto val = this->element (KeyFotoOid);
     if( val )
@@ -65,7 +65,7 @@ QString Personel::FotoOid() const
     }
 }
 
-QString Personel::Birim() const
+QString SerikBLDCore::Personel::Birim() const
 {
     auto val = this->element (KeyBirimi);
     if( val )
@@ -76,22 +76,22 @@ QString Personel::Birim() const
     }
 }
 
-void Personel::setAdSoyad(const QString &adsoyad)
+void SerikBLDCore::Personel::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
 }
 
-void Personel::setBuroPersoneli(const bool &buro)
+void SerikBLDCore::Personel::setBuroPersoneli(const bool &buro)
 {
     this->append(KeyBuroPersonel,buro);
 }
 
-void Personel::setFotoOid(const QString &fotoOid)
+void SerikBLDCore::Personel::setFotoOid(const QString &fotoOid)
 {
     this->append(KeyFotoOid,bsoncxx::oid{fotoOid.toStdString ()});
 }
 
-void Personel::setBirim(const QString &birim)
+void SerikBLDCore::Personel::setBirim(const QString &birim)
 {
     this->append(KeyBirimi,birim.toStdString ());
 }

@@ -8,77 +8,96 @@
 
 static int DBConnectionCount = 0;
 
-DB::DB()
+SerikBLDCore::DB::DB()
 {
-
-    std::cout << "New Connect: Connection Count: " << ++DBConnectionCount << std::endl;
-    mConstructWithNewClient = true;
-    try {
-        mClient = new mongocxx::client(mongocxx::uri(_url));
-    } catch (mongocxx::exception &e) {
-        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
-    }
-    _mDB = mClient->database (DB__);
+//    std::cout << "New Connect: Connection Count: " << ++DBConnectionCount << std::endl;
+//    mConstructWithNewClient = true;
+//    try {
+//        mClient = new mongocxx::client(mongocxx::uri(_url));
+//    } catch (mongocxx::exception &e) {
+//        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+//        std::cout << str << std::endl;
+//    }
+//    _mDB = mClient->database (DB__);
 }
 
-DB::DB(const DB &db)
+SerikBLDCore::DB::DB(const DB &db)
     :mDB(db.mDB)
 {
     std::cout << "DB::DB(const DB &db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
-DB::DB(mongocxx::database *_db)
+SerikBLDCore::DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
     std::cout << "DB::DB(mongocxx::database *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
-DB::DB(DB *_db) : mDB(_db->db ())
+SerikBLDCore::DB::DB(DB *_db) : mDB(_db->db ())
 {
     std::cout << "DB::DB(DB *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
-DB::DB(const DB *_db) : mDB( _db->getDB ()->mDB )
+SerikBLDCore::DB::DB(const DB *_db) : mDB( _db->getDB ()->mDB )
 {
 
 }
 
 
 
-DB::~DB()
+SerikBLDCore::DB::~DB()
 {
-    std::cout << "DB Destructor " << std::endl;
+    std::cout << "-DB Destructor- Delete Client: " << mConstructWithNewClient << std::endl;
     if( mConstructWithNewClient )
     {
         std::cout << "Delete DB Connection, CurrentConnection Count: " <<  --DBConnectionCount << std::endl;
-        delete mClient;
+//        delete mClient;
     }
+    std::cout << "DB Destructor End" << std::endl;
 }
 
-DB &DB::operator=(const DB &otherDB)
+SerikBLDCore::DB &SerikBLDCore::DB::operator=(const DB &otherDB)
 {
     std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
-
-    mClient = otherDB.mClient;
-    _mDB = mClient->database (DB__);
+//    mClient = otherDB.mClient;
+    mDB = otherDB.mDB;
     return *this;
 }
 
-mongocxx::database *DB::db()
+QVector<QString> SerikBLDCore::DB::getMahalleler()
 {
-    if( mConstructWithNewClient )
+
+    QVector<QString> list;
+
+
+    auto cursor = this->find (std::move(Item("Mahalleler")));
+    if( cursor )
     {
-        return &_mDB;
-    }else{
-        return mDB;
+        for( auto doc : cursor.value () )
+        {
+            try {
+                list.append (doc["Mahalle"].get_utf8 ().value.to_string().c_str ());
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+                std::cout << str << std::endl;
+            }
+        }
     }
+    return list;
+
 }
 
-std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
+
+
+mongocxx::database *SerikBLDCore::DB::db()
+{
+    return mDB;
+}
+
+std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFilename)
 {
     auto bucket = this->db ()->gridfs_bucket ();
 
@@ -163,7 +182,7 @@ std::string DB::downloadFile(const QString &fileOid, bool forceFilename)
     return fullFilename.toStdString ();
 }
 
-std::string DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
+std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
 {
     auto bucket = this->db ()->gridfs_bucket ();
 
@@ -250,7 +269,7 @@ std::string DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
     return fullFilename.toStdString ();
 }
 
-bsoncxx::types::value DB::uploadfile(QString filepath)
+bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
 {
     auto bucket = this->db ()->gridfs_bucket ();
     QFile file( filepath );
@@ -269,7 +288,7 @@ bsoncxx::types::value DB::uploadfile(QString filepath)
     }
 }
 
-mongocxx::stdx::optional<mongocxx::result::insert_one> DB::insertItem(const Item &item)
+mongocxx::stdx::optional<mongocxx::result::insert_one> SerikBLDCore::DB::insertItem(const Item &item)
 {
 
     try {
@@ -282,7 +301,7 @@ mongocxx::stdx::optional<mongocxx::result::insert_one> DB::insertItem(const Item
     }
 }
 
-mongocxx::stdx::optional<mongocxx::result::update> DB::updateItem(const Item &item)
+mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(const Item &item)
 {
 
     auto filter = document{};
@@ -340,31 +359,31 @@ mongocxx::stdx::optional<mongocxx::result::update> DB::updateItem(const Item &it
 
 }
 
-mongocxx::stdx::optional<bsoncxx::document::value> DB::findOneItem(const Item &item)
+mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem(const Item &item)
 {
     try {
         auto value = this->db ()->collection (item.getCollection ()).find_one (item.view ());
         return value;
     } catch (mongocxx::exception &e) {
-        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Collection: " + item.getCollection ();
         std::cout << str << std::endl;
         return mongocxx::stdx::nullopt;
     }
 }
 
-mongocxx::stdx::optional<mongocxx::cursor> DB::find(const Item &item, const mongocxx::options::find findOptions)
+mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const Item &item, const mongocxx::options::find findOptions)
 {
     try {
         auto cursor = this->db ()->collection (item.getCollection ()).find (item.view (),findOptions);
         return std::move(cursor);
     } catch (mongocxx::exception &e) {
-        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
         std::cout << str << std::endl;
         return mongocxx::stdx::nullopt;
     }
 }
 
-mongocxx::stdx::optional<mongocxx::result::delete_result> DB::deleteItem(const Item &item)
+mongocxx::stdx::optional<mongocxx::result::delete_result> SerikBLDCore::DB::deleteItem(const Item &item)
 {
     try {
         auto del = this->db ()->collection (item.getCollection ()).delete_one (item.view ());
@@ -378,7 +397,7 @@ mongocxx::stdx::optional<mongocxx::result::delete_result> DB::deleteItem(const I
 
 
 
-std::int64_t DB::countItem(const Item &item)
+std::int64_t SerikBLDCore::DB::countItem(const Item &item)
 {
     try {
         auto count = this->db ()->collection (item.getCollection ()).count_documents (item.view ());

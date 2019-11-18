@@ -19,6 +19,7 @@
 
 
 
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT Item
 {
 public:
@@ -128,5 +129,8 @@ private:
     const std::string mCollection;
 
 };
+
+}
+
 
 #endif // ITEM_H

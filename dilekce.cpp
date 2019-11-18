@@ -2,28 +2,28 @@
 #include <QDate>
 #include <QTime>
 
-const std::string Dilekce::Collection = "Dilekce";
-const std::string Dilekce::KeySayi = "Sayı";
-const std::string Dilekce::KeyKonu{"Konu"};
-const std::string Dilekce::KeyTCOid{"TCOid"};
-const std::string Dilekce::KeyBirim{"Birim"};
-const std::string Dilekce::KeyIcerikTipi{"IcerikTipi"};
-const std::string Dilekce::KeyIcerik{"Icerik"};
-const std::string Dilekce::KeyDilekceOid{"dilekceOid"};
-const std::string Dilekce::KeyEkler{"Ekler"};
-const std::string Dilekce::KeyTarihJulian{"TarihJulian"};
-const std::string Dilekce::KeySaat{"Saat"};
-const std::string Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
-const std::string Dilekce::KeyOid{"_id"};
-const std::string Dilekce::KeyGorevliPersonel{"GorevliPersonel"};
-const std::string Dilekce::KeyDilekceDurum{"DilekceDurum"};
-const std::string Dilekce::KeyCevapOid{"CevapOid"};
-const std::string Dilekce::KeyYil{"Yıl"};
-const std::string Dilekce::KeyAy{"Ay"};
+const std::string SerikBLDCore::Dilekce::Collection = "Dilekce";
+const std::string SerikBLDCore::Dilekce::KeySayi = "Sayı";
+const std::string SerikBLDCore::Dilekce::KeyKonu{"Konu"};
+const std::string SerikBLDCore::Dilekce::KeyTCOid{"TCOid"};
+const std::string SerikBLDCore::Dilekce::KeyBirim{"Birim"};
+const std::string SerikBLDCore::Dilekce::KeyIcerikTipi{"IcerikTipi"};
+const std::string SerikBLDCore::Dilekce::KeyIcerik{"Icerik"};
+const std::string SerikBLDCore::Dilekce::KeyDilekceOid{"dilekceOid"};
+const std::string SerikBLDCore::Dilekce::KeyEkler{"Ekler"};
+const std::string SerikBLDCore::Dilekce::KeyTarihJulian{"TarihJulian"};
+const std::string SerikBLDCore::Dilekce::KeySaat{"Saat"};
+const std::string SerikBLDCore::Dilekce::KeyBilgiBirimler{"BilgiBirimler"};
+const std::string SerikBLDCore::Dilekce::KeyOid{"_id"};
+const std::string SerikBLDCore::Dilekce::KeyGorevliPersonel{"GorevliPersonel"};
+const std::string SerikBLDCore::Dilekce::KeyDilekceDurum{"DilekceDurum"};
+const std::string SerikBLDCore::Dilekce::KeyCevapOid{"CevapOid"};
+const std::string SerikBLDCore::Dilekce::KeyYil{"Yıl"};
+const std::string SerikBLDCore::Dilekce::KeyAy{"Ay"};
 
 
 
-Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
+SerikBLDCore::Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
 {
     if( other != nullptr )
     {
@@ -31,7 +31,7 @@ Dilekce::Dilekce(Dilekce *other) : Item(Dilekce::Collection)
     }
 }
 
-Dilekce::operator bool() const
+SerikBLDCore::Dilekce::operator bool() const
 {
     return !this->view ().empty ();
 }
@@ -39,74 +39,74 @@ Dilekce::operator bool() const
 
 
 
-void Dilekce::SetSayi(const int &sayi)
+void SerikBLDCore::Dilekce::SetSayi(const int &sayi)
 {
     this->append(KeySayi,sayi);
 }
 
-void Dilekce::SetKonu(const QString &konu)
+void SerikBLDCore::Dilekce::SetKonu(const QString &konu)
 {
     this->append(KeyKonu,konu.toStdString ());
 }
 
-void Dilekce::SetTCOid(const QString &oid)
+void SerikBLDCore::Dilekce::SetTCOid(const QString &oid)
 {
     this->append(KeyTCOid,bsoncxx::oid{oid.toStdString ()});
 }
 
-void Dilekce::SetBirim(const QString &birim)
+void SerikBLDCore::Dilekce::SetBirim(const QString &birim)
 {
     this->append(KeyBirim,birim.toStdString ());
 }
 
-void Dilekce::SetIcerikTipi(const QString &icerikTipi)
+void SerikBLDCore::Dilekce::SetIcerikTipi(const QString &icerikTipi)
 {
     this->append(KeyIcerikTipi,icerikTipi.toStdString ());
 }
 
-void Dilekce::SetIcerik(const QString &icerik)
+void SerikBLDCore::Dilekce::SetIcerik(const QString &icerik)
 {
     this->append(KeyIcerik,icerik.toStdString ());
 }
 
-void Dilekce::SetDilekceOid(const QString &dilekceOid)
+void SerikBLDCore::Dilekce::SetDilekceOid(const QString &dilekceOid)
 {
     this->append(KeyDilekceOid,dilekceOid.toStdString ());
 }
 
-void Dilekce::AddEkOid(const QString &ekOid)
+void SerikBLDCore::Dilekce::AddEkOid(const QString &ekOid)
 {
     //TODO: Array Eklenecek
     this->pushArray(KeyEkler,bsoncxx::oid{ekOid.toStdString ()});
 }
 
-void Dilekce::SetTarih(const int &julianDay)
+void SerikBLDCore::Dilekce::SetTarih(const int &julianDay)
 {
     this->append(KeyTarihJulian,julianDay);
 }
 
-void Dilekce::SetSaat(const int &mSecsFromBeginDay)
+void SerikBLDCore::Dilekce::SetSaat(const int &mSecsFromBeginDay)
 {
     this->append(KeySaat,mSecsFromBeginDay);
 }
 
-void Dilekce::AddBilgiBirim(const QString &bilgiBirim)
+void SerikBLDCore::Dilekce::AddBilgiBirim(const QString &bilgiBirim)
 {
     this->pushArray(KeyBilgiBirimler,bilgiBirim.toStdString ());
 }
 
-void Dilekce::SetOid(const QString &oid)
+void SerikBLDCore::Dilekce::SetOid(const QString &oid)
 {
     this->append(KeyOid,bsoncxx::oid{oid.toStdString ()});
 
 }
 
-void Dilekce::AddGorevliPersonel(const Personel &personel)
+void SerikBLDCore::Dilekce::AddGorevliPersonel(const Personel &personel)
 {
     this->pushArray(KeyGorevliPersonel,bsoncxx::document::value(personel.view ()));
 }
 
-void Dilekce::DeleteGorevliPersonel(const Personel &personel)
+void SerikBLDCore::Dilekce::DeleteGorevliPersonel(const Personel &personel)
 {
     auto pList = this->GorevliList ();
     this->removeElement (KeyGorevliPersonel);
@@ -126,30 +126,30 @@ void Dilekce::DeleteGorevliPersonel(const Personel &personel)
     }
 }
 
-void Dilekce::SetDurum(const QString &dilekceDurum)
+void SerikBLDCore::Dilekce::SetDurum(const QString &dilekceDurum)
 {
     this->append(KeyDilekceDurum,dilekceDurum.toStdString ());
 }
 
-void Dilekce::SetCevapOid(const QString &cevapOid)
+void SerikBLDCore::Dilekce::SetCevapOid(const QString &cevapOid)
 {
     this->append(KeyCevapOid,bsoncxx::oid{cevapOid.toStdString ()});
 }
 
-Dilekce &Dilekce::setYil(const int &yil)
+SerikBLDCore::Dilekce &SerikBLDCore::Dilekce::setYil(const int &yil)
 {
     this->append(KeyYil,yil);
     return *this;
 }
 
-Dilekce &Dilekce::setAy(const QString &ay)
+SerikBLDCore::Dilekce &SerikBLDCore::Dilekce::setAy(const QString &ay)
 {
     this->append(KeyAy,ay.toStdString ());
     return *this;
 }
 
 
-int Dilekce::sayi()
+int SerikBLDCore::Dilekce::sayi()
 {
     auto sayi = this->element (KeySayi);
     if( sayi )
@@ -160,7 +160,7 @@ int Dilekce::sayi()
     }
 }
 
-QString Dilekce::konu()
+QString SerikBLDCore::Dilekce::konu()
 {
     auto value = this->element (KeyKonu);
     if( value )
@@ -171,7 +171,7 @@ QString Dilekce::konu()
     }
 }
 
-QString Dilekce::tcoid()
+QString SerikBLDCore::Dilekce::tcoid()
 {
     auto value = this->element (KeyTCOid);
     if( value )
@@ -182,7 +182,7 @@ QString Dilekce::tcoid()
     }
 }
 
-QString Dilekce::birim()
+QString SerikBLDCore::Dilekce::birim()
 {
     auto value = this->element (KeyBirim);
     if( value )
@@ -193,7 +193,7 @@ QString Dilekce::birim()
     }
 }
 
-QString Dilekce::icerikTipi()
+QString SerikBLDCore::Dilekce::icerikTipi()
 {
     auto value = this->element (KeyIcerikTipi);
     if( value )
@@ -204,7 +204,7 @@ QString Dilekce::icerikTipi()
     }
 }
 
-QString Dilekce::icerik()
+QString SerikBLDCore::Dilekce::icerik()
 {
     auto value = this->element (KeyIcerik);
     if( value )
@@ -215,7 +215,7 @@ QString Dilekce::icerik()
     }
 }
 
-int Dilekce::tarihJulian()
+int SerikBLDCore::Dilekce::tarihJulian()
 {
     auto value = this->element (KeyTarihJulian);
     if( value )
@@ -226,7 +226,7 @@ int Dilekce::tarihJulian()
     }
 }
 
-QString Dilekce::tarihText()
+QString SerikBLDCore::Dilekce::tarihText()
 {
     auto value = this->element (KeyTarihJulian);
     if( value )
@@ -237,7 +237,7 @@ QString Dilekce::tarihText()
     }
 }
 
-int Dilekce::saatMSecStartofDay()
+int SerikBLDCore::Dilekce::saatMSecStartofDay()
 {
     auto value = this->element (KeySaat);
     if( value )
@@ -248,7 +248,7 @@ int Dilekce::saatMSecStartofDay()
     }
 }
 
-QString Dilekce::saatText()
+QString SerikBLDCore::Dilekce::saatText()
 {
     auto value = this->element (KeySaat);
     if( value )
@@ -259,7 +259,7 @@ QString Dilekce::saatText()
     }
 }
 
-QString Dilekce::dilekceOid()
+QString SerikBLDCore::Dilekce::dilekceOid()
 {
     auto value = this->element (KeyDilekceOid);
     if( value )
@@ -270,7 +270,7 @@ QString Dilekce::dilekceOid()
     }
 }
 
-QStringList Dilekce::EkOidList()
+QStringList SerikBLDCore::Dilekce::EkOidList()
 {
     QStringList list;
 
@@ -284,7 +284,7 @@ QStringList Dilekce::EkOidList()
     return list;
 }
 
-QVector<Personel> Dilekce::GorevliList() const
+QVector<SerikBLDCore::Personel> SerikBLDCore::Dilekce::GorevliList() const
 {
     QVector<Personel> list;
 
@@ -303,7 +303,7 @@ QVector<Personel> Dilekce::GorevliList() const
     return list;
 }
 
-QString Dilekce::Durum() const
+QString SerikBLDCore::Dilekce::Durum() const
 {
     auto value = this->element (KeyDilekceDurum);
     if( value )
@@ -314,7 +314,7 @@ QString Dilekce::Durum() const
     }
 }
 
-QString Dilekce::cevapOid() const
+QString SerikBLDCore::Dilekce::cevapOid() const
 {
     auto value = this->element (KeyCevapOid);
     if( value )

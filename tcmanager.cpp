@@ -2,7 +2,7 @@
 
 
 
-TCManager::TCManager() : DB()
+SerikBLDCore::TCManager::TCManager() : DB()
 {
     std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager()" << std::endl;
 
@@ -10,7 +10,7 @@ TCManager::TCManager() : DB()
 
 
 
-TCManager::TCManager(DB *mDB)
+SerikBLDCore::TCManager::TCManager(DB *mDB)
     : DB(mDB)
 {
     std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager(DB *mDB)" << std::endl;
@@ -22,15 +22,15 @@ TCManager::TCManager(DB *mDB)
 
 //}
 
-TCManager::TCManager(mongocxx::database *_db) : DB(_db)
+SerikBLDCore::TCManager::TCManager(mongocxx::database *_db) : DB(_db)
 {
 
 }
 
 
-boost::optional<TC> TCManager::Create_TC()
+boost::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
 {
-    auto item = new TC();
+    auto item = new SerikBLDCore::TC();
 
     try {
         auto ins = this->db ()->collection (TC::Collection).insert_one (item->view ());
@@ -50,29 +50,29 @@ boost::optional<TC> TCManager::Create_TC()
 
 }
 
-bool TCManager::insertTC(TC *item)
+bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
 {
 
     {
-        TC _item;
+        SerikBLDCore::TC _item;
         _item.setTCNO (item->TCNO ());
         auto exist = this->countItem (*item);
 
         if( exist > 0 )
         {
-            std::cout << TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
+            std::cout << SerikBLDCore::TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
             return false;
         }
     }
 
     {
-        TC _item;
+        SerikBLDCore::TC _item;
         _item.setCepTelefonu (item->CepTelefonu ());
         auto exist = this->countItem (*item);
 
         if( exist > 0 )
         {
-            std::cout << TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
+            std::cout << SerikBLDCore::TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
             return false;
         }
     }
@@ -93,25 +93,26 @@ bool TCManager::insertTC(TC *item)
 
 }
 
-boost::optional<TC *> TCManager::Load_byTCNO(const std::string &tcno)
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTCNO(const std::string &tcno)
 {
-    TC* item = new TC();
+
+    SerikBLDCore::TC *item = new SerikBLDCore::TC();
     item->setTCNO (tcno.c_str ());
 
     auto val = this->findOneItem (*item);
     if( val )
     {
         item->setDocumentView (val.value ().view ());
-        return item;
+        return (item);
     }else{
         return boost::none;
     }
 
 }
 
-boost::optional<TC *> TCManager::Load_byTEL(const std::string &tel)
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTEL(const std::string &tel)
 {
-    TC* item = new TC();
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
     item->setCepTelefonu (tel.c_str ());
 
     auto val = this->findOneItem (*item);
@@ -124,9 +125,9 @@ boost::optional<TC *> TCManager::Load_byTEL(const std::string &tel)
     }
 }
 
-boost::optional<TC *> TCManager::Load_byOID(const std::string &oid)
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const std::string &oid)
 {
-    TC* item = new TC();
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
     item->setOid (oid.c_str ());
     item->printView ();
 
@@ -140,9 +141,9 @@ boost::optional<TC *> TCManager::Load_byOID(const std::string &oid)
     }
 }
 
-boost::optional<TC *> TCManager::Load_byOID(const bsoncxx::oid &oid)
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bsoncxx::oid &oid)
 {
-    TC* item = new TC();
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
     item->setOid (oid.to_string ());
     item->printView ();
 
@@ -155,3 +156,5 @@ boost::optional<TC *> TCManager::Load_byOID(const bsoncxx::oid &oid)
         return boost::none;
     }
 }
+
+

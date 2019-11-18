@@ -1,9 +1,9 @@
 #include "dilekceaciklama.h"
 #include <QDate>
 
-const std::string DilekceAciklama::Collection{"DilekceAciklama"};
+const std::string SerikBLDCore::DilekceAciklama::Collection{"DilekceAciklama"};
 
-DilekceAciklama::DilekceAciklama(DilekceAciklama *other) : Item (DilekceAciklama::Collection)
+SerikBLDCore::DilekceAciklama::DilekceAciklama(DilekceAciklama *other) : Item (DilekceAciklama::Collection)
 {
     if( other != nullptr )
     {
@@ -11,64 +11,64 @@ DilekceAciklama::DilekceAciklama(DilekceAciklama *other) : Item (DilekceAciklama
     }
 }
 
-DilekceAciklama::DilekceAciklama(const DilekceAciklama &other) : Item (DilekceAciklama::Collection)
+SerikBLDCore::DilekceAciklama::DilekceAciklama(const DilekceAciklama &other) : Item (DilekceAciklama::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-DilekceAciklama::DilekceAciklama(DilekceAciklama &&other) : Item (DilekceAciklama::Collection)
+SerikBLDCore::DilekceAciklama::DilekceAciklama(DilekceAciklama &&other) : Item (DilekceAciklama::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-DilekceAciklama &DilekceAciklama::operator=(const DilekceAciklama &other)
-{
-    this->setDocumentView (other.view ());
-    return *this;
-}
-
-DilekceAciklama &DilekceAciklama::operator=(DilekceAciklama &&other)
+SerikBLDCore::DilekceAciklama &SerikBLDCore::DilekceAciklama::operator=(const DilekceAciklama &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-void DilekceAciklama::setDilekceOid(const std::string &dilekceOid)
+SerikBLDCore::DilekceAciklama &SerikBLDCore::DilekceAciklama::operator=(DilekceAciklama &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+void SerikBLDCore::DilekceAciklama::setDilekceOid(const std::string &dilekceOid)
 {
     this->append( KeydilekceOid,bsoncxx::oid{dilekceOid});
 }
 
-void DilekceAciklama::setAciklama(const std::string &aciklama)
+void SerikBLDCore::DilekceAciklama::setAciklama(const std::string &aciklama)
 {
     this->append(Keyaciklama,aciklama);
 }
 
-void DilekceAciklama::setPersonelOid(const std::string &personelOid)
+void SerikBLDCore::DilekceAciklama::setPersonelOid(const std::string &personelOid)
 {
     this->append(KeypersonelOid,bsoncxx::oid{personelOid});
 }
 
-void DilekceAciklama::setPersonelName(const std::string &adSoyad)
+void SerikBLDCore::DilekceAciklama::setPersonelName(const std::string &adSoyad)
 {
     this->append(KeyPersonelName,adSoyad);
 }
 
-void DilekceAciklama::setGorunur(const bool &gorunur)
+void SerikBLDCore::DilekceAciklama::setGorunur(const bool &gorunur)
 {
     this->append(KeyGorunur,gorunur);
 }
 
-void DilekceAciklama::setJulianDay(const int &julianDay)
+void SerikBLDCore::DilekceAciklama::setJulianDay(const int &julianDay)
 {
     this->append(JulianDay,julianDay);
 }
 
-void DilekceAciklama::setSaat(const std::string &saat)
+void SerikBLDCore::DilekceAciklama::setSaat(const std::string &saat)
 {
     this->append(KeySaat,saat);
 }
 
-QString DilekceAciklama::PersonelOid() const
+QString SerikBLDCore::DilekceAciklama::PersonelOid() const
 {
     auto val = this->element (KeypersonelOid);
     if( val )
@@ -79,7 +79,7 @@ QString DilekceAciklama::PersonelOid() const
     }
 }
 
-QString DilekceAciklama::Aciklama() const
+QString SerikBLDCore::DilekceAciklama::Aciklama() const
 {
     auto val = this->element (Keyaciklama);
     if( val )
@@ -90,7 +90,7 @@ QString DilekceAciklama::Aciklama() const
     }
 }
 
-QString DilekceAciklama::DilekceOid() const
+QString SerikBLDCore::DilekceAciklama::DilekceOid() const
 {
     auto val = this->element (KeydilekceOid);
     if( val )
@@ -101,7 +101,7 @@ QString DilekceAciklama::DilekceOid() const
     }
 }
 
-bool DilekceAciklama::Gorunur() const
+bool SerikBLDCore::DilekceAciklama::Gorunur() const
 {
     auto val = this->element (KeyGorunur);
     if( val )
@@ -112,7 +112,7 @@ bool DilekceAciklama::Gorunur() const
     }
 }
 
-QString DilekceAciklama::Tarih() const
+QString SerikBLDCore::DilekceAciklama::Tarih() const
 {
     auto val = this->element (JulianDay);
     if( val )
@@ -123,7 +123,7 @@ QString DilekceAciklama::Tarih() const
     }
 }
 
-QString DilekceAciklama::PersonelName() const
+QString SerikBLDCore::DilekceAciklama::PersonelName() const
 {
     auto val = this->element (KeyPersonelName);
     if( val )
@@ -134,7 +134,7 @@ QString DilekceAciklama::PersonelName() const
     }
 }
 
-QString DilekceAciklama::Saat() const
+QString SerikBLDCore::DilekceAciklama::Saat() const
 {
     auto val = this->element (KeySaat);
     if( val )
@@ -144,7 +144,7 @@ QString DilekceAciklama::Saat() const
         return "";
     }}
 
-DilekceAciklama::operator bool() const
+SerikBLDCore::DilekceAciklama::operator bool() const
 {
     return !this->view ().empty ();
 }

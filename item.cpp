@@ -2,25 +2,25 @@
 
 
 #ifdef DESKTOP
-Item::Item(const std::string &collection)
+SerikBLDCore::Item::Item(const std::string &collection)
     :mDoc(document{}),mCollection(collection)
 {
     mDoc.clear ();
 }
 
 
-Item::Item(const bsoncxx::document::view mView, const std::string _Collection)
+SerikBLDCore::Item::Item(const bsoncxx::document::view mView, const std::string _Collection)
     :mCollection(_Collection)
 {
     this->setDocumentView (mView);
 }
 
-Item::~Item()
+SerikBLDCore::Item::~Item()
 {
     mDoc.clear ();
 }
 
-void Item::operator=(const bsoncxx::builder::basic::document &value)
+void SerikBLDCore::Item::operator=(const bsoncxx::builder::basic::document &value)
 {
     mDoc.clear ();
 
@@ -30,7 +30,7 @@ void Item::operator=(const bsoncxx::builder::basic::document &value)
     }
 }
 
-void Item::operator=(const bsoncxx::document::view &view)
+void SerikBLDCore::Item::operator=(const bsoncxx::document::view &view)
 {
     mDoc.clear ();
     for( auto item : view )
@@ -40,7 +40,7 @@ void Item::operator=(const bsoncxx::document::view &view)
 }
 
 
-void Item::setDocumentView(const bsoncxx::document::view &view)
+void SerikBLDCore::Item::setDocumentView(const bsoncxx::document::view &view)
 {
     mDoc.clear ();
     for( auto item : view )
@@ -49,7 +49,7 @@ void Item::setDocumentView(const bsoncxx::document::view &view)
     }
 }
 
-boost::optional<bsoncxx::types::value> Item::element(std::string key) const
+boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
 {
     try {
         return mDoc.view ()[key].get_value ();
@@ -60,12 +60,12 @@ boost::optional<bsoncxx::types::value> Item::element(std::string key) const
     }
 }
 
-bsoncxx::document::view Item::view() const
+bsoncxx::document::view SerikBLDCore::Item::view() const
 {
     return mDoc.view ();
 }
 
-boost::optional<bsoncxx::oid> Item::oid() const
+boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
 {
     try {
         return this->view ()["_id"].get_oid ().value;
@@ -76,7 +76,7 @@ boost::optional<bsoncxx::oid> Item::oid() const
     }
 }
 
-boost::optional<bsoncxx::builder::basic::document> Item::ItemFilter() const
+boost::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilter() const
 {
 
     auto oid = this->oid ();
@@ -103,7 +103,7 @@ boost::optional<bsoncxx::builder::basic::document> Item::ItemFilter() const
 
 #endif
 
-Item::Item(const Item &other) : mCollection(other.getCollection ())
+SerikBLDCore::Item::Item(const Item &other) : mCollection(other.getCollection ())
 {
 #ifdef DESKTOP
     this->setDocumentView (other.view ());
@@ -113,7 +113,7 @@ Item::Item(const Item &other) : mCollection(other.getCollection ())
 #endif
 }
 
-Item::Item(Item &&other)
+SerikBLDCore::Item::Item(Item &&other)
 {
 #ifdef DESKTOP
     this->setDocumentView (other.view ());
@@ -123,7 +123,7 @@ Item::Item(Item &&other)
 #endif
 }
 
-Item& Item::operator=(const Item &value)
+SerikBLDCore::Item& SerikBLDCore::Item::operator=(const Item &value)
 {
 #ifdef DESKTOP
     mDoc.clear ();
@@ -141,7 +141,7 @@ Item& Item::operator=(const Item &value)
 
 }
 
-Item &Item::operator=(Item &&other)
+SerikBLDCore::Item &SerikBLDCore::Item::operator=(Item &&other)
 {
 #ifdef DESKTOP
     mDoc.clear ();
@@ -157,7 +157,7 @@ Item &Item::operator=(Item &&other)
 
 }
 
-void Item::printView() const
+void SerikBLDCore::Item::printView() const
 {
 #ifdef DESKTOP
     std::cout << this->getCollection () << " " <<bsoncxx::to_json (this->view ()) << std::endl;
@@ -167,7 +167,7 @@ void Item::printView() const
 #endif
 }
 
-Item &Item::setOid(const std::string &oid)
+SerikBLDCore::Item &SerikBLDCore::Item::setOid(const std::string &oid)
 {
 #ifdef DESKTOP
     this->append("_id",bsoncxx::oid{oid});
@@ -179,12 +179,12 @@ Item &Item::setOid(const std::string &oid)
 }
 
 
-std::string Item::getCollection() const
+std::string SerikBLDCore::Item::getCollection() const
 {
     return mCollection;
 }
 
-void Item::removeElement(const std::string &key)
+void SerikBLDCore::Item::removeElement(const std::string &key)
 {
 #ifdef DESKTOP
     auto tempDoc = document{};

@@ -9,6 +9,7 @@
 #include "personel.h"
 
 
+namespace SerikBLDCore {
 namespace DilekceDurum {
 static const QString Acik{"Açik"};
 static const QString Cevaplandi{"Cevaplandı"};
@@ -77,6 +78,9 @@ public:
     QString Durum() const;
     QString cevapOid() const;
 };
+
+
+}
 
 
 

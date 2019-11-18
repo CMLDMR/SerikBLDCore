@@ -4,7 +4,7 @@
 #include "personel.h"
 #include "db.h"
 
-
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT PersonelManager : virtual public DB
 {
 public:
@@ -14,5 +14,7 @@ public:
 
     QVector<Personel> PersonelList( const std::string &birim );
 };
+
+}
 
 #endif // PERSONELMANAGER_H

@@ -7,6 +7,10 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 
+//SRKBLDCore__
+
+namespace SerikBLDCore {
+
 class SERIKBLDCORE_EXPORT TC : public Item
 {
 public:
@@ -23,20 +27,28 @@ public:
 
 public:
     TC(TC* other = nullptr );
+    TC( bsoncxx::document::value* mValue );
     TC( const TC &other );
     TC( TC &&other);
 
-    TC* operator=(const bsoncxx::document::value &value);
+    TC& operator=(const bsoncxx::document::value &value);
+    TC& operator=( bsoncxx::document::value *value );
+    TC& operator=( const bsoncxx::document::view &view );
 
 
-    void setTCNO( const QString &tcno );
-    void setAdSoyad( const QString &adsoyad );
-    void setCepTelefonu( const QString &cepTelefonu );
-    void setMahalle( const QString &mahalle );
-    void setTamAdress( const QString &adres );
-    void setPassword( const QString &password = QString("") );
-    void setNormalTelefon( const QString &normalTelefon );
-    void setCalismaSMS( const bool &smsgitsin = false );
+
+    TC& operator=( const TC& other );
+    TC& operator=( TC&& other );
+
+
+    TC& setTCNO( const QString &tcno );
+    TC& setAdSoyad( const QString &adsoyad );
+    TC& setCepTelefonu( const QString &cepTelefonu );
+    TC& setMahalle( const QString &mahalle );
+    TC& setTamAdress( const QString &adres );
+    TC& setPassword( const QString &password = QString("") );
+    TC& setNormalTelefon( const QString &normalTelefon );
+    TC& setCalismaSMS( const bool &smsgitsin = false );
 
     QString TCNO();
     QString AdSoyad();
@@ -48,5 +60,8 @@ public:
     bool    CalismaSMS();
 
 };
+
+}
+
 
 #endif // TC_H

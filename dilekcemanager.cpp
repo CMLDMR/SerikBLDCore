@@ -2,29 +2,29 @@
 #include "tc.h"
 
 
-DilekceManager::DilekceManager() : DB()
+SerikBLDCore::DilekceManager::DilekceManager() : DB()
 {
 
 }
 
-DilekceManager::DilekceManager(DB *mDB) : DB(mDB)
+SerikBLDCore::DilekceManager::DilekceManager(DB *mDB) : DB(mDB)
 {
 
 }
 
-DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
+SerikBLDCore::DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
 {
 
 }
 
 
 
-boost::optional<Dilekce *> DilekceManager::Create_Dilekce()
+boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
 {
-        auto item = new Dilekce();
+        auto item = new SerikBLDCore::Dilekce();
 
         try {
-            auto ins = this->db ()->collection (Dilekce::Collection).insert_one (item->view ());
+            auto ins = this->db ()->collection (SerikBLDCore::Dilekce::Collection).insert_one (item->view ());
             if( ins )
             {
                 item->append("_id",ins.value ().inserted_id ().get_oid ().value );
@@ -39,7 +39,7 @@ boost::optional<Dilekce *> DilekceManager::Create_Dilekce()
         }
 }
 
-bool DilekceManager::Update(Dilekce *dilekce)
+bool SerikBLDCore::DilekceManager::Update(SerikBLDCore::Dilekce *dilekce)
 {
         auto filter = document{};
         auto oid = dilekce->element ("_id");
@@ -63,7 +63,7 @@ bool DilekceManager::Update(Dilekce *dilekce)
                 std::cout << str << std::endl;
             }
 
-            auto upt = this->db ()->collection (Dilekce::Collection).update_one (filter.view (),setDoc.view ());
+            auto upt = this->db ()->collection (SerikBLDCore::Dilekce::Collection).update_one (filter.view (),setDoc.view ());
 
             if( upt )
             {
@@ -81,7 +81,7 @@ bool DilekceManager::Update(Dilekce *dilekce)
         }
 }
 
-bool DilekceManager::insertDilekce(const Dilekce *dilekce)
+bool SerikBLDCore::DilekceManager::insertDilekce(const SerikBLDCore::Dilekce *dilekce)
 {
 
     try {
@@ -105,7 +105,7 @@ bool DilekceManager::insertDilekce(const Dilekce *dilekce)
 
 }
 
-boost::optional<bsoncxx::oid> DilekceManager::insertCevap(const DilekceCevap *cevap)
+boost::optional<bsoncxx::oid> SerikBLDCore::DilekceManager::insertCevap(const SerikBLDCore::DilekceCevap *cevap)
 {
     try {
         auto ins = this->insertItem (*cevap);
@@ -127,7 +127,7 @@ boost::optional<bsoncxx::oid> DilekceManager::insertCevap(const DilekceCevap *ce
     }
 }
 
-bool DilekceManager::updateDilekce(const Dilekce *dilekce)
+bool SerikBLDCore::DilekceManager::updateDilekce(const SerikBLDCore::Dilekce *dilekce)
 {
     try {
         auto upt = this->updateItem (*dilekce);
@@ -149,7 +149,7 @@ bool DilekceManager::updateDilekce(const Dilekce *dilekce)
     }
 }
 
-bool DilekceManager::insertAciklama(const DilekceAciklama *aciklama)
+bool SerikBLDCore::DilekceManager::insertAciklama(const DilekceAciklama *aciklama)
 {
     try {
         auto ins = this->insertItem (*aciklama);
@@ -164,15 +164,15 @@ bool DilekceManager::insertAciklama(const DilekceAciklama *aciklama)
     }
 }
 
-QVector<Dilekce> DilekceManager::findDilekce(const Item &itemFilter, const mongocxx::options::find findOptions)
+QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findDilekce(const Item &itemFilter, const mongocxx::options::find findOptions)
 {
-    QVector<Dilekce> list;
+    QVector<SerikBLDCore::Dilekce> list;
     auto cursor = this->find (itemFilter);
     if( cursor )
     {
         for( auto doc : cursor.get () )
         {
-            Dilekce _dilekce;
+            SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
             list.append (_dilekce);
         }
@@ -180,13 +180,13 @@ QVector<Dilekce> DilekceManager::findDilekce(const Item &itemFilter, const mongo
     return list;
 }
 
-QVector<Dilekce> DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
+QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
 {
-    QVector<Dilekce> list;
+    QVector<SerikBLDCore::Dilekce> list;
     std::string TCOid;
 
     {
-        TC item;
+        SerikBLDCore::TC item;
         item.setCepTelefonu (mTelefonNumarasi);
 
         auto val = this->findOneItem (item);
@@ -203,7 +203,7 @@ QVector<Dilekce> DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
 
 
 
-    Dilekce item;
+    SerikBLDCore::Dilekce item;
     item.SetTCOid (TCOid.c_str ());
 
     auto cursor = this->find (item);
@@ -211,7 +211,7 @@ QVector<Dilekce> DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
     {
         for( auto doc : cursor.get () )
         {
-            Dilekce _dilekce;
+            SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
             list.append (_dilekce);
         }
@@ -219,13 +219,13 @@ QVector<Dilekce> DilekceManager::findByTelefon(const QString &mTelefonNumarasi)
     return list;
 }
 
-QVector<Dilekce> DilekceManager::findByTCNO(const QString &mTCNO)
+QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findByTCNO(const QString &mTCNO)
 {
-    QVector<Dilekce> list;
+    QVector<SerikBLDCore::Dilekce> list;
     std::string TCOid;
 
     {
-        TC item;
+        SerikBLDCore::TC item;
         item.setTCNO (mTCNO);
 
         auto val = this->findOneItem (item);
@@ -242,7 +242,7 @@ QVector<Dilekce> DilekceManager::findByTCNO(const QString &mTCNO)
 
 
 
-    Dilekce item;
+    SerikBLDCore::Dilekce item;
     item.SetTCOid (TCOid.c_str ());
 
     auto cursor = this->find (item);
@@ -250,7 +250,7 @@ QVector<Dilekce> DilekceManager::findByTCNO(const QString &mTCNO)
     {
         for( auto doc : cursor.get () )
         {
-            Dilekce _dilekce;
+            SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
             list.append (_dilekce);
         }
@@ -258,7 +258,7 @@ QVector<Dilekce> DilekceManager::findByTCNO(const QString &mTCNO)
     return list;
 }
 
-QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
+QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findBySayi(const int &sayi)
 {
     QVector<Dilekce> list;
     Dilekce item;
@@ -277,7 +277,7 @@ QVector<Dilekce> DilekceManager::findBySayi(const int &sayi)
     return list;
 }
 
-QVector<DilekceAciklama> DilekceManager::findAciklama(const std::string &dilekceOid )
+QVector<SerikBLDCore::DilekceAciklama> SerikBLDCore::DilekceManager::findAciklama(const std::string &dilekceOid )
 {
     QVector<DilekceAciklama> list;
     DilekceAciklama item;
@@ -297,7 +297,7 @@ QVector<DilekceAciklama> DilekceManager::findAciklama(const std::string &dilekce
     return list;
 }
 
-bool DilekceManager::deleteAciklama(const std::string &oid)
+bool SerikBLDCore::DilekceManager::deleteAciklama(const std::string &oid)
 {
     DilekceAciklama item;
     item.setOid (oid);
@@ -317,7 +317,7 @@ bool DilekceManager::deleteAciklama(const std::string &oid)
 
 }
 
-boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
+boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::LoadDilekce(const std::string &oid)
 {
     if( oid.size () == 24 )
     {
@@ -340,7 +340,7 @@ boost::optional<Dilekce *> DilekceManager::LoadDilekce(const std::string &oid)
 }
 
 
-boost::optional<DilekceCevap *> DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
+boost::optional<SerikBLDCore::DilekceCevap *> SerikBLDCore::DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
 {
     DilekceCevap* item = new DilekceCevap();
     item->setOid (cevapOid);
@@ -355,7 +355,7 @@ boost::optional<DilekceCevap *> DilekceManager::LoadDilekceCevap(const std::stri
 }
 
 
-QString DilekceManager::TaranmisDilekcePath(const QString &taranmisdilekceOid)
+QString SerikBLDCore::DilekceManager::TaranmisDilekcePath(const QString &taranmisdilekceOid)
 {
     auto val = this->downloadFile (taranmisdilekceOid);
     return QString::fromStdString (val);

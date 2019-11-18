@@ -4,7 +4,7 @@
 #include "db.h"
 #include "tc.h"
 
-
+namespace SerikBLDCore {
 
 class SERIKBLDCORE_EXPORT TCManager : public DB
 {
@@ -15,15 +15,17 @@ public:
     TCManager( mongocxx::database* _db );
 
 
-    boost::optional<TC> Create_TC();
+    boost::optional<SerikBLDCore::TC> Create_TC();
 
-    bool insertTC( TC* item );
+    bool insertTC( SerikBLDCore::TC* item );
 
-    boost::optional<TC*> Load_byTCNO( const std::string &tcno );
-    boost::optional<TC*> Load_byTEL( const std::string &tel );
+    boost::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );
+    boost::optional<SerikBLDCore::TC*> Load_byTEL( const std::string &tel );
 
-    boost::optional<TC*> Load_byOID( const std::string &oid );
-    boost::optional<TC*> Load_byOID( const bsoncxx::oid &oid );
+    boost::optional<SerikBLDCore::TC*> Load_byOID( const std::string &oid );
+    boost::optional<SerikBLDCore::TC*> Load_byOID( const bsoncxx::oid &oid );
 };
+
+}
 
 #endif // TCMANAGER_H

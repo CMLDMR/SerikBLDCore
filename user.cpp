@@ -1,30 +1,30 @@
 #include "user.h"
 
-const std::string User::Collection{"Personel"};
-const std::string User::Baskan{"Başkan"};
-const std::string User::BaskanYardimcisi{"Başkan Yardımcısı"};
-const std::string User::Mudur{"Müdür"};
-const std::string User::Sef{"Şef"};
-const std::string User::Personel{"Personel"};
+const std::string SerikBLDCore::User::Collection{"Personel"};
+const std::string SerikBLDCore::User::Baskan{"Başkan"};
+const std::string SerikBLDCore::User::BaskanYardimcisi{"Başkan Yardımcısı"};
+const std::string SerikBLDCore::User::Mudur{"Müdür"};
+const std::string SerikBLDCore::User::Sef{"Şef"};
+const std::string SerikBLDCore::User::Personel{"Personel"};
 
-User::User() : Item (User::Collection) , DB()
+SerikBLDCore::User::User() : Item (User::Collection) , DB()
 {
 }
 
-User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
+SerikBLDCore::User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
 {
 
 }
 
-User::User(mongocxx::database *_db, bsoncxx::document::value _userValue) : Item(_userValue.view (),User::Collection) , DB(_db)
+SerikBLDCore::User::User(mongocxx::database *_db, bsoncxx::document::value _userValue) : Item(_userValue.view (),User::Collection) , DB(_db)
 {
 }
 
-User::User(User *_user) : Item(_user->view (),User::Collection) , DB(_user->db())
+SerikBLDCore::User::User(User *_user) : Item(_user->view (),User::Collection) , DB(_user->db())
 {
 }
 
-bool User::Login(const std::string &_mTel, const std::string &_mPassword)
+bool SerikBLDCore::User::Login(const std::string &_mTel, const std::string &_mPassword)
 {
     this->append(this->KeyTel,_mTel);
     this->append(this->KeyPassword,_mPassword);
@@ -47,12 +47,12 @@ bool User::Login(const std::string &_mTel, const std::string &_mPassword)
     return false;
 }
 
-bsoncxx::document::value User::Value() const
+bsoncxx::document::value SerikBLDCore::User::Value() const
 {
     return bsoncxx::document::value(this->view ());
 }
 
-std::string User::PhotoFilePath()
+std::string SerikBLDCore::User::PhotoFilePath()
 {
     auto element = this->element (KeyFotoid);
     if( element )
@@ -64,7 +64,7 @@ std::string User::PhotoFilePath()
     }
 }
 
-std::string User::AdSoyad()
+std::string SerikBLDCore::User::AdSoyad()
 {
     auto element = this->element (KeyAdSoyad);
 
@@ -76,7 +76,7 @@ std::string User::AdSoyad()
     }
 }
 
-std::string User::Statu()
+std::string SerikBLDCore::User::Statu()
 {
     auto element = this->element (KeyStatu);
 
@@ -88,7 +88,7 @@ std::string User::Statu()
     }
 }
 
-std::string User::Birimi()
+std::string SerikBLDCore::User::Birimi()
 {
     auto element = this->element (KeyBirimi);
 
@@ -100,7 +100,7 @@ std::string User::Birimi()
     }
 }
 
-QString User::UserOid() const
+QString SerikBLDCore::User::UserOid() const
 {
     auto element = this->element ("_id");
     if( element )

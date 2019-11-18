@@ -3,37 +3,37 @@
 #include <QTime>
 #include <QDate>
 
-const std::string TalepKey::Collection{"Talep"};
-const std::string TalepKey::TCOID{"TCOID"};
-const std::string TalepKey::Mahalle{"Mahalle"};
-const std::string TalepKey::Adres{"Adress"};
-const std::string TalepKey::Konu{"Konu"};
-const std::string TalepKey::SecStartOfDay{"SecStartOfDay"};
-const std::string TalepKey::JulianDay{"julianday"};
-const std::string TalepKey::Durum{"Durum"};
-const std::string TalepKey::Kaynak{"Kaynak"};
-const std::string TalepKey::Birim{"Birim"};
-const std::string TalepKey::GorevliPersonel{"GorevliPersonel"};
-const std::string TalepKey::Yil{"Yıl"};
-const std::string TalepKey::Ay{"Ay"};
+const std::string SerikBLDCore::TalepKey::Collection{"Talep"};
+const std::string SerikBLDCore::TalepKey::TCOID{"TCOID"};
+const std::string SerikBLDCore::TalepKey::Mahalle{"Mahalle"};
+const std::string SerikBLDCore::TalepKey::Adres{"Adress"};
+const std::string SerikBLDCore::TalepKey::Konu{"Konu"};
+const std::string SerikBLDCore::TalepKey::SecStartOfDay{"SecStartOfDay"};
+const std::string SerikBLDCore::TalepKey::JulianDay{"julianday"};
+const std::string SerikBLDCore::TalepKey::Durum{"Durum"};
+const std::string SerikBLDCore::TalepKey::Kaynak{"Kaynak"};
+const std::string SerikBLDCore::TalepKey::Birim{"Birim"};
+const std::string SerikBLDCore::TalepKey::GorevliPersonel{"GorevliPersonel"};
+const std::string SerikBLDCore::TalepKey::Yil{"Yıl"};
+const std::string SerikBLDCore::TalepKey::Ay{"Ay"};
 
 
 
-const std::string TalepKey::DurumKey::DevamEdiyor{"DevamEdiyor"};
-const std::string TalepKey::DurumKey::Tamamlandi{"Tamamlandi"};
-const std::string TalepKey::DurumKey::TeyitEdilmemis{"TeyitEdilmemis"};
-const std::string TalepKey::DurumKey::Beklemede{"Beklemede"};
-const std::string TalepKey::DurumKey::RedEdildi{"RedEdildi"};
+const std::string SerikBLDCore::TalepKey::DurumKey::DevamEdiyor{"DevamEdiyor"};
+const std::string SerikBLDCore::TalepKey::DurumKey::Tamamlandi{"Tamamlandi"};
+const std::string SerikBLDCore::TalepKey::DurumKey::TeyitEdilmemis{"TeyitEdilmemis"};
+const std::string SerikBLDCore::TalepKey::DurumKey::Beklemede{"Beklemede"};
+const std::string SerikBLDCore::TalepKey::DurumKey::RedEdildi{"RedEdildi"};
 
-const std::string TalepKey::KaynakKey::Sms{"SMS"};
-const std::string TalepKey::KaynakKey::Beyazmasa{"BEYAZMASA"};
-const std::string TalepKey::KaynakKey::Telefon{"TELEFON"};
-const std::string TalepKey::KaynakKey::Web{"WEB"};
-const std::string TalepKey::KaynakKey::Mobil{"MOBIL"};
-const std::string TalepKey::KaynakKey::SosyalMedya{"SOSYALMEDYA"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::Sms{"SMS"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::Beyazmasa{"BEYAZMASA"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::Telefon{"TELEFON"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::Web{"WEB"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::Mobil{"MOBIL"};
+const std::string SerikBLDCore::TalepKey::KaynakKey::SosyalMedya{"SOSYALMEDYA"};
 
 
-Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
+SerikBLDCore::Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
 {
     if( other != nullptr )
     {
@@ -41,88 +41,88 @@ Talep::Talep::Talep(Talep *other) : Item(TalepKey::Collection)
     }
 }
 
-Talep::Talep(const Talep &other) : Item(TalepKey::Collection)
+SerikBLDCore::Talep::Talep(const Talep &other) : Item(TalepKey::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-Talep::Talep(Talep &&other) : Item(TalepKey::Collection)
+SerikBLDCore::Talep::Talep(Talep &&other) : Item(TalepKey::Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-Talep &Talep::operator=(const Talep &other)
-{
-    this->setDocumentView (other.view ());
-    return *this;
-}
-
-Talep &Talep::operator=(Talep &&other)
+SerikBLDCore::Talep &SerikBLDCore::Talep::operator=(const Talep &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-Talep::operator bool() const
+SerikBLDCore::Talep &SerikBLDCore::Talep::operator=(Talep &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+SerikBLDCore::Talep::operator bool() const
 {
     return !this->view ().empty ();
 }
 
-void Talep::setTCOID(const QString &tcoid)
+void SerikBLDCore::Talep::setTCOID(const QString &tcoid)
 {
     this->append(TalepKey::TCOID,bsoncxx::oid{tcoid.toStdString ()});
 }
 
-void Talep::setMahalle(const QString &mahalle)
+void SerikBLDCore::Talep::setMahalle(const QString &mahalle)
 {
     this->append(TalepKey::Mahalle,mahalle.toStdString ());
 }
 
-void Talep::setAddress(const QString &address)
+void SerikBLDCore::Talep::setAddress(const QString &address)
 {
     this->append(TalepKey::Adres,address.toStdString ());
 }
 
-void Talep::setKonu(const QString &konu)
+void SerikBLDCore::Talep::setKonu(const QString &konu)
 {
     this->append(TalepKey::Konu,konu.toStdString ());
 }
 
-void Talep::setSec(const int &mSecStartOfDay)
+void SerikBLDCore::Talep::setSec(const int &mSecStartOfDay)
 {
     this->append(TalepKey::SecStartOfDay,mSecStartOfDay);
 }
 
-void Talep::setJulianDay(const int &julianDay)
+void SerikBLDCore::Talep::setJulianDay(const int &julianDay)
 {
     this->append(TalepKey::JulianDay,julianDay);
 }
 
-Talep &Talep::setDurum(const QString &durum)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setDurum(const QString &durum)
 {
     this->append(TalepKey::Durum,durum.toStdString ());
     return *this;
 }
 
-Talep &Talep::setKaynak(const QString &kaynak)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setKaynak(const QString &kaynak)
 {
     this->append(TalepKey::Kaynak,kaynak.toStdString ());
     return *this;
 }
 
-Talep &Talep::setBirim(const QString &birim)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setBirim(const QString &birim)
 {
     this->append(TalepKey::Birim,birim.toStdString ());
     return *this;
 }
 
-Talep &Talep::AddGorevliPersonel(const Personel &personel)
+SerikBLDCore::Talep &SerikBLDCore::Talep::AddGorevliPersonel(const Personel &personel)
 {
     this->pushArray(TalepKey::GorevliPersonel,bsoncxx::document::value(personel.view ()));
     return *this;
 }
 
-Talep &Talep::DeleteGorevliPersonel(const Personel &personel)
+SerikBLDCore::Talep &SerikBLDCore::Talep::DeleteGorevliPersonel(const Personel &personel)
 {
     auto pList = this->GorevliList ();
     this->removeElement (TalepKey::GorevliPersonel);
@@ -143,19 +143,19 @@ Talep &Talep::DeleteGorevliPersonel(const Personel &personel)
     return *this;
 }
 
-Talep &Talep::setYil(const int &yil)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setYil(const int &yil)
 {
     this->append(TalepKey::Yil,yil);
     return *this;
 }
 
-Talep &Talep::setAy(const QString &ay)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setAy(const QString &ay)
 {
     this->append(TalepKey::Ay,ay.toStdString ());
     return *this;
 }
 
-QString Talep::oid() const
+QString SerikBLDCore::Talep::oid() const
 {
     auto val = this->element ("_id");
     if( val )
@@ -165,7 +165,7 @@ QString Talep::oid() const
     return "";
 }
 
-QString Talep::tcOid() const
+QString SerikBLDCore::Talep::tcOid() const
 {
     auto val = this->element (TalepKey::TCOID);
     if( val )
@@ -175,7 +175,7 @@ QString Talep::tcOid() const
     return "";
 }
 
-QString Talep::mahalle() const
+QString SerikBLDCore::Talep::mahalle() const
 {
     auto val = this->element (TalepKey::Mahalle);
     if( val )
@@ -185,7 +185,7 @@ QString Talep::mahalle() const
     return "";
 }
 
-QString Talep::adres() const
+QString SerikBLDCore::Talep::adres() const
 {
     auto val = this->element (TalepKey::Adres);
     if( val )
@@ -195,7 +195,7 @@ QString Talep::adres() const
     return "";
 }
 
-QString Talep::konu() const
+QString SerikBLDCore::Talep::konu() const
 {
     auto val = this->element (TalepKey::Konu);
     if( val )
@@ -205,7 +205,7 @@ QString Talep::konu() const
     return "";
 }
 
-QString Talep::saat() const
+QString SerikBLDCore::Talep::saat() const
 {
     auto val = this->element (TalepKey::SecStartOfDay);
     if( val )
@@ -215,7 +215,7 @@ QString Talep::saat() const
     return "";
 }
 
-QString Talep::tarih() const
+QString SerikBLDCore::Talep::tarih() const
 {
     auto val = this->element (TalepKey::JulianDay);
     if( val )
@@ -225,7 +225,7 @@ QString Talep::tarih() const
     return "";
 }
 
-int Talep::julianDay() const
+int SerikBLDCore::Talep::julianDay() const
 {
     auto val = this->element (TalepKey::JulianDay);
     if( val )
@@ -235,7 +235,7 @@ int Talep::julianDay() const
     return -1;
 }
 
-int Talep::mSecStartOfDay() const
+int SerikBLDCore::Talep::mSecStartOfDay() const
 {
     auto val = this->element (TalepKey::SecStartOfDay);
     if( val )
@@ -245,7 +245,7 @@ int Talep::mSecStartOfDay() const
     return -1;
 }
 
-QString Talep::durum() const
+QString SerikBLDCore::Talep::durum() const
 {
     auto val = this->element (TalepKey::Durum);
     if( val )
@@ -255,7 +255,7 @@ QString Talep::durum() const
     return "";
 }
 
-QString Talep::durumColor() const
+QString SerikBLDCore::Talep::durumColor() const
 {
     auto durum_ = this->durum ();
 
@@ -274,7 +274,7 @@ QString Talep::durumColor() const
 
 }
 
-QString Talep::kaynak() const
+QString SerikBLDCore::Talep::kaynak() const
 {
     auto val = this->element (TalepKey::Kaynak);
     if( val )
@@ -283,7 +283,7 @@ QString Talep::kaynak() const
     }
     return "";}
 
-QString Talep::kaynakColor() const
+QString SerikBLDCore::Talep::kaynakColor() const
 {
     auto kaynak_ = this->kaynak ();
 
@@ -303,7 +303,7 @@ QString Talep::kaynakColor() const
     }
 }
 
-QString Talep::birim() const
+QString SerikBLDCore::Talep::birim() const
 {
     auto val = this->element (TalepKey::Birim);
     if( val )
@@ -313,7 +313,7 @@ QString Talep::birim() const
     return "";
 }
 
-QVector<Personel> Talep::GorevliList() const
+QVector<SerikBLDCore::Personel> SerikBLDCore::Talep::GorevliList() const
 {
     QVector<Personel> list;
 

@@ -6,6 +6,7 @@
 #include "db.h"
 #include "Config.h"
 
+namespace SerikBLDCore {
 
 class SERIKBLDCORE_EXPORT TalepManager : public DB
 {
@@ -15,6 +16,8 @@ public:
     TalepManager( mongocxx::database* _db );
 
     bool insertTalep( const Talep* item );
+
+    std::string insertTalep( const Talep& item );
 
     bool updateTalep( const Talep* item );
 
@@ -31,6 +34,9 @@ public:
     TalepKey::KaynakPipelineResult kaynakPipeLine( const QString &birim );
 
 };
+
+
+}
 
 
 

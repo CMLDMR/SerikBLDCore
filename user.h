@@ -8,6 +8,7 @@
 #ifdef WT_CLASS
 #endif
 
+namespace SerikBLDCore {
 
 class SERIKBLDCORE_EXPORT User : public Item , public DB
 {
@@ -47,5 +48,7 @@ public:
     QString UserOid() const;
 
 };
+
+}
 
 #endif // USER_H

@@ -15,6 +15,7 @@
 #include <boost/optional.hpp>
 #endif
 
+namespace SerikBLDCore {
 class Item;
 
 class SERIKBLDCORE_EXPORT DB
@@ -29,9 +30,14 @@ public:
 
     DB& operator=(const DB& otherDB);
 
-    const DB* getDB() const{
+
+
+    const DB* getDB() const {
         return this;
     }
+
+
+    QVector<QString> getMahalleler() ;
 
 
     mongocxx::database* db();
@@ -58,11 +64,14 @@ private:
 
 
 private:
-    mongocxx::database _mDB;
-    mongocxx::client* mClient;
+//    mongocxx::database _mDB;
+//    mongocxx::client* mClient;
 
     bool mConstructWithNewClient;
     mongocxx::database* mDB;
 };
+
+}
+
 
 #endif // DB_H

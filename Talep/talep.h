@@ -6,6 +6,7 @@
 #include "SerikBLDCore_global.h"
 #include "personel.h"
 
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT TalepKey
 {
 public:
@@ -114,6 +115,12 @@ public:
 
 
 };
+
+
+}
+
+
+
 
 
 

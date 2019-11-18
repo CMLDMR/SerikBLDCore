@@ -2,51 +2,51 @@
 #include "user.h"
 #include <QDateTime>
 
-const std::string TalepSubItem::Collection{"TalepSubItem"};
-const std::string TalepSubItem::Type{"Tip"};
-const std::string TalepSubItem::TalepOid{"talepOid"};
-const std::string TalepSubItem::Aciklama{"Açıklama"};
-const std::string TalepSubItem::Fotograf{"Fotograf"};
-const std::string TalepSubItem::Pdf{"pdf"};
-const std::string TalepSubItem::Konum{"Konum"};
-const std::string TalepSubItem::Video{"Video"};
-const std::string TalepSubItem::Sms{"Sms"};
-const std::string TalepSubItem::Log{"Log"};
-const std::string TalepSubItem::PersonelName{"PersonelName"};
-const std::string TalepSubItem::PersonelOid{"PersonelOid"};
+const std::string SerikBLDCore::TalepSubItem::Collection{"TalepSubItem"};
+const std::string SerikBLDCore::TalepSubItem::Type{"Tip"};
+const std::string SerikBLDCore::TalepSubItem::TalepOid{"talepOid"};
+const std::string SerikBLDCore::TalepSubItem::Aciklama{"Açıklama"};
+const std::string SerikBLDCore::TalepSubItem::Fotograf{"Fotograf"};
+const std::string SerikBLDCore::TalepSubItem::Pdf{"pdf"};
+const std::string SerikBLDCore::TalepSubItem::Konum{"Konum"};
+const std::string SerikBLDCore::TalepSubItem::Video{"Video"};
+const std::string SerikBLDCore::TalepSubItem::Sms{"Sms"};
+const std::string SerikBLDCore::TalepSubItem::Log{"Log"};
+const std::string SerikBLDCore::TalepSubItem::PersonelName{"PersonelName"};
+const std::string SerikBLDCore::TalepSubItem::PersonelOid{"PersonelOid"};
 
-TalepSubItem::TalepSubItem() : Item (Collection)
+SerikBLDCore::TalepSubItem::TalepSubItem() : Item (Collection)
 {
 }
 
-TalepSubItem::TalepSubItem(const TalepSubItem &other) : Item (Collection)
-{
-    this->setDocumentView (other.view ());
-}
-
-TalepSubItem::TalepSubItem(TalepSubItem &&other) : Item(Collection)
+SerikBLDCore::TalepSubItem::TalepSubItem(const TalepSubItem &other) : Item (Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-TalepSubItem &TalepSubItem::operator=(const TalepSubItem &other)
+SerikBLDCore::TalepSubItem::TalepSubItem(TalepSubItem &&other) : Item(Collection)
 {
     this->setDocumentView (other.view ());
-    return *this;
 }
 
-TalepSubItem &TalepSubItem::operator=(TalepSubItem &&other)
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::operator=(const TalepSubItem &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-void TalepSubItem::setType(TalepSubItem::ItemType type)
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::operator=(TalepSubItem &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+void SerikBLDCore::TalepSubItem::setType(SerikBLDCore::TalepSubItem::ItemType type)
 {
     this->append(Type,static_cast<int>(type));
 }
 
-TalepSubItem::ItemType TalepSubItem::type() const
+SerikBLDCore::TalepSubItem::ItemType SerikBLDCore::TalepSubItem::type() const
 {
     auto val = this->element (Type);
     if( val )
@@ -56,12 +56,12 @@ TalepSubItem::ItemType TalepSubItem::type() const
     return ItemType::none;
 }
 
-void TalepSubItem::setTalepOid(const QString &talepOid)
+void SerikBLDCore::TalepSubItem::setTalepOid(const QString &talepOid)
 {
     this->append(TalepOid,bsoncxx::oid{talepOid.toStdString ()});
 }
 
-QString TalepSubItem::talepOid() const
+QString SerikBLDCore::TalepSubItem::talepOid() const
 {
     auto val = this->element (TalepOid);
     if( val )
@@ -71,13 +71,13 @@ QString TalepSubItem::talepOid() const
     return "";
 }
 
-void TalepSubItem::setAciklama(const QString &aciklama)
+void SerikBLDCore::TalepSubItem::setAciklama(const QString &aciklama)
 {
     this->append(Aciklama,aciklama.toStdString ());
     this->setType (ItemType::Aciklama);
 }
 
-QString TalepSubItem::aciklama() const
+QString SerikBLDCore::TalepSubItem::aciklama() const
 {
     auto val = this->element (Aciklama);
     if( val )
@@ -87,13 +87,13 @@ QString TalepSubItem::aciklama() const
     return "";
 }
 
-void TalepSubItem::setLog(const QString &log)
+void SerikBLDCore::TalepSubItem::setLog(const QString &log)
 {
     this->append(Log,log.toStdString ());
     this->setType (ItemType::Log);
 }
 
-QString TalepSubItem::log() const
+QString SerikBLDCore::TalepSubItem::log() const
 {
     auto val = this->element (Log);
     if( val )
@@ -103,13 +103,13 @@ QString TalepSubItem::log() const
     return "";
 }
 
-void TalepSubItem::setFotograf(const QString &fotoOid)
+void SerikBLDCore::TalepSubItem::setFotograf(const QString &fotoOid)
 {
     this->append(Fotograf,bsoncxx::oid{fotoOid.toStdString ()});
     this->setType (ItemType::Fotograf);
 }
 
-QString TalepSubItem::fotografOid() const
+QString SerikBLDCore::TalepSubItem::fotografOid() const
 {
     auto val = this->element (Fotograf);
     if( val )
@@ -119,13 +119,13 @@ QString TalepSubItem::fotografOid() const
     return "";
 }
 
-void TalepSubItem::setPdf(const QString &pdfOid)
+void SerikBLDCore::TalepSubItem::setPdf(const QString &pdfOid)
 {
     this->append(Pdf,bsoncxx::oid{pdfOid.toStdString ()});
     this->setType (ItemType::Pdf);
 }
 
-QString TalepSubItem::pdfOid() const
+QString SerikBLDCore::TalepSubItem::pdfOid() const
 {
     auto val = this->element (Pdf);
     if( val )
@@ -135,7 +135,7 @@ QString TalepSubItem::pdfOid() const
     return "";
 }
 
-void TalepSubItem::setKonum(double x, double y)
+void SerikBLDCore::TalepSubItem::setKonum(double x, double y)
 {
     auto doc = document{};
 
@@ -157,7 +157,7 @@ void TalepSubItem::setKonum(double x, double y)
     this->setType (ItemType::Konum);
 }
 
-double TalepSubItem::xCoordinate() const
+double SerikBLDCore::TalepSubItem::xCoordinate() const
 {
     auto val = this->element (Konum);
     if( val )
@@ -173,7 +173,7 @@ double TalepSubItem::xCoordinate() const
     return 0;
 }
 
-double TalepSubItem::yCoordinate() const
+double SerikBLDCore::TalepSubItem::yCoordinate() const
 {
     auto val = this->element (Konum);
     if( val )
@@ -189,13 +189,13 @@ double TalepSubItem::yCoordinate() const
     return 0;
 }
 
-void TalepSubItem::setVideoOid(const QString &videoOid)
+void SerikBLDCore::TalepSubItem::setVideoOid(const QString &videoOid)
 {
     this->append(Video,bsoncxx::oid{videoOid.toStdString ()});
     this->setType (ItemType::Video);
 }
 
-QString TalepSubItem::videoOid() const
+QString SerikBLDCore::TalepSubItem::videoOid() const
 {
     auto val = this->element (Video);
     if( val )
@@ -205,13 +205,13 @@ QString TalepSubItem::videoOid() const
     return "";
 }
 
-void TalepSubItem::setSms(const QString &sms)
+void SerikBLDCore::TalepSubItem::setSms(const QString &sms)
 {
     this->append(Sms,sms.toStdString ());
     this->setType (ItemType::Sms);
 }
 
-QString TalepSubItem::sms() const
+QString SerikBLDCore::TalepSubItem::sms() const
 {
     auto val = this->element (Sms);
     if( val )
@@ -221,12 +221,12 @@ QString TalepSubItem::sms() const
     return "";
 }
 
-void TalepSubItem::setPersonelName(const QString &personelName)
+void SerikBLDCore::TalepSubItem::setPersonelName(const QString &personelName)
 {
     this->append(PersonelName,personelName.toStdString ());
 }
 
-QString TalepSubItem::personelName() const
+QString SerikBLDCore::TalepSubItem::personelName() const
 {
     auto val = this->element (PersonelName);
     if( val )
@@ -236,12 +236,12 @@ QString TalepSubItem::personelName() const
     return "";
 }
 
-void TalepSubItem::setPersonelOid(const QString &personelOid)
+void SerikBLDCore::TalepSubItem::setPersonelOid(const QString &personelOid)
 {
     this->append(PersonelOid,bsoncxx::oid{personelOid.toStdString ()});
 }
 
-QString TalepSubItem::personelOid() const
+QString SerikBLDCore::TalepSubItem::personelOid() const
 {
     auto val = this->element (PersonelOid);
     if( val )
@@ -251,7 +251,7 @@ QString TalepSubItem::personelOid() const
     return "";
 }
 
-QString TalepSubItem::tarih() const
+QString SerikBLDCore::TalepSubItem::tarih() const
 {
     auto val = this->oid ();
     if( val )
@@ -261,7 +261,7 @@ QString TalepSubItem::tarih() const
     return "";
 }
 
-int TalepSubItem::julianDay() const
+int SerikBLDCore::TalepSubItem::julianDay() const
 {
     auto val = this->oid ();
     if( val )
@@ -271,7 +271,7 @@ int TalepSubItem::julianDay() const
     return 0;
 }
 
-QString TalepSubItem::saat() const
+QString SerikBLDCore::TalepSubItem::saat() const
 {
     auto val = this->oid ();
     if( val )
@@ -281,7 +281,7 @@ QString TalepSubItem::saat() const
     return "";
 }
 
-QString TalepSubItem::typeColor() const
+QString SerikBLDCore::TalepSubItem::typeColor() const
 {
     switch (this->type ()) {
     case ItemType::Aciklama:
@@ -304,7 +304,7 @@ QString TalepSubItem::typeColor() const
     }
 }
 
-QString TalepSubItem::typeStr() const
+QString SerikBLDCore::TalepSubItem::typeStr() const
 {
     switch (this->type ()) {
     case ItemType::Aciklama:
@@ -328,7 +328,7 @@ QString TalepSubItem::typeStr() const
     }
 }
 
-QJsonObject TalepSubItem::toJson() const
+QJsonObject SerikBLDCore::TalepSubItem::toJson() const
 {
     return QJsonDocument::fromJson (bsoncxx::to_json (this->view ()).c_str ()).object ();
 }

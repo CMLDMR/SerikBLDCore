@@ -4,6 +4,7 @@
 
 #include "item.h"
 
+namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT DilekceCevap : public Item
 {
     static const std::string Collection;
@@ -45,5 +46,8 @@ public:
     QVector<QString> ekList() const;
 
 };
+
+}
+
 
 #endif // DILEKCECEVAP_H
