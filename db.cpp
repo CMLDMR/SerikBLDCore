@@ -28,6 +28,13 @@ SerikBLDCore::DB::DB(const DB &db)
     mConstructWithNewClient = false;
 }
 
+SerikBLDCore::DB::DB(SerikBLDCore::DB &&other)
+    :mDB(other.mDB)
+{
+    std::cout << "DB::DB(DB &&db): " << DBConnectionCount << std::endl;
+    mConstructWithNewClient = false;
+}
+
 SerikBLDCore::DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
@@ -62,8 +69,21 @@ SerikBLDCore::DB::~DB()
 SerikBLDCore::DB &SerikBLDCore::DB::operator=(const DB &otherDB)
 {
     std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
-//    mClient = otherDB.mClient;
     mDB = otherDB.mDB;
+    return *this;
+}
+
+SerikBLDCore::DB &SerikBLDCore::DB::operator=(SerikBLDCore::DB &&otherDB)
+{
+    std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
+    mDB = otherDB.mDB;
+    return *this;
+}
+
+SerikBLDCore::DB &SerikBLDCore::DB::operator=(mongocxx::database *_db)
+{
+    std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
+    mDB = _db;
     return *this;
 }
 
@@ -184,7 +204,7 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
 std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
 {
-    auto bucket = this->db ()->gridfs_bucket ();
+    auto bucket = this->mDB->gridfs_bucket ();
 
     auto doc = bsoncxx::builder::basic::document{};
 
@@ -201,9 +221,9 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     try {
         auto roid = bsoncxx::types::value(doc.view()["key"].get_oid());
         downloader = bucket.open_download_stream(roid);
-
     } catch (bsoncxx::exception &e) {
-        return "";
+        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
+        return "img/404-header.png";
     }
 
 
@@ -260,9 +280,7 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
         }
 
         out.close();
-    }
-
-    else{
+    }else{
         std::cout << "Error Can Not Open File: " <<fullFilename.toStdString() << std::endl;
     }
 
@@ -272,6 +290,25 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
 bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
 {
     auto bucket = this->db ()->gridfs_bucket ();
+    QFile file( filepath );
+    if( file.open( QIODevice::ReadOnly ) )
+    {
+        QFileInfo info(filepath);
+        auto uploader = bucket.open_upload_stream(info.fileName().toStdString().c_str());
+        QByteArray ar = file.readAll();
+        file.close();
+
+        uploader.write((std::uint8_t*)ar.data(),ar.size());
+        auto res = uploader.close();
+        return res.id();
+    }else{
+        std::cout << "Can not open File " << filepath.toStdString () << std::endl;
+    }
+}
+
+bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
+{
+    auto bucket = mDB->gridfs_bucket ();
     QFile file( filepath );
     if( file.open( QIODevice::ReadOnly ) )
     {

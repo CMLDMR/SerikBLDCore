@@ -23,12 +23,15 @@ class SERIKBLDCORE_EXPORT DB
 public:
     explicit DB();
     DB( const DB &db);
+    DB( DB&& other );
     DB( mongocxx::database* _db );
     DB( DB* _db );
     DB( const DB* _db );
     ~DB();
 
     DB& operator=(const DB& otherDB);
+    DB& operator=( DB&& otherDB );
+    DB& operator=( mongocxx::database* _db );
 
 
 
@@ -45,6 +48,7 @@ public:
     std::string downloadFile(const QString &fileOid , bool forceFilename = false);
     std::string downloadFileWeb( const QString &fileOid , bool forceFilename = false );
     bsoncxx::types::value uploadfile(QString filepath );
+    bsoncxx::types::value uploadfile(QString filepath ) const;
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
     mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);
