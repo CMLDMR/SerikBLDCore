@@ -51,6 +51,11 @@ $(function() {
 <div class="title">SerikBLDCore::TalepManager Sınıf Referans</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html" title="The TalepManager class Bu Sınıf Talep leri Yönetir. Talep ekler, günceller ve Talep leri listeler....">TalepManager</a> class Bu Sınıf <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> leri Yönetir. <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> ekler, günceller ve <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> leri listeler. <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> lere ait eventları da yönetir. Açıklama , SMS , Fotoğraf , PDF ekler. Ayrıca Bu <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> ları CRUD yapar.  
+ <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#details">Ayrıntılar...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../dd/db1/talepmanager_8h_source.html">talepmanager.h</a>&gt;</code></p>
 <div class="dynheader">
 SerikBLDCore::TalepManager için kalıtım şeması:</div>
 <div class="dyncontent">
@@ -69,41 +74,32 @@ Public Üye Fonksiyonlar</h2></td></tr>
 <tr class="memitem:aaafbec939c79a0ffc910a56b788d87b1"><td class="memItemLeft" align="right" valign="top"><a id="aaafbec939c79a0ffc910a56b788d87b1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>TalepManager</b> (mongocxx::database *_db)</td></tr>
 <tr class="separator:aaafbec939c79a0ffc910a56b788d87b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93bd0432898fcd8d04aef85322c50634"><td class="memItemLeft" align="right" valign="top"><a id="a93bd0432898fcd8d04aef85322c50634"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>insertTalep</b> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *item)</td></tr>
+<tr class="memitem:a93bd0432898fcd8d04aef85322c50634"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a93bd0432898fcd8d04aef85322c50634">insertTalep</a> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *item)</td></tr>
+<tr class="memdesc:a93bd0432898fcd8d04aef85322c50634"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>item</b> talebi veri tabanına ekler.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a93bd0432898fcd8d04aef85322c50634">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a93bd0432898fcd8d04aef85322c50634"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b49ca97c57fe10470c6196b9541e1af"><td class="memItemLeft" align="right" valign="top"><a id="a2b49ca97c57fe10470c6196b9541e1af"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>insertTalep</b> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;item)</td></tr>
+<tr class="memitem:a2b49ca97c57fe10470c6196b9541e1af"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a2b49ca97c57fe10470c6196b9541e1af">insertTalep</a> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;item)</td></tr>
+<tr class="memdesc:a2b49ca97c57fe10470c6196b9541e1af"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>item</b> talebi veri tabanına ekler.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a2b49ca97c57fe10470c6196b9541e1af">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a2b49ca97c57fe10470c6196b9541e1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35b3ed91be8a40c47f9fbc2bf513748d"><td class="memItemLeft" align="right" valign="top"><a id="a35b3ed91be8a40c47f9fbc2bf513748d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateTalep</b> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *item)</td></tr>
+<tr class="memitem:a35b3ed91be8a40c47f9fbc2bf513748d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a35b3ed91be8a40c47f9fbc2bf513748d">updateTalep</a> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *item)</td></tr>
+<tr class="memdesc:a35b3ed91be8a40c47f9fbc2bf513748d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>item</b> ile eşleşen talebi günceller.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a35b3ed91be8a40c47f9fbc2bf513748d">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a35b3ed91be8a40c47f9fbc2bf513748d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c6b436f11832d084bff19331c7b13d5"><td class="memItemLeft" align="right" valign="top"><a id="a1c6b436f11832d084bff19331c7b13d5"></a>
-QVector&lt; <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>findTalep</b> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter, int limit=20, int skip=0)</td></tr>
+<tr class="memitem:a1c6b436f11832d084bff19331c7b13d5"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a1c6b436f11832d084bff19331c7b13d5">findTalep</a> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter, int limit=20, int skip=0)</td></tr>
+<tr class="memdesc:a1c6b436f11832d084bff19331c7b13d5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>filter</b> ile eşleşen tüm talepleri listeler.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a1c6b436f11832d084bff19331c7b13d5">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a1c6b436f11832d084bff19331c7b13d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4116a4b5c48c2f93c2de4f7cef0997ce"><td class="memItemLeft" align="right" valign="top"><a id="a4116a4b5c48c2f93c2de4f7cef0997ce"></a>
-<a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>&#160;</td><td class="memItemRight" valign="bottom"><b>findOneTalep</b> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter)</td></tr>
+<tr class="memitem:a4116a4b5c48c2f93c2de4f7cef0997ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a4116a4b5c48c2f93c2de4f7cef0997ce">findOneTalep</a> (const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter)</td></tr>
+<tr class="memdesc:a4116a4b5c48c2f93c2de4f7cef0997ce"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>filter</b> ile Eşleşen Mevcut Talebi Geri Döndürür.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a4116a4b5c48c2f93c2de4f7cef0997ce">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a4116a4b5c48c2f93c2de4f7cef0997ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af72b8114499c91d7991cc6c877099588"><td class="memItemLeft" align="right" valign="top"><a id="af72b8114499c91d7991cc6c877099588"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>insertTalepSubItem</b> (const <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> *item)</td></tr>
+<tr class="memitem:af72b8114499c91d7991cc6c877099588"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af72b8114499c91d7991cc6c877099588">insertTalepSubItem</a> (const <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> *item)</td></tr>
+<tr class="memdesc:af72b8114499c91d7991cc6c877099588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mevcut Talebe Açıklama , Resim , SMS , Fotoğraf yada PDF ekler.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af72b8114499c91d7991cc6c877099588">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:af72b8114499c91d7991cc6c877099588"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb417937996d9188c1a55d401c692235"><td class="memItemLeft" align="right" valign="top"><a id="aeb417937996d9188c1a55d401c692235"></a>
-QVector&lt; <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>findTalepSubItem</b> (const QString &amp;talepOid)</td></tr>
+<tr class="memitem:aeb417937996d9188c1a55d401c692235"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aeb417937996d9188c1a55d401c692235">findTalepSubItem</a> (const QString &amp;talepOid)</td></tr>
+<tr class="memdesc:aeb417937996d9188c1a55d401c692235"><td class="mdescLeft">&#160;</td><td class="mdescRight">Talebe Ait Açıklama, Resim , SMS , Fotoğraf ve PDF eklentileri listeler.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aeb417937996d9188c1a55d401c692235">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:aeb417937996d9188c1a55d401c692235"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a859dcb854d6330c75ee6086db5f8853b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">TalepKey::DurumPipelineResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">durumPipeLine</a> (const QString &amp;birim)</td></tr>
-<tr class="memdesc:a859dcb854d6330c75ee6086db5f8853b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri Geri Döndürür.<br  />
-Örnek Kode <br  />
- </p><blockquote class="doxtable">
-<p><code>auto container = this-&gt;Header ()-&gt;addWidget (cpp14::make_unique&lt;WContainerWidget&gt;());<br  />
- container-&gt;addStyleClass (Bootstrap::Grid::col_full_12);<br  />
- container-&gt;setMargin (15,Side::Top|Side::Bottom);<br  />
- auto toolbarWidget = container-&gt;addWidget (cpp14::make_unique&lt;WToolBar&gt;()); </code></p>
-</blockquote>
-<p><br  />
-  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">Ayrıntılar...</a><br /></td></tr>
+<tr class="memdesc:a859dcb854d6330c75ee6086db5f8853b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:a859dcb854d6330c75ee6086db5f8853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af29cd006c6b26ce14f9ae16ed924276d"><td class="memItemLeft" align="right" valign="top"><a id="af29cd006c6b26ce14f9ae16ed924276d"></a>
-<a class="el" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">TalepKey::KaynakPipelineResult</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kaynakPipeLine</b> (const QString &amp;birim)</td></tr>
+<tr class="memitem:af29cd006c6b26ce14f9ae16ed924276d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">TalepKey::KaynakPipelineResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af29cd006c6b26ce14f9ae16ed924276d">kaynakPipeLine</a> (const QString &amp;birim)</td></tr>
+<tr class="memdesc:af29cd006c6b26ce14f9ae16ed924276d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Taleplerin Nerden Geldiğinin İstatistik Bilgilerini Verir.  <a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af29cd006c6b26ce14f9ae16ed924276d">Ayrıntılar...</a><br /></td></tr>
 <tr class="separator:af29cd006c6b26ce14f9ae16ed924276d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_serik_b_l_d_core_1_1_d_b"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_serik_b_l_d_core_1_1_d_b')"><img src="../../closed.png" alt="-"/>&#160;Public Üye Fonksiyonlar inherited from <a class="el" href="../../d4/df7/class_serik_b_l_d_core_1_1_d_b.html">SerikBLDCore::DB</a></td></tr>
 <tr class="memitem:a215b2e93cbe639f0d6c5a39f363ca214 inherit pub_methods_class_serik_b_l_d_core_1_1_d_b"><td class="memItemLeft" align="right" valign="top"><a id="a215b2e93cbe639f0d6c5a39f363ca214"></a>
@@ -171,8 +167,9 @@ mongocxx::stdx::optional&lt; mongocxx::result::delete_result &gt;&#160;</td><td 
 <tr class="separator:ab250a4fa910b528643c95d01fb3db477 inherit pub_methods_class_serik_b_l_d_core_1_1_d_b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Ayrıntılı tanımlama</h2>
-<div class="textblock">
-<p class="definition"><a class="el" href="../../dd/db1/talepmanager_8h_source.html">talepmanager.h</a> dosyasının <a class="el" href="../../dd/db1/talepmanager_8h_source.html#l00011">11</a> numaralı satırında tanımlanmıştır.</p>
+<div class="textblock"><p>The <a class="el" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html" title="The TalepManager class Bu Sınıf Talep leri Yönetir. Talep ekler, günceller ve Talep leri listeler....">TalepManager</a> class Bu Sınıf <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> leri Yönetir. <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> ekler, günceller ve <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> leri listeler. <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> lere ait eventları da yönetir. Açıklama , SMS , Fotoğraf , PDF ekler. Ayrıca Bu <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> ları CRUD yapar. </p>
+
+<p class="definition"><a class="el" href="../../dd/db1/talepmanager_8h_source.html">talepmanager.h</a> dosyasının <a class="el" href="../../dd/db1/talepmanager_8h_source.html#l00015">15</a> numaralı satırında tanımlanmıştır.</p>
 </div><h2 class="groupheader">Üye Fonksiyon Dokümantasyonu</h2>
 <a id="a859dcb854d6330c75ee6086db5f8853b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a859dcb854d6330c75ee6086db5f8853b">&#9670;&nbsp;</a></span>durumPipeLine()</h2>
@@ -190,16 +187,7 @@ mongocxx::stdx::optional&lt; mongocxx::result::delete_result &gt;&#160;</td><td 
       </table>
 </div><div class="memdoc">
 
-<p>Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri Geri Döndürür.<br  />
-Örnek Kode <br  />
- </p><blockquote class="doxtable">
-<p><code>auto container = this-&gt;Header ()-&gt;addWidget (cpp14::make_unique&lt;WContainerWidget&gt;());<br  />
- container-&gt;addStyleClass (Bootstrap::Grid::col_full_12);<br  />
- container-&gt;setMargin (15,Side::Top|Side::Bottom);<br  />
- auto toolbarWidget = container-&gt;addWidget (cpp14::make_unique&lt;WToolBar&gt;()); </code></p>
-</blockquote>
-<p><br  />
- </p>
+<p>Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri. </p>
 <dl class="params"><dt>Parametreler</dt><dd>
   <table class="params">
     <tr><td class="paramname">birim</td><td></td></tr>
@@ -209,6 +197,256 @@ mongocxx::stdx::optional&lt; mongocxx::result::delete_result &gt;&#160;</td><td 
 <dl class="section return"><dt>Döndürdüğü değer</dt><dd></dd></dl>
 
 <p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00172">172</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="a4116a4b5c48c2f93c2de4f7cef0997ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4116a4b5c48c2f93c2de4f7cef0997ce">&#9670;&nbsp;</a></span>findOneTalep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">SerikBLDCore::Talep</a> SerikBLDCore::TalepManager::findOneTalep </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;&#160;</td>
+          <td class="paramname"><em>filter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>filter</b> ile Eşleşen Mevcut Talebi Geri Döndürür. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filter</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd></dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00111">111</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="a1c6b436f11832d084bff19331c7b13d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c6b436f11832d084bff19331c7b13d5">&#9670;&nbsp;</a></span>findTalep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">SerikBLDCore::Talep</a> &gt; SerikBLDCore::TalepManager::findTalep </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;&#160;</td>
+          <td class="paramname"><em>filter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>limit</em> = <code>20</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>skip</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>filter</b> ile eşleşen tüm talepleri listeler. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filter</td><td></td></tr>
+    <tr><td class="paramname">limit</td><td></td></tr>
+    <tr><td class="paramname">skip</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd></dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00084">84</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="aeb417937996d9188c1a55d401c692235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb417937996d9188c1a55d401c692235">&#9670;&nbsp;</a></span>findTalepSubItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">SerikBLDCore::TalepSubItem</a> &gt; SerikBLDCore::TalepManager::findTalepSubItem </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>talepOid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Talebe Ait Açıklama, Resim , SMS , Fotoğraf ve PDF eklentileri listeler. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">talepOid</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd></dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00145">145</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="a2b49ca97c57fe10470c6196b9541e1af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b49ca97c57fe10470c6196b9541e1af">&#9670;&nbsp;</a></span>insertTalep() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SerikBLDCore::TalepManager::insertTalep </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>item</b> talebi veri tabanına ekler. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd>talebin oid bilgisini geri döndürür. </dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00040">40</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="a93bd0432898fcd8d04aef85322c50634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93bd0432898fcd8d04aef85322c50634">&#9670;&nbsp;</a></span>insertTalep() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SerikBLDCore::TalepManager::insertTalep </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>item</b> talebi veri tabanına ekler. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd>Taleb Veritabanına eklendi ise <b>true</b> yoksa <b>false</b> döndürür. </dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00018">18</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="af72b8114499c91d7991cc6c877099588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af72b8114499c91d7991cc6c877099588">&#9670;&nbsp;</a></span>insertTalepSubItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SerikBLDCore::TalepManager::insertTalepSubItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a> *&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mevcut Talebe Açıklama , Resim , SMS , Fotoğraf yada PDF ekler. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd></dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00123">123</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="af29cd006c6b26ce14f9ae16ed924276d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af29cd006c6b26ce14f9ae16ed924276d">&#9670;&nbsp;</a></span>kaynakPipeLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">SerikBLDCore::TalepKey::KaynakPipelineResult</a> SerikBLDCore::TalepManager::kaynakPipeLine </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>birim</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Taleplerin Nerden Geldiğinin İstatistik Bilgilerini Verir. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">birim</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd>KaynakPipelineResult </dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00259">259</a> numaralı satırında tanımlanmıştır.</p>
+
+</div>
+</div>
+<a id="a35b3ed91be8a40c47f9fbc2bf513748d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b3ed91be8a40c47f9fbc2bf513748d">&#9670;&nbsp;</a></span>updateTalep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SerikBLDCore::TalepManager::updateTalep </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> *&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><b>item</b> ile eşleşen talebi günceller. </p>
+<dl class="params"><dt>Parametreler</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">item</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Döndürdüğü değer</dt><dd><a class="el" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> Güncellendi ise <b>true</b> yoksa <b>false</b> geri döndürür. </dd></dl>
+
+<p class="definition"><a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html">talepmanager.cpp</a> dosyasının <a class="el" href="../../d7/d1b/talepmanager_8cpp_source.html#l00062">62</a> numaralı satırında tanımlanmıştır.</p>
 
 </div>
 </div>

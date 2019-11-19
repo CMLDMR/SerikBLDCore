@@ -58,46 +58,62 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="../../d1/d36/class_serik_b_l_d_core.html">SerikBLDCore</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">   11</a></span>&#160;<span class="keyword">class </span>SERIKBLDCORE_EXPORT <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a> : <span class="keyword">public</span> DB</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>(DB* mDB);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>( mongocxx::database* _db );</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">bool</span> insertTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>* item );</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::string insertTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>&amp; item );</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">   15</a></span>&#160;<span class="keyword">class </span>SERIKBLDCORE_EXPORT <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a> : <span class="keyword">public</span> DB</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>(DB* mDB);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">TalepManager</a>( mongocxx::database* _db );</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span> updateTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>* item );</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    QVector&lt;Talep&gt; findTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter , <span class="keywordtype">int</span> limit = 20 , <span class="keywordtype">int</span> skip = 0);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> findOneTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter );</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> insertTalepSubItem( <span class="keyword">const</span> <a class="code" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a>* item );</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> insertTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>* item );</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QVector&lt;TalepSubItem&gt; findTalepSubItem( <span class="keyword">const</span> QString &amp;talepOid );</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">TalepKey::DurumPipelineResult</a> durumPipeLine(<span class="keyword">const</span> QString &amp;birim );</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">TalepKey::KaynakPipelineResult</a> kaynakPipeLine( <span class="keyword">const</span> QString &amp;birim );</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::string insertTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>&amp; item );</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">bool</span> updateTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a>* item );</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif // TALEPMANAGER_H</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QVector&lt;Talep&gt; findTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter , <span class="keywordtype">int</span> limit = 20 , <span class="keywordtype">int</span> skip = 0);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> findOneTalep( <span class="keyword">const</span> <a class="code" href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">Talep</a> &amp;filter );</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> insertTalepSubItem( <span class="keyword">const</span> <a class="code" href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">TalepSubItem</a>* item );</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    QVector&lt;TalepSubItem&gt; findTalepSubItem( <span class="keyword">const</span> QString &amp;talepOid );</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">TalepKey::DurumPipelineResult</a> durumPipeLine(<span class="keyword">const</span> QString &amp;birim );</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">TalepKey::KaynakPipelineResult</a> kaynakPipeLine( <span class="keyword">const</span> QString &amp;birim );</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#endif // TALEPMANAGER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_manager_html"><div class="ttname"><a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">SerikBLDCore::TalepManager</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dd/db1/talepmanager_8h_source.html#l00011">talepmanager.h:11</a></div></div>
-<div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result_html"><div class="ttname"><a href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">SerikBLDCore::TalepKey::DurumPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00054">talep.h:54</a></div></div>
-<div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result_html"><div class="ttname"><a href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">SerikBLDCore::TalepKey::KaynakPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00063">talep.h:63</a></div></div>
-<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_html"><div class="ttname"><a href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">SerikBLDCore::Talep</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00078">talep.h:78</a></div></div>
-<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_sub_item_html"><div class="ttname"><a href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">SerikBLDCore::TalepSubItem</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/dc0/talepsubitem_8h_source.html#l00010">talepsubitem.h:10</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_manager_html"><div class="ttname"><a href="../../da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html">SerikBLDCore::TalepManager</a></div><div class="ttdoc">The TalepManager class Bu Sınıf Talep leri Yönetir. Talep ekler, günceller ve Talep leri listeler....</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/db1/talepmanager_8h_source.html#l00015">talepmanager.h:15</a></div></div>
+<div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result_html"><div class="ttname"><a href="../../d4/dfd/struct_serik_b_l_d_core_1_1_talep_key_1_1_durum_pipeline_result.html">SerikBLDCore::TalepKey::DurumPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00056">talep.h:56</a></div></div>
+<div class="ttc" id="astruct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result_html"><div class="ttname"><a href="../../da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html">SerikBLDCore::TalepKey::KaynakPipelineResult</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00065">talep.h:65</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_html"><div class="ttname"><a href="../../da/d8b/class_serik_b_l_d_core_1_1_talep.html">SerikBLDCore::Talep</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d74/talep_8h_source.html#l00080">talep.h:80</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_talep_sub_item_html"><div class="ttname"><a href="../../dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html">SerikBLDCore::TalepSubItem</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/dc0/talepsubitem_8h_source.html#l00011">talepsubitem.h:11</a></div></div>
 <div class="ttc" id="aclass_serik_b_l_d_core_html"><div class="ttname"><a href="../../d1/d36/class_serik_b_l_d_core.html">SerikBLDCore</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d92/serikbldcore_8h_source.html#l00006">serikbldcore.h:6</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
