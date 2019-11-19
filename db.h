@@ -16,6 +16,7 @@
 #endif
 
 namespace SerikBLDCore {
+
 class Item;
 
 class SERIKBLDCORE_EXPORT DB
