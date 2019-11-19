@@ -10,7 +10,9 @@ namespace SerikBLDCore {
 
 
 
-
+///
+/// \brief The TalepKey class: Talep Durumu , Talep Keyleri ve Kaynak Keylerini İçerir
+///
 class SERIKBLDCORE_EXPORT TalepKey
 {
 public:
