@@ -14,9 +14,13 @@ const std::string SerikBLDCore::TalepSubItem::Sms{"Sms"};
 const std::string SerikBLDCore::TalepSubItem::Log{"Log"};
 const std::string SerikBLDCore::TalepSubItem::PersonelName{"PersonelName"};
 const std::string SerikBLDCore::TalepSubItem::PersonelOid{"PersonelOid"};
+const std::string SerikBLDCore::TalepSubItem::TCName{"tcName"};
+const std::string SerikBLDCore::TalepSubItem::TCOid{"tcOid"};
+const std::string SerikBLDCore::TalepSubItem::UType{"UserType"};
 
 SerikBLDCore::TalepSubItem::TalepSubItem() : Item (Collection)
 {
+
 }
 
 SerikBLDCore::TalepSubItem::TalepSubItem(const TalepSubItem &other) : Item (Collection)
@@ -236,9 +240,11 @@ QString SerikBLDCore::TalepSubItem::personelName() const
     return "";
 }
 
-void SerikBLDCore::TalepSubItem::setPersonelOid(const QString &personelOid)
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::setPersonelOid(const QString &personelOid)
 {
+    this->setUserType (PersonelUser);
     this->append(PersonelOid,bsoncxx::oid{personelOid.toStdString ()});
+    return *this;
 }
 
 QString SerikBLDCore::TalepSubItem::personelOid() const
@@ -249,6 +255,55 @@ QString SerikBLDCore::TalepSubItem::personelOid() const
         return QString::fromStdString (val.value ().get_oid ().value.to_string ());
     }
     return "";
+}
+
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::setTCName(const QString &tcName)
+{
+    this->append(TCName,tcName.toStdString ());
+    return *this;
+}
+
+QString SerikBLDCore::TalepSubItem::tcName() const
+{
+    auto val = this->element (TCName);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::setTCOid(const QString &tcOid)
+{
+    this->setUserType (TCUser);
+    this->append(TCOid,bsoncxx::oid{tcOid.toStdString ()});
+    return *this;
+}
+
+QString SerikBLDCore::TalepSubItem::tcOid() const
+{
+    auto val = this->element (TCOid);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+    }
+    return "";
+}
+
+SerikBLDCore::TalepSubItem &SerikBLDCore::TalepSubItem::setUserType(const SerikBLDCore::TalepSubItem::UserType type)
+{
+    this->append(UType,bsoncxx::types::b_int32{static_cast<int>(type)});
+    return *this;
+}
+
+SerikBLDCore::TalepSubItem::UserType SerikBLDCore::TalepSubItem::userType() const
+{
+    auto val = this->element (UType);
+    if( val )
+    {
+        return static_cast<UserType>(val.value ().get_int32 ().value);
+    }
+    return NoUser;
 }
 
 QString SerikBLDCore::TalepSubItem::tarih() const

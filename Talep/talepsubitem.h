@@ -7,6 +7,7 @@
 #include "talep.h"
 
 namespace SerikBLDCore {
+
 class SERIKBLDCORE_EXPORT TalepSubItem : public Item
 {
 public:
@@ -20,6 +21,12 @@ public:
         Video,
         Sms,
         Log
+    };
+
+    enum UserType{
+        NoUser = 0,
+        PersonelUser,
+        TCUser
     };
 
     TalepSubItem();
@@ -60,8 +67,17 @@ public:
     void setPersonelName( const QString& personelName );
     QString personelName() const;
 
-    void setPersonelOid( const QString& personelOid );
+    TalepSubItem& setPersonelOid( const QString& personelOid );
     QString personelOid() const;
+
+    TalepSubItem& setTCName( const QString& tcName );
+    QString tcName() const;
+
+    TalepSubItem &setTCOid( const QString& tcOid );
+    QString tcOid() const;
+
+    TalepSubItem &setUserType( const UserType type );
+    UserType userType() const;
 
     QString tarih() const;
     int julianDay() const;
@@ -86,6 +102,9 @@ public:
     static const std::string Log;
     static const std::string PersonelName;
     static const std::string PersonelOid;
+    static const std::string TCName;
+    static const std::string TCOid;
+    static const std::string UType;
 };
 
 }
