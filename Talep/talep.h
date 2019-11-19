@@ -87,12 +87,12 @@ public:
 
     operator bool() const;
 
-    void setTCOID( const QString &tcoid );
-    void setMahalle( const QString &mahalle );
-    void setAddress( const QString &address );
-    void setKonu( const QString &konu );
-    void setSec( const int &mSecStartOfDay );
-    void setJulianDay( const int &julianDay );
+    Talep& setTCOID( const QString &tcoid );
+    Talep& setMahalle( const QString &mahalle );
+    Talep& setAddress( const QString &address );
+    Talep& setKonu( const QString &konu );
+    Talep& setSec( const int &mSecStartOfDay );
+    Talep& setJulianDay( const int &julianDay );
     Talep& setDurum( const QString &durum );
     Talep& setKaynak( const QString &kaynak );
     Talep& setBirim( const QString &birim );

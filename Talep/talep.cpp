@@ -69,34 +69,40 @@ SerikBLDCore::Talep::operator bool() const
     return !this->view ().empty ();
 }
 
-void SerikBLDCore::Talep::setTCOID(const QString &tcoid)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setTCOID(const QString &tcoid)
 {
     this->append(TalepKey::TCOID,bsoncxx::oid{tcoid.toStdString ()});
+    return *this;
 }
 
-void SerikBLDCore::Talep::setMahalle(const QString &mahalle)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setMahalle(const QString &mahalle)
 {
     this->append(TalepKey::Mahalle,mahalle.toStdString ());
+    return *this;
 }
 
-void SerikBLDCore::Talep::setAddress(const QString &address)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setAddress(const QString &address)
 {
     this->append(TalepKey::Adres,address.toStdString ());
+    return *this;
 }
 
-void SerikBLDCore::Talep::setKonu(const QString &konu)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setKonu(const QString &konu)
 {
     this->append(TalepKey::Konu,konu.toStdString ());
+    return *this;
 }
 
-void SerikBLDCore::Talep::setSec(const int &mSecStartOfDay)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setSec(const int &mSecStartOfDay)
 {
     this->append(TalepKey::SecStartOfDay,mSecStartOfDay);
+    return *this;
 }
 
-void SerikBLDCore::Talep::setJulianDay(const int &julianDay)
+SerikBLDCore::Talep &SerikBLDCore::Talep::setJulianDay(const int &julianDay)
 {
     this->append(TalepKey::JulianDay,julianDay);
+    return *this;
 }
 
 SerikBLDCore::Talep &SerikBLDCore::Talep::setDurum(const QString &durum)
