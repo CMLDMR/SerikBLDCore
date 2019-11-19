@@ -18,6 +18,10 @@
 //#endif
 
 
+#define MAKE_STRINGS(VAR) #VAR
+
+
+
 //////////////////////////////////
 // CHECK PLATFORM
 #ifdef Q_OS_WIN
