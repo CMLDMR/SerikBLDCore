@@ -5,21 +5,58 @@
 
 QString SerikBLDCore::SMSAbstractManager::lastSendedSMSID() const
 {
+    if( !mManagerValid ){
+        std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
+        return "";
+    }
     return mLastSendedSMSID;
 }
 
 void SerikBLDCore::SMSAbstractManager::setLastSendedSMSID(const QString &lastSendedSMSID)
 {
+    if( !mManagerValid ){
+        std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
+        return;
+    }
     mLastSendedSMSID = lastSendedSMSID;
 }
 
 SerikBLDCore::SMSAbstractManager::SMSAbstractManager(DB *_db) : DB(_db)
 {
+    if( _db == nullptr )
+    {
+        mManagerValid = false;
+    }else{
+        mManagerValid = true;
+    }
+}
 
+SerikBLDCore::SMSAbstractManager::SMSAbstractManager(const SerikBLDCore::DB *_db) : DB(_db)
+{
+    if( _db == nullptr )
+    {
+        mManagerValid = false;
+    }else{
+        mManagerValid = true;
+    }
+}
+
+
+
+
+
+bool SerikBLDCore::SMSAbstractManager::isManagerValid() const
+{
+    return mManagerValid;
 }
 
 bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara)
 {
+    if( !mManagerValid ){
+        std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
+        return false;
+    }
+
     SMS::SMSItem filter;
 
     filter.setJulianDay (QDate::currentDate ().toJulianDay ());
@@ -41,10 +78,16 @@ bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara)
 
 QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(const QString &numara)
 {
+    QVector<SMS::SMSItem> list;
+
+    if( !mManagerValid ){
+        std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
+        return list;
+    }
+
     SMS::SMSItem filter;
     filter.setNumara (numara);
 
-    QVector<SMS::SMSItem> list;
 
     auto cursor = this->find (filter);
 
@@ -62,6 +105,10 @@ QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(co
 
 bool SerikBLDCore::SMSAbstractManager::updateSMS(const SerikBLDCore::SMS::SMSItem &item)
 {
+    if( !mManagerValid ){
+        std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
+        return false;
+    }
     auto ins = this->updateItem (item);
     if( ins )
     {

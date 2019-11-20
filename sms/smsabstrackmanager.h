@@ -11,12 +11,21 @@ namespace SerikBLDCore {
 ///
 /// \brief The SMSAbstractManager class
 /// SMS Gönderimi , SMS item Güncelleme ve Gönderilen SMSleri Listeleme Yönetimi Sınıfı
-class SERIKBLDCORE_EXPORT SMSAbstractManager : private DB
+class SERIKBLDCORE_EXPORT SMSAbstractManager : public DB
 {
     QString mLastSendedSMSID;
+    bool mManagerValid;
 public:
     SMSAbstractManager( DB* _db );
+    SMSAbstractManager( const DB* _db );
 
+
+
+    ///
+    /// \brief isManagerValid: Eğer SMSManager Veritabanı Bağlantısı Yok ise Geçersiz Olur ve İşlem Yapmaz.
+    /// \return
+    ///
+    bool isManagerValid() const;
 
     ///
     /// \brief canSend: Verilen Numaraya SMS en az 5 Dakika Ara ile Gönderilmesi Gerekir.
