@@ -256,6 +256,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="TalepManager"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae78c9d92fdfa0eb2be53039340564c88"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="TalepManager"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aaafbec939c79a0ffc910a56b788d87b1"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="durumPipeLine"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="durumPipeLine"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae69d69864db2c87770adeed6d6644f0c"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="findOneTalep"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a4116a4b5c48c2f93c2de4f7cef0997ce"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="findTalep"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a1c6b436f11832d084bff19331c7b13d5"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="findTalepSubItem"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aeb417937996d9188c1a55d401c692235"><param name="ImageNumber" value="11"></OBJECT>
@@ -263,6 +264,7 @@
         <LI><OBJECT type="text/sitemap"><param name="Name" value="insertTalep"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a93bd0432898fcd8d04aef85322c50634"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="insertTalepSubItem"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af72b8114499c91d7991cc6c877099588"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="kaynakPipeLine"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af29cd006c6b26ce14f9ae16ed924276d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="kaynakPipeLine"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ab77511dc9eefcd6dc42f86204a9794bc"><param name="ImageNumber" value="11"></OBJECT>
         <LI><OBJECT type="text/sitemap"><param name="Name" value="updateTalep"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a35b3ed91be8a40c47f9fbc2bf513748d"><param name="ImageNumber" value="11"></OBJECT>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="TalepSubItem"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="ImageNumber" value="1"></OBJECT>

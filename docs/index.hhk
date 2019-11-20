@@ -86,11 +86,11 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a3489f707684789201025182854a197df"><param name="Name" value="SerikBLDCore::DB"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a31a38dc0afa6bbed146b5679a566dcb0"><param name="Name" value="DB"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a31a38dc0afa6bbed146b5679a566dcb0"><param name="Name" value="SerikBLDCore::DB"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a3e7d666e611006fb71c18761d3064db6"><param name="Name" value="DB"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a3e7d666e611006fb71c18761d3064db6"><param name="Name" value="SerikBLDCore::DB"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a31a38dc0afa6bbed146b5679a566dcb0"><param name="Name" value="DB"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#af30c89769a768a3e1673509179320bbe"><param name="Name" value="db"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dd/daa/class_serik_b_l_d_core_1_1_dilekce_manager.html#a4e183e2186f50d6a240f6aa7bb478fd1"><param name="Name" value="deleteAciklama"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="df/d90/class_serik_b_l_d_core_1_1_dilekce.html#aeecad055dc76fa47ea2a656ac7920044"><param name="Name" value="DeleteGorevliPersonel"></OBJECT>
@@ -138,6 +138,10 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d9/d00/class_serik_b_l_d_core_1_1_talep_key.html#a28cbaa8470c4a3a5005e14e255d5f44a"><param name="Name" value="Durum"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a755b0a2f6624e83b28c34554cd0f2e4d"><param name="Name" value="durumColor"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b"><param name="Name" value="durumPipeLine"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a859dcb854d6330c75ee6086db5f8853b"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae69d69864db2c87770adeed6d6644f0c"><param name="Name" value="durumPipeLine"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a3f9a468b231413e4923d091d1ee62d00"><param name="Name" value="ekList"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="df/d90/class_serik_b_l_d_core_1_1_dilekce.html#afb8dfc74daf6323a9cb907baf643c21a"><param name="Name" value="EkOidList"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#aaf767f712b9c8ade2a6a8da0aeee28f0"><param name="Name" value="find"></OBJECT>
@@ -198,6 +202,10 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d9/d00/class_serik_b_l_d_core_1_1_talep_key.html#ac8ad08d44eeafc0d1e65491eac80bbaf"><param name="Name" value="Kaynak"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a3bb07a1f2361eb5b86a7b1a30d199e45"><param name="Name" value="kaynakColor"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af29cd006c6b26ce14f9ae16ed924276d"><param name="Name" value="kaynakPipeLine"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#af29cd006c6b26ce14f9ae16ed924276d"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ab77511dc9eefcd6dc42f86204a9794bc"><param name="Name" value="kaynakPipeLine"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a33327d3914dfcbb1fa132c5b08c00055"><param name="Name" value="KeyAdres"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a7a9aa6e450f50ec04b3e3c066b58a08c"><param name="Name" value="KeyAdSoyad"></OBJECT>
   <UL>
@@ -318,13 +326,13 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html#aaeb439f34a0ffb446fbb579070f322bc"><param name="Name" value="SerikBLDCore::Item"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a6455f96fa1bf8a5cb2b6b4a75e459b57"><param name="Name" value="operator="></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a6455f96fa1bf8a5cb2b6b4a75e459b57"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a8a934153b7c63f646e57d7cd6f6c82d7"><param name="Name" value="operator="></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a8a934153b7c63f646e57d7cd6f6c82d7"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a6455f96fa1bf8a5cb2b6b4a75e459b57"><param name="Name" value="operator="></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a6455f96fa1bf8a5cb2b6b4a75e459b57"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#aeba7ade1e3d7c7193b195f86ca4eb174"><param name="Name" value="operator="></OBJECT>
   <UL>
@@ -362,13 +370,13 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a9f6aec9ff1142691e35ef3792c5ea230"><param name="Name" value="Password"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a0f442533c6eba3a0ca299d13bd029977"><param name="Name" value="Pdf"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a7dcfdafbfc22b8040429b0ac3aca4bc7"><param name="Name" value="pdfOid"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#af701c6542fe1f3e954920a57cc344512"><param name="Name" value="Personel"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#af701c6542fe1f3e954920a57cc344512"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a88ba7c506fbddad013a405dee64c03d2"><param name="Name" value="Personel"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#a88ba7c506fbddad013a405dee64c03d2"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#af701c6542fe1f3e954920a57cc344512"><param name="Name" value="Personel"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/de1/class_serik_b_l_d_core_1_1_personel.html#af701c6542fe1f3e954920a57cc344512"><param name="Name" value="SerikBLDCore::Personel"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a5a35951c0066d17adbe3fe4ee217d585"><param name="Name" value="Personel"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d5/da5/class_serik_b_l_d_core_1_1_personel_manager.html#af7ddf305bacc7546d328cf74f03fd7ef"><param name="Name" value="PersonelList"></OBJECT>
@@ -961,11 +969,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html"><param name="Name" value="SerikBLDCore::Item"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html#aaeb439f34a0ffb446fbb579070f322bc"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html#ad2d1a8ae9168daf7d713f266f333aecb"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html"><param name="Name" value="SerikBLDCore::Item"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html#ad2d1a8ae9168daf7d713f266f333aecb"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html#aaeb439f34a0ffb446fbb579070f322bc"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d8/dc7/class_serik_b_l_d_core_1_1_item.html"><param name="Name" value="SerikBLDCore::Item"></OBJECT>
   <UL>
@@ -1319,6 +1327,10 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae69d69864db2c87770adeed6d6644f0c"><param name="Name" value="durumPipeLine"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
+  <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a4116a4b5c48c2f93c2de4f7cef0997ce"><param name="Name" value="findOneTalep"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
@@ -1331,11 +1343,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a2b49ca97c57fe10470c6196b9541e1af"><param name="Name" value="insertTalep"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a93bd0432898fcd8d04aef85322c50634"><param name="Name" value="insertTalep"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a93bd0432898fcd8d04aef85322c50634"><param name="Name" value="insertTalep"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a2b49ca97c57fe10470c6196b9541e1af"><param name="Name" value="insertTalep"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
@@ -1347,21 +1359,25 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aaafbec939c79a0ffc910a56b788d87b1"><param name="Name" value="TalepManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ab77511dc9eefcd6dc42f86204a9794bc"><param name="Name" value="kaynakPipeLine"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae78c9d92fdfa0eb2be53039340564c88"><param name="Name" value="TalepManager"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aaafbec939c79a0ffc910a56b788d87b1"><param name="Name" value="TalepManager"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a35b3ed91be8a40c47f9fbc2bf513748d"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a7a2fde6b908445d790e3d78d4a41a04f"><param name="Name" value="Aciklama"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a78a6346d70200d539b88fc64a2aa808c"><param name="Name" value="aciklama"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a78a6346d70200d539b88fc64a2aa808c"><param name="Name" value="aciklama"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a7a2fde6b908445d790e3d78d4a41a04f"><param name="Name" value="Aciklama"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
@@ -1393,11 +1409,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a9d1efb08aa2ab1ccbf15b38841aa4277"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#af919f43a71e2d920bf1861c47193c2f4"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#af919f43a71e2d920bf1861c47193c2f4"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a9d1efb08aa2ab1ccbf15b38841aa4277"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
@@ -1409,11 +1425,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#abb6d565b55d1acb44020c2ecfa76e53f"><param name="Name" value="personelName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#acc77b55c5b7385ec31dac47ae230fefa"><param name="Name" value="PersonelName"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#acc77b55c5b7385ec31dac47ae230fefa"><param name="Name" value="PersonelName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#abb6d565b55d1acb44020c2ecfa76e53f"><param name="Name" value="personelName"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
@@ -1501,11 +1517,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a94501970a560ef263fd44c03ea41ce31"><param name="Name" value="TalepSubItem"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ab0de8f74f1ac5505a38a357d4db1ffea"><param name="Name" value="TalepSubItem"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ab0de8f74f1ac5505a38a357d4db1ffea"><param name="Name" value="TalepSubItem"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a94501970a560ef263fd44c03ea41ce31"><param name="Name" value="TalepSubItem"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
@@ -1513,11 +1529,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a7b0960367eddb0ffdea62900bfbbf2f6"><param name="Name" value="TCName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ab34f45ac4eaebfdd2bfc585458864e77"><param name="Name" value="tcName"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ab34f45ac4eaebfdd2bfc585458864e77"><param name="Name" value="tcName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a7b0960367eddb0ffdea62900bfbbf2f6"><param name="Name" value="TCName"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
   <UL>
@@ -1631,7 +1647,7 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#af1b539cb867db42fa07afa92c3d840ee"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#acfb2ad04e7b37a5ea63773fc666e0ec9"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   <UL>
@@ -1639,11 +1655,11 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a039fcc51b5aceb22176cd7dfdb765e23"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#af1b539cb867db42fa07afa92c3d840ee"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#acfb2ad04e7b37a5ea63773fc666e0ec9"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a039fcc51b5aceb22176cd7dfdb765e23"><param name="Name" value="operator="></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   <UL>
@@ -1733,9 +1749,9 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html"><param name="Name" value="SerikBLDCore::TCManager"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#af5a2b31107a62388a30c77901561bd58"><param name="Name" value="TCManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#a9630a9237dfc541508bf7f8ca1c81e0e"><param name="Name" value="TCManager"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#a9630a9237dfc541508bf7f8ca1c81e0e"><param name="Name" value="SerikBLDCore::TCManager"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#af5a2b31107a62388a30c77901561bd58"><param name="Name" value="SerikBLDCore::TCManager"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   <UL>
@@ -1807,15 +1823,15 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#ad5352c3c523333fb4b757b543c2dcdd4"><param name="Name" value="User"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
-  <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a25eea1e086830e0c5b923b75f1b8d326"><param name="Name" value="User"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a26432619f75aee9a0d4e219fb91fc1d6"><param name="Name" value="User"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#ad5352c3c523333fb4b757b543c2dcdd4"><param name="Name" value="User"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   <UL>
@@ -1936,33 +1952,30 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d0/d71/class_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_key.html#a9caec7dae7962f335156390ebfcfa026"><param name="Name" value="SerikBLDCore::TalepKey::KaynakKey"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html#a481747d18b7427e8c967d34093d2f844"><param name="Name" value="Sms"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html#a481747d18b7427e8c967d34093d2f844"><param name="Name" value="SerikBLDCore::TalepKey::KaynakPipelineResult"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#affe3cf92f2247c675527dbf3621d977d"><param name="Name" value="Sms"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a1441a90bfdca87d6117961c409587712"><param name="Name" value="sms"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#affe3cf92f2247c675527dbf3621d977d"><param name="Name" value="Sms"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d0/d71/class_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_key.html#ae4f9d9961859b755584c257986ece76b"><param name="Name" value="SosyalMedya"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d0/d71/class_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_key.html#ae4f9d9961859b755584c257986ece76b"><param name="Name" value="SerikBLDCore::TalepKey::KaynakKey"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/da8/struct_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_pipeline_result.html#a50bebe9b30fd10ee6d624a57574220fa"><param name="Name" value="SosyalMedya"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#af3c6dc5ca242fe56030eda19edf933eb"><param name="Name" value="Statu"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a9b166ec72571f1820d99701a90aaacbb"><param name="Name" value="Talep"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a9b166ec72571f1820d99701a90aaacbb"><param name="Name" value="SerikBLDCore::Talep"></OBJECT>
+  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a057658730182eea3fdcdc190c3ba67fd"><param name="Name" value="Talep"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a057658730182eea3fdcdc190c3ba67fd"><param name="Name" value="SerikBLDCore::Talep"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a5645e12d80a03f4f58c559fdbc27c774"><param name="Name" value="Talep"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a5645e12d80a03f4f58c559fdbc27c774"><param name="Name" value="SerikBLDCore::Talep"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#a9b166ec72571f1820d99701a90aaacbb"><param name="Name" value="Talep"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aaafbec939c79a0ffc910a56b788d87b1"><param name="Name" value="TalepManager"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#aaafbec939c79a0ffc910a56b788d87b1"><param name="Name" value="SerikBLDCore::TalepManager"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#ae78c9d92fdfa0eb2be53039340564c88"><param name="Name" value="TalepManager"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a005157de484ff2d93c2567658f26c276"><param name="Name" value="talepOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a59de54b3b709c96956edccfe52ddb218"><param name="Name" value="TalepOid"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a005157de484ff2d93c2567658f26c276"><param name="Name" value="talepOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a94501970a560ef263fd44c03ea41ce31"><param name="Name" value="TalepSubItem"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a94501970a560ef263fd44c03ea41ce31"><param name="Name" value="SerikBLDCore::TalepSubItem"></OBJECT>
@@ -1987,9 +2000,9 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ab7045b1b083e9f94b2b3d4fd022d029f"><param name="Name" value="tarih"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="df/d90/class_serik_b_l_d_core_1_1_dilekce.html#a0b8d8d813262d3763e00a4b6399a2232"><param name="Name" value="tarihJulian"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="df/d90/class_serik_b_l_d_core_1_1_dilekce.html#a794373003ea63d87e1869ec7e4a7648b"><param name="Name" value="tarihText"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a4c9c9454310fd4a9bda4f1ad923d69ec"><param name="Name" value="TC"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a712af3c6e31db82b37b0f92dff07d206"><param name="Name" value="TC"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a4c9c9454310fd4a9bda4f1ad923d69ec"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a712af3c6e31db82b37b0f92dff07d206"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a580da4dfa0e7238bd27a1890d1ffe136"><param name="Name" value="TC"></OBJECT>
   <UL>
@@ -1999,7 +2012,7 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a16d92c9b517827070e5e99821ab75299"><param name="Name" value="SerikBLDCore::TC"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a712af3c6e31db82b37b0f92dff07d206"><param name="Name" value="TC"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d65/class_serik_b_l_d_core_1_1_t_c.html#a4c9c9454310fd4a9bda4f1ad923d69ec"><param name="Name" value="TC"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#af5a2b31107a62388a30c77901561bd58"><param name="Name" value="TCManager"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d6/db0/class_serik_b_l_d_core_1_1_t_c_manager.html#af5a2b31107a62388a30c77901561bd58"><param name="Name" value="SerikBLDCore::TCManager"></OBJECT>
@@ -2011,8 +2024,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="df/d90/class_serik_b_l_d_core_1_1_dilekce.html#a75a7cfe185b771671c195e261d2587d4"><param name="Name" value="tcoid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/d8b/class_serik_b_l_d_core_1_1_talep.html#ab72f892484f23f8ed17b5e2d4218b232"><param name="Name" value="tcOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d9/d00/class_serik_b_l_d_core_1_1_talep_key.html#aab7df997a0acba60f93e8f33d351c2e1"><param name="Name" value="TCOID"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a38358762ea131b6ec60a2a382c3bb346"><param name="Name" value="tcOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a785810eb24ddcd885d52b137e26735dd"><param name="Name" value="TCOid"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#a38358762ea131b6ec60a2a382c3bb346"><param name="Name" value="tcOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d0/d71/class_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_key.html#ae5f142b33a2eae6ed44cf692e15adc56"><param name="Name" value="Telefon"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d0/d71/class_serik_b_l_d_core_1_1_talep_key_1_1_kaynak_key.html#ae5f142b33a2eae6ed44cf692e15adc56"><param name="Name" value="SerikBLDCore::TalepKey::KaynakKey"></OBJECT>
@@ -2032,20 +2045,20 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dd/daa/class_serik_b_l_d_core_1_1_dilekce_manager.html#a838c04d55866a18a81f79b4daeb33d3b"><param name="Name" value="updateDilekce"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#a0124ef7f7aa8f7dccff4342af0523d24"><param name="Name" value="updateItem"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="da/dc5/class_serik_b_l_d_core_1_1_talep_manager.html#a35b3ed91be8a40c47f9fbc2bf513748d"><param name="Name" value="updateTalep"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#aa77422ee0b31caba9236e54539dc7165"><param name="Name" value="uploadfile"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#aa77422ee0b31caba9236e54539dc7165"><param name="Name" value="SerikBLDCore::DB"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#adda4b069c69f6fb52658616880d2fa8d"><param name="Name" value="uploadfile"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#adda4b069c69f6fb52658616880d2fa8d"><param name="Name" value="SerikBLDCore::DB"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d4/df7/class_serik_b_l_d_core_1_1_d_b.html#aa77422ee0b31caba9236e54539dc7165"><param name="Name" value="uploadfile"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a26432619f75aee9a0d4e219fb91fc1d6"><param name="Name" value="User"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a26432619f75aee9a0d4e219fb91fc1d6"><param name="Name" value="SerikBLDCore::User"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a25eea1e086830e0c5b923b75f1b8d326"><param name="Name" value="User"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a25eea1e086830e0c5b923b75f1b8d326"><param name="Name" value="SerikBLDCore::User"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#ad5352c3c523333fb4b757b543c2dcdd4"><param name="Name" value="User"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#ad5352c3c523333fb4b757b543c2dcdd4"><param name="Name" value="SerikBLDCore::User"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#a25eea1e086830e0c5b923b75f1b8d326"><param name="Name" value="User"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="d1/dff/class_serik_b_l_d_core_1_1_user.html#af3499f7e0514666653141ba976f827ae"><param name="Name" value="UserOid"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#af8f2e6f19ba10e1053e58f6e0dc7752c"><param name="Name" value="userType"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="dc/d82/class_serik_b_l_d_core_1_1_talep_sub_item.html#ac537d83f6cce78b3acc5ff76df2c2ca9"><param name="Name" value="UType"></OBJECT>
