@@ -34,6 +34,7 @@ SOURCES += \
     qbson/qelement.cpp \
     qbson/qoid.cpp \
     serikbldcore.cpp \
+    sms/smsitem.cpp \
     tc.cpp \
     tcmanager.cpp \
     user.cpp
@@ -58,6 +59,7 @@ HEADERS += \
     qbson/qelement.h \
     qbson/qoid.h \
     serikbldcore.h \
+    sms/smsitem.h \
     tc.h \
     tcmanager.h \
     user.h
