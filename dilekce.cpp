@@ -273,14 +273,15 @@ QString SerikBLDCore::Dilekce::dilekceOid()
 QStringList SerikBLDCore::Dilekce::EkOidList()
 {
     QStringList list;
-
-    auto _list = this->element (KeyEkler).value ().get_array ().value;
-
-    for( auto item : _list )
+    auto _list_ = this->element (KeyEkler);
+    if( _list_ )
     {
-        list.push_back (item.get_oid ().value.to_string ().c_str ());
+        auto _list = _list_.value ().get_array ().value;
+        for( auto item : _list )
+        {
+            list.push_back (item.get_oid ().value.to_string ().c_str ());
+        }
     }
-
     return list;
 }
 
@@ -298,6 +299,23 @@ QVector<SerikBLDCore::Personel> SerikBLDCore::Dilekce::GorevliList() const
             Personel personelItem;
             personelItem.setDocumentView (item.get_document ().view ());
             list.push_back (std::move(personelItem));
+        }
+    }
+    return list;
+}
+
+QVector<QString> SerikBLDCore::Dilekce::BilgiBirimList() const
+{
+    QVector<QString> list;
+
+    auto _list = this->element (KeyBilgiBirimler);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            list.push_back (std::move(item.get_utf8 ().value.to_string().c_str ()));
         }
     }
     return list;
