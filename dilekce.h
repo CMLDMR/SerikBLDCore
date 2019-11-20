@@ -75,6 +75,7 @@ public:
     QString dilekceOid();
     QStringList EkOidList();
     QVector<Personel> GorevliList() const;
+    QVector<QString> BilgiBirimList() const;
     QString Durum() const;
     QString cevapOid() const;
 };
