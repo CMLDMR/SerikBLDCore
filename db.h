@@ -41,6 +41,7 @@ public:
     }
 
 
+
     QVector<QString> getMahalleler() ;
 
 
