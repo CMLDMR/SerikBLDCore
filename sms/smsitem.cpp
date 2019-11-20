@@ -109,3 +109,5 @@ int SerikBLDCore::SMS::SMSItem::julianDay() const
     }
     return -1;
 }
+
+
