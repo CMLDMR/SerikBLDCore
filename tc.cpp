@@ -14,7 +14,6 @@ const std::string SerikBLDCore::TC::KeyOid{"_id"};
 
 SerikBLDCore::TC::TC(TC *other) : Item(TC::Collection)
 {
-
     if( other != nullptr )
     {
         this->setDocumentView (other->view ());
