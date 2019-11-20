@@ -53,6 +53,8 @@ public:
 
     QString TaranmisDilekcePath( const QString &taranmisdilekceOid );
 
+
+
 };
 
 
