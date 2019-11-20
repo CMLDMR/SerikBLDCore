@@ -91,6 +91,13 @@ public:
     TalepKey::DurumPipelineResult durumPipeLine(const QString &birim );
 
 
+    ///
+    /// \brief Birime Ait Talep/Şikayetle İlgili İstatistik Bilgileri
+    /// \param filter
+    /// \return
+    ///
+    TalepKey::DurumPipelineResult durumPipeLine( const Talep &filter );
+
 
 
     ///
@@ -99,6 +106,17 @@ public:
     /// \return KaynakPipelineResult
     ///
     TalepKey::KaynakPipelineResult kaynakPipeLine( const QString &birim );
+
+
+
+
+
+    ///
+    /// \brief Taleplerin Nerden Geldiğinin İstatistik Bilgilerini Verir.
+    /// \param filter
+    /// \return
+    ///
+    TalepKey::KaynakPipelineResult kaynakPipeLine( const Talep &filter );
 
 };
 
