@@ -28,7 +28,7 @@ public:
     DB( mongocxx::database* _db );
     DB( DB* _db );
     DB( const DB* _db );
-    ~DB();
+    virtual ~DB();
 
     DB& operator=(const DB& otherDB);
     DB& operator=( DB&& otherDB );
