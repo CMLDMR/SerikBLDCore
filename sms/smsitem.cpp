@@ -1,4 +1,4 @@
-#include "smsitem.h"
+﻿#include "smsitem.h"
 
 SerikBLDCore::SMS::SMSItem::SMSItem(SMSItem *other) : Item(Collection)
 {
@@ -76,4 +76,36 @@ QString SerikBLDCore::SMS::SMSItem::idText() const
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
     }
     return "";
+}
+
+SerikBLDCore::SMS::SMSItem &SerikBLDCore::SMS::SMSItem::setmSecStartOfDay(const int &mSecStartOfDay)
+{
+    this->append(mSecStartDay,mSecStartOfDay);
+    return *this;
+}
+
+int SerikBLDCore::SMS::SMSItem::secStartOfDay() const
+{
+    auto val = this->element (mSecStartDay);
+    if( val )
+    {
+        return val.value ().get_int32 ().value;
+    }
+    return -1;
+}
+
+SerikBLDCore::SMS::SMSItem &SerikBLDCore::SMS::SMSItem::setJulianDay(const int &julianDay)
+{
+    this->append(julianday,julianDay);
+    return *this;
+}
+
+int SerikBLDCore::SMS::SMSItem::julianDay() const
+{
+    auto val = this->element (julianday);
+    if( val )
+    {
+        return val.value ().get_int32 ().value;
+    }
+    return -1;
 }
