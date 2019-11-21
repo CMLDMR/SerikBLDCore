@@ -1,5 +1,5 @@
 #CONFIG -= qt
-QT += core
+QT += core xml network
 
 TEMPLATE = lib
 DEFINES += SERIKBLDCORE_LIBRARY
