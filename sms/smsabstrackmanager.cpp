@@ -29,6 +29,7 @@ SerikBLDCore::SMSAbstractManager::SMSAbstractManager(DB *_db) : DB(_db)
     }else{
         mManagerValid = true;
     }
+
 }
 
 SerikBLDCore::SMSAbstractManager::SMSAbstractManager(const SerikBLDCore::DB *_db) : DB(_db)
@@ -50,7 +51,7 @@ bool SerikBLDCore::SMSAbstractManager::isManagerValid() const
     return mManagerValid;
 }
 
-bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara)
+bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara, int &kalanSure)
 {
     if( !mManagerValid ){
         std::cout << __LINE__ << " " << __FUNCTION__ << " SMS Manager Veritabanı Yok" << std::endl;
@@ -61,13 +62,18 @@ bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara)
 
     filter.setJulianDay (QDate::currentDate ().toJulianDay ());
 
-    auto val = this->findOneItem (filter);
+    SMS::SMSItem findOptions;
+    findOptions.append("_id",-1);
 
+    auto val = this->findOneItem (filter,findOptions);
+    kalanSure = -1;
     if( val )
     {
         filter.setDocumentView (val.value ().view ());
 
-        if( filter.secStartOfDay () + 300 * 1000 > QTime::currentTime ().msecsSinceStartOfDay ()  )
+        kalanSure = QTime::currentTime ().msecsSinceStartOfDay () - filter.secStartOfDay ();
+
+        if( kalanSure > 60000  )
         {
             return true;
         }

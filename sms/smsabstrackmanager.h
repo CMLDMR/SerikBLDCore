@@ -4,6 +4,9 @@
 #include "SerikBLDCore_global.h"
 #include "db.h"
 #include "smsitem.h"
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 
 namespace SerikBLDCore {
@@ -15,6 +18,7 @@ class SERIKBLDCORE_EXPORT SMSAbstractManager : public DB
 {
     QString mLastSendedSMSID;
     bool mManagerValid;
+
 public:
     SMSAbstractManager( DB* _db );
     SMSAbstractManager( const DB* _db );
@@ -33,7 +37,7 @@ public:
     /// \param numara
     /// \return bool
     ///
-    bool canSend( const QString& numara );
+    bool canSend( const QString& numara , int &kalanSure );
 
     ///
     /// \brief listSMS : Verilen Numaraya Gönderilen SMSleri listeler
@@ -47,7 +51,7 @@ public:
     /// \param item
     /// \return ID
     ///
-    virtual SMS::SMSItem& insertAndSendSMS( const SMS::SMSItem& item ) = 0;
+    virtual bool insertAndSendSMS( const SMS::SMSItem& item ) = 0;
 
     ///
     /// \brief updateSMS Mevcut SMS Günceller.
