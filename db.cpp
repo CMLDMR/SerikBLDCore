@@ -396,10 +396,26 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
 
 }
 
-mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem(const Item &item)
+mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem(const Item &item )
 {
     try {
         auto value = this->db ()->collection (item.getCollection ()).find_one (item.view ());
+        return value;
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Collection: " + item.getCollection ();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
+mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem(const SerikBLDCore::Item &item, const SerikBLDCore::Item &findOptions)
+{
+    mongocxx::options::find findOptions_;
+
+    findOptions_.sort (findOptions.view ());
+
+    try {
+        auto value = this->db ()->collection (item.getCollection ()).find_one (item.view (),findOptions_);
         return value;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Collection: " + item.getCollection ();

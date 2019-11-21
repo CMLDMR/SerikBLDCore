@@ -54,7 +54,8 @@ public:
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
     mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);
-    mongocxx::stdx::optional<bsoncxx::document::value> findOneItem( const Item &item );
+    mongocxx::stdx::optional<bsoncxx::document::value> findOneItem(const Item &item );
+    mongocxx::stdx::optional<bsoncxx::document::value> findOneItem(const Item &item , const Item &findOptions );
     mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const mongocxx::options::find findOptions = mongocxx::options::find() );
     mongocxx::stdx::optional<mongocxx::result::delete_result> deleteItem( const Item &item );
     ///
