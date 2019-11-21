@@ -122,32 +122,11 @@ public:
 
 
 
-    friend std::ostream& operator << (std::ostream& streamer, SMSItem& item){
-        streamer << "SMS: "<<item.smsText ().toStdString () << " NUMARA: " << item.numaraText ().toStdString () << " ID: " << item.idText ().toStdString () << " JulianDay: " << item.julianDay () << std::endl;
-        return streamer;
-    }
-    friend std::ostream& operator << (std::ostream& streamer, const SMSItem& item){
-        streamer << "SMS: "<<item.smsText ().toStdString () << " NUMARA: " << item.numaraText ().toStdString () << " ID: " << item.idText ().toStdString () << " JulianDay: " << item.julianDay () << std::endl;
-        return streamer;
-    }
+    friend std::ostream& operator << (std::ostream& streamer, SMSItem& item);
+    friend std::ostream& operator << (std::ostream& streamer, const SMSItem& item);
 };
 
-
-//std::ostream &SerikBLDCore::SMS::operator <<(std::ostream &streamer, const SerikBLDCore::SMS::SMSItem &item)
-//{
-
-//}
-
-//std::ostream &SerikBLDCore::SMS::operator <<(std::ostream &streamer, SerikBLDCore::SMS::SMSItem &item)
-//{
-
-//}
-
-
-
-
 }
-
 
 }
 
