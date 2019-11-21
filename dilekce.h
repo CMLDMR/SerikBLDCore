@@ -11,9 +11,9 @@
 
 namespace SerikBLDCore {
 namespace DilekceDurum {
-static const QString Acik{"Açik"};
-static const QString Cevaplandi{"Cevaplandı"};
-static const QString RedEdildi{"RedEdildi"};
+static const std::string Acik{"Acik"};
+static const std::string Cevaplandi{"Cevaplandi"};
+static const std::string RedEdildi{"RedEdildi"};
 } // namespace DilekceDurum
 
 
@@ -62,18 +62,18 @@ public:
     Dilekce& setYil( const int& yil );
     Dilekce& setAy( const QString& ay);
 
-    int sayi();
-    QString konu();
-    QString tcoid();
-    QString birim();
-    QString icerikTipi();
-    QString icerik();
-    int tarihJulian();
-    QString tarihText();
-    int saatMSecStartofDay();
-    QString saatText();
-    QString dilekceOid();
-    QStringList EkOidList();
+    int sayi() const;
+    QString konu() const;
+    QString tcoid() const;
+    QString birim() const;
+    QString icerikTipi() const;
+    QString icerik() const;
+    int tarihJulian() const;
+    QString tarihText() const;
+    int saatMSecStartofDay() const;
+    QString saatText() const;
+    QString dilekceOid() const;
+    QStringList EkOidList() const;
     QVector<Personel> GorevliList() const;
     QVector<QString> BilgiBirimList() const;
     QString Durum() const;

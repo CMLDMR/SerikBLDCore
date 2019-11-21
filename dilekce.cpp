@@ -148,8 +148,7 @@ SerikBLDCore::Dilekce &SerikBLDCore::Dilekce::setAy(const QString &ay)
     return *this;
 }
 
-
-int SerikBLDCore::Dilekce::sayi()
+int SerikBLDCore::Dilekce::sayi() const
 {
     auto sayi = this->element (KeySayi);
     if( sayi )
@@ -160,7 +159,7 @@ int SerikBLDCore::Dilekce::sayi()
     }
 }
 
-QString SerikBLDCore::Dilekce::konu()
+QString SerikBLDCore::Dilekce::konu() const
 {
     auto value = this->element (KeyKonu);
     if( value )
@@ -171,7 +170,7 @@ QString SerikBLDCore::Dilekce::konu()
     }
 }
 
-QString SerikBLDCore::Dilekce::tcoid()
+QString SerikBLDCore::Dilekce::tcoid() const
 {
     auto value = this->element (KeyTCOid);
     if( value )
@@ -182,7 +181,7 @@ QString SerikBLDCore::Dilekce::tcoid()
     }
 }
 
-QString SerikBLDCore::Dilekce::birim()
+QString SerikBLDCore::Dilekce::birim() const
 {
     auto value = this->element (KeyBirim);
     if( value )
@@ -193,7 +192,7 @@ QString SerikBLDCore::Dilekce::birim()
     }
 }
 
-QString SerikBLDCore::Dilekce::icerikTipi()
+QString SerikBLDCore::Dilekce::icerikTipi() const
 {
     auto value = this->element (KeyIcerikTipi);
     if( value )
@@ -204,7 +203,7 @@ QString SerikBLDCore::Dilekce::icerikTipi()
     }
 }
 
-QString SerikBLDCore::Dilekce::icerik()
+QString SerikBLDCore::Dilekce::icerik() const
 {
     auto value = this->element (KeyIcerik);
     if( value )
@@ -215,7 +214,7 @@ QString SerikBLDCore::Dilekce::icerik()
     }
 }
 
-int SerikBLDCore::Dilekce::tarihJulian()
+int SerikBLDCore::Dilekce::tarihJulian() const
 {
     auto value = this->element (KeyTarihJulian);
     if( value )
@@ -226,7 +225,7 @@ int SerikBLDCore::Dilekce::tarihJulian()
     }
 }
 
-QString SerikBLDCore::Dilekce::tarihText()
+QString SerikBLDCore::Dilekce::tarihText() const
 {
     auto value = this->element (KeyTarihJulian);
     if( value )
@@ -237,7 +236,7 @@ QString SerikBLDCore::Dilekce::tarihText()
     }
 }
 
-int SerikBLDCore::Dilekce::saatMSecStartofDay()
+int SerikBLDCore::Dilekce::saatMSecStartofDay() const
 {
     auto value = this->element (KeySaat);
     if( value )
@@ -248,7 +247,7 @@ int SerikBLDCore::Dilekce::saatMSecStartofDay()
     }
 }
 
-QString SerikBLDCore::Dilekce::saatText()
+QString SerikBLDCore::Dilekce::saatText() const
 {
     auto value = this->element (KeySaat);
     if( value )
@@ -259,7 +258,7 @@ QString SerikBLDCore::Dilekce::saatText()
     }
 }
 
-QString SerikBLDCore::Dilekce::dilekceOid()
+QString SerikBLDCore::Dilekce::dilekceOid() const
 {
     auto value = this->element (KeyDilekceOid);
     if( value )
@@ -270,7 +269,7 @@ QString SerikBLDCore::Dilekce::dilekceOid()
     }
 }
 
-QStringList SerikBLDCore::Dilekce::EkOidList()
+QStringList SerikBLDCore::Dilekce::EkOidList() const
 {
     QStringList list;
     auto _list_ = this->element (KeyEkler);
