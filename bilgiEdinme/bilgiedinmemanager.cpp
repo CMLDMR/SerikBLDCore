@@ -1,6 +1,8 @@
 #include "bilgiedinmemanager.h"
 
-BilgiEdinmeManager::BilgiEdinmeManager()
+
+SerikBLDCore::BilgiEdinme::BilgiEdinmeManager::BilgiEdinmeManager(SerikBLDCore::DB *db)
+    : ListItem(db)
 {
 
 }
