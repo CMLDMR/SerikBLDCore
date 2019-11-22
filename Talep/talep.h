@@ -30,6 +30,7 @@ public:
     static const std::string Yil;
     static const std::string Ay;
     static const std::string FotoOid;
+    static const std::string KisiGizle;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
@@ -103,6 +104,7 @@ public:
     Talep& setYil( const int& yil );
     Talep& setAy( const QString& ay );
     Talep& setFoto( const QString& fotooid );
+    Talep& setKisiGizle( const bool& gizle );
 
     QString oid() const;
     QString tcOid() const;
@@ -120,6 +122,7 @@ public:
     QString birim() const;
     QVector<Personel> GorevliList() const;
     QString fotoOid() const;
+    bool kisiGizli() const;
 
 
 };

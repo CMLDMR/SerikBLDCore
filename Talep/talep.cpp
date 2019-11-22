@@ -17,6 +17,7 @@ const std::string SerikBLDCore::TalepKey::GorevliPersonel{"GorevliPersonel"};
 const std::string SerikBLDCore::TalepKey::Yil{"Yıl"};
 const std::string SerikBLDCore::TalepKey::Ay{"Ay"};
 const std::string SerikBLDCore::TalepKey::FotoOid{"FotoOid"};
+const std::string SerikBLDCore::TalepKey::KisiGizle{"KisiGizle"};
 
 
 
@@ -168,6 +169,12 @@ SerikBLDCore::Talep &SerikBLDCore::Talep::setFoto(const QString &fotooid)
     return *this;
 }
 
+SerikBLDCore::Talep &SerikBLDCore::Talep::setKisiGizle(const bool &gizle)
+{
+    this->append(TalepKey::KisiGizle,gizle);
+    return *this;
+}
+
 QString SerikBLDCore::Talep::oid() const
 {
     auto val = this->element ("_id");
@@ -300,8 +307,7 @@ QString SerikBLDCore::Talep::kaynakColor() const
 {
     auto kaynak_ = this->kaynak ();
 
-    if( kaynak_ == "SMS" )
-    {
+    if( kaynak_ == "SMS" ){
         return "MediumVioletRed";
     }else if (kaynak_ == "BEYAZMASA") {
         return "MintCream";
@@ -353,4 +359,14 @@ QString SerikBLDCore::Talep::fotoOid() const
         return QString::fromStdString (val.value ().get_oid ().value.to_string());
     }
     return "";
+}
+
+bool SerikBLDCore::Talep::kisiGizli() const
+{
+    auto val = this->element (TalepKey::KisiGizle);
+    if( val )
+    {
+        return val.value ().get_bool ().value;
+    }
+    return false;
 }
