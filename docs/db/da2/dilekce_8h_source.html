@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('db/da2/dilekce_8h_source.html','../../
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="../../d1/d36/class_serik_b_l_d_core.html">SerikBLDCore</a> {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>DilekceDurum {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> QString Acik{<span class="stringliteral">&quot;Açik&quot;</span>};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> QString Cevaplandi{<span class="stringliteral">&quot;Cevaplandı&quot;</span>};</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> QString RedEdildi{<span class="stringliteral">&quot;RedEdildi&quot;</span>};</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string Acik{<span class="stringliteral">&quot;Acik&quot;</span>};</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string Cevaplandi{<span class="stringliteral">&quot;Cevaplandi&quot;</span>};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string RedEdildi{<span class="stringliteral">&quot;RedEdildi&quot;</span>};</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace DilekceDurum</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
@@ -155,18 +155,18 @@ $(document).ready(function(){initNavTree('db/da2/dilekce_8h_source.html','../../
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="../../df/d90/class_serik_b_l_d_core_1_1_dilekce.html">Dilekce</a>&amp; setYil( <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; yil );</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="../../df/d90/class_serik_b_l_d_core_1_1_dilekce.html">Dilekce</a>&amp; setAy( <span class="keyword">const</span> QString&amp; ay);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> sayi();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    QString konu();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    QString tcoid();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    QString birim();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    QString icerikTipi();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    QString icerik();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> tarihJulian();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    QString tarihText();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">int</span> saatMSecStartofDay();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    QString saatText();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    QString dilekceOid();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    QStringList EkOidList();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> sayi() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    QString konu() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    QString tcoid() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    QString birim() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    QString icerikTipi() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    QString icerik() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> tarihJulian() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    QString tarihText() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">int</span> saatMSecStartofDay() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    QString saatText() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    QString dilekceOid() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    QStringList EkOidList() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    QVector&lt;Personel&gt; GorevliList() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    QVector&lt;QString&gt; BilgiBirimList() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    QString Durum() <span class="keyword">const</span>;</div>
