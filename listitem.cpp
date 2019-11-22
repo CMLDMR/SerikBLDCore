@@ -1,6 +1,2 @@
 #include "listitem.h"
-
-ListItem::ListItem()
-{
-
-}
+#include "bilgiEdinme/bilgiedinmeitem.h"

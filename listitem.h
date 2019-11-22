@@ -1,11 +1,118 @@
 #ifndef LISTITEM_H
 #define LISTITEM_H
 
+#include "Config.h"
+#include "SerikBLDCore_global.h"
+#include "db.h"
 
+
+namespace SerikBLDCore {
+
+
+
+template <typename T>
 class ListItem : public DB
 {
 public:
-    ListItem();
+    ListItem(DB* db) : DB(db){}
+
+
+    inline QVector<T> UpdateList(const T& filter){
+        list.clear ();
+        auto cursor = this->find (filter);
+        if( cursor )
+        {
+            for( auto item : cursor.value() )
+            {
+                T _item;
+                _item.setDocumentView(item);
+                list.append (_item);
+            }
+        }
+
+        return list;
+    }
+
+    inline bool UpdateItem( const T& item ){
+        auto result = DB::updateItem (item);
+        if( result )
+        {
+            if( result.value ().modified_count () )
+            {
+                replace (item);
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    inline std::string InsertItem( const T& item ){
+        auto result = DB::insertItem (item);
+        if( result )
+        {
+            if( result.value ().result ().inserted_count () )
+            {
+                T _item;
+                _item.setDocumentView(item.view());
+                _item.setOid( result.value ().inserted_id ().get_oid ().value.to_string () );
+                list.append (_item);
+                return result.value ().inserted_id ().get_oid ().value.to_string ();
+            }else{
+                return "";
+            }
+        }else{
+            return "";
+        }
+    }
+
+    inline bool DeleteItem( const T& item ){
+        auto result = DB::deleteItem (item);
+        if( result )
+        {
+            if( result.value ().deleted_count () )
+            {
+                remove (item);
+                return true;
+            }
+        }
+        return false;
+    }
+
+private:
+    QVector<T> list;
+
+    void replace( const T& item ){
+        int index = 0;
+        for( auto _item : list )
+        {
+            if( _item.oid().value().to_string() == item.oid().value().to_string() )
+            {
+                list.replace (index,item);
+                break;
+            }
+            index++;
+        }
+    }
+
+    void remove( const T& item ){
+        int index = 0;
+        for( auto _item : list )
+        {
+            if( _item.oid().value().to_string() == item.oid().value().to_string() )
+            {
+                list.remove (index);
+                break;
+            }
+            index++;
+        }
+    }
 };
+}
+
+
+
+
 
 #endif // LISTITEM_H
