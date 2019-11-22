@@ -124,7 +124,7 @@ SerikBLDCore::TC& SerikBLDCore::TC::setCalismaSMS(const bool &smsgitsin)
     return *this;
 }
 
-QString SerikBLDCore::TC::TCNO()
+QString SerikBLDCore::TC::TCNO()const
 {
     auto value = this->element (KeyTC);
     if( value )
@@ -135,7 +135,7 @@ QString SerikBLDCore::TC::TCNO()
     }
 }
 
-QString SerikBLDCore::TC::AdSoyad()
+QString SerikBLDCore::TC::AdSoyad()const
 {
     auto value = this->element (KeyAdSoyad);
     if( value )
@@ -146,7 +146,7 @@ QString SerikBLDCore::TC::AdSoyad()
     }
 }
 
-QString SerikBLDCore::TC::CepTelefonu()
+QString SerikBLDCore::TC::CepTelefonu()const
 {
     auto value = this->element (KeyCepTelefonu);
     if( value )
@@ -157,7 +157,7 @@ QString SerikBLDCore::TC::CepTelefonu()
     }
 }
 
-QString SerikBLDCore::TC::Mahalle()
+QString SerikBLDCore::TC::Mahalle()const
 {
     auto value = this->element (KeyMahalle);
     if( value )
@@ -168,7 +168,7 @@ QString SerikBLDCore::TC::Mahalle()
     }
 }
 
-QString SerikBLDCore::TC::TamAdres()
+QString SerikBLDCore::TC::TamAdres()const
 {
     auto value = this->element (KeyAdres);
     if( value )
@@ -179,7 +179,7 @@ QString SerikBLDCore::TC::TamAdres()
     }
 }
 
-QString SerikBLDCore::TC::Password()
+QString SerikBLDCore::TC::Password()const
 {
     auto value = this->element (KeyPassword);
     if( value )
@@ -190,7 +190,7 @@ QString SerikBLDCore::TC::Password()
     }
 }
 
-QString SerikBLDCore::TC::NormalTelefon()
+QString SerikBLDCore::TC::NormalTelefon()const
 {
     auto value = this->element (KeyNormalTelefon);
     if( value )
@@ -201,7 +201,7 @@ QString SerikBLDCore::TC::NormalTelefon()
     }
 }
 
-bool SerikBLDCore::TC::CalismaSMS()
+bool SerikBLDCore::TC::CalismaSMS()const
 {
     auto value = this->element (KeyCalismaSMS);
     if( value )

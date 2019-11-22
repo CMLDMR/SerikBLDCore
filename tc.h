@@ -50,19 +50,19 @@ public:
     TC& setNormalTelefon( const QString &normalTelefon );
     TC& setCalismaSMS( const bool &smsgitsin = false );
 
-    QString TCNO();
-    QString AdSoyad();
-    QString CepTelefonu();
-    QString Mahalle();
-    QString TamAdres();
-    QString Password();
-    QString NormalTelefon();
+    QString TCNO() const;
+    QString AdSoyad() const;
+    QString CepTelefonu() const;
+    QString Mahalle() const;
+    QString TamAdres() const;
+    QString Password() const;
+    QString NormalTelefon() const ;
 
     ///
     /// \brief Çalışmalarla ilgili Vatandaşa SMS Gidip Gitmeyeceğini Belirler
     /// \return Eğer Gönderilecekse <b>true</b> yoksa <b>false</b> Döndürür.
     ///
-    bool    CalismaSMS();
+    bool    CalismaSMS() const;
 
 };
 
