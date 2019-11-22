@@ -21,12 +21,15 @@ SOURCES += \
     Talep/talep.cpp \
     Talep/talepmanager.cpp \
     Talep/talepsubitem.cpp \
+    bilgiEdinme/bilgiedinmeitem.cpp \
+    bilgiEdinme/bilgiedinmemanager.cpp \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
     dilekcecevap.cpp \
     dilekcemanager.cpp \
     item.cpp \
+    listitem.cpp \
     personel.cpp \
     personelmanager.cpp \
     qbson/qarray.cpp \
@@ -46,12 +49,15 @@ HEADERS += \
     Talep/talep.h \
     Talep/talepmanager.h \
     Talep/talepsubitem.h \
+    bilgiEdinme/bilgiedinmeitem.h \
+    bilgiEdinme/bilgiedinmemanager.h \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
     dilekcecevap.h \
     dilekcemanager.h \
     item.h \
+    listitem.h \
     mongoheaders.h \
     personel.h \
     personelmanager.h \
