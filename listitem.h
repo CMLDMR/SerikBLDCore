@@ -18,7 +18,7 @@ public:
 
 
     inline QVector<T> UpdateList(const T& filter){
-        list.clear ();
+        __mlist.clear ();
         auto cursor = this->find (filter);
         if( cursor )
         {
@@ -26,11 +26,10 @@ public:
             {
                 T _item;
                 _item.setDocumentView(item);
-                list.append (_item);
+                __mlist.append (_item);
             }
         }
-
-        return list;
+        return __mlist;
     }
 
     inline bool UpdateItem( const T& item ){
@@ -57,7 +56,7 @@ public:
                 T _item;
                 _item.setDocumentView(item.view());
                 _item.setOid( result.value ().inserted_id ().get_oid ().value.to_string () );
-                list.append (_item);
+                __mlist.append (_item);
                 return result.value ().inserted_id ().get_oid ().value.to_string ();
             }else{
                 return "";
@@ -81,15 +80,15 @@ public:
     }
 
 private:
-    QVector<T> list;
+    QVector<T> __mlist;
 
     void replace( const T& item ){
         int index = 0;
-        for( auto _item : list )
+        for( auto _item : __mlist )
         {
             if( _item.oid().value().to_string() == item.oid().value().to_string() )
             {
-                list.replace (index,item);
+                __mlist.replace (index,item);
                 break;
             }
             index++;
@@ -98,11 +97,11 @@ private:
 
     void remove( const T& item ){
         int index = 0;
-        for( auto _item : list )
+        for( auto _item : __mlist )
         {
             if( _item.oid().value().to_string() == item.oid().value().to_string() )
             {
-                list.remove (index);
+                __mlist.remove (index);
                 break;
             }
             index++;
