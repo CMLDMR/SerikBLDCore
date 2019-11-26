@@ -4,7 +4,6 @@
 
 SerikBLDCore::TCManager::TCManager() : DB()
 {
-    std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager()" << std::endl;
 
 }
 
@@ -13,7 +12,6 @@ SerikBLDCore::TCManager::TCManager() : DB()
 SerikBLDCore::TCManager::TCManager(DB *mDB)
     : DB(mDB)
 {
-    std::cout << __LINE__ << " " << __FUNCTION__ << " " << "TCManager::TCManager(DB *mDB)" << std::endl;
 
 }
 
@@ -60,7 +58,6 @@ bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
 
         if( exist > 0 )
         {
-            std::cout << SerikBLDCore::TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
             return false;
         }
     }
@@ -72,7 +69,6 @@ bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
 
         if( exist > 0 )
         {
-            std::cout << SerikBLDCore::TC::Collection << " " << __LINE__ << " " << __FUNCTION__ << " tcno Exist" << std::endl;
             return false;
         }
     }
