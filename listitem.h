@@ -16,6 +16,25 @@ class ListItem : public DB
 public:
     ListItem(DB* db) : DB(db){}
 
+    inline const T &itemAt(const QString &byOid)
+    {
+         T *item = new T();
+        for( auto _item : __mlist )
+        {
+            auto _oid = _item.oid();
+            if( _oid )
+            {
+                if( byOid.toStdString () == _oid.value().to_string() )
+                {
+                    item->setDocumentView(_item.view());// _item;
+                    break;
+                }
+            }
+        }
+        return std::move(*item);
+    }
+
+
 
     inline QVector<T> UpdateList(const T& filter){
         __mlist.clear ();
