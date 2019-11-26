@@ -59,6 +59,8 @@ public:
     BilgiEdinmeItem& setCevap( const QString& cevapOid );
     BilgiEdinmeItem& setCevap( const bsoncxx::oid& cevapOid );
     QString cevapOid() const;
+
+    bool cevaplandi() const;
 };
 
 

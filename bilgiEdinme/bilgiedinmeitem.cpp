@@ -182,3 +182,14 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::cevapOid() const
     }
     return "";
 }
+
+bool SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::cevaplandi() const
+{
+    auto val = this->element (Key::CevapOid);
+    if( val )
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
