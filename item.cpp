@@ -9,7 +9,7 @@ SerikBLDCore::Item::Item(const std::string &collection)
 }
 
 
-SerikBLDCore::Item::Item(const bsoncxx::document::view mView, const std::string _Collection)
+SerikBLDCore::Item::Item(const bsoncxx::document::view mView, const std::string &_Collection)
     :mCollection(_Collection)
 {
     this->setDocumentView (mView);
