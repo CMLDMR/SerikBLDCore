@@ -436,6 +436,23 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const Item &it
     }
 }
 
+mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLDCore::Item &item, const int &limit, const int &skip)
+{
+    mongocxx::options::find findOptions;
+
+    findOptions.limit (limit);
+    findOptions.skip (skip);
+
+    try {
+        auto cursor = this->db ()->collection (item.getCollection ()).find (item.view (),findOptions);
+        return std::move(cursor);
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
 mongocxx::stdx::optional<mongocxx::result::delete_result> SerikBLDCore::DB::deleteItem(const Item &item)
 {
     try {
