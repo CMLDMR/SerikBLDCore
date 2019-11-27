@@ -76,10 +76,12 @@ bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara, int &kalan
         if( kalanSure > 60000  )
         {
             return true;
+        }else{
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(const QString &numara)
