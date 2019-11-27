@@ -167,6 +167,11 @@ void SerikBLDCore::Item::printView() const
 #endif
 }
 
+void SerikBLDCore::Item::clear()
+{
+    this->mDoc.clear ();
+}
+
 SerikBLDCore::Item &SerikBLDCore::Item::setOid(const std::string &oid)
 {
 #ifdef DESKTOP

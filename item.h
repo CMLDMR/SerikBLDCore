@@ -50,6 +50,8 @@ public:
 
     void printView() const;
 
+    void clear();
+
     Item& setOid( const std::string &oid );
 
     std::string getCollection() const;
@@ -101,7 +103,9 @@ public:
 
 
     template<typename T>
-    void append( std::string key ,const T &value ){
+    Item& append( std::string key ,const T &value ){
+
+
 #ifdef DESKTOP
         this->removeElement (key);
         try {
@@ -110,10 +114,35 @@ public:
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
         }
+
 #else
 
 
 #endif
+
+        return *this;
+    }
+
+
+    template<>
+    Item& append( std::string key ,const Item &value ){
+
+
+#ifdef DESKTOP
+        this->removeElement (key);
+        try {
+            mDoc.append (kvp(key,value.view ()));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
+
+#else
+
+
+#endif
+
+        return *this;
     }
 
 
