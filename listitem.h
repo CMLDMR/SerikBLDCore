@@ -34,7 +34,7 @@ public:
         return std::move(*item);
     }
 
-    inline QVector<T> UpdateList(const T& filter , const int &limit = 20 , const int &skip = 0 ){
+    inline QVector<T>& UpdateList(const T& filter , const int &limit = 20 , const int &skip = 0 ){
         __mlist.clear ();
         auto cursor = this->find ( filter , limit , skip );
         if( cursor )
