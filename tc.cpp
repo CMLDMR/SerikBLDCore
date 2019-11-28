@@ -11,8 +11,17 @@ const std::string SerikBLDCore::TC::KeyAdres{"Tam Adres"};
 const std::string SerikBLDCore::TC::KeyPassword{"password"};
 const std::string SerikBLDCore::TC::KeyCalismaSMS{"CalismaSMS"};
 const std::string SerikBLDCore::TC::KeyOid{"_id"};
+const std::string SerikBLDCore::TC::KeyFotoOid{"fotoOid"};
 
 SerikBLDCore::TC::TC(TC *other) : Item(TC::Collection)
+{
+    if( other != nullptr )
+    {
+        this->setDocumentView (other->view ());
+    }
+}
+
+SerikBLDCore::TC::TC(const SerikBLDCore::TC *other) : Item(TC::Collection)
 {
     if( other != nullptr )
     {
@@ -124,6 +133,12 @@ SerikBLDCore::TC& SerikBLDCore::TC::setCalismaSMS(const bool &smsgitsin)
     return *this;
 }
 
+SerikBLDCore::TC &SerikBLDCore::TC::setFotoOid(const QString &oid)
+{
+    this->append(KeyFotoOid,bsoncxx::oid{oid.toStdString ()});
+    return *this;
+}
+
 QString SerikBLDCore::TC::TCNO()const
 {
     auto value = this->element (KeyTC);
@@ -199,6 +214,16 @@ QString SerikBLDCore::TC::NormalTelefon()const
     }else{
         return "";
     }
+}
+
+QString SerikBLDCore::TC::FotoOid() const
+{
+    auto val = this->element (KeyFotoOid);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+    }
+    return "";
 }
 
 bool SerikBLDCore::TC::CalismaSMS()const

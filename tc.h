@@ -24,14 +24,16 @@ public:
     static const std::string KeyPassword;
     static const std::string KeyCalismaSMS;
     static const std::string KeyOid;
+    static const std::string KeyFotoOid;
 
 public:
     TC(TC* other = nullptr );
+    TC(const TC* other );
     TC( bsoncxx::document::value* mValue );
     TC( const TC &other );
     TC( TC &&other);
 
-    TC& operator=(const bsoncxx::document::value &value);
+    TC& operator=( const bsoncxx::document::value &value );
     TC& operator=( bsoncxx::document::value *value );
     TC& operator=( const bsoncxx::document::view &view );
 
@@ -49,6 +51,7 @@ public:
     TC& setPassword( const QString &password = QString("") );
     TC& setNormalTelefon( const QString &normalTelefon );
     TC& setCalismaSMS( const bool &smsgitsin = false );
+    TC& setFotoOid( const QString& oid );
 
     QString TCNO() const;
     QString AdSoyad() const;
@@ -57,6 +60,7 @@ public:
     QString TamAdres() const;
     QString Password() const;
     QString NormalTelefon() const ;
+    QString FotoOid() const;
 
     ///
     /// \brief Çalışmalarla ilgili Vatandaşa SMS Gidip Gitmeyeceğini Belirler
