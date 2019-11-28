@@ -19,6 +19,8 @@ public:
 
     bool insertTC( SerikBLDCore::TC* item );
 
+    bool updateTC( SerikBLDCore::TC* tcItem );
+
     boost::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );
     boost::optional<SerikBLDCore::TC*> Load_byTEL( const std::string &tel );
 

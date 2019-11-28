@@ -89,6 +89,45 @@ bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
 
 }
 
+bool SerikBLDCore::TCManager::updateTC(SerikBLDCore::TC *tcItem)
+{
+
+    {
+        SerikBLDCore::TC _item;
+        _item.setTCNO (tcItem->TCNO ());
+        auto exist = this->countItem (*tcItem);
+
+        if( exist > 0 )
+        {
+            return false;
+        }
+    }
+
+    {
+        SerikBLDCore::TC _item;
+        _item.setCepTelefonu (tcItem->CepTelefonu ());
+        auto exist = this->countItem (*tcItem);
+
+        if( exist > 0 )
+        {
+            return false;
+        }
+    }
+
+    auto val = this->updateItem (*tcItem);
+
+    if( val )
+    {
+        if( val.value ().modified_count () )
+        {
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
 boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTCNO(const std::string &tcno)
 {
 
