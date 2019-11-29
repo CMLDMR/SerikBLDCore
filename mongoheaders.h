@@ -14,6 +14,7 @@
 #include <bsoncxx/builder/basic/kvp.hpp>
 #include <bsoncxx/exception/exception.hpp>
 #include <bsoncxx/view_or_value.hpp>
+#include <bsoncxx/types/value.hpp>
 
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
