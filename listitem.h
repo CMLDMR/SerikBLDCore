@@ -14,7 +14,7 @@ template <typename T>
 class ListItem : public DB
 {
 public:
-    ListItem(DB* db) : DB(db){}
+    ListItem(DB* db) : DB(db),__limit(20),__skip(0){}
 
     inline const T &itemAt(const QString &byOid)
     {
@@ -34,9 +34,12 @@ public:
         return std::move(*item);
     }
 
-    inline QVector<T>& UpdateList(const T& filter , const int &limit = 20 , const int &skip = 0 ){
+    inline QVector<T>& UpdateList(const T& filter , const int &limit , const int &skip  ){
         __mlist.clear ();
-        auto cursor = this->find ( filter , limit , skip );
+        __limit = limit;
+        __skip = skip;
+        __count = this->countItem (filter);
+        auto cursor = this->find ( filter , __limit , __skip );
         if( cursor )
         {
             for( auto item : cursor.value() )
@@ -46,6 +49,24 @@ public:
                 __mlist.append (_item);
             }
         }
+        this->__onlist (__mlist);
+        return __mlist;
+    }
+
+    inline QVector<T>& UpdateList(const T& filter  ){
+        __mlist.clear ();
+        __count = this->countItem (filter);
+        auto cursor = this->find ( filter , __limit , __skip );
+        if( cursor )
+        {
+            for( auto item : cursor.value() )
+            {
+                T _item;
+                _item.setDocumentView(item);
+                __mlist.append (_item);
+            }
+        }
+        this->__onlist (__mlist);
         return __mlist;
     }
 
@@ -96,8 +117,55 @@ public:
         return false;
     }
 
+
+    inline QVector<T>& next(const T& filter ){
+        __count = this->countItem (filter);
+        if( __skip + __limit < __count )
+        {
+            __skip += __limit;
+            return this->UpdateList (filter);
+        }else{
+            this->UpdateList (filter);
+            this->__onlist (__mlist);
+            return __mlist;
+        }
+    }
+
+    inline QVector<T>& back( const T& filter ){
+        __count = this->countItem (filter);
+        if( __skip > __limit )
+        {
+            __skip -= __limit;
+            return this->UpdateList (filter);
+        }else{
+            if( __skip > 0 )
+            {
+                __skip = 0;
+            }
+            this->UpdateList (filter);
+            this->__onlist (__mlist);
+            return __mlist;
+        }
+    }
+
+
+    inline void setLimit( const int& limit ){ __limit = limit; }
+    inline int limit() const { return __limit; }
+
+    inline void setSkip( const int& skip ) { __skip = skip; }
+    inline int skip() const { return __skip; }
+
+    inline int totalCount () const { return __count; }
+
+
+    virtual void onList( const QVector<T>  *mlist ) = 0;
+
 private:
     QVector<T> __mlist;
+
+    void __onlist( QVector<T> &mlist ){
+        this->onList (&mlist);
+    }
 
     void replace( const T& item ){
         int index = 0;
@@ -124,6 +192,11 @@ private:
             index++;
         }
     }
+
+
+    int __limit = 20;
+    int __skip = 0;
+    int __count = 0;
 
 };
 
