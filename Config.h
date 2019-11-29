@@ -53,4 +53,35 @@
 //////////////////////////////////
 
 
+namespace SerikBLDCore {
+
+namespace BilgiEdinme {
+namespace Key {
+static const std::string GeriDonus{"geriDonus"};
+static const std::string JulianDay{"julianDay"};
+static const std::string TCOid{"TCOid"};
+static const std::string Konu{"Konu"};
+static const std::string Mesaj{"Mesaj"};
+static const std::string Birim{"Birim"};
+static const std::string CevapOid{"CevapOid"};
+}
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // CONFIG_H
