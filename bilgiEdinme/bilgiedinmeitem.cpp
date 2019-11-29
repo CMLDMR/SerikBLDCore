@@ -2,10 +2,10 @@
 #include <QDateTime>
 
 
-const std::string SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::Collection{"BilgiEdinme"};
+const std::string SerikBLDCore::BilgiEdinmeItem::Collection{"BilgiEdinme"};
 
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::BilgiEdinmeItem(SerikBLDCore::BilgiEdinme::BilgiEdinmeItem *other) : SerikBLDCore::Item (Collection)
+SerikBLDCore::BilgiEdinmeItem::BilgiEdinmeItem(SerikBLDCore::BilgiEdinmeItem *other) : SerikBLDCore::Item (Collection)
 {
     if( other != nullptr )
     {
@@ -15,37 +15,37 @@ SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::BilgiEdinmeItem(SerikBLDCore::BilgiE
     }
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::BilgiEdinmeItem(const SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &other): SerikBLDCore::Item (Collection)
+SerikBLDCore::BilgiEdinmeItem::BilgiEdinmeItem(const SerikBLDCore::BilgiEdinmeItem &other): SerikBLDCore::Item (Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::BilgiEdinmeItem(SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &&other): SerikBLDCore::Item (Collection)
+SerikBLDCore::BilgiEdinmeItem::BilgiEdinmeItem(SerikBLDCore::BilgiEdinmeItem &&other): SerikBLDCore::Item (Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::operator=(const SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &other)
-{
-    this->setDocumentView (other.view ());
-    return *this;
-}
-
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::operator=(SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &&other)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::operator=(const SerikBLDCore::BilgiEdinmeItem &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setGeriDonus(const bool &geriDonus)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::operator=(SerikBLDCore::BilgiEdinmeItem &&other)
 {
-    this->append(Key::GeriDonus,geriDonus);
+    this->setDocumentView (other.view ());
     return *this;
 }
 
-bool SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::geriDonus() const
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setGeriDonus(const bool &geriDonus)
 {
-    auto val = this->element (Key::GeriDonus);
+    this->append(BilgiEdinme::Key::GeriDonus,geriDonus);
+    return *this;
+}
+
+bool SerikBLDCore::BilgiEdinmeItem::geriDonus() const
+{
+    auto val = this->element (BilgiEdinme::Key::GeriDonus);
     if( val )
     {
         return val.value ().get_bool ().value;
@@ -53,15 +53,15 @@ bool SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::geriDonus() const
     return false;
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setJulianDay(const int &julianDay)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setJulianDay(const int &julianDay)
 {
-    this->append(Key::JulianDay,julianDay);
+    this->append(BilgiEdinme::Key::JulianDay,julianDay);
     return *this;
 }
 
-int SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::julianDay() const
+int SerikBLDCore::BilgiEdinmeItem::julianDay() const
 {
-    auto val = this->element (Key::JulianDay);
+    auto val = this->element (BilgiEdinme::Key::JulianDay);
     if( val )
     {
         return val.value ().get_int32 ().value;
@@ -69,7 +69,7 @@ int SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::julianDay() const
     return 0;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::tarih() const
+QString SerikBLDCore::BilgiEdinmeItem::tarih() const
 {
     auto _oid = this->oid ();
     if( _oid )
@@ -80,7 +80,7 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::tarih() const
     }
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::saat() const
+QString SerikBLDCore::BilgiEdinmeItem::saat() const
 {
     auto _oid = this->oid ();
     if( _oid )
@@ -91,21 +91,21 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::saat() const
     }
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setTCoid(const QString &tcoid)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setTCoid(const QString &tcoid)
 {
-    this->append(Key::TCOid,bsoncxx::oid{tcoid.toStdString ()});
+    this->append(BilgiEdinme::Key::TCOid,bsoncxx::oid{tcoid.toStdString ()});
     return *this;
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setTCoid(const bsoncxx::oid &tcoid)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setTCoid(const bsoncxx::oid &tcoid)
 {
-    this->append(Key::TCOid,tcoid);
+    this->append(BilgiEdinme::Key::TCOid,tcoid);
     return *this;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::tcOid() const
+QString SerikBLDCore::BilgiEdinmeItem::tcOid() const
 {
-    auto val = this->element (Key::TCOid);
+    auto val = this->element (BilgiEdinme::Key::TCOid);
     if( val )
     {
         return QString::fromStdString (val.value ().get_oid ().value.to_string ());
@@ -113,15 +113,15 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::tcOid() const
     return "";
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setKonu(const QString &konu)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setKonu(const QString &konu)
 {
-    this->append(Key::Konu,konu.toStdString ());
+    this->append(BilgiEdinme::Key::Konu,konu.toStdString ());
     return *this;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::konu() const
+QString SerikBLDCore::BilgiEdinmeItem::konu() const
 {
-    auto val = this->element (Key::Konu);
+    auto val = this->element (BilgiEdinme::Key::Konu);
     if( val )
     {
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
@@ -129,15 +129,15 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::konu() const
     return "";
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setMesaj(const QString &mesaj)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setMesaj(const QString &mesaj)
 {
-    this->append(Key::Mesaj,mesaj.toStdString ());
+    this->append(BilgiEdinme::Key::Mesaj,mesaj.toStdString ());
     return *this;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::mesaj() const
+QString SerikBLDCore::BilgiEdinmeItem::mesaj() const
 {
-    auto val = this->element (Key::Mesaj);
+    auto val = this->element (BilgiEdinme::Key::Mesaj);
     if( val )
     {
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
@@ -145,15 +145,15 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::mesaj() const
     return "";
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setBirim(const QString &birim)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setBirim(const QString &birim)
 {
-    this->append(Key::Birim,birim.toStdString ());
+    this->append(BilgiEdinme::Key::Birim,birim.toStdString ());
     return *this;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::birim() const
+QString SerikBLDCore::BilgiEdinmeItem::birim() const
 {
-    auto val = this->element (Key::Birim);
+    auto val = this->element (BilgiEdinme::Key::Birim);
     if( val )
     {
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
@@ -161,21 +161,21 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::birim() const
     return "";
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setCevap(const QString &cevapOid)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setCevap(const QString &cevapOid)
 {
-    this->append(Key::CevapOid,bsoncxx::oid{cevapOid.toStdString ()});
+    this->append(BilgiEdinme::Key::CevapOid,bsoncxx::oid{cevapOid.toStdString ()});
     return *this;
 }
 
-SerikBLDCore::BilgiEdinme::BilgiEdinmeItem &SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::setCevap(const bsoncxx::oid &cevapOid)
+SerikBLDCore::BilgiEdinmeItem &SerikBLDCore::BilgiEdinmeItem::setCevap(const bsoncxx::oid &cevapOid)
 {
-    this->append(Key::CevapOid,cevapOid);
+    this->append(BilgiEdinme::Key::CevapOid,cevapOid);
     return *this;
 }
 
-QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::cevapOid() const
+QString SerikBLDCore::BilgiEdinmeItem::cevapOid() const
 {
-    auto val = this->element (Key::CevapOid);
+    auto val = this->element (BilgiEdinme::Key::CevapOid);
     if( val )
     {
         return QString::fromStdString (val.value ().get_oid ().value.to_string ());
@@ -183,9 +183,9 @@ QString SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::cevapOid() const
     return "";
 }
 
-bool SerikBLDCore::BilgiEdinme::BilgiEdinmeItem::cevaplandi() const
+bool SerikBLDCore::BilgiEdinmeItem::cevaplandi() const
 {
-    auto val = this->element (Key::CevapOid);
+    auto val = this->element (BilgiEdinme::Key::CevapOid);
     if( val )
     {
         return true;

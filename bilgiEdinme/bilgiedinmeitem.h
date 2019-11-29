@@ -9,21 +9,7 @@
 namespace SerikBLDCore {
 
 
-namespace BilgiEdinme {
-
-namespace Key {
-static const std::string GeriDonus{"geriDonus"};
-static const std::string JulianDay{"julianDay"};
-static const std::string TCOid{"TCOid"};
-static const std::string Konu{"Konu"};
-static const std::string Mesaj{"Mesaj"};
-static const std::string Birim{"Birim"};
-static const std::string CevapOid{"CevapOid"};
-}
-
-
-
-class SERIKBLDCORE_EXPORT BilgiEdinmeItem : public SerikBLDCore::Item
+class SERIKBLDCORE_EXPORT BilgiEdinmeItem : public Item
 {
 public:
     static const std::string Collection;
@@ -62,9 +48,6 @@ public:
 
     bool cevaplandi() const;
 };
-
-
-}
 
 
 }
