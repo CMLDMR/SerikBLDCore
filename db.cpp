@@ -138,12 +138,13 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
         downloader = bucket.open_download_stream(roid);
 
     } catch (bsoncxx::exception &e) {
+        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
         return "";
     }
 
 
     auto file_length = downloader.file_length();
-    auto bytes_counter = 0;
+    std::int32_t bytes_counter = 0;
 
     QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
 
@@ -309,11 +310,13 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
 bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
 {
     auto bucket = mDB->gridfs_bucket ();
+
+    mongocxx::gridfs::uploader uploader;
     QFile file( filepath );
     if( file.open( QIODevice::ReadOnly ) )
     {
         QFileInfo info(filepath);
-        auto uploader = bucket.open_upload_stream(info.fileName().toStdString().c_str());
+        uploader = bucket.open_upload_stream(info.fileName().toStdString().c_str());
         QByteArray ar = file.readAll();
         file.close();
 
@@ -322,6 +325,7 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
         return res.id();
     }else{
         std::cout << "Can not open File " << filepath.toStdString () << std::endl;
+        return uploader.close ().id ();
     }
 }
 
