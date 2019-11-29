@@ -7,17 +7,17 @@
 
 namespace SerikBLDCore {
 
-namespace BilgiEdinme {
-
-
 
 class SERIKBLDCORE_EXPORT BilgiEdinmeManager : public SerikBLDCore::ListItem<BilgiEdinmeItem>
 {
 public:
     explicit BilgiEdinmeManager(DB* db);
 
+protected:
+    virtual void onList( const QVector<BilgiEdinmeItem>  *mlist ) override {}
+
 };
-}
+
 
 }
 
