@@ -80,10 +80,10 @@ unix {
 
 
 windows{
-    message ("Platform Windows")
+    MSVC_VER = $$(VisualStudioVersion)
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        message("x86 build")
+        message("msvc 2015 x86")
         msvc{
             message ("Compiler MSVC")
             win32: LIBS += -L$$PWD/../Mongo/msvc2017x86/lib/ -lbsoncxx
@@ -102,12 +102,12 @@ windows{
         }
 
     } else {
-        message("x64 build")
-
 
             INCLUDEPATH += $$PWD/../boost/boost
             DEPENDPATH += $$PWD/../boost/boost
 
+    equals(MSVC_VER, 14.0){
+        message("msvc 2015 x64")
             win32: LIBS += -L$$PWD/../Mongo/msvc2015x64/install/lib/ -lbsoncxx
 
             INCLUDEPATH += $$PWD/../Mongo/msvc2015x64/install/include/bsoncxx/v_noabi
@@ -117,6 +117,24 @@ windows{
 
             INCLUDEPATH += $$PWD/../Mongo/msvc2015x64/install/include/mongocxx/v_noabi
             DEPENDPATH += $$PWD/../Mongo/msvc2015x64/install/include/mongocxx/v_noabi
+
+    }
+
+    equals(MSVC_VER, 15.0){
+        message("msvc 2017 x64")
+
+            win32: LIBS += -L$$PWD/../Mongo/msvc2017x64/lib/ -lbsoncxx
+
+            INCLUDEPATH += $$PWD/../Mongo/msvc2017x64/include/bsoncxx/v_noabi
+            DEPENDPATH += $$PWD/../Mongo/msvc2017x64/include/bsoncxx/v_noabi
+
+            win32: LIBS += -L$$PWD/../Mongo/msvc2017x64/lib/ -lmongocxx
+
+            INCLUDEPATH += $$PWD/../Mongo/msvc2017x64/include/mongocxx/v_noabi
+            DEPENDPATH += $$PWD/../Mongo/msvc2017x64/include/mongocxx/v_noabi
+    }
+
+
 
         ## Windows x64 (64bit) specific build here
 
@@ -262,6 +280,8 @@ DISTFILES += \
     docs/tab_h.png \
     docs/tab_s.png \
     docs/tabs.css
+
+
 
 
 
