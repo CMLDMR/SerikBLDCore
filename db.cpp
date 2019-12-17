@@ -447,6 +447,12 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
     findOptions.limit (limit);
     findOptions.skip (skip);
 
+    Item sortItem(item.getCollection ());
+    sortItem.append("_id",-1);
+
+    findOptions.sort (sortItem.view ());
+
+
     try {
         auto cursor = this->db ()->collection (item.getCollection ()).find (item.view (),findOptions);
         return std::move(cursor);
