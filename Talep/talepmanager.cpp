@@ -90,6 +90,14 @@ QVector<SerikBLDCore::Talep> SerikBLDCore::TalepManager::findTalep(const Talep &
     findOptions.limit (limit);
     findOptions.skip (skip);
 
+
+    Talep sortDoc;
+
+    sortDoc.append("_id",-1);
+
+
+    findOptions.sort (sortDoc.view ());
+
     try {
         auto cursor = this->find (filter,findOptions);
         if( cursor )
@@ -118,6 +126,11 @@ SerikBLDCore::Talep SerikBLDCore::TalepManager::findOneTalep(const Talep &filter
         item.setDocumentView (val.value ().view ());
     }
     return item;
+}
+
+int64_t SerikBLDCore::TalepManager::talepCount(const SerikBLDCore::Talep &filter)
+{
+    return this->countItem (filter);
 }
 
 bool SerikBLDCore::TalepManager::insertTalepSubItem(const TalepSubItem *item)
