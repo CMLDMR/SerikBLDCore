@@ -63,6 +63,14 @@ public:
     Talep findOneTalep( const Talep &filter );
 
 
+    /**
+     * @brief talepCount
+     * @param filter
+     * @return
+     */
+    std::int64_t talepCount( const Talep& filter = Talep() );
+
+
 
 
     ///
