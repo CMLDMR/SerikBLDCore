@@ -24,6 +24,8 @@
 #include <mongocxx/exception/exception.hpp>
 #include <mongocxx/stdx.hpp>
 #include <mongocxx/gridfs/bucket.hpp>
+#include <mongocxx/exception/bulk_write_exception.hpp>
+#include <mongocxx/exception/gridfs_exception.hpp>
 #include <mongocxx/pipeline.hpp>
 #include <mongocxx/result/insert_one.hpp>
 #include <mongocxx/collection.hpp>
