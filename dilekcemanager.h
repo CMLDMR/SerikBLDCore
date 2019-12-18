@@ -31,7 +31,12 @@ public:
 
     boost::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
 
-    bool updateDilekce( const Dilekce* dilekce );
+    /**
+     * @brief updateDilekce: Mevcut Dilekçeyi Günceller.
+     * @param dilekce
+     * @return
+     */
+    virtual bool updateDilekce( const Dilekce* dilekce );
 
     bool insertAciklama( const DilekceAciklama* aciklama  );
 
@@ -58,7 +63,7 @@ public:
      * @param yeniKategori
      * @return
      */
-    bool insertYeniKategori( const QString& yeniKategori );
+    virtual bool insertYeniKategori( const QString& yeniKategori );
 
 
     /**
@@ -73,7 +78,7 @@ public:
      * @param kategoriName
      * @return
      */
-    bool deleteKategori( const QString& kategoriName );
+    virtual bool deleteKategori( const QString& kategoriName );
 
 
     /**
@@ -82,7 +87,7 @@ public:
      * @param newName
      * @return
      */
-    bool reNameKategori( const QString& oldName , const QString& newName );
+    virtual bool reNameKategori( const QString& oldName , const QString& newName );
 
 
 
