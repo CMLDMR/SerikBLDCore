@@ -21,64 +21,64 @@ SerikBLDCore::DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
 
 boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
 {
-        auto item = new SerikBLDCore::Dilekce();
+    auto item = new SerikBLDCore::Dilekce();
 
-        try {
-            auto ins = this->db ()->collection (SerikBLDCore::Dilekce::Collection).insert_one (item->view ());
-            if( ins )
-            {
-                item->append("_id",ins.value ().inserted_id ().get_oid ().value );
-                return item;
-            }else{
-                return boost::none;
-            }
-        } catch (mongocxx::exception &e) {
-            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+    try {
+        auto ins = this->db ()->collection (SerikBLDCore::Dilekce::Collection).insert_one (item->view ());
+        if( ins )
+        {
+            item->append("_id",ins.value ().inserted_id ().get_oid ().value );
+            return item;
+        }else{
             return boost::none;
         }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return boost::none;
+    }
 }
 
 bool SerikBLDCore::DilekceManager::Update(SerikBLDCore::Dilekce *dilekce)
 {
-        auto filter = document{};
-        auto oid = dilekce->element ("_id");
+    auto filter = document{};
+    auto oid = dilekce->element ("_id");
 
-        if( oid )
+    if( oid )
+    {
+        try {
+            filter.append (kvp("_id",oid->get_oid ()));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            return false;
+        }
+
+        auto setDoc = document{};
+
+        try {
+            setDoc.append (kvp("$set",dilekce->view ()));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
+
+        auto upt = this->db ()->collection (SerikBLDCore::Dilekce::Collection).update_one (filter.view (),setDoc.view ());
+
+        if( upt )
         {
-            try {
-                filter.append (kvp("_id",oid->get_oid ()));
-            } catch (bsoncxx::exception &e) {
-                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                std::cout << str << std::endl;
-                return false;
-            }
-
-            auto setDoc = document{};
-
-            try {
-                setDoc.append (kvp("$set",dilekce->view ()));
-            } catch (bsoncxx::exception &e) {
-                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                std::cout << str << std::endl;
-            }
-
-            auto upt = this->db ()->collection (SerikBLDCore::Dilekce::Collection).update_one (filter.view (),setDoc.view ());
-
-            if( upt )
+            if( upt.value ().modified_count () )
             {
-                if( upt.value ().modified_count () )
-                {
-                    return true;
-                }else{
-                    return false;
-                }
+                return true;
             }else{
                 return false;
             }
         }else{
             return false;
         }
+    }else{
+        return false;
+    }
 }
 
 bool SerikBLDCore::DilekceManager::insertDilekce(const SerikBLDCore::Dilekce *dilekce)
@@ -422,4 +422,36 @@ bool SerikBLDCore::DilekceManager::deleteKategori(const QString &kategoriName)
         }
     }
     return false;
+}
+
+bool SerikBLDCore::DilekceManager::reNameKategori(const QString &oldName, const QString &newName)
+{
+    Item item("dilekceKategori");
+    item.append("name",oldName.toStdString ());
+
+    auto count  = this->countItem (item);
+
+    if( count )
+    {
+        if( !this->deleteItem (item) )
+        {
+            return false;
+        }
+    }
+    item.removeElement ("name");
+
+    item.append("name",newName.toStdString ());
+
+    auto ins = this->insertItem (item);
+
+    if( ins )
+    {
+        if( ins.value ().result ().inserted_count () )
+        {
+            return true;
+        }
+    }
+
+    return false;
+
 }

@@ -76,6 +76,15 @@ public:
     bool deleteKategori( const QString& kategoriName );
 
 
+    /**
+     * @brief reNameKategori
+     * @param oldName
+     * @param newName
+     * @return
+     */
+    bool reNameKategori( const QString& oldName , const QString& newName );
+
+
 
 };
 
