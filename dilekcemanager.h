@@ -18,9 +18,9 @@ class SERIKBLDCORE_EXPORT DilekceManager : public DB
 public:
     explicit DilekceManager();
 
-    DilekceManager( DB* mDB );
+    explicit DilekceManager( DB* mDB );
 
-    DilekceManager( mongocxx::database *_db );
+    explicit DilekceManager( mongocxx::database *_db );
 
     boost::optional<Dilekce*> Create_Dilekce();
 
@@ -52,6 +52,28 @@ public:
     boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
 
     QString TaranmisDilekcePath( const QString &taranmisdilekceOid );
+
+    /**
+     * @brief insertYeniKategori
+     * @param yeniKategori
+     * @return
+     */
+    bool insertYeniKategori( const QString& yeniKategori );
+
+
+    /**
+     * @brief Kategorilist
+     * @return
+     */
+    QStringList Kategorilist();
+
+
+    /**
+     * @brief deleteKategori
+     * @param kategoriName
+     * @return
+     */
+    bool deleteKategori( const QString& kategoriName );
 
 
 

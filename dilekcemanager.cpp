@@ -360,3 +360,66 @@ QString SerikBLDCore::DilekceManager::TaranmisDilekcePath(const QString &taranmi
     auto val = this->downloadFile (taranmisdilekceOid);
     return QString::fromStdString (val);
 }
+
+bool SerikBLDCore::DilekceManager::insertYeniKategori(const QString &yeniKategori)
+{
+    Item item("dilekceKategori");
+
+    item.append("name",yeniKategori.toStdString ());
+
+    auto count = this->countItem (item);
+
+    if( count )
+    {
+        return false;
+    }
+
+    auto val = this->insertItem (item);
+
+    if( val )
+    {
+        if( val.value ().result ().inserted_count () ){
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
+QStringList SerikBLDCore::DilekceManager::Kategorilist()
+{
+
+    QStringList list;
+
+    Item item("dilekceKategori");
+
+    auto cursor = this->find (item);
+
+    if( cursor ){
+        for( auto doc : cursor.value () )
+        {
+            list.append (doc["name"].get_utf8 ().value.to_string().c_str ());
+        }
+    }
+
+    return list;
+}
+
+bool SerikBLDCore::DilekceManager::deleteKategori(const QString &kategoriName)
+{
+    Item item("dilekceKategori");
+
+    item.append("name",kategoriName.toStdString ());
+
+    auto del = this->deleteItem (item);
+
+    if( del )
+    {
+        if( del.value ().deleted_count () )
+        {
+            return true;
+        }
+    }
+    return false;
+}
