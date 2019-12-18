@@ -51,6 +51,7 @@ public:
     std::string downloadFileWeb( const QString &fileOid , bool forceFilename = false );
     bsoncxx::types::value uploadfile(QString filepath );
     bsoncxx::types::value uploadfile(QString filepath ) const;
+    bool deleteGridFS( const QString &fileOid );
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);
     mongocxx::stdx::optional<mongocxx::result::update> updateItem( const Item &item);

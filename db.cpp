@@ -6,6 +6,7 @@
 #include <QDir>
 #include "item.h"
 
+
 static int DBConnectionCount = 0;
 
 SerikBLDCore::DB::DB()
@@ -326,6 +327,23 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
     }else{
         std::cout << "Can not open File " << filepath.toStdString () << std::endl;
         return uploader.close ().id ();
+    }
+}
+
+bool SerikBLDCore::DB::deleteGridFS(const QString &fileOid)
+{
+    bsoncxx::types::value id(bsoncxx::types::b_oid{bsoncxx::oid{fileOid.toStdString ()}});
+    try {
+        mDB->gridfs_bucket ().delete_file (id);
+        return true;
+    } catch (mongocxx::gridfs_exception &e) {
+        std::string str = "ERROR GridFS Exception: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return false;
+    } catch ( mongocxx::bulk_write_exception &e) {
+        std::string str = "ERROR bulk_write_exception: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return false;
     }
 }
 
