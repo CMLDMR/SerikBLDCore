@@ -394,7 +394,7 @@ QStringList SerikBLDCore::DilekceManager::Kategorilist()
 
     Item item("dilekceKategori");
 
-    auto cursor = this->find (item);
+    auto cursor = this->find (item,1000);
 
     if( cursor ){
         for( auto doc : cursor.value () )
