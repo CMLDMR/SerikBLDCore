@@ -30,6 +30,8 @@ SOURCES += \
     dilekcemanager.cpp \
     item.cpp \
     listitem.cpp \
+    meclis/meclisitem.cpp \
+    meclis/meclismanager.cpp \
     personel.cpp \
     personelmanager.cpp \
     qbson/qarray.cpp \
@@ -58,6 +60,8 @@ HEADERS += \
     dilekcemanager.h \
     item.h \
     listitem.h \
+    meclis/meclisitem.h \
+    meclis/meclismanager.h \
     mongoheaders.h \
     personel.h \
     personelmanager.h \
