@@ -481,6 +481,8 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
     }
 }
 
+
+
 mongocxx::stdx::optional<mongocxx::result::delete_result> SerikBLDCore::DB::deleteItem(const Item &item)
 {
     try {

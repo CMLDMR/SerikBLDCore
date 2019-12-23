@@ -40,6 +40,10 @@ public:
         return this;
     }
 
+    DB* getDB(){
+        return this;
+    }
+
 
 
     QVector<QString> getMahalleler() ;
