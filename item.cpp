@@ -221,3 +221,70 @@ void SerikBLDCore::Item::removeElement(const std::string &key)
 
 
 
+
+SerikBLDCore::FindOptions::FindOptions()
+    :Item("none")
+{
+
+}
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setLimit(const int &limit)
+{
+    this->append("limit",bsoncxx::types::b_int64{limit});
+    return *this;
+}
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSkip(const int &skip)
+{
+    this->append("skip",bsoncxx::types::b_int64{skip});
+    return *this;
+}
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setProjection(const SerikBLDCore::Item &sortItem)
+{
+    this->append("sortDoc",sortItem);
+    return *this;
+}
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSort(const SerikBLDCore::Item &projItem)
+{
+    this->append("projection",projItem);
+    return *this;
+}
+
+int SerikBLDCore::FindOptions::limit() const
+{
+    auto val = this->element ("limit");
+
+    if( val )
+    {
+        return static_cast<int>(val.value ().get_int64 ().value);
+    }else{
+        return 20;
+    }
+}
+
+int SerikBLDCore::FindOptions::skip() const
+{
+    auto val = this->element ("skip");
+
+    if( val )
+    {
+        return static_cast<int>(val.value ().get_int64 ().value);
+    }else{
+        return 0;
+    }
+}
+
+//TODO: yeniden Yazılacak. sort Doc Geri Dönmüyor. Boş Document Geri Döndürülüyor
+SerikBLDCore::Item SerikBLDCore::FindOptions::sort() const
+{
+    return SerikBLDCore::Item("none");
+}
+//TODO: yeniden Yazılacak. sort Doc Geri Dönmüyor. Boş Document Geri Döndürülüyor
+SerikBLDCore::Item SerikBLDCore::FindOptions::projection() const
+{
+    return SerikBLDCore::Item("none");
+}
+
+

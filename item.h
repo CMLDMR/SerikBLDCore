@@ -20,13 +20,15 @@
 
 
 namespace SerikBLDCore {
+
+
 class SERIKBLDCORE_EXPORT Item
 {
 public:
     explicit Item(const std::string &collection);
     Item(const Item& other);
     Item( Item &&other );
-    ~Item();
+    virtual ~Item();
 
 
 
@@ -158,6 +160,30 @@ private:
     const std::string mCollection;
 
 };
+
+
+
+
+class SERIKBLDCORE_EXPORT FindOptions : private Item
+{
+public:
+    explicit FindOptions();
+
+    FindOptions& setLimit( const int &limit );
+    FindOptions& setSkip( const int &skip );
+
+    FindOptions& setSort( const Item& sortItem);
+    FindOptions& setProjection( const Item& projItem);
+
+    int limit() const;
+    int skip() const;
+
+    Item sort() const;
+    Item projection() const;
+
+
+};
+
 
 }
 
