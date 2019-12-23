@@ -64,6 +64,18 @@ std::string SerikBLDCore::User::PhotoFilePath()
     }
 }
 
+std::string SerikBLDCore::User::PhotoFilePathWeb()
+{
+    auto element = this->element (KeyFotoid);
+    if( element )
+    {
+        auto url = this->downloadFileWeb (element->get_oid ().value.to_string ().c_str ());
+        return url;
+    }else{
+        return "";
+    }
+}
+
 std::string SerikBLDCore::User::AdSoyad()
 {
     auto element = this->element (KeyAdSoyad);
@@ -97,6 +109,18 @@ std::string SerikBLDCore::User::Birimi()
         return  (element->get_utf8 ().value.to_string());
     }else{
         return (KeyBirimi + " Bilgisi Eksik");
+    }
+}
+
+std::string SerikBLDCore::User::Telefon() const
+{
+    auto element = this->element (KeyTel);
+
+    if( element )
+    {
+        return  (element->get_utf8 ().value.to_string());
+    }else{
+        return ("");
     }
 }
 

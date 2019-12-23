@@ -42,9 +42,11 @@ public:
     bsoncxx::document::value Value() const;
 
     std::string PhotoFilePath();
+    std::string PhotoFilePathWeb();
     std::string AdSoyad();
     std::string Statu();
     std::string Birimi();
+    std::string Telefon() const;
     QString UserOid() const;
 
 };
