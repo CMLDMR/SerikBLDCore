@@ -105,7 +105,7 @@ public:
 
 
     template<typename T>
-    Item& append( std::string key ,const T &value ){
+    Item& append( const std::string &key ,const T &value ){
 
 
 #ifdef DESKTOP
@@ -127,7 +127,7 @@ public:
 
 
     template<>
-    Item& append( std::string key ,const Item &value ){
+    Item& append( const std::string &key ,const Item &value ){
 
 
 #ifdef DESKTOP
@@ -164,10 +164,11 @@ private:
 
 
 
-class SERIKBLDCORE_EXPORT FindOptions : private Item
+class SERIKBLDCORE_EXPORT FindOptions : public Item
 {
 public:
     explicit FindOptions();
+
 
     FindOptions& setLimit( const int &limit );
     FindOptions& setSkip( const int &skip );

@@ -65,6 +65,8 @@ bsoncxx::document::view SerikBLDCore::Item::view() const
     return mDoc.view ();
 }
 
+
+
 boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
 {
     try {
@@ -160,7 +162,7 @@ SerikBLDCore::Item &SerikBLDCore::Item::operator=(Item &&other)
 void SerikBLDCore::Item::printView() const
 {
 #ifdef DESKTOP
-    std::cout << this->getCollection () << " " <<bsoncxx::to_json (this->view ()) << std::endl;
+    std::cout << __LINE__ << " " << __FUNCTION__ << " Coll: " <<this->getCollection () << " : " <<bsoncxx::to_json (this->view ()) << std::endl;
 #else
 
 
@@ -228,11 +230,18 @@ SerikBLDCore::FindOptions::FindOptions()
 
 }
 
+
+
 SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setLimit(const int &limit)
 {
     this->append("limit",bsoncxx::types::b_int64{limit});
     return *this;
 }
+
+
+
+
+
 
 SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSkip(const int &skip)
 {
@@ -240,17 +249,32 @@ SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSkip(const int &skip)
     return *this;
 }
 
-SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setProjection(const SerikBLDCore::Item &sortItem)
-{
-    this->append("sortDoc",sortItem);
-    return *this;
-}
 
-SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSort(const SerikBLDCore::Item &projItem)
+
+
+
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setProjection(const SerikBLDCore::Item &projItem)
 {
     this->append("projection",projItem);
     return *this;
 }
+
+
+
+
+
+
+SerikBLDCore::FindOptions &SerikBLDCore::FindOptions::setSort(const SerikBLDCore::Item &sortItem)
+{
+    this->append("sort",sortItem);
+    return *this;
+}
+
+
+
+
+
 
 int SerikBLDCore::FindOptions::limit() const
 {
@@ -264,6 +288,10 @@ int SerikBLDCore::FindOptions::limit() const
     }
 }
 
+
+
+
+
 int SerikBLDCore::FindOptions::skip() const
 {
     auto val = this->element ("skip");
@@ -276,15 +304,34 @@ int SerikBLDCore::FindOptions::skip() const
     }
 }
 
-//TODO: yeniden Yazılacak. sort Doc Geri Dönmüyor. Boş Document Geri Döndürülüyor
+
+
+
+
+
 SerikBLDCore::Item SerikBLDCore::FindOptions::sort() const
 {
+    auto val = this->element ("sort");
+    if( val )
+    {
+        return SerikBLDCore::Item(val.value ().get_document (),"none");
+    }
     return SerikBLDCore::Item("none");
 }
-//TODO: yeniden Yazılacak. sort Doc Geri Dönmüyor. Boş Document Geri Döndürülüyor
+
+
+
+
+
+
 SerikBLDCore::Item SerikBLDCore::FindOptions::projection() const
-{
-    return SerikBLDCore::Item("none");
+{    auto val = this->element ("projection");
+     if( val )
+     {
+         SerikBLDCore::Item item(val.value ().get_document ().value,"none");
+         return item;
+     }
+     return SerikBLDCore::Item("none");
 }
 
 
