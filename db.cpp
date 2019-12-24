@@ -7,6 +7,7 @@
 #include "item.h"
 
 
+
 static int DBConnectionCount = 0;
 
 SerikBLDCore::DB::DB()
@@ -469,6 +470,67 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
     sortItem.append("_id",-1);
 
     findOptions.sort (sortItem.view ());
+
+
+    try {
+        auto cursor = this->db ()->collection (item.getCollection ()).find (item.view (),findOptions);
+        return std::move(cursor);
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
+        std::cout << str << std::endl;
+        return mongocxx::stdx::nullopt;
+    }
+}
+
+mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLDCore::Item &item, const SerikBLDCore::FindOptions &options)
+{
+    mongocxx::options::find findOptions;
+    auto doc = document{};
+
+    if( options.limit () != 0 )
+    {
+        findOptions.limit (options.limit ());
+    }
+
+    findOptions.skip (options.skip ());
+
+    doc.clear ();
+    if( !options.projection ().view ().empty () )
+    {
+        auto __view = options.element ("projection");
+        if( __view )
+        {
+            for( auto __item : __view.value ().get_document ().value)
+            {
+                try {
+                    doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
+                } catch (bsoncxx::exception &e) {
+                    std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                    std::cout << str << std::endl;
+                }
+            }
+            findOptions.projection (doc.view ());
+        }
+    }
+
+    doc.clear ();
+    if( !options.sort ().view ().empty () )
+    {
+        auto __view = options.element ("sort");
+        if( __view )
+        {
+            for( auto __item : __view.value ().get_document ().value)
+            {
+                try {
+                    doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
+                } catch (bsoncxx::exception &e) {
+                    std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                    std::cout << str << std::endl;
+                }
+            }
+            findOptions.sort (doc.view ());
+        }
+    }
 
 
     try {

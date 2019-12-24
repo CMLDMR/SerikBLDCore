@@ -18,6 +18,7 @@
 namespace SerikBLDCore {
 
 class Item;
+class FindOptions;
 
 class SERIKBLDCORE_EXPORT DB
 {
@@ -63,12 +64,17 @@ public:
     mongocxx::stdx::optional<bsoncxx::document::value> findOneItem(const Item &item , const Item &findOptions );
     mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const mongocxx::options::find findOptions );
     mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const int &limit = 20 , const int &skip = 0  );
+    mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const FindOptions& options  );
+
     mongocxx::stdx::optional<mongocxx::result::delete_result> deleteItem( const Item &item );
-    ///
-    /// \brief countItem
-    /// \param item
-    /// \return
-    /// return item matched Count else if error return -1
+
+
+    /**
+     * @brief countItem
+     * Toplam item sayısını Geri Döndürür
+     * @param item
+     * @return
+     */
     int64_t countItem( const Item &item );
 
 private:
