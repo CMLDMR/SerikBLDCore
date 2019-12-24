@@ -23,7 +23,7 @@ namespace Meclis {
 namespace Key {
 static const std::string Collection{"MeclisV2"};
 static const std::string ay{"ay"};
-static const std::string yil{"yıl"};
+static const std::string yil{"yil"};
 static const std::string julianDate{"julianDate"};
 static const std::string yayinda{"yayinda"};
 static const std::string gundem{"gundem"};
