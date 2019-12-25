@@ -95,7 +95,13 @@ QVector<QString> SerikBLDCore::DB::getMahalleler()
     QVector<QString> list;
 
 
-    auto cursor = this->find (std::move(Item("Mahalleler")),0);
+    FindOptions options;
+
+    options.setSkip (0);
+    options.setLimit (0);
+    options.setSort (Item("none").append("Mahalleler",-1));
+
+    auto cursor = this->find (std::move(Item("Mahalleler")),options);
     if( cursor )
     {
         for( auto doc : cursor.value () )
