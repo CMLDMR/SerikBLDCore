@@ -32,6 +32,7 @@ SOURCES += \
     listitem.cpp \
     meclis/meclisitem.cpp \
     meclis/meclismanager.cpp \
+    meclis/meclisuyesi.cpp \
     personel.cpp \
     personelmanager.cpp \
     qbson/qarray.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     listitem.h \
     meclis/meclisitem.h \
     meclis/meclismanager.h \
+    meclis/meclisuyesi.h \
     mongoheaders.h \
     personel.h \
     personelmanager.h \
