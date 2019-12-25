@@ -27,6 +27,7 @@ static const std::string yil{"yil"};
 static const std::string julianDate{"julianDate"};
 static const std::string yayinda{"yayinda"};
 static const std::string gundem{"gundem"};
+static const std::string saat{"saat"};
 }
 
 
@@ -44,12 +45,14 @@ public:
     MeclisItem& setJulianDay( const int& julianDay );
     MeclisItem& setYayinda( const bool& yayinda );
     MeclisItem& setGundem( const QString& gundem );
+    MeclisItem& setSaat( const long& secFromStartOfDay );
 
     QString gundem() const;
     QString ay() const;
     int32_t yil() const;
     int64_t julianDay() const;
     bool yayinda() const;
+    long saat() const;
 };
 
 
@@ -137,6 +140,64 @@ public:
     std::string videothump3() const;
 
     std::string meclisoid() const;
+};
+
+
+
+
+namespace RaporKey {
+static const std::string Collection{"MeclisRaporlar"};
+static const std::string meclisOid{"meclisOid"};
+static const std::string raporAdi{"raporadi"};
+static const std::string raporOid{"raporOid"};
+static const std::string kimden{"kimden"};
+}
+
+
+class SERIKBLDCORE_EXPORT RaporItem : public Item
+{
+public:
+    explicit RaporItem();
+
+    RaporItem& setMeclisOid( const std::string &meclisOid );
+    RaporItem& setMeclisOid( const bsoncxx::oid &meclisOid );
+    RaporItem& setRaporAdi( const std::string& raporAdi );
+    RaporItem& setRaporOid( const std::string& raporOid );
+    RaporItem& setRaporOid( const bsoncxx::oid& raporOid );
+    RaporItem& setKimden( const std::string& kimden );
+
+    QString meclisOid() const;
+    QString raporAdi() const;
+    QString raporOid() const;
+    QString kimden() const;
+};
+
+
+namespace TeklifKey {
+static const std::string Collection{"MeclisTeklifler"};
+static const std::string meclisOid{"meclisOid"};
+static const std::string teklifAdi{"teklifadi"};
+static const std::string teklifOid{"teklifOid"};
+static const std::string kimden{"kimden"};
+}
+
+
+class SERIKBLDCORE_EXPORT TeklifItem : public Item
+{
+public:
+    explicit TeklifItem();
+
+    TeklifItem& setMeclisOid( const std::string &meclisOid );
+    TeklifItem& setMeclisOid( const bsoncxx::oid &meclisOid );
+    TeklifItem& setTeklifAdi( const std::string& teklifAdi );
+    TeklifItem& setTeklifOid( const std::string& teklifOid );
+    TeklifItem& setTeklifOid( const bsoncxx::oid& teklifOid );
+    TeklifItem& setKimden( const std::string& kimden );
+
+    QString meclisOid() const;
+    QString teklifAdi() const;
+    QString teklifOid() const;
+    QString kimden() const;
 };
 
 
