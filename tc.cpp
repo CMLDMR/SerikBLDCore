@@ -37,6 +37,12 @@ SerikBLDCore::TC::TC(bsoncxx::document::value *mValue) : Item(TC::Collection)
     }
 }
 
+SerikBLDCore::TC::TC(const std::string &newCollection)
+    :Item(newCollection)
+{
+
+}
+
 SerikBLDCore::TC::TC(const TC &other) : Item(TC::Collection)
 {
     this->setDocumentView (other.view ());

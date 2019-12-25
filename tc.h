@@ -7,7 +7,6 @@
 #include <QString>
 #include "SerikBLDCore_global.h"
 
-//SRKBLDCore__
 
 namespace SerikBLDCore {
 
@@ -30,8 +29,23 @@ public:
     TC(TC* other = nullptr );
     TC(const TC* other );
     TC( bsoncxx::document::value* mValue );
+
+
+    /**
+     * @brief TC
+     * Yeni Kişi için Gerekli.
+     * Örnek1: Meclis Üyesi Kayıt Ederken Bu TC Referans Gösterilecek. ( Yeni Collection Adı Yazılacak )
+     * Örnek2: Personel Oluştururken Bu Yeni
+     * @param newCollection
+     */
+    TC( const std::string& newCollection );
+
+
     TC( const TC &other );
     TC( TC &&other);
+
+    TC& operator=( const TC& other );
+    TC& operator=( TC&& other );
 
     TC& operator=( const bsoncxx::document::value &value );
     TC& operator=( bsoncxx::document::value *value );
@@ -39,8 +53,7 @@ public:
 
 
 
-    TC& operator=( const TC& other );
-    TC& operator=( TC&& other );
+
 
 
     TC& setTCNO( const QString &tcno );
