@@ -137,6 +137,8 @@ public:
             {
                 remove (item);
                 return true;
+            }else{
+                return false;
             }
         }
         return false;
