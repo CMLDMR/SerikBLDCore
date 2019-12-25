@@ -78,6 +78,7 @@ bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
     if( val )
     {
         if( val.value ().result ().inserted_count () ){
+            item->setOid (val.value ().inserted_id ().get_oid ().value.to_string ());
             return true;
         }else{
             return false;
