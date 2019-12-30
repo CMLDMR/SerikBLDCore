@@ -1,38 +1,38 @@
 #include "personel.h"
 
 
-const std::string SerikBLDCore::Personel::Collection{"Personel"};
+const std::string SerikBLDCore::IK::Personel::Collection{"Personel"};
 
 
 
-SerikBLDCore::Personel::Personel() : Item(Collection)
+SerikBLDCore::IK::Personel::Personel() : Item(Collection)
 {
 
 }
 
-SerikBLDCore::Personel::Personel(const Personel &other) : Item(Collection)
-{
-    this->setDocumentView (other.view ());
-}
-
-SerikBLDCore::Personel::Personel(Personel &&other) : Item(Collection)
+SerikBLDCore::IK::Personel::Personel(const Personel &other) : Item(Collection)
 {
     this->setDocumentView (other.view ());
 }
 
-SerikBLDCore::Personel &SerikBLDCore::Personel::operator=(const Personel &other)
+SerikBLDCore::IK::Personel::Personel(Personel &&other) : Item(Collection)
 {
     this->setDocumentView (other.view ());
-    return *this;
 }
 
-SerikBLDCore::Personel &SerikBLDCore::Personel::operator=(Personel &&other)
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::operator=(const Personel &other)
 {
     this->setDocumentView (other.view ());
     return *this;
 }
 
-QString SerikBLDCore::Personel::AdSoyad() const
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::operator=(Personel &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+QString SerikBLDCore::IK::Personel::AdSoyad() const
 {
     auto val = this->element (KeyAdSoyad);
     if( val )
@@ -43,7 +43,7 @@ QString SerikBLDCore::Personel::AdSoyad() const
     }
 }
 
-bool SerikBLDCore::Personel::BuroPersoneli() const
+bool SerikBLDCore::IK::Personel::BuroPersoneli() const
 {
     auto val = this->element (KeyBuroPersonel);
     if( val )
@@ -54,7 +54,7 @@ bool SerikBLDCore::Personel::BuroPersoneli() const
     }
 }
 
-QString SerikBLDCore::Personel::FotoOid() const
+QString SerikBLDCore::IK::Personel::FotoOid() const
 {
     auto val = this->element (KeyFotoOid);
     if( val )
@@ -65,7 +65,7 @@ QString SerikBLDCore::Personel::FotoOid() const
     }
 }
 
-QString SerikBLDCore::Personel::Birim() const
+QString SerikBLDCore::IK::Personel::Birim() const
 {
     auto val = this->element (KeyBirimi);
     if( val )
@@ -76,22 +76,44 @@ QString SerikBLDCore::Personel::Birim() const
     }
 }
 
-void SerikBLDCore::Personel::setAdSoyad(const QString &adsoyad)
+void SerikBLDCore::IK::Personel::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
 }
 
-void SerikBLDCore::Personel::setBuroPersoneli(const bool &buro)
+void SerikBLDCore::IK::Personel::setBuroPersoneli(const bool &buro)
 {
     this->append(KeyBuroPersonel,buro);
 }
 
-void SerikBLDCore::Personel::setFotoOid(const QString &fotoOid)
+void SerikBLDCore::IK::Personel::setFotoOid(const QString &fotoOid)
 {
     this->append(KeyFotoOid,bsoncxx::oid{fotoOid.toStdString ()});
 }
 
-void SerikBLDCore::Personel::setBirim(const QString &birim)
+void SerikBLDCore::IK::Personel::setBirim(const QString &birim)
 {
     this->append(KeyBirimi,birim.toStdString ());
+}
+
+SerikBLDCore::IK::BirimItem::BirimItem()
+    :SerikBLDCore::Item("COllection")
+{
+
+}
+
+SerikBLDCore::IK::BirimItem &SerikBLDCore::IK::BirimItem::setBirimAdi(const QString &birimAdi)
+{
+    this->append(BirimKey::birim,birimAdi.toStdString ());
+    return *this;
+}
+
+QString SerikBLDCore::IK::BirimItem::birimAdi() const
+{
+    auto val = this->element (BirimKey::birim);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
 }

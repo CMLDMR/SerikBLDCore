@@ -15,6 +15,10 @@
 #include <boost/optional.hpp>
 #endif
 
+
+#include "item.h"
+
+
 namespace SerikBLDCore {
 
 class Item;
@@ -26,9 +30,9 @@ public:
     explicit DB();
     DB( const DB &db);
     DB( DB&& other );
-    DB( mongocxx::database* _db );
-    DB( DB* _db );
-    DB( const DB* _db );
+    explicit DB( mongocxx::database* _db );
+    explicit DB( DB* _db );
+    explicit DB( const DB* _db );
     virtual ~DB();
 
     DB& operator=(const DB& otherDB);
@@ -66,6 +70,68 @@ public:
     mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const int &limit = 20 , const int &skip = 0  );
     mongocxx::stdx::optional<mongocxx::cursor> find( const Item &item , const FindOptions& options  );
 
+
+    template< typename V>
+    mongocxx::stdx::optional<mongocxx::result::update> pushValue( const Item& filter , const std::string& key , const V& value )
+    {
+        Item item("none");
+        item.append("$push",Item("none").append(key,value));
+        try {
+            auto upt = this->db ()->collection (filter.getCollection ()).update_one (filter.view (),item.view ());
+            return upt;
+        } catch (mongocxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            return mongocxx::stdx::nullopt;
+        }
+    }
+
+
+    template< typename V>
+    mongocxx::stdx::optional<mongocxx::result::update> pullValue( const Item& filter , const std::string& key , const V& value )
+    {
+        Item item("none");
+        item.append("$pull",Item("none").append(key,value));
+        try {
+            auto upt = this->db ()->collection (filter.getCollection ()).update_one (filter.view (),item.view ());
+            return upt;
+        } catch (mongocxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            this->setLastError (str.c_str ());
+            return mongocxx::stdx::nullopt;
+        }
+    }
+
+    template< typename V >
+    inline bool setField( const Item& filter , const std::string &field , const V& value ){
+
+        auto _oid = filter.oid ();
+
+        if( !_oid )
+        {
+            this->setLastError (QString("%1 %2 Required Object ID").arg (__LINE__)
+                                .arg (__FUNCTION__));
+            return false;
+        }
+
+        Item setDoc( filter.getCollection() );
+        setDoc.append( "_id" , filter.oid().value());
+        setDoc.append( field , value );
+        auto result = DB::updateItem (setDoc);
+        if( result )
+        {
+            if( result.value().modified_count() )
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+
     mongocxx::stdx::optional<mongocxx::result::delete_result> deleteItem( const Item &item );
 
 
@@ -77,18 +143,24 @@ public:
      */
     int64_t countItem( const Item &item );
 
+
+
+
+    QString getLastError();
+    void setLastError(const QString &lastError);
+
 private:
+    //    mongocxx::database _mDB;
+    //    mongocxx::client* mClient;
 
-
-
-
-private:
-//    mongocxx::database _mDB;
-//    mongocxx::client* mClient;
-
+    QString mLastError;
     bool mConstructWithNewClient;
     mongocxx::database* mDB;
 };
+
+
+
+
 
 }
 

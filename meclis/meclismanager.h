@@ -80,6 +80,12 @@ public:
 
     virtual void onList(const QVector<MeclisUyesi> *mlist) override;
 
+    std::vector<SerikBLDCore::Meclis::MeclisDonemi> getDonemList();
+
+    std::vector<SerikBLDCore::Meclis::PartiItem> getPartiList();
+
+    std::vector<SerikBLDCore::Meclis::KomisyonItem> getKomisyonList();
+
 };
 
 

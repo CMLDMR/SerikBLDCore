@@ -2,19 +2,30 @@
 #define PERSONELMANAGER_H
 
 #include "personel.h"
-#include "db.h"
+#include "listitem.h"
 
 namespace SerikBLDCore {
-class SERIKBLDCORE_EXPORT PersonelManager : virtual public DB
+class SERIKBLDCORE_EXPORT PersonelManager : public ListItem<IK::Personel>
 {
 public:
-    PersonelManager();
-    PersonelManager( DB* _mDB );
-    PersonelManager( mongocxx::database* _db );
+    explicit PersonelManager( DB* _mDB );
+    explicit PersonelManager( mongocxx::database* _db );
 
-    QVector<Personel> PersonelList( const std::string &birim );
+    QVector<IK::Personel> PersonelList( const std::string &birim );
+
+    void onList(const QVector<IK::Personel> *mlist) override;
 };
 
-}
+
+
+class SERIKBLDCORE_EXPORT BirimManager : public ListItem<IK::BirimItem>
+{
+public:
+    explicit BirimManager( DB* _db );
+
+    void onList(const QVector<IK::BirimItem> *mlist) override;
+};
+
+};
 
 #endif // PERSONELMANAGER_H

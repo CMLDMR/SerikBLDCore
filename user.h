@@ -31,9 +31,9 @@ public:
     explicit User();
 
 
-    User(mongocxx::database* _db );
+    explicit User(mongocxx::database* _db );
     User(mongocxx::database* _db , bsoncxx::document::value _userValue );
-    User( User* _user);
+    explicit User( User* _user);
 
 
     bool Login( const std::string &_mTel , const std::string &_mPassword);

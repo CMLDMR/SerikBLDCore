@@ -101,12 +101,12 @@ void SerikBLDCore::Dilekce::SetOid(const QString &oid)
 
 }
 
-void SerikBLDCore::Dilekce::AddGorevliPersonel(const Personel &personel)
+void SerikBLDCore::Dilekce::AddGorevliPersonel(const IK::Personel &personel)
 {
     this->pushArray(KeyGorevliPersonel,bsoncxx::document::value(personel.view ()));
 }
 
-void SerikBLDCore::Dilekce::DeleteGorevliPersonel(const Personel &personel)
+void SerikBLDCore::Dilekce::DeleteGorevliPersonel(const IK::Personel &personel)
 {
     auto pList = this->GorevliList ();
     this->removeElement (KeyGorevliPersonel);
@@ -284,9 +284,9 @@ QStringList SerikBLDCore::Dilekce::EkOidList() const
     return list;
 }
 
-QVector<SerikBLDCore::Personel> SerikBLDCore::Dilekce::GorevliList() const
+QVector<SerikBLDCore::IK::Personel> SerikBLDCore::Dilekce::GorevliList() const
 {
-    QVector<Personel> list;
+    QVector<IK::Personel> list;
 
     auto _list = this->element (KeyGorevliPersonel);
 
@@ -295,7 +295,7 @@ QVector<SerikBLDCore::Personel> SerikBLDCore::Dilekce::GorevliList() const
         auto __list = _list.value ().get_array ().value;
         for( auto item : __list )
         {
-            Personel personelItem;
+            IK::Personel personelItem;
             personelItem.setDocumentView (item.get_document ().view ());
             list.push_back (std::move(personelItem));
         }

@@ -55,8 +55,8 @@ public:
     void SetSaat( const int &mSecsFromBeginDay );
     void AddBilgiBirim( const QString &bilgiBirim );
     void SetOid( const QString &oid );
-    void AddGorevliPersonel(const Personel &personel );
-    void DeleteGorevliPersonel( const Personel &personel );
+    void AddGorevliPersonel(const IK::Personel &personel );
+    void DeleteGorevliPersonel( const IK::Personel &personel );
     void SetDurum( const QString &dilekceDurum);
     void SetCevapOid( const QString &cevapOid );
     Dilekce& setYil( const int& yil );
@@ -74,7 +74,7 @@ public:
     QString saatText() const;
     QString dilekceOid() const;
     QStringList EkOidList() const;
-    QVector<Personel> GorevliList() const;
+    QVector<IK::Personel> GorevliList() const;
     QVector<QString> BilgiBirimList() const;
     QString Durum() const;
     QString cevapOid() const;

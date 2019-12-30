@@ -99,8 +99,8 @@ public:
     Talep& setDurum( const QString &durum );
     Talep& setKaynak( const QString &kaynak );
     Talep& setBirim( const QString &birim );
-    Talep& AddGorevliPersonel(const Personel &personel );
-    Talep& DeleteGorevliPersonel( const Personel &personel );
+    Talep& AddGorevliPersonel(const IK::Personel &personel );
+    Talep& DeleteGorevliPersonel( const IK::Personel &personel );
     Talep& setYil( const int& yil );
     Talep& setAy( const QString& ay );
     Talep& setFoto( const QString& fotooid );
@@ -120,7 +120,7 @@ public:
     QString kaynak() const;
     QString kaynakColor() const;
     QString birim() const;
-    QVector<Personel> GorevliList() const;
+    QVector<IK::Personel> GorevliList() const;
     QString fotoOid() const;
     bool kisiGizli() const;
 

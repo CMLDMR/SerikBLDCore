@@ -7,6 +7,9 @@
 
 namespace SerikBLDCore {
 
+namespace IK {
+
+
 class SERIKBLDCORE_EXPORT Personel : public Item
 {
     static const std::string Collection;
@@ -40,6 +43,30 @@ public:
     void setBirim( const QString &birim );
 };
 
+
+
+
+
+namespace BirimKey {
+
+static const std::string Collection{"Müdürlükler"};
+static const std::string birim{"birim"};
+
+}
+
+
+class SERIKBLDCORE_EXPORT BirimItem : public Item
+{
+public:
+    explicit BirimItem();
+
+    BirimItem& setBirimAdi( const QString& birimAdi );
+
+    QString birimAdi() const;
+
+};
+
+}
 }
 
 

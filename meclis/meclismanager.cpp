@@ -67,6 +67,54 @@ void SerikBLDCore::Meclis::UyeManager::onList(const QVector<SerikBLDCore::Meclis
 
 }
 
+std::vector<SerikBLDCore::Meclis::MeclisDonemi> SerikBLDCore::Meclis::UyeManager::getDonemList()
+{
+    std::vector<SerikBLDCore::Meclis::MeclisDonemi> list;
+    auto cursor = this->find (SerikBLDCore::Meclis::MeclisDonemi(),0,0);
+    if( cursor )
+    {
+        for( auto item : *cursor )
+        {
+            SerikBLDCore::Meclis::MeclisDonemi donem;
+            donem.setDocumentView (item);
+            list.push_back (donem);
+        }
+    }
+    return list;
+}
+
+std::vector<SerikBLDCore::Meclis::PartiItem> SerikBLDCore::Meclis::UyeManager::getPartiList()
+{
+    std::vector<SerikBLDCore::Meclis::PartiItem> list;
+    auto cursor = this->find (SerikBLDCore::Meclis::PartiItem(),0,0);
+    if( cursor )
+    {
+        for( auto item : *cursor )
+        {
+            SerikBLDCore::Meclis::PartiItem donem;
+            donem.setDocumentView (item);
+            list.push_back (donem);
+        }
+    }
+    return list;
+}
+
+std::vector<SerikBLDCore::Meclis::KomisyonItem> SerikBLDCore::Meclis::UyeManager::getKomisyonList()
+{
+    std::vector<SerikBLDCore::Meclis::KomisyonItem> list;
+    auto cursor = this->find (SerikBLDCore::Meclis::KomisyonItem(),0,0);
+    if( cursor )
+    {
+        for( auto item : *cursor )
+        {
+            SerikBLDCore::Meclis::KomisyonItem donem;
+            donem.setDocumentView (item);
+            list.push_back (donem);
+        }
+    }
+    return list;
+}
+
 SerikBLDCore::Meclis::DonemManager::DonemManager(SerikBLDCore::DB *db)
 : SerikBLDCore::ListItem<SerikBLDCore::Meclis::MeclisDonemi> (db)
 {

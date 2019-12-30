@@ -103,6 +103,42 @@ public:
     }
 
 
+    void pullArray( const std::string& key , const bsoncxx::types::value &value )
+    {
+#ifdef DESKTOP
+        auto arr = array{};
+        auto existArray = this->element (key);
+
+        if( existArray )
+        {
+            this->removeElement ( key );
+            for( auto item : existArray.value ().get_array ().value )
+            {
+
+                if( value != item.get_value ())
+                {
+                    try {
+                        arr.append (item.get_value ());
+                    } catch (bsoncxx::exception &e) {
+                        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                        std::cout << str << std::endl;
+                    }
+                }
+            }
+        }
+
+        try {
+            mDoc.append (kvp(key,arr));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
+
+#else
+
+
+#endif
+    }
 
     template<typename T>
     Item& append( const std::string &key ,const T &value ){

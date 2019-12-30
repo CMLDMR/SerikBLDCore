@@ -1,10 +1,34 @@
 #include "meclisuyesi.h"
-
+#include <algorithm>
 
 SerikBLDCore::Meclis::MeclisUyesi::MeclisUyesi()
-    :SerikBLDCore::TC (UyeKey::Collection)
+    :SerikBLDCore::Item (UyeKey::Collection)
 {
 
+}
+
+SerikBLDCore::Meclis::MeclisUyesi::MeclisUyesi(const SerikBLDCore::Meclis::MeclisUyesi &other)
+    :SerikBLDCore::Item (other.getCollection ())
+{
+    this->setDocumentView (other.view ());
+}
+
+SerikBLDCore::Meclis::MeclisUyesi::MeclisUyesi(SerikBLDCore::Meclis::MeclisUyesi &&other)
+    :SerikBLDCore::Item (other.getCollection ())
+{
+    this->setDocumentView (other.view ());
+}
+
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::operator=(const SerikBLDCore::Meclis::MeclisUyesi &other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::operator=(SerikBLDCore::Meclis::MeclisUyesi &&other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
 }
 
 SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setTCOid(const std::string &tcOid)
@@ -19,29 +43,33 @@ SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setTCOid(c
     return *this;
 }
 
-SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setPartiOid(const std::string &partiOid)
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setPartiAdi(const std::string &partiAdi)
 {
-    this->append(UyeKey::partiOid,bsoncxx::oid{partiOid});
+    this->append(UyeKey::partiAdi,partiAdi);
     return *this;
 }
 
-SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setPartiOid(const bsoncxx::oid &partiOid)
+
+
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::addKomisyonAdi(const std::string &komisyonAdi)
 {
-    this->append(UyeKey::partiOid,partiOid);
+    this->pushArray(UyeKey::komisyonAdi,komisyonAdi);
     return *this;
 }
 
-SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setKomisyonOid(const std::string &komisyonOid)
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::delKomisyonAdi(const std::string &komisyonAdi)
 {
-    this->append(UyeKey::komisyonOid,bsoncxx::oid{komisyonOid});
+    this->pullArray(UyeKey::komisyonAdi,bsoncxx::types::value (bsoncxx::types::b_utf8{komisyonAdi}));
     return *this;
 }
 
-SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setKomisyonOid(const bsoncxx::oid &komisyonOid)
+SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::setDonemAdi(const std::string &donem)
 {
-    this->append(UyeKey::komisyonOid,komisyonOid);
+    this->append(UyeKey::donemAdi,donem);
     return *this;
 }
+
+
 
 QString SerikBLDCore::Meclis::MeclisUyesi::tcOid() const
 {
@@ -53,24 +81,43 @@ QString SerikBLDCore::Meclis::MeclisUyesi::tcOid() const
     return "";
 }
 
-QString SerikBLDCore::Meclis::MeclisUyesi::partiOid() const
+QString SerikBLDCore::Meclis::MeclisUyesi::partiAdi() const
 {
-    auto val = this->element (UyeKey::partiOid);
+    auto val = this->element (UyeKey::partiAdi);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
     }
     return "";
 }
 
-QString SerikBLDCore::Meclis::MeclisUyesi::komisyonOid() const
+QString SerikBLDCore::Meclis::MeclisUyesi::donemAdi() const
 {
-    auto val = this->element (UyeKey::komisyonOid);
+    auto val = this->element (UyeKey::donemAdi);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
     }
     return "";
+}
+
+QVector<QString> SerikBLDCore::Meclis::MeclisUyesi::komisyonUyelikleri() const
+{
+    QVector<QString> list;
+    auto val = this->element (UyeKey::komisyonAdi);
+    if( val )
+    {
+//        std::transform(val.value ().get_array ().value.begin (),
+//                       val.value ().get_array ().value.end (),
+//                       val.value ().get_array ().value.begin (),
+//                       [&list](const bsoncxx::v_noabi::array::element &element){ list.push_back (QString::fromStdString (element.get_utf8 ().value.to_string ())); });
+
+        for( auto item : val.value ().get_array ().value )
+        {
+            list.push_back (QString::fromStdString (item.get_utf8 ().value.to_string ()));
+        }
+    }
+    return list;
 }
 
 
@@ -80,18 +127,23 @@ SerikBLDCore::Meclis::MeclisDonemi::MeclisDonemi()
 
 }
 
-SerikBLDCore::Meclis::MeclisDonemi &SerikBLDCore::Meclis::MeclisDonemi::setDonem(const std::string &donem)
+
+
+SerikBLDCore::Meclis::MeclisDonemi &SerikBLDCore::Meclis::MeclisDonemi::setDonem(const int &baslangicYear, const int &bitisYear)
 {
-    this->append(DonemKey::donem,donem);
+    this->append(DonemKey::baslangicJulianDay,bsoncxx::types::b_int32{baslangicYear});
+    this->append(DonemKey::bitisJulianDay,bsoncxx::types::b_int32{bitisYear});
     return *this;
 }
 
 QString SerikBLDCore::Meclis::MeclisDonemi::donem() const
 {
-    auto val = this->element (DonemKey::donem);
-    if( val )
+    auto bas = this->element (DonemKey::baslangicJulianDay);
+    auto bit = this->element (DonemKey::bitisJulianDay);
+
+    if( bas && bit )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+        return QString("%1 - %2").arg (bas.value ().get_int32 ().value).arg (bit.value().get_int32 ().value);
     }
     return "";
 }

@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include <fstream>
 #include <QDir>
-#include "item.h"
+//#include "item.h"
 
 
 
@@ -110,7 +110,7 @@ QVector<QString> SerikBLDCore::DB::getMahalleler()
                 list.append (doc["Mahalle"].get_utf8 ().value.to_string().c_str ());
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
-                std::cout << str << std::endl;
+                this->setLastError (str.c_str ());
             }
         }
     }
@@ -134,7 +134,8 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
     try {
         doc.append(bsoncxx::builder::basic::kvp("key",bsoncxx::oid{fileOid.toStdString ()}));
     } catch (bsoncxx::exception& e) {
-        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+        this->setLastError (str.c_str ());
         return "NULL";
     }
 
@@ -146,7 +147,8 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
         downloader = bucket.open_download_stream(roid);
 
     } catch (bsoncxx::exception &e) {
-        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+        this->setLastError (str.c_str ());
         return "";
     }
 
@@ -177,8 +179,6 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
     if( QFile::exists(fullFilename) )
     {
         return fullFilename.toStdString ();
-    }else{
-        std::cout << "FILE NOT FOUND: " << fullFilename.toStdString() << std::endl;
     }
 
     auto buffer_size = std::min(file_length, static_cast<std::int64_t>(downloader.chunk_size()));
@@ -191,21 +191,15 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
     if( out.is_open() )
     {
-
         while ( auto length_read = downloader.read(buffer.get(), static_cast<std::size_t>(buffer_size)) ) {
-
             auto bufferPtr = buffer.get();
             out.write(reinterpret_cast<char*>(bufferPtr),length_read);
-
             bytes_counter += static_cast<std::int32_t>( length_read );
-
         }
-
         out.close();
-    }
-
-    else{
-        std::cout << "Error Can Not Open File: " <<fullFilename.toStdString() << std::endl;
+    }else{
+        std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + fullFilename.toStdString() ;
+        this->setLastError (str.c_str ());
     }
 
     return fullFilename.toStdString ();
@@ -220,7 +214,8 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     try {
         doc.append(bsoncxx::builder::basic::kvp("key",bsoncxx::oid{fileOid.toStdString ()}));
     } catch (bsoncxx::exception& e) {
-        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
+        std::string str = "Error: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+        this->setLastError (str.c_str ());
         return "NULL";
     }
 
@@ -231,7 +226,8 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
         auto roid = bsoncxx::types::value(doc.view()["key"].get_oid());
         downloader = bucket.open_download_stream(roid);
     } catch (bsoncxx::exception &e) {
-        std::cout << __LINE__ << " Error: " << e.what() << std::endl;
+        std::string str = "Error: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+        this->setLastError (str.c_str ());
         return "img/404-header.png";
     }
 
@@ -264,8 +260,6 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     if( QFile::exists("docroot/"+fullFilename) )
     {
         return fullFilename.toStdString ();
-    }else{
-        std::cout << "FILE NOT FOUND: " << fullFilename.toStdString() << std::endl;
     }
 
     auto buffer_size = std::min(file_length, static_cast<std::int64_t>(downloader.chunk_size()));
@@ -290,7 +284,8 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
 
         out.close();
     }else{
-        std::cout << "Error Can Not Open File: " <<fullFilename.toStdString() << std::endl;
+        std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + fullFilename.toStdString() ;
+        this->setLastError (str.c_str ());
     }
 
     return fullFilename.toStdString ();
@@ -311,14 +306,14 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
         auto res = uploader.close();
         return res.id();
     }else{
-        std::cout << "Can not open File " << filepath.toStdString () << std::endl;
+        std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + filepath.toStdString() ;
+        this->setLastError (str.c_str ());
     }
 }
 
 bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
 {
     auto bucket = mDB->gridfs_bucket ();
-
     mongocxx::gridfs::uploader uploader;
     QFile file( filepath );
     if( file.open( QIODevice::ReadOnly ) )
@@ -332,7 +327,7 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
         auto res = uploader.close();
         return res.id();
     }else{
-        std::cout << "Can not open File " << filepath.toStdString () << std::endl;
+        std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + filepath.toStdString() ;
         return uploader.close ().id ();
     }
 }
@@ -345,11 +340,11 @@ bool SerikBLDCore::DB::deleteGridFS(const QString &fileOid)
         return true;
     } catch (mongocxx::gridfs_exception &e) {
         std::string str = "ERROR GridFS Exception: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return false;
     } catch ( mongocxx::bulk_write_exception &e) {
         std::string str = "ERROR bulk_write_exception: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return false;
     }
 }
@@ -362,7 +357,7 @@ mongocxx::stdx::optional<mongocxx::result::insert_one> SerikBLDCore::DB::insertI
         return ins;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -376,7 +371,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
         filter.append (kvp("_id",item.view ()["_id"].get_oid ().value));
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return boost::none;
     }
 
@@ -391,7 +386,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
                 doc.append (kvp(element.key (),element.get_value ()));
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                std::cout << str << std::endl;
+                this->setLastError (str.c_str ());
                 _errorOccured = true;
                 break;
             }
@@ -408,7 +403,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
         setDoc.append (kvp("$set",doc));
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return boost::none;
     }
 
@@ -418,7 +413,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
         return upt;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 
@@ -432,7 +427,7 @@ mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem
         return value;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Collection: " + item.getCollection ();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -448,7 +443,7 @@ mongocxx::stdx::optional<bsoncxx::document::value> SerikBLDCore::DB::findOneItem
         return value;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Collection: " + item.getCollection ();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -460,7 +455,7 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const Item &it
         return std::move(cursor);
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -483,7 +478,7 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
         return std::move(cursor);
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -512,7 +507,7 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
                     doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                    std::cout << str << std::endl;
+                    this->setLastError (str.c_str ());
                 }
             }
             findOptions.projection (doc.view ());
@@ -531,7 +526,7 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
                     doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                    std::cout << str << std::endl;
+                    this->setLastError (str.c_str ());
                 }
             }
             findOptions.sort (doc.view ());
@@ -544,7 +539,7 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
         return std::move(cursor);
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() +" Collection: " + item.getCollection ();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -558,7 +553,7 @@ mongocxx::stdx::optional<mongocxx::result::delete_result> SerikBLDCore::DB::dele
         return del;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return mongocxx::stdx::nullopt;
     }
 }
@@ -572,7 +567,21 @@ std::int64_t SerikBLDCore::DB::countItem(const Item &item)
         return count;
     } catch (mongocxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        this->setLastError (str.c_str ());
         return -1;
     }
 }
+
+QString SerikBLDCore::DB::getLastError()
+{
+    auto str = mLastError;
+    mLastError = "";
+    return str;
+}
+
+void SerikBLDCore::DB::setLastError(const QString &lastError)
+{
+    mLastError = lastError;
+}
+
+

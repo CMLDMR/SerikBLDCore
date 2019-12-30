@@ -124,13 +124,13 @@ SerikBLDCore::Talep &SerikBLDCore::Talep::setBirim(const QString &birim)
     return *this;
 }
 
-SerikBLDCore::Talep &SerikBLDCore::Talep::AddGorevliPersonel(const Personel &personel)
+SerikBLDCore::Talep &SerikBLDCore::Talep::AddGorevliPersonel(const IK::Personel &personel)
 {
     this->pushArray(TalepKey::GorevliPersonel,bsoncxx::document::value(personel.view ()));
     return *this;
 }
 
-SerikBLDCore::Talep &SerikBLDCore::Talep::DeleteGorevliPersonel(const Personel &personel)
+SerikBLDCore::Talep &SerikBLDCore::Talep::DeleteGorevliPersonel(const IK::Personel &personel)
 {
     auto pList = this->GorevliList ();
     this->removeElement (TalepKey::GorevliPersonel);
@@ -332,9 +332,9 @@ QString SerikBLDCore::Talep::birim() const
     return "";
 }
 
-QVector<SerikBLDCore::Personel> SerikBLDCore::Talep::GorevliList() const
+QVector<SerikBLDCore::IK::Personel> SerikBLDCore::Talep::GorevliList() const
 {
-    QVector<Personel> list;
+    QVector<IK::Personel> list;
 
     auto _list = this->element (TalepKey::GorevliPersonel);
 
@@ -343,7 +343,7 @@ QVector<SerikBLDCore::Personel> SerikBLDCore::Talep::GorevliList() const
         auto __list = _list.value ().get_array ().value;
         for( auto item : __list )
         {
-            Personel personelItem;
+            IK::Personel personelItem;
             personelItem.setDocumentView (item.get_document ().view ());
             list.push_back (std::move(personelItem));
         }
