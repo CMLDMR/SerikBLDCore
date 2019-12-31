@@ -50,6 +50,7 @@ public:
     }
 
 
+    virtual void errorOccured( const std::string& errorText );
 
     QVector<QString> getMahalleler() ;
 
@@ -124,9 +125,11 @@ public:
             {
                 return true;
             }else{
+                setLastError (QString("%1 Modified Document").arg (result.value ().modified_count ()));
                 return false;
             }
         }else{
+            setLastError (QString("setField No Result"));
             return false;
         }
     }

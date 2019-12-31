@@ -63,7 +63,6 @@ SerikBLDCore::DB::~DB()
     if( mConstructWithNewClient )
     {
         std::cout << "Delete DB Connection, CurrentConnection Count: " <<  --DBConnectionCount << std::endl;
-//        delete mClient;
     }
     std::cout << "DB Destructor End" << std::endl;
 }
@@ -87,6 +86,11 @@ SerikBLDCore::DB &SerikBLDCore::DB::operator=(mongocxx::database *_db)
     std::cout << "DB &DB::operator=(const DB &otherDB): " << DBConnectionCount << std::endl;
     mDB = _db;
     return *this;
+}
+
+void SerikBLDCore::DB::errorOccured(const std::string &errorText)
+{
+
 }
 
 QVector<QString> SerikBLDCore::DB::getMahalleler()
@@ -328,6 +332,7 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
         return res.id();
     }else{
         std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + filepath.toStdString() ;
+        const_cast<SerikBLDCore::DB*>(this)->setLastError (str.c_str ());
         return uploader.close ().id ();
     }
 }
@@ -582,6 +587,7 @@ QString SerikBLDCore::DB::getLastError()
 void SerikBLDCore::DB::setLastError(const QString &lastError)
 {
     mLastError = lastError;
+    errorOccured (lastError.toStdString ());
 }
 
 
