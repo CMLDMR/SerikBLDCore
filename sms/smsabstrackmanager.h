@@ -4,9 +4,9 @@
 #include "SerikBLDCore_global.h"
 #include "db.h"
 #include "smsitem.h"
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
+//#include <QNetworkAccessManager>
+//#include <QNetworkReply>
+//#include <QNetworkRequest>
 
 
 namespace SerikBLDCore {
@@ -46,7 +46,7 @@ public:
      * @param numara
      * @return
      */
-    QVector<SMS::SMSItem> listSMS( const QString& numara );
+    QVector<SMS::SMSItem> listSMS( const QString& numara , const int& skip = 0 );
 
 
     /**
@@ -55,6 +55,13 @@ public:
      * @return
      */
     virtual bool insertAndSendSMS( const SMS::SMSItem& item ) = 0;
+
+    /**
+     * @brief checkRapor: SMS iletilip iletilmediğini Sorgular
+     * @param item
+     * @return ileti raporu var mı kontrol eder.
+     */
+    virtual bool checkRapor( const SMS::SMSItem& item ) = 0;
 
     /**
      * @brief updateSMS Mevcut SMS Günceller
@@ -76,6 +83,21 @@ public:
      * @param lastSendedSMSID
      */
     void setLastSendedSMSID(const QString &lastSendedSMSID);
+
+
+
+    /**
+     * @brief confirmTelefonNumarasi
+     * @param telefonNumarasi
+     * @return
+     */
+    bool confirmTelefonNumarasi( const QString& telefonNumarasi );
+
+
+
+private:
+    QString __charList{"0123456789"};
+
 };
 }
 

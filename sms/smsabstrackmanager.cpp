@@ -21,6 +21,38 @@ void SerikBLDCore::SMSAbstractManager::setLastSendedSMSID(const QString &lastSen
     mLastSendedSMSID = lastSendedSMSID;
 }
 
+bool SerikBLDCore::SMSAbstractManager::confirmTelefonNumarasi(const QString &telefonNumarasi)
+{
+    bool telFormatDogru = true;
+
+    if( telefonNumarasi.count () != 11 ){
+        telFormatDogru = false;
+        return false;
+    }
+
+    if( telefonNumarasi.at (0) != '0' )
+    {
+        telFormatDogru = false;
+        return false;
+    }
+
+    if( telefonNumarasi.at (1) != '5' )
+    {
+        telFormatDogru = false;
+        return false;
+    }
+
+    for( auto item : telefonNumarasi )
+    {
+        if( !__charList.contains (item) )
+        {
+            telFormatDogru = false;
+        }
+    }
+    return telFormatDogru;
+
+}
+
 SerikBLDCore::SMSAbstractManager::SMSAbstractManager(DB *_db) : DB(_db)
 {
     if( _db == nullptr )
@@ -61,6 +93,7 @@ bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara, int &kalan
     SMS::SMSItem filter;
 
     filter.setJulianDay (QDate::currentDate ().toJulianDay ());
+    filter.setNumara (numara);
 
     SMS::SMSItem findOptions;
     findOptions.append("_id",-1);
@@ -84,7 +117,7 @@ bool SerikBLDCore::SMSAbstractManager::canSend(const QString &numara, int &kalan
     return true;
 }
 
-QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(const QString &numara)
+QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(const QString &numara, const int &skip)
 {
     QVector<SMS::SMSItem> list;
 
@@ -97,7 +130,7 @@ QVector<SerikBLDCore::SMS::SMSItem> SerikBLDCore::SMSAbstractManager::listSMS(co
     filter.setNumara (numara);
 
 
-    auto cursor = this->find (filter);
+    auto cursor = this->find (filter,20,skip);
 
     if( cursor )
     {

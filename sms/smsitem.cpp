@@ -110,6 +110,38 @@ int SerikBLDCore::SMS::SMSItem::julianDay() const
     return -1;
 }
 
+SerikBLDCore::SMS::SMSItem &SerikBLDCore::SMS::SMSItem::setRapor(const QString &raporText)
+{
+    this->append(raporKey,raporText.toStdString ());
+    return *this;
+}
+
+QString SerikBLDCore::SMS::SMSItem::rapor() const
+{
+    auto val = this->element (raporKey);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "rapor yok";
+}
+
+SerikBLDCore::SMS::SMSItem &SerikBLDCore::SMS::SMSItem::setRaporID(const int &id)
+{
+    this->append(smsIDRapor,bsoncxx::types::b_int32{id});
+    return *this;
+}
+
+int SerikBLDCore::SMS::SMSItem::raporID() const
+{
+    auto val = this->element (smsIDRapor);
+    if( val )
+    {
+        return val.value ().get_int32 ().value;
+    }
+    return 0;
+}
+
 std::ostream &operator <<(std::ostream &streamer, const SerikBLDCore::SMS::SMSItem &item)
 {
     streamer << "SMS: "<<item.smsText ().toStdString () << " NUMARA: " << item.numaraText ().toStdString () << " ID: " << item.idText ().toStdString () << " JulianDay: " << item.julianDay () << std::endl;

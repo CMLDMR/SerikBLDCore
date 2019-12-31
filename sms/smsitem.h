@@ -20,6 +20,8 @@ static const std::string numara{"telefon"};
 static const std::string smsID{"smsid"};
 static const std::string mSecStartDay{"mSecStartDay"};
 static const std::string julianday{"julianDay"};
+static const std::string raporKey{"rapor"};
+static const std::string smsIDRapor{"smsidrapor"};
 
 /**
  * @brief The SMSItem class
@@ -85,7 +87,7 @@ public:
     /**
      * @brief setID Gönderilen SMS ID'sini Set Eder
      * @param smsIDText
-     * @return
+     * @return "ID:5445844"
      */
     SMSItem& setID( const QString& smsIDText );
 
@@ -120,6 +122,15 @@ public:
      * @return
      */
     int julianDay() const;
+
+
+    SMSItem& setRapor( const QString &raporText);
+
+    QString rapor() const;
+
+    SMSItem& setRaporID( const int& id );
+
+    int raporID() const;
 
 
 
