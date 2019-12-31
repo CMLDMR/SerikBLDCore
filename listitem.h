@@ -54,7 +54,7 @@ public:
         return __mlist;
     }
 
-    inline QVector<T>& UpdateList(const T& filter  ){
+    inline QVector<T>& UpdateList(const T& filter = T() ){
         __mlist.clear ();
         __count = this->countItem (filter);
         auto cursor = this->find ( filter , __limit , __skip );
@@ -189,6 +189,17 @@ public:
 
     virtual void onList( const QVector<T>  *mlist ) = 0;
 
+    const QVector<T> &List() const
+    {
+        return __mlist;
+    }
+
+
+    virtual void errorOccured(const std::string &errorText) override
+    {
+
+    }
+
 private:
     QVector<T> __mlist;
 
@@ -226,6 +237,8 @@ private:
     int __limit = 20;
     int __skip = 0;
     int __count = 0;
+
+
 
 };
 
