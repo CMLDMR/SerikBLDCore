@@ -10,17 +10,27 @@ namespace SerikBLDCore {
 namespace IK {
 
 
+namespace Statu {
+static const std::string Baskan{"Başkan"};;
+static const std::string BaskanYardimcisi{"Başkan Yardımcısı"};;
+static const std::string Mudur{"Müdür"};;
+static const std::string Sef{"Şef"};;
+static const std::string Personel{"Personel"};;
+}
+
+
 class SERIKBLDCORE_EXPORT Personel : public Item
 {
+public:
     static const std::string Collection;
-    const std::string KeyAdSoyad{"ad soyad"};
-    const std::string KeyBuroPersonel{"Büro Personeli"};
-    const std::string KeyTelefon{"telefon"};
-    const std::string KeyStatu{"Statü"};
-    const std::string KeyBirimi{"Birimi"};
-    const std::string KeyFotoOid{"fotooid"};
-    const std::string KeyPassword{"password"};
-    const std::string KeyTCNO{"tcno"};
+    static const std::string KeyAdSoyad;
+    static const std::string KeyBuroPersonel;
+    static const std::string KeyTelefon;
+    static const std::string KeyStatu;
+    static const std::string KeyBirimi;
+    static const std::string KeyFotoOid;
+    static const std::string KeyPassword;
+    static const std::string KeyTCNO;
 public:
     explicit Personel();
     Personel( const Personel &other );
@@ -33,14 +43,22 @@ public:
     bool BuroPersoneli() const;
     QString FotoOid() const;
     QString Birim() const;
+    QString statu() const;
+    QString telefon() const;
+    QString sifre() const;
 
 
 
+    Personel& setAdSoyad( const QString &adsoyad );
+    Personel& setBuroPersoneli( const bool &buro = true );
+    Personel& setFotoOid( const QString &fotoOid );
+    Personel& setBirim( const QString &birim );
+    Personel& setStatu( const QString &statu );
+    Personel& setTelefon( const QString &telefon );
+    Personel& setSifre( const QString &sifre );
 
-    void setAdSoyad( const QString &adsoyad );
-    void setBuroPersoneli( const bool &buro = true );
-    void setFotoOid( const QString &fotoOid );
-    void setBirim( const QString &birim );
+
+    virtual void errorOccured(const std::string &errorText) override;
 };
 
 
@@ -50,7 +68,7 @@ public:
 namespace BirimKey {
 
 static const std::string Collection{"Müdürlükler"};
-static const std::string birim{"birim"};
+static const std::string birim{"Birim"};
 
 }
 
@@ -59,6 +77,11 @@ class SERIKBLDCORE_EXPORT BirimItem : public Item
 {
 public:
     explicit BirimItem();
+    BirimItem( const BirimItem& other );
+    BirimItem( BirimItem&& other );
+
+    BirimItem& operator=( const BirimItem& other );
+    BirimItem& operator=( BirimItem& other );
 
     BirimItem& setBirimAdi( const QString& birimAdi );
 

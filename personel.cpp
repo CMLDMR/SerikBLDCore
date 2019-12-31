@@ -2,7 +2,14 @@
 
 
 const std::string SerikBLDCore::IK::Personel::Collection{"Personel"};
-
+const std::string SerikBLDCore::IK::Personel::KeyAdSoyad{"ad soyad"};
+const std::string SerikBLDCore::IK::Personel::KeyBuroPersonel{"Büro Personeli"};
+const std::string SerikBLDCore::IK::Personel::KeyTelefon{"telefon"};
+const std::string SerikBLDCore::IK::Personel::KeyStatu{"Statü"};
+const std::string SerikBLDCore::IK::Personel::KeyBirimi{"Birimi"};
+const std::string SerikBLDCore::IK::Personel::KeyFotoOid{"fotooid"};
+const std::string SerikBLDCore::IK::Personel::KeyPassword{"password"};
+const std::string SerikBLDCore::IK::Personel::KeyTCNO{"tcno"};
 
 
 SerikBLDCore::IK::Personel::Personel() : Item(Collection)
@@ -76,30 +83,114 @@ QString SerikBLDCore::IK::Personel::Birim() const
     }
 }
 
-void SerikBLDCore::IK::Personel::setAdSoyad(const QString &adsoyad)
+QString SerikBLDCore::IK::Personel::statu() const
+{
+    auto val = this->element (KeyStatu);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString SerikBLDCore::IK::Personel::telefon() const
+{
+    auto val = this->element (KeyTelefon);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+QString SerikBLDCore::IK::Personel::sifre() const
+{
+    auto val = this->element (KeyPassword);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }else{
+        return "";
+    }
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
+    return *this;
 }
 
-void SerikBLDCore::IK::Personel::setBuroPersoneli(const bool &buro)
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setBuroPersoneli(const bool &buro)
 {
     this->append(KeyBuroPersonel,buro);
+    return *this;
 }
 
-void SerikBLDCore::IK::Personel::setFotoOid(const QString &fotoOid)
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setFotoOid(const QString &fotoOid)
 {
     this->append(KeyFotoOid,bsoncxx::oid{fotoOid.toStdString ()});
+    return *this;
 }
 
-void SerikBLDCore::IK::Personel::setBirim(const QString &birim)
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setBirim(const QString &birim)
 {
     this->append(KeyBirimi,birim.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setStatu(const QString &statu)
+{
+    this->append(KeyStatu,statu.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setTelefon(const QString &telefon)
+{
+    this->append(KeyTelefon,telefon.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setSifre(const QString &sifre)
+{
+    this->append(KeyPassword,sifre.toStdString ());
+    return *this;
+}
+
+void SerikBLDCore::IK::Personel::errorOccured(const std::string &errorText)
+{
+
 }
 
 SerikBLDCore::IK::BirimItem::BirimItem()
-    :SerikBLDCore::Item("COllection")
+    :SerikBLDCore::Item(BirimKey::Collection)
 {
 
+}
+
+SerikBLDCore::IK::BirimItem::BirimItem(const SerikBLDCore::IK::BirimItem &other)
+    :SerikBLDCore::Item(BirimKey::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+SerikBLDCore::IK::BirimItem::BirimItem(SerikBLDCore::IK::BirimItem &&other)
+    :SerikBLDCore::Item(BirimKey::Collection)
+{
+    this->setDocumentView (other.view ());
+}
+
+SerikBLDCore::IK::BirimItem &SerikBLDCore::IK::BirimItem::operator=(const SerikBLDCore::IK::BirimItem &other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
+}
+
+SerikBLDCore::IK::BirimItem &SerikBLDCore::IK::BirimItem::operator=(SerikBLDCore::IK::BirimItem &other)
+{
+    this->setDocumentView (other.view ());
+    return *this;
 }
 
 SerikBLDCore::IK::BirimItem &SerikBLDCore::IK::BirimItem::setBirimAdi(const QString &birimAdi)
