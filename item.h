@@ -35,16 +35,22 @@ public:
     Item& operator=(const Item &value);
     Item& operator=( Item &&other );
 
+    virtual void errorOccured(const std::string& errorText ) ;
+
 
 #ifdef DESKTOP
     Item(const bsoncxx::document::view mView , const std::string &_Collection);
-    void operator=(const document &value);
-    void operator=(const bsoncxx::document::view &view);
-    void setDocumentView( const bsoncxx::document::view &view);
+    Item& operator=(const document &value);
+    Item& operator=(const bsoncxx::document::view &view);
+    SerikBLDCore::Item& setDocumentView( const bsoncxx::document::view &view);
     bsoncxx::document::view view() const;
     boost::optional<bsoncxx::types::value> element(std::string key) const;
     boost::optional<bsoncxx::oid> oid() const;
-    boost::optional<document> ItemFilter() const;
+
+    boost::optional<bsoncxx::types::value> element(std::string key);
+    boost::optional<bsoncxx::oid> oid();
+
+    boost::optional<document> ItemFilter();
 #else
 
 
@@ -78,7 +84,7 @@ public:
                     arr.append (item.get_value ());
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                    std::cout << str << std::endl;
+                    errorOccured (str);
                 }
             }
         }
@@ -87,14 +93,14 @@ public:
             arr.append (value);
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
         }
 
         try {
             mDoc.append (kvp(key,arr));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
         }
 #else
 
@@ -121,7 +127,7 @@ public:
                         arr.append (item.get_value ());
                     } catch (bsoncxx::exception &e) {
                         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                        std::cout << str << std::endl;
+                        errorOccured (str);
                     }
                 }
             }
@@ -131,7 +137,7 @@ public:
             mDoc.append (kvp(key,arr));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
         }
 
 #else
@@ -150,7 +156,7 @@ public:
             mDoc.append (kvp(key,value));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
         }
 
 #else
@@ -172,7 +178,7 @@ public:
             mDoc.append (kvp(key,value.view ()));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
         }
 
 #else

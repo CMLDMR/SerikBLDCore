@@ -20,7 +20,7 @@ SerikBLDCore::Item::~Item()
     mDoc.clear ();
 }
 
-void SerikBLDCore::Item::operator=(const bsoncxx::builder::basic::document &value)
+SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::builder::basic::document &value)
 {
     mDoc.clear ();
 
@@ -28,25 +28,28 @@ void SerikBLDCore::Item::operator=(const bsoncxx::builder::basic::document &valu
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
+    return *this;
 }
 
-void SerikBLDCore::Item::operator=(const bsoncxx::document::view &view)
+SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::document::view &view)
 {
     mDoc.clear ();
     for( auto item : view )
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
+    return *this;
 }
 
 
-void SerikBLDCore::Item::setDocumentView(const bsoncxx::document::view &view)
+SerikBLDCore::Item& SerikBLDCore::Item::setDocumentView(const bsoncxx::document::view &view)
 {
     mDoc.clear ();
     for( auto item : view )
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
+    return *this;
 }
 
 boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
@@ -55,7 +58,7 @@ boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string k
         return mDoc.view ()[key].get_value ();
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
-        std::cout << str << std::endl;
+        const_cast<SerikBLDCore::Item*>(this)->errorOccured (str);
         return boost::none;
     }
 }
@@ -73,12 +76,34 @@ boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
         return this->view ()["_id"].get_oid ().value;
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
+        const_cast<SerikBLDCore::Item*>(this)->errorOccured (str);
         return boost::none;
     }
 }
 
-boost::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilter() const
+boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key)
+{
+    try {
+        return mDoc.view ()[key].get_value ();
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
+        errorOccured (str);
+        return boost::none;
+    }
+}
+
+boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid()
+{
+    try {
+        return this->view ()["_id"].get_oid ().value;
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        errorOccured (str);
+        return boost::none;
+    }
+}
+
+boost::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilter()
 {
 
     auto oid = this->oid ();
@@ -91,9 +116,10 @@ boost::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilte
             doc.append (kvp("_id",oid.value ()));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-            std::cout << str << std::endl;
+            errorOccured (str);
             return boost::none;
         }
+        return std::move(doc);
     }else{
         return boost::none;
     }
@@ -159,6 +185,11 @@ SerikBLDCore::Item &SerikBLDCore::Item::operator=(Item &&other)
 
 }
 
+void SerikBLDCore::Item::errorOccured(const std::string &errorText)
+{
+
+}
+
 void SerikBLDCore::Item::printView() const
 {
 #ifdef DESKTOP
@@ -202,10 +233,9 @@ void SerikBLDCore::Item::removeElement(const std::string &key)
         {
             try {
                 tempDoc.append( kvp( item.key ().to_string() , item.get_value () ) );
-
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-                std::cout << str << std::endl;
+                errorOccured (str);
             }
         }
     }
