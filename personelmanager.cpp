@@ -35,6 +35,28 @@ void SerikBLDCore::PersonelManager::onList(const QVector<SerikBLDCore::IK::Perso
 
 }
 
+void SerikBLDCore::PersonelManager::errorOccured(const std::string &errorText)
+{
+
+}
+
+QVector<QString> SerikBLDCore::PersonelManager::birimList() const
+{
+    QVector<QString> list;
+    SerikBLDCore::IK::BirimItem item;
+    auto cursor = const_cast<SerikBLDCore::DB*>(this->getDB ())->find (item,100,0);
+    if( cursor )
+    {
+        for( auto item__ : cursor.value () )
+        {
+            SerikBLDCore::IK::BirimItem __item;
+            __item.setDocumentView (item__);
+            list.push_back (__item.birimAdi ());
+        }
+    }
+    return list;
+}
+
 SerikBLDCore::BirimManager::BirimManager(SerikBLDCore::DB *_db)
     :SerikBLDCore::ListItem<IK::BirimItem> (_db)
 {

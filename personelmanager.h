@@ -14,6 +14,10 @@ public:
     QVector<IK::Personel> PersonelList( const std::string &birim );
 
     void onList(const QVector<IK::Personel> *mlist) override;
+
+    void errorOccured(const std::string &errorText) override;
+
+    QVector<QString> birimList() const;
 };
 
 
