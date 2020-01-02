@@ -58,6 +58,9 @@ public:
     Personel& setSifre( const QString &sifre );
 
 
+    bool static checkTelefonFormat( const QString& numara );
+
+
     virtual void errorOccured(const std::string &errorText) override;
 };
 

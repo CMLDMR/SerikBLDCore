@@ -148,6 +148,11 @@ SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setStatu(const QString &
 
 SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setTelefon(const QString &telefon)
 {
+    if( !checkTelefonFormat (telefon) )
+    {
+        errorOccured ("Telefon Numrası Hatalı");
+        return *this;
+    }
     this->append(KeyTelefon,telefon.toStdString ());
     return *this;
 }
@@ -156,6 +161,40 @@ SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setSifre(const QString &
 {
     this->append(KeyPassword,sifre.toStdString ());
     return *this;
+}
+
+bool SerikBLDCore::IK::Personel::checkTelefonFormat(const QString &numara)
+{
+
+    QString str("0123456789");
+    if( numara.count () != 11 )
+    {
+        return false;
+    }
+
+    if( numara.at (0) != '0' )
+    {
+        return false;
+    }
+
+    if( numara.at (1) != '5' )
+    {
+        return false;
+    }
+
+    bool returnType = true;
+    for( auto item : numara )
+    {
+        if( !str.contains (item) )
+        {
+            returnType = false;
+            break;
+        }
+    }
+
+    return returnType;
+
+
 }
 
 void SerikBLDCore::IK::Personel::errorOccured(const std::string &errorText)
