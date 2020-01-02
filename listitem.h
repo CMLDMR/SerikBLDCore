@@ -30,6 +30,8 @@ public:
                     item->setDocumentView(_item.view());// _item;
                     break;
                 }
+            }else{
+                errorOccured("Hata Oid");
             }
         }
         return std::move(*item);
