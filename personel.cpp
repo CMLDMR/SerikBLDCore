@@ -1,6 +1,6 @@
 #include "personel.h"
 
-
+const std::string SerikBLDCore::IK::Personel::CollectionHold{"PersonelHold"};
 const std::string SerikBLDCore::IK::Personel::Collection{"Personel"};
 const std::string SerikBLDCore::IK::Personel::KeyAdSoyad{"ad soyad"};
 const std::string SerikBLDCore::IK::Personel::KeyBuroPersonel{"Büro Personeli"};

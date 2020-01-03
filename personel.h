@@ -22,6 +22,7 @@ static const std::string Personel{"Personel"};;
 class SERIKBLDCORE_EXPORT Personel : public Item
 {
 public:
+    static const std::string CollectionHold;
     static const std::string Collection;
     static const std::string KeyAdSoyad;
     static const std::string KeyBuroPersonel;
@@ -31,6 +32,7 @@ public:
     static const std::string KeyFotoOid;
     static const std::string KeyPassword;
     static const std::string KeyTCNO;
+
 public:
     explicit Personel();
     Personel( const Personel &other );
