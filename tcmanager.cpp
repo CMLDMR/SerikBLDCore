@@ -165,7 +165,6 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const st
 {
     SerikBLDCore::TC* item = new SerikBLDCore::TC();
     item->setOid (oid.c_str ());
-    item->printView ();
 
     auto val = this->findOneItem (*item);
     if( val )
@@ -181,7 +180,6 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bs
 {
     SerikBLDCore::TC* item = new SerikBLDCore::TC();
     item->setOid (oid.to_string ());
-    item->printView ();
 
     auto val = this->findOneItem (*item);
     if( val )
@@ -209,4 +207,64 @@ void SerikBLDCore::TCManagerV2::onList(const QVector<SerikBLDCore::TC> *mlist)
 void SerikBLDCore::TCManagerV2::errorOccured(const std::string &errorText)
 {
 
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTCNO(const std::string &tcno)
+{
+    SerikBLDCore::TC *item = new SerikBLDCore::TC();
+    item->setTCNO (tcno.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return (item);
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTEL(const std::string &tel)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setCepTelefonu (tel.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const std::string &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const bsoncxx::oid &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.to_string ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
 }
