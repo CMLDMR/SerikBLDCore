@@ -188,6 +188,21 @@ public:
 
     inline int totalCount () const { return __count; }
 
+    inline int totalDocument(const T& value = T()) {
+        __totalDocument = this->countItem (value);
+        return this->__totalDocument;
+    }
+
+    inline int totalPage(const T& value = T()) {
+        __totalDocument = this->countItem (value);
+        return __totalDocument/__limit;
+    }
+
+    inline int currentPage(const T& value = T()) {
+        __totalDocument = this->countItem (value);
+        return __skip/__limit;
+    }
+
 
     virtual void onList( const QVector<T>  *mlist ) = 0;
 
@@ -240,6 +255,7 @@ private:
     int __skip = 0;
     int __count = 0;
 
+    int __totalDocument = 0;
 
 
 };
