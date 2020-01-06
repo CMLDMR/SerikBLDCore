@@ -194,3 +194,19 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bs
 }
 
 
+
+SerikBLDCore::TCManagerV2::TCManagerV2(SerikBLDCore::DB *_db)
+    :ListItem<SerikBLDCore::TC> (_db)
+{
+
+}
+
+void SerikBLDCore::TCManagerV2::onList(const QVector<SerikBLDCore::TC> *mlist)
+{
+
+}
+
+void SerikBLDCore::TCManagerV2::errorOccured(const std::string &errorText)
+{
+
+}

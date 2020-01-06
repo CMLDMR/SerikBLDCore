@@ -3,7 +3,7 @@
 
 #include "db.h"
 #include "tc.h"
-
+#include "listitem.h"
 namespace SerikBLDCore {
 
 class SERIKBLDCORE_EXPORT TCManager : public DB
@@ -11,8 +11,8 @@ class SERIKBLDCORE_EXPORT TCManager : public DB
 public:
     explicit TCManager();
 
-    TCManager( DB* mDB );
-    TCManager( mongocxx::database* _db );
+    explicit TCManager( DB* mDB );
+    explicit TCManager( mongocxx::database* _db );
 
 
     boost::optional<SerikBLDCore::TC> Create_TC();
@@ -26,6 +26,19 @@ public:
 
     boost::optional<SerikBLDCore::TC*> Load_byOID( const std::string &oid );
     boost::optional<SerikBLDCore::TC*> Load_byOID( const bsoncxx::oid &oid );
+};
+
+
+class SERIKBLDCORE_EXPORT TCManagerV2 : public ListItem<SerikBLDCore::TC>
+{
+public:
+    explicit TCManagerV2( SerikBLDCore::DB* _db );
+
+
+    virtual void onList(const QVector<TC> *mlist) override;
+
+    virtual void errorOccured(const std::string &errorText) override;
+
 };
 
 }
