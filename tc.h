@@ -26,9 +26,9 @@ public:
     static const std::string KeyFotoOid;
 
 public:
-    TC(TC* other = nullptr );
-    TC(const TC* other );
-    TC( bsoncxx::document::value* mValue );
+    explicit TC(TC* other = nullptr );
+    explicit TC(const TC* other );
+    explicit TC( bsoncxx::document::value* mValue );
 
 
     /**
@@ -38,7 +38,7 @@ public:
      * Örnek2: Personel Oluştururken Bu Yeni
      * @param newCollection
      */
-    TC( const std::string& newCollection );
+    explicit TC( const std::string& newCollection );
 
 
     TC( const TC &other );
