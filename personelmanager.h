@@ -28,6 +28,8 @@ public:
     explicit BirimManager( DB* _db );
 
     void onList(const QVector<IK::BirimItem> *mlist) override;
+
+    void errorOccured(const std::string &errorText) override;
 };
 
 };

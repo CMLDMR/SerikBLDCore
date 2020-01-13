@@ -67,3 +67,8 @@ void SerikBLDCore::BirimManager::onList(const QVector<IK::BirimItem> *mlist)
 {
 
 }
+
+void SerikBLDCore::BirimManager::errorOccured(const std::string &errorText)
+{
+
+}
