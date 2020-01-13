@@ -9,15 +9,21 @@ const std::string SerikBLDCore::User::Personel{"Personel"};
 
 SerikBLDCore::User::User() : Item (User::Collection) , DB()
 {
+
 }
 
 SerikBLDCore::User::User(mongocxx::database *_db) : Item (User::Collection) , DB(_db)
 {
+    mBirimManager = new SerikBLDCore::BirimManager( new SerikBLDCore::DB(_db));
 
 }
 
-SerikBLDCore::User::User(mongocxx::database *_db, bsoncxx::document::value _userValue) : Item(_userValue.view (),User::Collection) , DB(_db)
+SerikBLDCore::User::User(mongocxx::database *_db, bsoncxx::document::value _userValue)
+    : Item(_userValue.view (),
+      User::Collection) ,
+      DB(_db)
 {
+    mBirimManager = new SerikBLDCore::BirimManager( new SerikBLDCore::DB(_db));
 }
 
 SerikBLDCore::User::User(User *_user) : Item(_user->view (),User::Collection) , DB(_user->db())
@@ -108,7 +114,7 @@ std::string SerikBLDCore::User::Birimi()
     {
         return  (element->get_utf8 ().value.to_string());
     }else{
-        return (KeyBirimi + " Bilgisi Eksik");
+        return ("");
     }
 }
 
@@ -131,6 +137,29 @@ QString SerikBLDCore::User::UserOid() const
     {
         return  QString::fromStdString (element->get_oid ().value.to_string());
     }
-    return ("Bilgisi Eksik");
+    return ("");
 
+}
+
+SerikBLDCore::User &SerikBLDCore::User::setWorkingBirim(const QString &birim)
+{
+    this->append(KeyBirimi,birim.toStdString ());
+    return *this;
+}
+
+QVector<bsoncxx::oid> SerikBLDCore::User::mudurlukList() const
+{
+    QVector<bsoncxx::oid> list;
+
+    auto _list = this->element (KeyMudurlukler);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            list.push_back (item.get_oid ().value);
+        }
+    }
+    return list;
 }

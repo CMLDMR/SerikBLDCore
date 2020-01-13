@@ -2,7 +2,7 @@
 #define USER_H
 
 #include "item.h"
-#include "db.h"
+#include "personelmanager.h"
 
 //#define WT_CLASS "4.1.0"
 #ifdef WT_CLASS
@@ -20,6 +20,7 @@ public:
     const std::string KeyStatu{"Statü"};
     const std::string KeyBirimi{"Birimi"};
     const std::string KeyFotoid{"fotooid"};
+    const std::string KeyMudurlukler{"Müdürlükler"};
 
     static const std::string Baskan;
     static const std::string BaskanYardimcisi;
@@ -48,6 +49,13 @@ public:
     std::string Birimi();
     std::string Telefon() const;
     QString UserOid() const;
+
+    User& setWorkingBirim( const QString& birim );
+
+    QVector<bsoncxx::oid> mudurlukList() const;
+
+private:
+    SerikBLDCore::BirimManager* mBirimManager;
 
 };
 
