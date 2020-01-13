@@ -32,6 +32,7 @@ public:
     static const std::string KeyFotoOid;
     static const std::string KeyPassword;
     static const std::string KeyTCNO;
+    static const std::string KeyMudurlukler;
 
 public:
     explicit Personel();
@@ -48,6 +49,7 @@ public:
     QString statu() const;
     QString telefon() const;
     QString sifre() const;
+    QVector<bsoncxx::oid> mudurlukList() const;
 
 
 
@@ -58,6 +60,9 @@ public:
     Personel& setStatu( const QString &statu );
     Personel& setTelefon( const QString &telefon );
     Personel& setSifre( const QString &sifre );
+    Personel& addMudurluk( const QString &mudurlukOid );
+    Personel& deleteMudurluk( const QString &mudurlukOid );
+
 
 
     bool static checkTelefonFormat( const QString& numara );

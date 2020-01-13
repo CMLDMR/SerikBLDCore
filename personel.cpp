@@ -10,7 +10,7 @@ const std::string SerikBLDCore::IK::Personel::KeyBirimi{"Birimi"};
 const std::string SerikBLDCore::IK::Personel::KeyFotoOid{"fotooid"};
 const std::string SerikBLDCore::IK::Personel::KeyPassword{"password"};
 const std::string SerikBLDCore::IK::Personel::KeyTCNO{"tcno"};
-
+const std::string SerikBLDCore::IK::Personel::KeyMudurlukler{"Müdürlükler"};
 
 SerikBLDCore::IK::Personel::Personel() : Item(Collection)
 {
@@ -116,6 +116,23 @@ QString SerikBLDCore::IK::Personel::sifre() const
     }
 }
 
+QVector<bsoncxx::oid> SerikBLDCore::IK::Personel::mudurlukList() const
+{
+    QVector<bsoncxx::oid> list;
+
+    auto _list = this->element (KeyMudurlukler);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            list.push_back (item.get_oid ().value);
+        }
+    }
+    return list;
+}
+
 SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
@@ -160,6 +177,33 @@ SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setTelefon(const QString
 SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setSifre(const QString &sifre)
 {
     this->append(KeyPassword,sifre.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::addMudurluk(const QString &mudurlukOid)
+{
+    this->pushArray(KeyMudurlukler,bsoncxx::oid{mudurlukOid.toStdString ()});
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::deleteMudurluk(const QString &mudurlukOid)
+{
+    auto pList = this->mudurlukList ();
+    this->removeElement (KeyMudurlukler);
+
+    if( pList.count () == 1 )
+    {
+        this->append(KeyMudurlukler,array{});
+        return *this;
+    }
+
+    for( auto item : pList )
+    {
+        if( item.to_string () != mudurlukOid.toStdString ())
+        {
+            this->addMudurluk (item.to_string ().c_str ());
+        }
+    }
     return *this;
 }
 
