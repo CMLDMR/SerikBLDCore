@@ -42,6 +42,8 @@ SOURCES += \
     serikbldcore.cpp \
     sms/smsabstrackmanager.cpp \
     sms/smsitem.cpp \
+    stok/stok.cpp \
+    stok/stokkategorimanager.cpp \
     tc.cpp \
     tcmanager.cpp \
     user.cpp
@@ -74,6 +76,8 @@ HEADERS += \
     serikbldcore.h \
     sms/smsabstrackmanager.h \
     sms/smsitem.h \
+    stok/stok.h \
+    stok/stokkategorimanager.h \
     tc.h \
     tcmanager.h \
     user.h
