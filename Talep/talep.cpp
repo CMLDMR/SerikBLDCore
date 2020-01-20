@@ -126,8 +126,29 @@ SerikBLDCore::Talep &SerikBLDCore::Talep::setBirim(const QString &birim)
 
 SerikBLDCore::Talep &SerikBLDCore::Talep::AddGorevliPersonel(const IK::Personel &personel)
 {
+
+    bool exist = false;
+
+    auto pList = this->GorevliList ();
+
+    for( auto item : pList )
+    {
+        if( item.oid ().value ().to_string () != personel.oid ().value ().to_string () )
+        {
+            exist = true;
+            break;
+        }
+    }
+
+    if( exist )
+    {
+        return *this;
+    }
+
     this->pushArray(TalepKey::GorevliPersonel,bsoncxx::document::value(personel.view ()));
+
     return *this;
+
 }
 
 SerikBLDCore::Talep &SerikBLDCore::Talep::DeleteGorevliPersonel(const IK::Personel &personel)
