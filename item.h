@@ -8,6 +8,8 @@
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
+#include <QDate>
+#include <QDateTime>
 #include "db.h"
 
 #ifdef DESKTOP
@@ -51,6 +53,10 @@ public:
     boost::optional<bsoncxx::oid> oid();
 
     boost::optional<document> ItemFilter();
+
+    boost::optional<QTime> getTime() const;
+
+    boost::optional<QDate> getDate() const;
 #else
 
 
@@ -63,6 +69,8 @@ public:
     Item& setOid( const std::string &oid );
 
     std::string getCollection() const;
+
+    void setCollection( const std::string& collection );
 
     void removeElement( const std::string &key );
 
@@ -199,7 +207,7 @@ private:
 
 
 #endif
-    const std::string mCollection;
+    std::string mCollection;
 
 };
 

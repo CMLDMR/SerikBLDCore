@@ -126,6 +126,44 @@ boost::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilte
 
 }
 
+boost::optional<QTime> SerikBLDCore::Item::getTime() const
+{
+    auto _oid = this->oid ();
+
+    if( _oid )
+    {
+        return boost::none;
+    }
+
+    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+
+    if( !dateTime.isValid () )
+    {
+        return boost::none;
+    }
+
+    return dateTime.time ();
+}
+
+boost::optional<QDate> SerikBLDCore::Item::getDate() const
+{
+    auto _oid = this->oid ();
+
+    if( _oid )
+    {
+        return boost::none;
+    }
+
+    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+
+    if( !dateTime.isValid () )
+    {
+        return boost::none;
+    }
+
+    return dateTime.date ();
+}
+
 #else
 
 
@@ -221,6 +259,13 @@ std::string SerikBLDCore::Item::getCollection() const
 {
     return mCollection;
 }
+
+void SerikBLDCore::Item::setCollection(const std::string &collection)
+{
+    this->mCollection = collection;
+}
+
+
 
 void SerikBLDCore::Item::removeElement(const std::string &key)
 {
