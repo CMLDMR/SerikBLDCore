@@ -135,6 +135,10 @@ public:
     }
 
 
+    bool incValue( const Item& filter , const std::string& field , const std::int64_t& value );
+
+    bool incValue( const Item& filter , const std::string& field , const std::int32_t& value );
+
     mongocxx::stdx::optional<mongocxx::result::delete_result> deleteItem( const Item &item );
 
 

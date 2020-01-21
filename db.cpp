@@ -549,6 +549,100 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
     }
 }
 
+bool SerikBLDCore::DB::incValue(const SerikBLDCore::Item &filter, const std::string &field, const int64_t &value)
+{
+    auto _oid = filter.oid ();
+    if( !_oid )
+    {
+        this->setLastError (QString("%1 %2 Required Object ID").arg (__LINE__)
+                            .arg (__FUNCTION__));
+        return false;
+    }
+    auto _filter = document{};
+    try {
+        _filter.append (kvp("_id",_oid.value ()));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        setLastError (str.c_str ());
+        return false;
+    }
+    auto incDoc = document{};
+    try {
+        incDoc.append (kvp(field,make_document(kvp("$inc",bsoncxx::types::b_int64{value}))));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        this->setLastError (str.c_str ());
+        return false;
+    }
+    try {
+        auto res = this->db ()->collection (filter.getCollection ()).update_one (_filter.view (),incDoc.view ());
+        if( res )
+        {
+            if( res.value ().modified_count () )
+            {
+                return true;
+            }else{
+                this->setLastError ("No Field incremented");
+                return false;
+            }
+        }else{
+            this->setLastError ("increment value db not operated");
+            return false;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        this->setLastError (str.c_str ());
+        return false;
+    }
+}
+
+bool SerikBLDCore::DB::incValue(const SerikBLDCore::Item &filter, const std::string &field, const int32_t &value)
+{
+    auto _oid = filter.oid ();
+    if( !_oid )
+    {
+        this->setLastError (QString("%1 %2 Required Object ID").arg (__LINE__)
+                            .arg (__FUNCTION__));
+        return false;
+    }
+    auto _filter = document{};
+    try {
+        _filter.append (kvp("_id",_oid.value ()));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        setLastError (str.c_str ());
+        return false;
+    }
+    auto incDoc = document{};
+    try {
+        incDoc.append (kvp(field,make_document(kvp("$inc",bsoncxx::types::b_int32{value}))));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        setLastError (str.c_str ());
+        return false;
+    }
+    try {
+        auto res = this->db ()->collection (filter.getCollection ()).update_one (_filter.view (),incDoc.view ());
+        if( res )
+        {
+            if( res.value ().modified_count () )
+            {
+                return true;
+            }else{
+                this->setLastError ("No Field incremented");
+                return false;
+            }
+        }else{
+            this->setLastError ("increment value db not operated");
+            return false;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        this->setLastError (str.c_str ());
+        return false;
+    }
+}
+
 
 
 mongocxx::stdx::optional<mongocxx::result::delete_result> SerikBLDCore::DB::deleteItem(const Item &item)
