@@ -13,17 +13,40 @@ namespace Stok {
 
 
 namespace StokKey {
-static const std::string Collection{"Stok"};
+static const std::string Collection{"StokGiris"};
+static const std::string CollectionCikis{"StokCikis"};
 static const std::string mudurluk{"mudurluk"};
 static const std::string kategori{"kategori"};
 static const std::string adi{"adi"};
 static const std::string kodu{"kodu"};
 static const std::string miktar{"miktar"};
+static const std::string giris{"giris"};
+static const std::string tcoid{"tcoid"};
+static const std::string teslimAlan{"teslimAlan"};
 }
-class SERIKBLDCORE_EXPORT Stok : private SerikBLDCore::Item
+class SERIKBLDCORE_EXPORT Stok : public SerikBLDCore::Item
 {
 public:
-    explicit Stok( const std::string& mudurluk );
+
+
+    struct TeslimAlan {
+        std::string teslimAlan;
+        std::int64_t miktar;
+        std::int64_t julianDay;
+        std::int64_t mSecSinceStartOfDay;
+        explicit TeslimAlan( const bsoncxx::document::view &view );
+        Item getItem() const;
+    };
+
+    enum class Giris : bool
+    {
+        giris = true,
+        cikis = false
+    };
+
+    explicit Stok( SerikBLDCore::Stok::Stok::Giris giris = SerikBLDCore::Stok::Stok::Giris::giris,
+                   const std::string& mudurluk = "none" );
+
     Stok( const Stok& other );
     Stok( Stok&& other );
     Stok& operator=( const Stok& other );
@@ -33,12 +56,19 @@ public:
     Stok& setAdi( const std::string& adi );
     Stok& setKodu( const bsoncxx::oid& kodOid );
     Stok& setMiktar( const std::int64_t& miktar );
+    Stok& setTcOid( const bsoncxx::oid& tcoid );
+    Stok& setMudurluk( const std::string& mudurluk );
+
+    Stok& addTeslimAlan( const TeslimAlan& alan );
 
 
     boost::optional<bsoncxx::oid> kategori() const;
     std::string adi() const;
     boost::optional<bsoncxx::oid> kodu() const;
     std::int64_t miktar() const;
+    boost::optional<bsoncxx::oid> tcoid() const;
+
+
 };
 
 
@@ -66,6 +96,7 @@ namespace StokKodKey {
 static const std::string Collection{"stokKod"};
 static const std::string adi{"adi"};
 static const std::string birimi{"birimi"};
+static const std::string kategoriOid{"kategoriOid"};
 }
 
 class SERIKBLDCORE_EXPORT StokKodItem : public SerikBLDCore::Item
@@ -80,9 +111,11 @@ public:
 
     StokKodItem& setAdi( const std::string& adi );
     StokKodItem& setBirim( const std::string& birim );
+    StokKodItem& setKategoriOid( const bsoncxx::oid& kategoriOid );
 
     std::string adi() const;
     std::string birim() const;
+    boost::optional<bsoncxx::oid> kategoriOid() const;
 };
 
 }
