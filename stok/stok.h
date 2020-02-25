@@ -34,6 +34,7 @@ public:
         std::int64_t miktar;
         std::int64_t julianDay;
         std::int64_t mSecSinceStartOfDay;
+        explicit TeslimAlan(){}
         explicit TeslimAlan( const bsoncxx::document::view &view );
         Item getItem() const;
     };
@@ -61,6 +62,11 @@ public:
 
     Stok& addTeslimAlan( const TeslimAlan& alan );
 
+
+
+
+    QVector<TeslimAlan> Teslimler() const;
+    std::int64_t kalanMiktar() const;
 
     boost::optional<bsoncxx::oid> kategori() const;
     std::string adi() const;

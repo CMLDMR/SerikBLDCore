@@ -78,8 +78,36 @@ SerikBLDCore::Stok::Stok &SerikBLDCore::Stok::Stok::setMudurluk(const std::strin
 
 SerikBLDCore::Stok::Stok &SerikBLDCore::Stok::Stok::addTeslimAlan(const SerikBLDCore::Stok::Stok::TeslimAlan &alan)
 {
-    this->pushArray(StokKey::teslimAlan,alan.getItem ());
+    this->pushArray(StokKey::teslimAlan,alan.getItem ().view ());
     return *this;
+}
+
+QVector<SerikBLDCore::Stok::Stok::TeslimAlan> SerikBLDCore::Stok::Stok::Teslimler() const
+{
+    QVector<TeslimAlan> list;
+    auto val = this->element (SerikBLDCore::Stok::StokKey::teslimAlan);
+    if( val )
+    {
+        auto array = val.value ().get_array ().value;
+        for( auto item : array )
+        {
+            TeslimAlan teslim(item.get_document ().view ());
+            list.push_back (teslim);
+        }
+    }
+    return list;
+}
+
+int64_t SerikBLDCore::Stok::Stok::kalanMiktar() const
+{
+    auto alinanToplam = 0;
+
+    for( auto item : this->Teslimler () )
+    {
+        alinanToplam += item.miktar;
+    }
+
+    return (this->miktar () - alinanToplam);
 }
 
 
