@@ -116,7 +116,7 @@ std::vector<SerikBLDCore::Meclis::KomisyonItem> SerikBLDCore::Meclis::UyeManager
 }
 
 SerikBLDCore::Meclis::DonemManager::DonemManager(SerikBLDCore::DB *db)
-: SerikBLDCore::ListItem<SerikBLDCore::Meclis::MeclisDonemi> (db)
+    : SerikBLDCore::ListItem<SerikBLDCore::Meclis::MeclisDonemi> (db)
 {
 
 }
@@ -127,7 +127,7 @@ void SerikBLDCore::Meclis::DonemManager::onList(const QVector<SerikBLDCore::Mecl
 }
 
 SerikBLDCore::Meclis::PartiManager::PartiManager(SerikBLDCore::DB *db)
-: SerikBLDCore::ListItem<SerikBLDCore::Meclis::PartiItem> (db)
+    : SerikBLDCore::ListItem<SerikBLDCore::Meclis::PartiItem> (db)
 {
 
 }
@@ -139,12 +139,23 @@ void SerikBLDCore::Meclis::PartiManager::onList(const QVector<SerikBLDCore::Mecl
 }
 
 SerikBLDCore::Meclis::KomisyonManager::KomisyonManager(SerikBLDCore::DB *db)
-: SerikBLDCore::ListItem<SerikBLDCore::Meclis::KomisyonItem> (db)
+    : SerikBLDCore::ListItem<SerikBLDCore::Meclis::KomisyonItem> (db)
 {
 
 }
 
 void SerikBLDCore::Meclis::KomisyonManager::onList(const QVector<SerikBLDCore::Meclis::KomisyonItem> *mlist)
+{
+
+}
+
+SerikBLDCore::Meclis::GundemManager::GundemManager(SerikBLDCore::DB *db)
+    : SerikBLDCore::ListItem<SerikBLDCore::Meclis::GundemItem> (db)
+{
+
+}
+
+void SerikBLDCore::Meclis::GundemManager::onList(const QVector<SerikBLDCore::Meclis::GundemItem> *mlist)
 {
 
 }

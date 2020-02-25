@@ -72,6 +72,17 @@ public:
 
 
 
+class SERIKBLDCORE_EXPORT GundemManager : public SerikBLDCore::ListItem<SerikBLDCore::Meclis::GundemItem>
+{
+public:
+    explicit GundemManager(DB* db);
+
+    virtual void onList(const QVector<GundemItem> *mlist) override;
+
+};
+
+
+
 
 class SERIKBLDCORE_EXPORT UyeManager : public SerikBLDCore::ListItem<SerikBLDCore::Meclis::MeclisUyesi>
 {
