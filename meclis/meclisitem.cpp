@@ -404,3 +404,73 @@ QString SerikBLDCore::Meclis::TeklifItem::kimden() const
     }
     return "";
 }
+
+SerikBLDCore::Meclis::GundemItem::GundemItem()
+    :SerikBLDCore::Item(GundemKey::Collection)
+{
+
+}
+
+SerikBLDCore::Meclis::GundemItem &SerikBLDCore::Meclis::GundemItem::setMeclisOid(const std::string &meclisOid)
+{
+    this->append(GundemKey::meclisOid,bsoncxx::oid{meclisOid});
+    return *this;
+}
+
+SerikBLDCore::Meclis::GundemItem &SerikBLDCore::Meclis::GundemItem::setMeclisOid(const bsoncxx::oid &meclisOid)
+{
+    this->append(GundemKey::meclisOid,meclisOid);
+    return *this;
+}
+
+SerikBLDCore::Meclis::GundemItem &SerikBLDCore::Meclis::GundemItem::setGundemAdi(const std::string &gundemAdi)
+{
+    this->append(GundemKey::gundemAdi,gundemAdi);
+    return *this;
+}
+
+SerikBLDCore::Meclis::GundemItem &SerikBLDCore::Meclis::GundemItem::setGundemDosyasi(const bsoncxx::oid &gundemFile)
+{
+    this->append(GundemKey::gundemFileOid,gundemFile);
+    return *this;
+}
+
+std::string SerikBLDCore::Meclis::GundemItem::meclisOid() const
+{
+    auto val = this->element (GundemKey::meclisOid);
+    if( val )
+    {
+        return val.value ().get_oid ().value.to_string ();
+    }
+    return "";
+}
+
+std::string SerikBLDCore::Meclis::GundemItem::gundemAdi() const
+{
+    auto val = this->element (GundemKey::gundemAdi);
+    if( val )
+    {
+        return val.value ().get_utf8 ().value.to_string ();
+    }
+    return "";
+}
+
+bool SerikBLDCore::Meclis::GundemItem::gundemDosyasiVar() const
+{
+    auto val = this->element (GundemKey::gundemFileOid);
+    if( val )
+    {
+        return true;
+    }
+    return false;
+}
+
+std::string SerikBLDCore::Meclis::GundemItem::gundemDosyasi() const
+{
+    auto val = this->element (GundemKey::gundemFileOid);
+    if( val )
+    {
+        return val.value ().get_oid ().value.to_string ();
+    }
+    return "";
+}

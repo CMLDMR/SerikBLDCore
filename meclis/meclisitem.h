@@ -202,6 +202,36 @@ public:
 
 
 
+
+namespace GundemKey {
+static const std::string Collection{"MeclisGumdem"};
+static const std::string meclisOid{"meclisOid"};
+static const std::string gundemAdi{"gumdemAdi"};
+static const std::string gundemFileOid{"gundemFileOid"};
+}
+
+
+class SERIKBLDCORE_EXPORT GundemItem : public Item
+{
+public:
+    explicit GundemItem();
+
+
+    GundemItem& setMeclisOid( const std::string& meclisOid );
+    GundemItem& setMeclisOid( const bsoncxx::oid& meclisOid );
+    GundemItem& setGundemAdi( const std::string& gundemAdi );
+    GundemItem& setGundemDosyasi( const bsoncxx::oid& gundemFile );
+
+
+    std::string meclisOid() const;
+    std::string gundemAdi() const;
+    bool gundemDosyasiVar() const;
+    std::string gundemDosyasi() const;
+
+};
+
+
+
 }
 
 
