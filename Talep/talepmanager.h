@@ -16,7 +16,7 @@ class SERIKBLDCORE_EXPORT TalepManager : public DB
 {
 public:
     TalepManager();
-    TalepManager(DB* mDB);
+    TalepManager( DB* mDB );
     TalepManager( mongocxx::database* _db );
 
     ///

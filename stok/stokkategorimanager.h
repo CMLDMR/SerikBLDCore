@@ -63,10 +63,7 @@ public:
 
     void updateKategoriList( const SerikBLDCore::Stok::StokKategori filter = SerikBLDCore::Stok::StokKategori() );
 
-
     virtual void onList(const QVector<SerikBLDCore::Stok::StokKategori> *mlist) override;
-
-
 
     SerikBLDCore::User* user() const;
 

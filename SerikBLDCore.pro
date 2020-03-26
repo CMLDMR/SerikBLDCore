@@ -19,6 +19,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Talep/talep.cpp \
+    Talep/talepkategori.cpp \
+    Talep/talepkategorimanager.cpp \
     Talep/talepmanager.cpp \
     Talep/talepsubitem.cpp \
     bilgiEdinme/bilgiedinmeitem.cpp \
@@ -52,6 +54,8 @@ HEADERS += \
     Config.h \
     SerikBLDCore_global.h \
     Talep/talep.h \
+    Talep/talepkategori.h \
+    Talep/talepkategorimanager.h \
     Talep/talepmanager.h \
     Talep/talepsubitem.h \
     bilgiEdinme/bilgiedinmeitem.h \
