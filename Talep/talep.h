@@ -31,6 +31,7 @@ public:
     static const std::string Ay;
     static const std::string FotoOid;
     static const std::string KisiGizle;
+    static const std::string KategoriOid;
 
 
     class SERIKBLDCORE_EXPORT DurumKey
@@ -73,6 +74,12 @@ public:
         int SosyalMedya;
     };
 
+    struct KategoriPipelineResult{
+        std::string mKategori;
+        std::string mKategoriOid;
+        std::int64_t mSayi;
+    };
+
 
 
 };
@@ -105,6 +112,7 @@ public:
     Talep& setAy( const QString& ay );
     Talep& setFoto( const QString& fotooid );
     Talep& setKisiGizle( const bool& gizle );
+    Talep& setKategoriOid( const QString& kategoriOid );
 
     QString oid() const;
     QString tcOid() const;
@@ -123,6 +131,7 @@ public:
     QVector<IK::Personel> GorevliList() const;
     QString fotoOid() const;
     bool kisiGizli() const;
+    QString kategoriOid() const;
 
 
 };

@@ -15,9 +15,9 @@ namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT TalepManager : public DB
 {
 public:
-    TalepManager();
-    TalepManager( DB* mDB );
-    TalepManager( mongocxx::database* _db );
+    explicit TalepManager();
+    explicit TalepManager( DB* mDB );
+    explicit TalepManager( mongocxx::database* _db );
 
     ///
     /// \brief <b>item</b> talebi veri tabanına ekler.
@@ -52,6 +52,15 @@ public:
     /// \return
     ///
     QVector<Talep> findTalep( const Talep &filter , int limit = 20 , int skip = 0);
+
+
+    /**
+     * @brief findTalep
+     * @param filter
+     * @param findOptions
+     * @return
+     */
+    QVector<Talep> findTalep( const Talep &filter , const FindOptions& findOptions );
 
 
 
@@ -125,6 +134,16 @@ public:
     /// \return
     ///
     TalepKey::KaynakPipelineResult kaynakPipeLine( const Talep &filter );
+
+
+
+    /**
+     * @brief kategoriPipeLine
+     * @param filter
+     * @return
+     */
+    std::vector<TalepKey::KategoriPipelineResult> kategoriPipeLine( const Talep &filter );
+
 
 };
 

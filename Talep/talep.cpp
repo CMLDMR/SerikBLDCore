@@ -18,6 +18,7 @@ const std::string SerikBLDCore::TalepKey::Yil{"Yıl"};
 const std::string SerikBLDCore::TalepKey::Ay{"Ay"};
 const std::string SerikBLDCore::TalepKey::FotoOid{"FotoOid"};
 const std::string SerikBLDCore::TalepKey::KisiGizle{"KisiGizle"};
+const std::string SerikBLDCore::TalepKey::KategoriOid{"KategoriOid"};
 
 
 
@@ -193,6 +194,12 @@ SerikBLDCore::Talep &SerikBLDCore::Talep::setFoto(const QString &fotooid)
 SerikBLDCore::Talep &SerikBLDCore::Talep::setKisiGizle(const bool &gizle)
 {
     this->append(TalepKey::KisiGizle,gizle);
+    return *this;
+}
+
+SerikBLDCore::Talep &SerikBLDCore::Talep::setKategoriOid(const QString &kategoriOid)
+{
+    this->append(TalepKey::KategoriOid,bsoncxx::oid{kategoriOid.toStdString ()});
     return *this;
 }
 
@@ -390,4 +397,14 @@ bool SerikBLDCore::Talep::kisiGizli() const
         return val.value ().get_bool ().value;
     }
     return false;
+}
+
+QString SerikBLDCore::Talep::kategoriOid() const
+{
+    auto val = this->element (TalepKey::KategoriOid);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+    }
+    return "";
 }

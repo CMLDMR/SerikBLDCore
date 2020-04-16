@@ -1,4 +1,5 @@
 #include "talepmanager.h"
+#include "talepkategorimanager.h"
 
 SerikBLDCore::TalepManager::TalepManager() : DB()
 {
@@ -97,6 +98,28 @@ QVector<SerikBLDCore::Talep> SerikBLDCore::TalepManager::findTalep(const Talep &
 
 
     findOptions.sort (sortDoc.view ());
+
+    try {
+        auto cursor = this->find (filter,findOptions);
+        if( cursor )
+        {
+            for( auto item : cursor.value ())
+            {
+                Talep talep;
+                talep.setDocumentView (item);
+                list.append (talep);
+            }
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+    }
+    return list;
+}
+
+QVector<SerikBLDCore::Talep> SerikBLDCore::TalepManager::findTalep(const SerikBLDCore::Talep &filter, const SerikBLDCore::FindOptions &findOptions)
+{
+    QVector<Talep> list;
 
     try {
         auto cursor = this->find (filter,findOptions);
@@ -530,4 +553,59 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
     }
     return result;
+}
+
+std::vector<SerikBLDCore::TalepKey::KategoriPipelineResult> SerikBLDCore::TalepManager::kategoriPipeLine(const SerikBLDCore::Talep &filter)
+{
+
+    std::vector<SerikBLDCore::TalepKey::KategoriPipelineResult> resultList;
+
+    TalepKategoriManager* mKategoriManager = new TalepKategoriManager(this->getDB ());
+
+
+    mKategoriManager->setLimit (1000);
+
+    mKategoriManager->UpdateList ();
+
+    mongocxx::pipeline stage;
+
+    stage.match (filter.view ());
+
+    stage.group (make_document(kvp("_id","$"+TalepKey::KategoriOid),
+                               kvp("count",make_document(kvp("$sum",1)))));
+
+    auto cursor = this->db ()->collection (TalepKey::Collection).aggregate (stage);
+
+    for( auto doc : cursor )
+    {
+        TalepKey::KategoriPipelineResult result;
+        result.mSayi = 0;
+        try {
+            result.mKategoriOid = doc["_id"].get_oid ().value.to_string ();
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+            result.mKategoriOid = "";
+        }
+
+        if( result.mKategoriOid.size () )
+        {
+            try {
+                result.mKategori = mKategoriManager->KategoriName (doc["_id"].get_oid ().value.to_string().c_str ()).toStdString ();
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                std::cout << str << std::endl;
+            }
+
+            try {
+                result.mSayi = doc["count"].get_int32 ().value;
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                std::cout << str << std::endl;
+            }
+            resultList.push_back (result);
+        }
+
+    }
+    return resultList;
 }

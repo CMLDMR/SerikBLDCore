@@ -13,13 +13,15 @@ namespace SerikBLDCore {
 class SERIKBLDCORE_EXPORT TalepKategoriManager : public ListItem<SerikBLDCore::TalepKategori>
 {
 public:
-    TalepKategoriManager( DB* _mDB );
+    explicit TalepKategoriManager( DB* _mDB );
 
 
 
     virtual void onList(const QVector<SerikBLDCore::TalepKategori> *mlist) override;
 
-    void errorOccured(const std::string &errorText) override;
+    virtual void errorOccured(const std::string &errorText) override;
+
+    QString KategoriName(const QString& kategoriOid ) const;
 };
 
 }
