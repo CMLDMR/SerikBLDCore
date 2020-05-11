@@ -33,6 +33,7 @@ public:
     static const std::string KeyPassword;
     static const std::string KeyTCNO;
     static const std::string KeyMudurlukler;
+    static const std::string KeyAltBirim;
 
 public:
     explicit Personel();
@@ -50,6 +51,8 @@ public:
     QString telefon() const;
     QString sifre() const;
     QVector<bsoncxx::oid> mudurlukList() const;
+    QVector<bsoncxx::oid> altBirimOidList() const;
+    bool altBirimContains( const bsoncxx::oid& altBirimOid ) const;
 
 
 
@@ -62,6 +65,8 @@ public:
     Personel& setSifre( const QString &sifre );
     Personel& addMudurluk( const QString &mudurlukOid );
     Personel& deleteMudurluk( const QString &mudurlukOid );
+    Personel& addAltBirim( const QString &altBirimOid );
+
 
 
 
@@ -97,6 +102,26 @@ public:
 
     QString birimAdi() const;
 
+};
+
+
+namespace AltBirimKey {
+static const std::string Collection{"AltBirimler"};
+static const std::string altBirimAdi{"adi"};
+static const std::string birimOid{"birimOid"};
+}
+
+
+class SERIKBLDCORE_EXPORT AltBirimItem : public Item
+{
+public:
+    explicit AltBirimItem();
+
+    AltBirimItem& setName( const QString& birimName );
+    AltBirimItem& setBirimOid( const bsoncxx::oid& birimOid );
+
+    QString name() const;
+    std::string birimOid() const;
 };
 
 }

@@ -11,6 +11,7 @@ const std::string SerikBLDCore::IK::Personel::KeyFotoOid{"fotooid"};
 const std::string SerikBLDCore::IK::Personel::KeyPassword{"password"};
 const std::string SerikBLDCore::IK::Personel::KeyTCNO{"tcno"};
 const std::string SerikBLDCore::IK::Personel::KeyMudurlukler{"Müdürlükler"};
+const std::string SerikBLDCore::IK::Personel::KeyAltBirim{"altbirim"};
 
 SerikBLDCore::IK::Personel::Personel() : Item(Collection)
 {
@@ -133,6 +134,43 @@ QVector<bsoncxx::oid> SerikBLDCore::IK::Personel::mudurlukList() const
     return list;
 }
 
+QVector<bsoncxx::oid> SerikBLDCore::IK::Personel::altBirimOidList() const
+{
+
+    QVector<bsoncxx::oid> list;
+
+    auto _list = this->element (KeyAltBirim);
+
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            list.push_back (item.get_oid ().value);
+        }
+    }
+    return list;
+}
+
+bool SerikBLDCore::IK::Personel::altBirimContains(const bsoncxx::oid &altBirimOid) const
+{
+    bool returnValue = false;
+    auto _list = this->element (KeyAltBirim);
+    if( _list )
+    {
+        auto __list = _list.value ().get_array ().value;
+        for( auto item : __list )
+        {
+            if( altBirimOid.to_string () == item.get_oid ().value.to_string () )
+            {
+                returnValue = true;
+                break;
+            }
+        }
+    }
+    return returnValue;
+}
+
 SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::setAdSoyad(const QString &adsoyad)
 {
     this->append(KeyAdSoyad,adsoyad.toStdString ());
@@ -203,6 +241,15 @@ SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::deleteMudurluk(const QSt
         {
             this->addMudurluk (item.to_string ().c_str ());
         }
+    }
+    return *this;
+}
+
+SerikBLDCore::IK::Personel &SerikBLDCore::IK::Personel::addAltBirim(const QString &altBirim)
+{
+    if( !this->altBirimContains (bsoncxx::oid{altBirim.toStdString ()}) )
+    {
+        this->pushArray(KeyAltBirim,bsoncxx::oid{altBirim.toStdString ()});
     }
     return *this;
 }
@@ -288,6 +335,44 @@ QString SerikBLDCore::IK::BirimItem::birimAdi() const
     if( val )
     {
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
+SerikBLDCore::IK::AltBirimItem::AltBirimItem()
+    :Item (AltBirimKey::Collection)
+{
+
+}
+
+SerikBLDCore::IK::AltBirimItem &SerikBLDCore::IK::AltBirimItem::setName(const QString &birimName)
+{
+    this->append(AltBirimKey::altBirimAdi,birimName.toStdString ());
+    return *this;
+}
+
+SerikBLDCore::IK::AltBirimItem &SerikBLDCore::IK::AltBirimItem::setBirimOid(const bsoncxx::oid &birimOid)
+{
+    this->append(AltBirimKey::birimOid,birimOid);
+    return *this;
+}
+
+QString SerikBLDCore::IK::AltBirimItem::name() const
+{
+    auto val = this->element (AltBirimKey::altBirimAdi);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
+std::string SerikBLDCore::IK::AltBirimItem::birimOid() const
+{
+    auto val = this->element (AltBirimKey::birimOid);
+    if( val )
+    {
+        return  (val.value ().get_oid ().value.to_string());
     }
     return "";
 }
