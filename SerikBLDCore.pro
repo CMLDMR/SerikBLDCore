@@ -30,6 +30,8 @@ SOURCES += \
     dilekceaciklama.cpp \
     dilekcecevap.cpp \
     dilekcemanager.cpp \
+    firma/firmaitem.cpp \
+    firma/firmamanager.cpp \
     item.cpp \
     listitem.cpp \
     meclis/meclisitem.cpp \
@@ -65,6 +67,8 @@ HEADERS += \
     dilekceaciklama.h \
     dilekcecevap.h \
     dilekcemanager.h \
+    firma/firmaitem.h \
+    firma/firmamanager.h \
     item.h \
     listitem.h \
     meclis/meclisitem.h \

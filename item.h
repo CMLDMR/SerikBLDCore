@@ -117,6 +117,7 @@ public:
     }
 
 
+
     void pullArray( const std::string& key , const bsoncxx::types::value &value )
     {
 #ifdef DESKTOP
@@ -153,6 +154,8 @@ public:
 
 #endif
     }
+
+
 
     template<typename T>
     Item& append( const std::string &key ,const T &value ){
