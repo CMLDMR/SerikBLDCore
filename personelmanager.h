@@ -18,6 +18,12 @@ public:
     void errorOccured(const std::string &errorText) override;
 
     QVector<QString> birimList() const;
+
+    QMap<QString,QString> altBirimList( const bsoncxx::oid &birimOid ) const;
+
+    QMap<QString,QString> altBirimList( const std::string &birimName ) const;
+
+    std::string birimOid( const std::string& birimName );
 };
 
 
@@ -30,6 +36,17 @@ public:
     void onList(const QVector<IK::BirimItem> *mlist) override;
 
     void errorOccured(const std::string &errorText) override;
+};
+
+
+class SERIKBLDCORE_EXPORT AltBirimManager : public ListItem<IK::AltBirimItem>
+{
+public:
+    explicit AltBirimManager( DB* _db );
+
+    void errorOccured(const std::string &errorText) override;
+
+    void onList(const QVector<IK::AltBirimItem> *mlist) override;
 };
 
 };
