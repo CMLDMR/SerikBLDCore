@@ -16,6 +16,7 @@ static const std::string adres{"adres"};
 static const std::string kayitTarihEpoch{"kayitTarih"};
 static const std::string kaydedenOid{"kaydedenOid"};
 static const std::string vergiNo{"vergiNo"};
+static const std::string yetkiliOid{"yetkiliOid"};
 }
 
 class SERIKBLDCORE_EXPORT FirmaItem : public Item
@@ -29,12 +30,16 @@ public:
     FirmaItem& setAdres( const std::string& adres );
     FirmaItem& setVergi( const std::string& vergiNo );
     FirmaItem& setKaydeden(const bsoncxx::oid& oid , const std::int64_t& mSecSinceEpoch );
+    FirmaItem& setYetkiliOid( const bsoncxx::oid& yetkiliOid );
 
     std::string name() const;
     std::string telefon() const;
     std::string vergiNo() const;
     std::int64_t kayitTarihi() const;
     std::string mail() const;
+    std::string kaydedenOid() const;
+    std::string adres() const;
+    std::string yetkiliOid() const;
 
     void errorOccured(const std::string &errorText) override;
 };

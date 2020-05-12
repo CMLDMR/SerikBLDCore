@@ -45,6 +45,12 @@ SerikBLDCore::Firma::FirmaItem &SerikBLDCore::Firma::FirmaItem::setKaydeden(cons
     return *this;
 }
 
+SerikBLDCore::Firma::FirmaItem &SerikBLDCore::Firma::FirmaItem::setYetkiliOid(const bsoncxx::oid &yetkiliOid)
+{
+    this->append(Key::yetkiliOid,yetkiliOid);
+    return *this;
+}
+
 
 
 std::string SerikBLDCore::Firma::FirmaItem::name() const
@@ -97,6 +103,39 @@ std::string SerikBLDCore::Firma::FirmaItem::mail() const
     if( val )
     {
         return val.value ().get_utf8 ().value.to_string();
+    }else{
+        return "";
+    }
+}
+
+std::string SerikBLDCore::Firma::FirmaItem::kaydedenOid() const
+{
+    auto val = this->element (Key::kaydedenOid);
+    if( val )
+    {
+        return val.value ().get_oid ().value.to_string();
+    }else{
+        return "";
+    }
+}
+
+std::string SerikBLDCore::Firma::FirmaItem::adres() const
+{
+    auto val = this->element (Key::adres);
+    if( val )
+    {
+        return val.value ().get_utf8 ().value.to_string();
+    }else{
+        return "";
+    }
+}
+
+std::string SerikBLDCore::Firma::FirmaItem::yetkiliOid() const
+{
+    auto val = this->element (Key::yetkiliOid);
+    if( val )
+    {
+        return val.value ().get_oid ().value.to_string();
     }else{
         return "";
     }
