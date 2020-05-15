@@ -32,6 +32,8 @@ SOURCES += \
     dilekcemanager.cpp \
     firma/firmaitem.cpp \
     firma/firmamanager.cpp \
+    imar/mimariproje.cpp \
+    imar/mimariprojemanager.cpp \
     item.cpp \
     listitem.cpp \
     meclis/meclisitem.cpp \
@@ -69,6 +71,8 @@ HEADERS += \
     dilekcemanager.h \
     firma/firmaitem.h \
     firma/firmamanager.h \
+    imar/mimariproje.h \
+    imar/mimariprojemanager.h \
     item.h \
     listitem.h \
     meclis/meclisitem.h \

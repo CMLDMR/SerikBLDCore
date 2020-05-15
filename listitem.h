@@ -112,7 +112,14 @@ public:
         return false;
     }
 
-
+    inline T FindOneItem( const T& filter ){
+        mongocxx::stdx::optional<bsoncxx::document::value> value = this->findOneItem ( filter );
+        T _item;
+        if( value ){
+            _item.setDocumentView(value.get ().view ());
+        }
+        return _item;
+    }
 
     inline std::string InsertItem( const T& item ){
         auto result = DB::insertItem (item);
@@ -148,7 +155,6 @@ public:
         return false;
     }
 
-
     inline QVector<T>& next(const T& filter ){
         __count = this->countItem (filter);
         if( __skip + __limit < __count )
@@ -179,11 +185,12 @@ public:
         }
     }
 
-
     inline void setLimit( const int& limit ){ __limit = limit; }
+
     inline int limit() const { return __limit; }
 
     inline void setSkip( const int& skip ) { __skip = skip; }
+
     inline int skip() const { return __skip; }
 
     inline int totalCount () const { return __count; }
@@ -203,14 +210,12 @@ public:
         return __skip/__limit;
     }
 
-
     virtual void onList( const QVector<T>  *mlist ) = 0;
 
     const QVector<T> &List() const
     {
         return __mlist;
     }
-
 
     virtual void errorOccured(const std::string &errorText) override
     {
