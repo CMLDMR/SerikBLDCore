@@ -7,6 +7,7 @@ const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyAda{"ada"};
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyParsel{"parsel"};
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyAdi{"projeAdi"};
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyMahalle{"projeMahalle"};
+const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyOnay{"projeOnay"};
 
 SerikBLDCore::Imar::MimariProje::MainProje::MainProje()
     :SerikBLDCore::Item (Collection)
@@ -58,6 +59,12 @@ SerikBLDCore::Imar::MimariProje::MainProje &SerikBLDCore::Imar::MimariProje::Mai
 SerikBLDCore::Imar::MimariProje::MainProje &SerikBLDCore::Imar::MimariProje::MainProje::setBasvuruJulianDay(const int64_t &basvuruJulianDay)
 {
     this->append(keyBasvuruJulianDay,bsoncxx::types::b_int64{basvuruJulianDay});
+    return *this;
+}
+
+SerikBLDCore::Imar::MimariProje::MainProje &SerikBLDCore::Imar::MimariProje::MainProje::setOnay(const bool &onay)
+{
+    this->append(keyOnay,onay);
     return *this;
 }
 
@@ -120,6 +127,16 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::mahalle() const
         return val.value ().get_utf8 ().value.to_string ();
     }else{
         return "";
+    }
+}
+
+bool SerikBLDCore::Imar::MimariProje::MainProje::onay() const
+{
+    auto val = this->element (keyOnay);
+    if( val ){
+        return val.value ().get_bool ().value;
+    }else{
+        return false;
     }
 }
 
@@ -543,6 +560,7 @@ SerikBLDCore::Imar::MimariProje::AsansorProje SerikBLDCore::Imar::MimariProje::B
 SerikBLDCore::Imar::MimariProje::MimariProje::MimariProje()
 {
     this->setProjectType (ProjectType::Mimari);
+    this->append(keyProjeTitle,"Mimari");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::MimariProje::iconPath() const
@@ -562,6 +580,7 @@ std::string SerikBLDCore::Imar::MimariProje::MimariProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::StatikProje::StatikProje()
 {
     this->setProjectType (ProjectType::Statik);
+    this->append(keyProjeTitle,"Statik");
 }
 
 
@@ -577,6 +596,7 @@ std::string SerikBLDCore::Imar::MimariProje::StatikProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::ElektrikProje::ElektrikProje()
 {
     this->setProjectType (ProjectType::Elektrik);
+    this->append(keyProjeTitle,"Elektrik");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::ElektrikProje::iconPath() const
@@ -587,6 +607,7 @@ std::string SerikBLDCore::Imar::MimariProje::ElektrikProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::MechanicProje::MechanicProje()
 {
     this->setProjectType (ProjectType::Mekanik);
+    this->append(keyProjeTitle,"Mekanik");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::MechanicProje::iconPath() const
@@ -597,6 +618,7 @@ std::string SerikBLDCore::Imar::MimariProje::MechanicProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::RuhsatProje::RuhsatProje()
 {
     this->setProjectType (ProjectType::Ruhsat);
+    this->append(keyProjeTitle,"Ruhsat");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::RuhsatProje::iconPath() const
@@ -607,6 +629,7 @@ std::string SerikBLDCore::Imar::MimariProje::RuhsatProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::IskeleProje::IskeleProje()
 {
     this->setProjectType (ProjectType::Iskele);
+    this->append(keyProjeTitle,"İskele");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::IskeleProje::iconPath() const
@@ -617,6 +640,7 @@ std::string SerikBLDCore::Imar::MimariProje::IskeleProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::ZeminEtudu::ZeminEtudu()
 {
     this->setProjectType (ProjectType::ZeminEtudu);
+    this->append(keyProjeTitle,"Zemin Etüdü");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::ZeminEtudu::iconPath() const
@@ -627,6 +651,7 @@ std::string SerikBLDCore::Imar::MimariProje::ZeminEtudu::iconPath() const
 SerikBLDCore::Imar::MimariProje::AsansorProje::AsansorProje()
 {
     this->setProjectType (ProjectType::Asansor);
+    this->append(keyProjeTitle,"Asansör");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::AsansorProje::iconPath() const
@@ -637,6 +662,7 @@ std::string SerikBLDCore::Imar::MimariProje::AsansorProje::iconPath() const
 SerikBLDCore::Imar::MimariProje::IskanProje::IskanProje()
 {
     this->setProjectType (ProjectType::Iskan);
+    this->append(keyProjeTitle,"İskan");
 }
 
 std::string SerikBLDCore::Imar::MimariProje::IskanProje::iconPath() const

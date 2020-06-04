@@ -22,6 +22,7 @@ public:
     static const std::string keyParsel;
     static const std::string keyAdi;
     static const std::string keyMahalle;
+    static const std::string keyOnay;
 
 
 
@@ -36,6 +37,7 @@ public:
     MainProje& setMahalle( const std::string& mahalle );
     MainProje& setFirmaOid( const bsoncxx::oid& firmaOid );
     MainProje& setBasvuruJulianDay( const std::int64_t& basvuruJulianDay );
+    MainProje& setOnay( const bool& onay );
 
 
     std::string adi() const;
@@ -44,6 +46,7 @@ public:
     std::int64_t ada() const;
     std::int64_t parsel() const;
     std::string mahalle() const;
+    bool onay() const;
 };
 
 
