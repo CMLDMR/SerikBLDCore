@@ -549,6 +549,58 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
     }
 }
 
+bool SerikBLDCore::DB::removeField(const SerikBLDCore::Item &filter, const std::string &field)
+{
+    auto _oid = filter.oid ();
+
+    if( !_oid )
+    {
+        this->setLastError (QString("%1 %2 Required Object ID").arg (__LINE__)
+                            .arg (__FUNCTION__));
+        return false;
+    }
+
+    auto newfilter = document{};
+
+    try {
+        newfilter.append(kvp("_id",bsoncxx::oid{_oid.value ().to_string ()}));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+    }
+
+    auto unsetDoc = document{};
+
+    try {
+        unsetDoc.append (kvp("$unset",make_document(kvp(field,""))));
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+    }
+
+
+    try {
+        auto result = this->db ()->collection (filter.getCollection ()).update_one (newfilter.view (),unsetDoc.view ());
+        if( result )
+        {
+            if( result.value().modified_count() )
+            {
+                return true;
+            }else{
+                setLastError (QString("%1 Modified Document").arg (result.value ().modified_count ()));
+                return false;
+            }
+        }else{
+            setLastError (QString("setField No Result"));
+            return false;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        setLastError (str.c_str ());
+        return false;
+    }
+}
+
 bool SerikBLDCore::DB::incValue(const SerikBLDCore::Item &filter, const std::string &field, const int64_t &value)
 {
     auto _oid = filter.oid ();

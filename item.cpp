@@ -254,6 +254,12 @@ SerikBLDCore::Item &SerikBLDCore::Item::setOid(const std::string &oid)
 #endif
 }
 
+SerikBLDCore::Item &SerikBLDCore::Item::setOid(const bsoncxx::oid &oid)
+{
+    this->append("_id",oid);
+    return *this;
+}
+
 
 std::string SerikBLDCore::Item::getCollection() const
 {
@@ -269,9 +275,7 @@ void SerikBLDCore::Item::setCollection(const std::string &collection)
 
 void SerikBLDCore::Item::removeElement(const std::string &key)
 {
-#ifdef DESKTOP
     auto tempDoc = document{};
-
     for( auto item : mDoc.view () )
     {
         if( key != item.key ().to_string() )
@@ -290,10 +294,6 @@ void SerikBLDCore::Item::removeElement(const std::string &key)
     {
         mDoc.append(kvp(item.key ().to_string(),item.get_value ()));
     }
-#else
-
-
-#endif
 }
 
 

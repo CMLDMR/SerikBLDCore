@@ -4,7 +4,9 @@
 #include "SerikBLDCore_global.h"
 #include "Config.h"
 
+#include <iterator>
 #include <iostream>
+
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
@@ -40,7 +42,6 @@ public:
     virtual void errorOccured(const std::string& errorText ) ;
 
 
-#ifdef DESKTOP
     Item(const bsoncxx::document::view mView , const std::string &_Collection);
     Item& operator=(const document &value);
     Item& operator=(const bsoncxx::document::view &view);
@@ -57,16 +58,15 @@ public:
     boost::optional<QTime> getTime() const;
 
     boost::optional<QDate> getDate() const;
-#else
 
-
-#endif
 
     void printView() const;
 
     void clear();
 
     Item& setOid( const std::string &oid );
+
+    Item& setOid( const bsoncxx::oid& oid );
 
     std::string getCollection() const;
 
@@ -76,10 +76,7 @@ public:
 
     template<typename T>
     void pushArray(std::string key ,const T &value){
-
-#ifdef DESKTOP
         auto arr = array{};
-
         auto existArray = this->element (key);
 
         if( existArray )
@@ -110,17 +107,13 @@ public:
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             errorOccured (str);
         }
-#else
-
-
-#endif
     }
+
 
 
 
     void pullArray( const std::string& key , const bsoncxx::types::value &value )
     {
-#ifdef DESKTOP
         auto arr = array{};
         auto existArray = this->element (key);
 
@@ -149,19 +142,12 @@ public:
             errorOccured (str);
         }
 
-#else
-
-
-#endif
     }
 
 
 
     template<typename T>
     Item& append( const std::string &key ,const T &value ){
-
-
-#ifdef DESKTOP
         this->removeElement (key);
         try {
             mDoc.append (kvp(key,value));
@@ -169,21 +155,12 @@ public:
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             errorOccured (str);
         }
-
-#else
-
-
-#endif
-
         return *this;
     }
 
 
     template<>
     Item& append( const std::string &key ,const Item &value ){
-
-
-#ifdef DESKTOP
         this->removeElement (key);
         try {
             mDoc.append (kvp(key,value.view ()));
@@ -191,27 +168,14 @@ public:
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             errorOccured (str);
         }
-
-#else
-
-
-#endif
-
         return *this;
     }
 
 
 
 private:
-
-#ifdef DESKTOP
     document mDoc;
-#else
-
-
-#endif
     std::string mCollection;
-
 };
 
 

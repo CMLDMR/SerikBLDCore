@@ -134,6 +134,8 @@ public:
         }
     }
 
+    inline bool removeField( const Item& filter , const std::string &field );
+
 
     bool incValue( const Item& filter , const std::string& field , const std::int64_t& value );
 

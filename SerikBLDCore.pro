@@ -32,6 +32,7 @@ SOURCES += \
     dilekcemanager.cpp \
     firma/firmaitem.cpp \
     firma/firmamanager.cpp \
+    imar/mimarilog.cpp \
     imar/mimariproje.cpp \
     imar/mimariprojemanager.cpp \
     item.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
     dilekcemanager.h \
     firma/firmaitem.h \
     firma/firmamanager.h \
+    imar/mimarilog.h \
     imar/mimariproje.h \
     imar/mimariprojemanager.h \
     item.h \
