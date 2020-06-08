@@ -110,6 +110,42 @@ public:
     }
 
 
+    template<>
+    void pushArray(std::string key ,const Item &value){
+        auto arr = array{};
+        auto existArray = this->element (key);
+
+        if( existArray )
+        {
+            this->removeElement ( key );
+
+            for( auto item : existArray.value ().get_array ().value )
+            {
+                try {
+                    arr.append (item.get_value ());
+                } catch (bsoncxx::exception &e) {
+                    std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                    errorOccured (str);
+                }
+            }
+        }
+
+        try {
+            arr.append (value.view ());
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            errorOccured (str);
+        }
+
+        try {
+            mDoc.append (kvp(key,arr));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            errorOccured (str);
+        }
+    }
+
+
 
 
     void pullArray( const std::string& key , const bsoncxx::types::value &value )
