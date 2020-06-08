@@ -8,6 +8,7 @@ const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyParsel{"parsel"
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyAdi{"projeAdi"};
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyMahalle{"projeMahalle"};
 const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyOnay{"projeOnay"};
+const std::string SerikBLDCore::Imar::MimariProje::MainProje::keyOnaylamaTarihi{"projeOnaylamaJulian"};
 
 SerikBLDCore::Imar::MimariProje::MainProje::MainProje()
     :SerikBLDCore::Item (Collection)
@@ -65,6 +66,7 @@ SerikBLDCore::Imar::MimariProje::MainProje &SerikBLDCore::Imar::MimariProje::Mai
 SerikBLDCore::Imar::MimariProje::MainProje &SerikBLDCore::Imar::MimariProje::MainProje::setOnay(const bool &onay)
 {
     this->append(keyOnay,onay);
+    this->append(keyOnaylamaTarihi,bsoncxx::types::b_int64{QDate::currentDate ().toJulianDay ()});
     return *this;
 }
 
@@ -137,6 +139,16 @@ bool SerikBLDCore::Imar::MimariProje::MainProje::onay() const
         return val.value ().get_bool ().value;
     }else{
         return false;
+    }
+}
+
+int64_t SerikBLDCore::Imar::MimariProje::MainProje::onaylamaJulianDay() const
+{
+    auto val = this->element (keyOnaylamaTarihi);
+    if( val ){
+        return val.value ().get_int64 ().value;
+    }else{
+        return -1;
     }
 }
 

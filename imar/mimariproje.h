@@ -23,6 +23,7 @@ public:
     static const std::string keyAdi;
     static const std::string keyMahalle;
     static const std::string keyOnay;
+    static const std::string keyOnaylamaTarihi;
 
 
 
@@ -47,6 +48,7 @@ public:
     std::int64_t parsel() const;
     std::string mahalle() const;
     bool onay() const;
+    std::int64_t onaylamaJulianDay() const;
 };
 
 
