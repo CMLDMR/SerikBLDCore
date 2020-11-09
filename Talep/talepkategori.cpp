@@ -43,7 +43,7 @@ QString SerikBLDCore::TalepKategori::KategoriName() const
     auto val = this->element (Baslik);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
     }
     return "";
 }

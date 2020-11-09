@@ -3,122 +3,122 @@
 
 
 
-SerikBLDCore::bsoncxx::Oid::Oid(const QString &_oidStr)
+MongoCore::bsoncxx::Oid::Oid(const QString &_oidStr)
 {
     this->_oid = _oidStr;
 }
 
-SerikBLDCore::bsoncxx::Oid::Oid(const SerikBLDCore::bsoncxx::Oid &_oid)
+MongoCore::bsoncxx::Oid::Oid(const MongoCore::bsoncxx::Oid &_oid)
 {
     this->_oid = _oid._oid;
 }
 
-SerikBLDCore::bsoncxx::Oid::Oid(SerikBLDCore::bsoncxx::Oid &&_oid)
+MongoCore::bsoncxx::Oid::Oid(MongoCore::bsoncxx::Oid &&_oid)
 {
     this->_oid = _oid._oid;
 }
 
-QString SerikBLDCore::bsoncxx::Oid::value() const
+QString MongoCore::bsoncxx::Oid::value() const
 {
     return this->_oid;
 }
 
-QDataStream& SerikBLDCore::bsoncxx::Oid::operator<<( QDataStream &stream)
+QDataStream& MongoCore::bsoncxx::Oid::operator<<( QDataStream &stream)
 {
     stream << this->value ();
     return stream;
 }
 
-SerikBLDCore::bsoncxx::element::element()
+MongoCore::bsoncxx::element::element()
     :mType{Type::k_unknown}
 {
 
 }
 
-SerikBLDCore::bsoncxx::element::element(const SerikBLDCore::bsoncxx::Oid &value)
+MongoCore::bsoncxx::element::element(const MongoCore::bsoncxx::Oid &value)
     :mValue {value.value ()},
       mType{Type::k_oid}
 {}
 
-SerikBLDCore::bsoncxx::element::element(const QString &value)
+MongoCore::bsoncxx::element::element(const QString &value)
     :mValue {value},
       mType{Type::k_utf8}
 {}
 
-SerikBLDCore::bsoncxx::element::element(const std::string &value)
+MongoCore::bsoncxx::element::element(const std::string &value)
     :mValue {value.c_str ()},
       mType{Type::k_utf8}
 {
 
 }
 
-SerikBLDCore::bsoncxx::element::element(const char *value)
+MongoCore::bsoncxx::element::element(const char *value)
     :mValue {value},
       mType{Type::k_utf8}
 {
 
 }
 
-SerikBLDCore::bsoncxx::element::element(const bool &value)
+MongoCore::bsoncxx::element::element(const bool &value)
     :mValue {value},
       mType{Type::k_bool}
 {}
 
-SerikBLDCore::bsoncxx::element::element(const double &value)
+MongoCore::bsoncxx::element::element(const double &value)
     :mValue {value},
       mType{Type::k_double}
 {}
 
-SerikBLDCore::bsoncxx::element::element(const qint64 &value)
+MongoCore::bsoncxx::element::element(const qint64 &value)
     :mValue {value},
       mType{Type::k_int64}
 {
 }
 
-SerikBLDCore::bsoncxx::element::element(const qint32 &value)
+MongoCore::bsoncxx::element::element(const qint32 &value)
     :mValue {value},
       mType{Type::k_int32}
 {}
 
-SerikBLDCore::bsoncxx::element::element(const SerikBLDCore::bsoncxx::object &value)
+MongoCore::bsoncxx::element::element(const MongoCore::bsoncxx::object &value)
     :mType{Type::k_object}
 {
     mValue.setValue(value);
 }
 
-SerikBLDCore::bsoncxx::element::element(const SerikBLDCore::bsoncxx::array &value)
+MongoCore::bsoncxx::element::element(const MongoCore::bsoncxx::array &value)
     :mType{Type::k_array}
 {
     mValue.setValue(value);
 }
 
-SerikBLDCore::bsoncxx::element::element(const SerikBLDCore::bsoncxx::element &other)
+MongoCore::bsoncxx::element::element(const MongoCore::bsoncxx::element &other)
 {
     this->mType = other.type ();
     this->mValue = other.value ();
 }
 
-SerikBLDCore::bsoncxx::element::element(SerikBLDCore::bsoncxx::element &&other)
+MongoCore::bsoncxx::element::element(MongoCore::bsoncxx::element &&other)
 {
     this->mType = other.type ();
     this->mValue = other.value ();
 }
 
-SerikBLDCore::bsoncxx::element& SerikBLDCore::bsoncxx::element::operator=(const SerikBLDCore::bsoncxx::element &other)
-{
-    this->mType = other.type ();
-    this->mValue = other.value ();
-    return *this;
-}
-
-SerikBLDCore::bsoncxx::element& SerikBLDCore::bsoncxx::element::operator=(SerikBLDCore::bsoncxx::element &&other)
+MongoCore::bsoncxx::element& MongoCore::bsoncxx::element::operator=(const MongoCore::bsoncxx::element &other)
 {
     this->mType = other.type ();
     this->mValue = other.value ();
     return *this;
 }
 
-bool SerikBLDCore::bsoncxx::element::operator==(const SerikBLDCore::bsoncxx::element &other)
+MongoCore::bsoncxx::element& MongoCore::bsoncxx::element::operator=(MongoCore::bsoncxx::element &&other)
+{
+    this->mType = other.type ();
+    this->mValue = other.value ();
+    return *this;
+}
+
+bool MongoCore::bsoncxx::element::operator==(const MongoCore::bsoncxx::element &other)
 {
     if( this->type () != other.type () ){
         return false;
@@ -153,7 +153,7 @@ bool SerikBLDCore::bsoncxx::element::operator==(const SerikBLDCore::bsoncxx::ele
     }
 }
 
-bool SerikBLDCore::bsoncxx::element::operator!=(const SerikBLDCore::bsoncxx::element &other)
+bool MongoCore::bsoncxx::element::operator!=(const MongoCore::bsoncxx::element &other)
 {
     if( this->type () != other.type () ){
         return true;
@@ -186,7 +186,7 @@ bool SerikBLDCore::bsoncxx::element::operator!=(const SerikBLDCore::bsoncxx::ele
     }
 }
 
-bool SerikBLDCore::bsoncxx::operator==(const SerikBLDCore::bsoncxx::element &element1, const SerikBLDCore::bsoncxx::element &element2)
+bool MongoCore::bsoncxx::operator==(const MongoCore::bsoncxx::element &element1, const MongoCore::bsoncxx::element &element2)
 {
     if( element1.type () != element2.type () ){
         return false;
@@ -219,7 +219,7 @@ bool SerikBLDCore::bsoncxx::operator==(const SerikBLDCore::bsoncxx::element &ele
     }
 }
 
-std::optional<SerikBLDCore::bsoncxx::Oid> SerikBLDCore::bsoncxx::element::toOid() const
+std::optional<MongoCore::bsoncxx::Oid> MongoCore::bsoncxx::element::toOid() const
 {
     if( this->type () == Type::k_oid ){
         return Oid(this->mValue.toString ());
@@ -227,7 +227,7 @@ std::optional<SerikBLDCore::bsoncxx::Oid> SerikBLDCore::bsoncxx::element::toOid(
     return std::nullopt;
 }
 
-std::optional<QString> SerikBLDCore::bsoncxx::element::toString() const
+std::optional<QString> MongoCore::bsoncxx::element::toString() const
 {
     if( this->type () == Type::k_utf8 ){
         return this->mValue.toString ();
@@ -235,7 +235,7 @@ std::optional<QString> SerikBLDCore::bsoncxx::element::toString() const
     return std::nullopt;
 }
 
-std::optional<bool> SerikBLDCore::bsoncxx::element::toBool() const
+std::optional<bool> MongoCore::bsoncxx::element::toBool() const
 {
     if( this->type () == Type::k_bool ){
         return this->mValue.toBool ();
@@ -243,7 +243,7 @@ std::optional<bool> SerikBLDCore::bsoncxx::element::toBool() const
     return std::nullopt;
 }
 
-std::optional<double> SerikBLDCore::bsoncxx::element::toDouble() const
+std::optional<double> MongoCore::bsoncxx::element::toDouble() const
 {
     if( this->type () == Type::k_double ){
         return this->mValue.toDouble ();
@@ -251,7 +251,7 @@ std::optional<double> SerikBLDCore::bsoncxx::element::toDouble() const
     return std::nullopt;
 }
 
-std::optional<qint64> SerikBLDCore::bsoncxx::element::toInt64() const
+std::optional<qint64> MongoCore::bsoncxx::element::toInt64() const
 {
     if( this->type () == Type::k_int64 ){
         return static_cast<qint64>(this->mValue.toInt ());
@@ -259,7 +259,7 @@ std::optional<qint64> SerikBLDCore::bsoncxx::element::toInt64() const
     return std::nullopt;
 }
 
-std::optional<qint32> SerikBLDCore::bsoncxx::element::toInt32() const
+std::optional<qint32> MongoCore::bsoncxx::element::toInt32() const
 {
     if( this->type () == Type::k_int32 ){
         return static_cast<qint32>(this->mValue.toInt ());
@@ -267,30 +267,30 @@ std::optional<qint32> SerikBLDCore::bsoncxx::element::toInt32() const
     return std::nullopt;
 }
 
-std::optional<SerikBLDCore::bsoncxx::object> SerikBLDCore::bsoncxx::element::toObject() const
+std::optional<MongoCore::bsoncxx::object> MongoCore::bsoncxx::element::toObject() const
 {
     if( this->type () == Type::k_object ){
-        auto val = qvariant_cast<SerikBLDCore::bsoncxx::object>(this->mValue);
-        return std::make_optional<SerikBLDCore::bsoncxx::object>(val);
+        auto val = qvariant_cast<MongoCore::bsoncxx::object>(this->mValue);
+        return std::make_optional<MongoCore::bsoncxx::object>(val);
     }
     return std::nullopt;
 }
 
-std::optional<SerikBLDCore::bsoncxx::array> SerikBLDCore::bsoncxx::element::toArray() const
+std::optional<MongoCore::bsoncxx::array> MongoCore::bsoncxx::element::toArray() const
 {
     if( this->type () == Type::k_array ){
-        auto val = qvariant_cast<SerikBLDCore::bsoncxx::array>(this->mValue);
-        return std::make_optional<SerikBLDCore::bsoncxx::array>(val);
+        auto val = qvariant_cast<MongoCore::bsoncxx::array>(this->mValue);
+        return std::make_optional<MongoCore::bsoncxx::array>(val);
     }
     return std::nullopt;
 }
 
-SerikBLDCore::bsoncxx::Type SerikBLDCore::bsoncxx::element::type() const
+MongoCore::bsoncxx::Type MongoCore::bsoncxx::element::type() const
 {
     return mType;
 }
 
-bool SerikBLDCore::bsoncxx::operator!=(const SerikBLDCore::bsoncxx::element &element1, const SerikBLDCore::bsoncxx::element &element2)
+bool MongoCore::bsoncxx::operator!=(const MongoCore::bsoncxx::element &element1, const MongoCore::bsoncxx::element &element2)
 {
     if( element1.type () != element2.type () ){
         return true;
@@ -322,7 +322,7 @@ bool SerikBLDCore::bsoncxx::operator!=(const SerikBLDCore::bsoncxx::element &ele
     }
 }
 
-QVariant SerikBLDCore::bsoncxx::element::value() const
+QVariant MongoCore::bsoncxx::element::value() const
 {
     return mValue;
 }
@@ -332,7 +332,7 @@ QVariant SerikBLDCore::bsoncxx::element::value() const
 
 
 
-std::ostream& SerikBLDCore::bsoncxx::operator<<(std::ostream& stream, const SerikBLDCore::bsoncxx::element &element)
+std::ostream& MongoCore::bsoncxx::operator<<(std::ostream& stream, const MongoCore::bsoncxx::element &element)
 {
     switch (element.type ()) {
     case Type::k_oid:

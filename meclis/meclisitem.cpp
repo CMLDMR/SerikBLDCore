@@ -51,7 +51,12 @@ QString SerikBLDCore::Meclis::MeclisItem::gundem() const
     auto val = this->element (Key::gundem);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val->get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val->get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -61,7 +66,13 @@ QString SerikBLDCore::Meclis::MeclisItem::ay() const
     auto val = this->element (Key::ay);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val->get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val->get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -135,7 +146,12 @@ std::string SerikBLDCore::Meclis::YouTubeLink::videoid() const
     auto val = this->element (LinkKey::VideoID);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -175,7 +191,12 @@ std::string SerikBLDCore::Meclis::YouTubeLink::meclisoid() const
     auto val = this->element (LinkKey::MeclisOid);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -298,7 +319,13 @@ QString SerikBLDCore::Meclis::RaporItem::raporAdi() const
     auto val = this->element (RaporKey::raporAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -318,7 +345,13 @@ QString SerikBLDCore::Meclis::RaporItem::kimden() const
     auto val = this->element (RaporKey::kimden);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -380,7 +413,13 @@ QString SerikBLDCore::Meclis::TeklifItem::teklifAdi() const
     auto val = this->element (TeklifKey::teklifAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -400,7 +439,13 @@ QString SerikBLDCore::Meclis::TeklifItem::kimden() const
     auto val = this->element (TeklifKey::kimden);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -450,7 +495,13 @@ std::string SerikBLDCore::Meclis::GundemItem::gundemAdi() const
     auto val = this->element (GundemKey::gundemAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string ();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+
     }
     return "";
 }

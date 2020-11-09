@@ -84,7 +84,12 @@ QString SerikBLDCore::DilekceAciklama::Aciklama() const
     auto val = this->element (Keyaciklama);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -128,7 +133,12 @@ QString SerikBLDCore::DilekceAciklama::PersonelName() const
     auto val = this->element (KeyPersonelName);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -139,7 +149,12 @@ QString SerikBLDCore::DilekceAciklama::Saat() const
     auto val = this->element (KeySaat);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }}

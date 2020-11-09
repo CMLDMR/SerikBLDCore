@@ -41,7 +41,12 @@ QString SerikBLDCore::SMS::SMSItem::smsText() const
     auto val = this->element (sms);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -57,7 +62,12 @@ QString SerikBLDCore::SMS::SMSItem::numaraText() const
     auto val = this->element (numara);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -73,7 +83,12 @@ QString SerikBLDCore::SMS::SMSItem::idText() const
     auto val = this->element (smsID);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -121,7 +136,13 @@ QString SerikBLDCore::SMS::SMSItem::rapor() const
     auto val = this->element (raporKey);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "rapor yok";
 }

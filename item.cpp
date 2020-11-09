@@ -1,19 +1,39 @@
 #include "item.h"
 
 
-#ifdef DESKTOP
+
 SerikBLDCore::Item::Item(const std::string &collection)
     :mDoc(document{}),mCollection(collection)
 {
     mDoc.clear ();
 }
 
-
 SerikBLDCore::Item::Item(const bsoncxx::document::view mView, const std::string &_Collection)
     :mCollection(_Collection)
 {
     this->setDocumentView (mView);
 }
+
+SerikBLDCore::Item& SerikBLDCore::Item::setDocumentView(const bsoncxx::document::view &view)
+{
+    mDoc.clear ();
+    for( auto item : view )
+    {
+#ifdef Q_CC_MSVC
+        this->append(item.key ().to_string().c_str (),item.get_value ());
+#endif
+
+#ifdef Q_CC_GNU
+        this->append(item.key (),item.get_value ());
+#endif
+    }
+    return *this;
+}
+
+
+
+
+
 
 SerikBLDCore::Item::~Item()
 {
@@ -26,7 +46,13 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::builder::basic:
 
     for( auto item : value.view () )
     {
+#ifdef Q_CC_MSVC
         this->append(item.key ().to_string().c_str (),item.get_value ());
+#endif
+
+#ifdef Q_CC_GNU
+        this->append(item.key (),item.get_value ());
+#endif
     }
     return *this;
 }
@@ -36,22 +62,21 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::document::view 
     mDoc.clear ();
     for( auto item : view )
     {
+#ifdef Q_CC_MSVC
         this->append(item.key ().to_string().c_str (),item.get_value ());
+#endif
+
+#ifdef Q_CC_GNU
+        this->append(item.key (),item.get_value ());
+#endif
     }
     return *this;
 }
 
 
-SerikBLDCore::Item& SerikBLDCore::Item::setDocumentView(const bsoncxx::document::view &view)
-{
-    mDoc.clear ();
-    for( auto item : view )
-    {
-        this->append(item.key ().to_string().c_str (),item.get_value ());
-    }
-    return *this;
-}
 
+
+#ifdef Q_CC_MSVC
 boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
 {
     try {
@@ -63,13 +88,6 @@ boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string k
     }
 }
 
-bsoncxx::document::view SerikBLDCore::Item::view() const
-{
-    return mDoc.view ();
-}
-
-
-
 boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
 {
     try {
@@ -80,6 +98,7 @@ boost::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
         return boost::none;
     }
 }
+
 
 boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key)
 {
@@ -164,63 +183,159 @@ boost::optional<QDate> SerikBLDCore::Item::getDate() const
     return dateTime.date ();
 }
 
-#else
+#endif
+
+#ifdef Q_CC_GNU
+std::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
+{
+    try {
+        return mDoc.view ()[key].get_value ();
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
+        const_cast<SerikBLDCore::Item*>(this)->errorOccured (str);
+        return std::nullopt;;
+    }
+}
+
+
+std::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
+{
+    try {
+        return this->view ()["_id"].get_oid ().value;
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        const_cast<SerikBLDCore::Item*>(this)->errorOccured (str);
+        return std::nullopt;
+    }
+}
+
+
+
+std::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key)
+{
+    try {
+        return mDoc.view ()[key].get_value ();
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
+        errorOccured (str);
+        return std::nullopt;
+    }
+}
+
+std::optional<bsoncxx::oid> SerikBLDCore::Item::oid()
+{
+    try {
+        return this->view ()["_id"].get_oid ().value;
+    } catch (bsoncxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        errorOccured (str);
+        return std::nullopt;
+    }
+}
+
+
+std::optional<bsoncxx::builder::basic::document> SerikBLDCore::Item::ItemFilter()
+{
+
+    auto oid = this->oid ();
+
+    if( oid )
+    {
+        auto doc = document{};
+
+        try {
+            doc.append (kvp("_id",oid.value ()));
+        } catch (bsoncxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            errorOccured (str);
+            return std::nullopt;
+        }
+        return std::move(doc);
+    }else{
+        return std::nullopt;
+    }
+
+}
+
+std::optional<QTime> SerikBLDCore::Item::getTime() const
+{
+    auto _oid = this->oid ();
+
+    if( _oid )
+    {
+        return std::nullopt;
+    }
+
+    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+
+    if( !dateTime.isValid () )
+    {
+        return std::nullopt;
+    }
+
+    return dateTime.time ();
+}
+
+std::optional<QDate> SerikBLDCore::Item::getDate() const
+{
+    auto _oid = this->oid ();
+
+    if( _oid )
+    {
+        return std::nullopt;
+    }
+
+    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+
+    if( !dateTime.isValid () )
+    {
+        return std::nullopt;
+    }
+
+    return dateTime.date ();
+}
 
 
 #endif
+
+
+
+bsoncxx::document::view SerikBLDCore::Item::view() const
+{
+    return mDoc.view ();
+}
+
+
 
 SerikBLDCore::Item::Item(const Item &other) : mCollection(other.getCollection ())
 {
-#ifdef DESKTOP
     this->setDocumentView (other.view ());
-#else
-
-
-#endif
 }
 
 SerikBLDCore::Item::Item(Item &&other)
 {
-#ifdef DESKTOP
     this->setDocumentView (other.view ());
-#else
-
-
-#endif
 }
 
 SerikBLDCore::Item& SerikBLDCore::Item::operator=(const Item &value)
 {
-#ifdef DESKTOP
     mDoc.clear ();
 
     for( auto item : value.view () )
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
-#else
-
-
-#endif
     return *this;
-
-
 }
 
 SerikBLDCore::Item &SerikBLDCore::Item::operator=(Item &&other)
 {
-#ifdef DESKTOP
     mDoc.clear ();
     for( auto item : other.view () )
     {
         this->append(item.key ().to_string().c_str (),item.get_value ());
     }
-#else
-
-
-#endif
     return *this;
-
 }
 
 void SerikBLDCore::Item::errorOccured(const std::string &errorText)
@@ -230,12 +345,7 @@ void SerikBLDCore::Item::errorOccured(const std::string &errorText)
 
 void SerikBLDCore::Item::printView() const
 {
-#ifdef DESKTOP
     std::cout << __LINE__ << " " << __FUNCTION__ << " Coll: " <<this->getCollection () << " : " <<bsoncxx::to_json (this->view ()) << std::endl;
-#else
-
-
-#endif
 }
 
 void SerikBLDCore::Item::clear()
@@ -245,13 +355,8 @@ void SerikBLDCore::Item::clear()
 
 SerikBLDCore::Item &SerikBLDCore::Item::setOid(const std::string &oid)
 {
-#ifdef DESKTOP
     this->append("_id",bsoncxx::oid{oid});
     return *this;
-#else
-
-
-#endif
 }
 
 SerikBLDCore::Item &SerikBLDCore::Item::setOid(const bsoncxx::oid &oid)
@@ -272,7 +377,7 @@ void SerikBLDCore::Item::setCollection(const std::string &collection)
 }
 
 
-
+#ifdef Q_CC_MSVC
 void SerikBLDCore::Item::removeElement(const std::string &key)
 {
     auto tempDoc = document{};
@@ -295,6 +400,36 @@ void SerikBLDCore::Item::removeElement(const std::string &key)
         mDoc.append(kvp(item.key ().to_string(),item.get_value ()));
     }
 }
+#endif
+
+#ifdef Q_CC_GNU
+void SerikBLDCore::Item::removeElement(const std::string_view &key)
+{
+    auto tempDoc = document{};
+    for( auto item : mDoc.view () )
+    {
+        if( key != item.key () )
+        {
+            try {
+                tempDoc.append( kvp( item.key () , item.get_value () ) );
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+                errorOccured (str);
+            }
+        }
+    }
+    mDoc.clear ();
+
+    for( auto item : tempDoc.view () )
+    {
+        mDoc.append(kvp(item.key (),item.get_value ()));
+    }
+}
+#endif
+
+
+
+
 
 
 
@@ -408,5 +543,13 @@ SerikBLDCore::Item SerikBLDCore::FindOptions::projection() const
      }
      return SerikBLDCore::Item("none");
 }
+
+
+
+
+
+
+
+
 
 

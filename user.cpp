@@ -88,7 +88,12 @@ std::string SerikBLDCore::User::AdSoyad()
 
     if( element )
     {
+#ifdef Q_CC_MSVC
         return (element->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return (element->get_utf8 ().value.data ());
+#endif
     }else{
         return (KeyAdSoyad + " Bilgisi Eksik");
     }
@@ -100,7 +105,12 @@ std::string SerikBLDCore::User::Statu()
 
     if( element )
     {
+#ifdef Q_CC_MSVC
         return  (element->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return  (element->get_utf8 ().value.data ());
+#endif
     }else{
         return (KeyStatu + " Bilgisi Eksik");
     }
@@ -112,7 +122,13 @@ std::string SerikBLDCore::User::Birimi()
 
     if( element )
     {
+#ifdef Q_CC_MSVC
         return  (element->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return  (element->get_utf8 ().value.data ());
+#endif
+
     }else{
         return ("");
     }
@@ -124,7 +140,12 @@ std::string SerikBLDCore::User::Telefon() const
 
     if( element )
     {
+#ifdef Q_CC_MSVC
         return  (element->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return  (element->get_utf8 ().value.data ());
+#endif
     }else{
         return ("");
     }

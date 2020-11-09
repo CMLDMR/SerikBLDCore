@@ -6,7 +6,7 @@
 
 
 
-namespace SerikBLDCore {
+namespace MongoCore {
 
 namespace bsoncxx {
 
@@ -24,12 +24,12 @@ public:
     bool operator==( const core& other );
     bool operator!=( const core& other );
 
-    friend std::ostream& operator<<( std::ostream& stream, const SerikBLDCore::bsoncxx::core& object );
+    friend std::ostream& operator<<( std::ostream& stream, const MongoCore::bsoncxx::core& object );
 
 
-    QMap<QString,SerikBLDCore::bsoncxx::element>& map();
+    QMap<QString,MongoCore::bsoncxx::element>& map();
 
-    QMap<QString,SerikBLDCore::bsoncxx::element>& view() const;
+    QMap<QString,MongoCore::bsoncxx::element> view() const;
 
     int count() const;
 
@@ -40,7 +40,7 @@ public:
 
 private:
     bool mIsArray = false;
-    QMap<QString,SerikBLDCore::bsoncxx::element> mMap;
+    QMap<QString,MongoCore::bsoncxx::element> mMap;
 };
 
 
@@ -49,6 +49,6 @@ private:
 
 }
 
-Q_DECLARE_METATYPE(SerikBLDCore::bsoncxx::core);
+Q_DECLARE_METATYPE(MongoCore::bsoncxx::core);
 
 #endif // CORE_H

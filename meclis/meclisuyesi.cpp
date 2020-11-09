@@ -86,7 +86,13 @@ QString SerikBLDCore::Meclis::MeclisUyesi::partiAdi() const
     auto val = this->element (UyeKey::partiAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -96,7 +102,13 @@ QString SerikBLDCore::Meclis::MeclisUyesi::donemAdi() const
     auto val = this->element (UyeKey::donemAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -114,7 +126,13 @@ QVector<QString> SerikBLDCore::Meclis::MeclisUyesi::komisyonUyelikleri() const
 
         for( auto item : val.value ().get_array ().value )
         {
-            list.push_back (QString::fromStdString (item.get_utf8 ().value.to_string ()));
+#ifdef Q_CC_MSVC
+        list.push_back (QString::fromStdString (item.get_utf8 ().value.to_string ()));
+#endif
+#ifdef Q_CC_GNU
+        list.push_back (QString::fromStdString (item.get_utf8 ().value.data ()));
+#endif
+
         }
     }
     return list;
@@ -165,7 +183,13 @@ QString SerikBLDCore::Meclis::PartiItem::parti() const
     auto val = this->element (PartiKey::parti);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -187,7 +211,13 @@ QString SerikBLDCore::Meclis::KomisyonItem::komisyonAdi() const
     auto val = this->element (KomisyonKey::komisyon);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }

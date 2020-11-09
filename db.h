@@ -12,7 +12,15 @@
 #ifdef Q_OS_WINDOWS
 #include "../url.h"
 #include "mongoheaders.h"
+#endif
+
+
+#ifdef Q_CC_MSVC
 #include <boost/optional.hpp>
+#endif
+
+#ifdef Q_CC_GNU
+#include <optional>
 #endif
 
 

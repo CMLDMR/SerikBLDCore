@@ -2,35 +2,35 @@
 
 
 
-SerikBLDCore::bsoncxx::object::object()
+MongoCore::bsoncxx::object::object()
     :core(false)
 {
 
 }
 
-SerikBLDCore::bsoncxx::object &SerikBLDCore::bsoncxx::object::append(const QString &key, const SerikBLDCore::bsoncxx::element &value)
+MongoCore::bsoncxx::object &MongoCore::bsoncxx::object::append(const QString &key, const MongoCore::bsoncxx::element &value)
 {
     this->map ().insert (key,value);
     return *this;
 }
 
-SerikBLDCore::bsoncxx::object &SerikBLDCore::bsoncxx::object::append(const QString &key, const SerikBLDCore::bsoncxx::object &value)
+MongoCore::bsoncxx::object &MongoCore::bsoncxx::object::append(const QString &key, const MongoCore::bsoncxx::object &value)
 {
     if( value.count () ){
-        this->map ().insert (key,SerikBLDCore::bsoncxx::element(value));
+        this->map ().insert (key,MongoCore::bsoncxx::element(value));
     }
     return *this;
 }
 
-SerikBLDCore::bsoncxx::object &SerikBLDCore::bsoncxx::object::append(const QString &key, const SerikBLDCore::bsoncxx::array &value)
+MongoCore::bsoncxx::object &MongoCore::bsoncxx::object::append(const QString &key, const MongoCore::bsoncxx::array &value)
 {
     if( value.count () ){
-        this->map ().insert (key,SerikBLDCore::bsoncxx::element(value));
+        this->map ().insert (key,MongoCore::bsoncxx::element(value));
     }
     return *this;
 }
 
-std::optional<SerikBLDCore::bsoncxx::element> SerikBLDCore::bsoncxx::object::element(const QString &key)
+std::optional<MongoCore::bsoncxx::element> MongoCore::bsoncxx::object::element(const QString &key)
 {
     if( this->map ().contains (key) ){
         return this->map ()[key];
@@ -39,31 +39,51 @@ std::optional<SerikBLDCore::bsoncxx::element> SerikBLDCore::bsoncxx::object::ele
     }
 }
 
+MongoCore::bsoncxx::object& MongoCore::bsoncxx::object::setObject(const MongoCore::bsoncxx::object &object)
+{
+    this->clear ();
 
-SerikBLDCore::bsoncxx::array::array()
+    for( auto key : object.view ().keys () ){
+        this->map ().insert (key,object.view ().value (key));
+    }
+    return *this;
+}
+
+MongoCore::bsoncxx::object &MongoCore::bsoncxx::object::setObject(const QMap<QString, MongoCore::bsoncxx::element> &elementList)
+{
+    this->clear ();
+
+    for( auto key : elementList.keys () ){
+        this->map ().insert (key,elementList.value (key));
+    }
+    return *this;
+}
+
+
+MongoCore::bsoncxx::array::array()
     :core(true)
 {
 
 }
 
-SerikBLDCore::bsoncxx::array &SerikBLDCore::bsoncxx::array::append(const SerikBLDCore::bsoncxx::element &value)
+MongoCore::bsoncxx::array &MongoCore::bsoncxx::array::append(const MongoCore::bsoncxx::element &value)
 {
-    this->map ().insert (QString::number (this->map ().count ()),SerikBLDCore::bsoncxx::element(value));
+    this->map ().insert (QString::number (this->map ().count ()),MongoCore::bsoncxx::element(value));
     return *this;
 }
 
-SerikBLDCore::bsoncxx::array &SerikBLDCore::bsoncxx::array::append(const SerikBLDCore::bsoncxx::object &value)
+MongoCore::bsoncxx::array &MongoCore::bsoncxx::array::append(const MongoCore::bsoncxx::object &value)
 {
     if( value.count () ){
-        this->map ().insert (QString::number (this->map ().count ()),SerikBLDCore::bsoncxx::element(value));
+        this->map ().insert (QString::number (this->map ().count ()),MongoCore::bsoncxx::element(value));
     }
     return *this;
 }
 
-SerikBLDCore::bsoncxx::array &SerikBLDCore::bsoncxx::array::append(const SerikBLDCore::bsoncxx::array &value)
+MongoCore::bsoncxx::array &MongoCore::bsoncxx::array::append(const MongoCore::bsoncxx::array &value)
 {
     if( value.count () ){
-        this->map ().insert (QString::number (this->map ().count ()),SerikBLDCore::bsoncxx::element(value));
+        this->map ().insert (QString::number (this->map ().count ()),MongoCore::bsoncxx::element(value));
     }
     return *this;
 }

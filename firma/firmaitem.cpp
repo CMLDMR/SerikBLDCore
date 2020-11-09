@@ -58,7 +58,13 @@ std::string SerikBLDCore::Firma::FirmaItem::name() const
     auto val = this->element (Key::firmaAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+
     }else{
         return "";
     }
@@ -69,7 +75,12 @@ std::string SerikBLDCore::Firma::FirmaItem::telefon() const
     auto val = this->element (Key::telefon);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }
@@ -80,7 +91,12 @@ std::string SerikBLDCore::Firma::FirmaItem::vergiNo() const
     auto val = this->element (Key::vergiNo);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }
@@ -102,7 +118,12 @@ std::string SerikBLDCore::Firma::FirmaItem::mail() const
     auto val = this->element (Key::email);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }
@@ -124,7 +145,12 @@ std::string SerikBLDCore::Firma::FirmaItem::adres() const
     auto val = this->element (Key::adres);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }

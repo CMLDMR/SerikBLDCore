@@ -150,7 +150,12 @@ QString SerikBLDCore::TC::TCNO()const
     auto value = this->element (KeyTC);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -161,7 +166,13 @@ QString SerikBLDCore::TC::AdSoyad()const
     auto value = this->element (KeyAdSoyad);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
+
     }else{
         return "";
     }
@@ -172,7 +183,12 @@ QString SerikBLDCore::TC::CepTelefonu()const
     auto value = this->element (KeyCepTelefonu);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -183,7 +199,12 @@ QString SerikBLDCore::TC::Mahalle()const
     auto value = this->element (KeyMahalle);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -194,7 +215,12 @@ QString SerikBLDCore::TC::TamAdres()const
     auto value = this->element (KeyAdres);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -205,7 +231,12 @@ QString SerikBLDCore::TC::Password()const
     auto value = this->element (KeyPassword);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -216,7 +247,12 @@ QString SerikBLDCore::TC::NormalTelefon()const
     auto value = this->element (KeyNormalTelefon);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }

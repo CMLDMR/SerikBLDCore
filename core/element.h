@@ -11,7 +11,7 @@
 
 
 
-namespace SerikBLDCore {
+namespace MongoCore {
 
 namespace bsoncxx {
 
@@ -63,11 +63,11 @@ public:
     explicit element( const array& value );
 
 
-    element( const SerikBLDCore::bsoncxx::element& other );
-    element( SerikBLDCore::bsoncxx::element&& other );
+    element( const MongoCore::bsoncxx::element& other );
+    element( MongoCore::bsoncxx::element&& other );
 
-    element& operator=( const SerikBLDCore::bsoncxx::element& other );
-    element& operator=( SerikBLDCore::bsoncxx::element&& other );
+    element& operator=( const MongoCore::bsoncxx::element& other );
+    element& operator=( MongoCore::bsoncxx::element&& other );
 
     bool operator==( const element& other );
     bool operator!=( const element& other );
@@ -78,16 +78,16 @@ public:
     std::optional<double> toDouble() const;
     std::optional<qint64> toInt64() const;
     std::optional<qint32> toInt32() const;
-    std::optional<SerikBLDCore::bsoncxx::object> toObject() const;
-    std::optional<SerikBLDCore::bsoncxx::array> toArray() const;
+    std::optional<MongoCore::bsoncxx::object> toObject() const;
+    std::optional<MongoCore::bsoncxx::array> toArray() const;
 
     QVariant value() const;
 
     Type type() const;
 
-    friend bool operator!=( const element& element1, const SerikBLDCore::bsoncxx::element& element2 );
-    friend bool operator==( const element& element1, const SerikBLDCore::bsoncxx::element& element2 );
-    friend std::ostream& operator<<( std::ostream& stream, const SerikBLDCore::bsoncxx::element& element );
+    friend bool operator!=( const element& element1, const MongoCore::bsoncxx::element& element2 );
+    friend bool operator==( const element& element1, const MongoCore::bsoncxx::element& element2 );
+    friend std::ostream& operator<<( std::ostream& stream, const MongoCore::bsoncxx::element& element );
 
 private:
     QVariant mValue;
@@ -102,7 +102,7 @@ private:
 
 }
 
-Q_DECLARE_METATYPE(SerikBLDCore::bsoncxx::element);
+Q_DECLARE_METATYPE(MongoCore::bsoncxx::element);
 
 
 

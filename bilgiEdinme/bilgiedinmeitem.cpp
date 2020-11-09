@@ -124,7 +124,13 @@ QString SerikBLDCore::BilgiEdinmeItem::konu() const
     auto val = this->element (BilgiEdinme::Key::Konu);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -140,7 +146,13 @@ QString SerikBLDCore::BilgiEdinmeItem::mesaj() const
     auto val = this->element (BilgiEdinme::Key::Mesaj);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -156,7 +168,13 @@ QString SerikBLDCore::BilgiEdinmeItem::birim() const
     auto val = this->element (BilgiEdinme::Key::Birim);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }

@@ -116,7 +116,7 @@ public:
         mongocxx::stdx::optional<bsoncxx::document::value> value = this->findOneItem ( filter );
         T _item;
         if( value ){
-            _item.setDocumentView(value.get ().view ());
+            _item.setDocumentView(value.value ().view ());
         }
         return _item;
     }

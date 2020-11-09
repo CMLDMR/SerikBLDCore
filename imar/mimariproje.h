@@ -134,8 +134,24 @@ public:
     std::string assignedPersonelOid() const;
     std::string assignedPersonelName() const;
     std::int64_t projeCount() const;
+
+#ifdef Q_CC_MSVC
     boost::optional<FileProject> at( const int& index ) const;
     boost::optional<FileProject> at( const bsoncxx::oid& fileoid ) const;
+    boost::optional<FileProject> operator[]( const int& index ) const;
+    boost::optional<FileProject> operator[]( const bsoncxx::oid& fileoid ) const;
+
+#endif
+#ifdef Q_CC_GNU
+    std::optional<FileProject> at( const int& index ) const;
+    std::optional<FileProject> at( const bsoncxx::oid& fileoid ) const;
+    std::optional<FileProject> operator[]( const int& index ) const;
+    std::optional<FileProject> operator[]( const bsoncxx::oid& fileoid ) const;
+
+#endif
+
+
+
     bool onaylanabilir() const;
     ProjectType type() const;
     std::string ownerOid() const;
@@ -143,8 +159,6 @@ public:
     std::string ownerTelefon() const;
 
 
-    boost::optional<FileProject> operator[]( const int& index ) const;
-    boost::optional<FileProject> operator[]( const bsoncxx::oid& fileoid ) const;
 
     MimariProje     toMimariProje();
     StatikProje     toStatikProje();

@@ -73,7 +73,7 @@ int64_t SerikBLDCore::Imar::MimariLog::julianDay() const
 {
     auto val = this->element (keyJulianDay);
     if( val ){
-        return val.get ().get_int64 ().value;
+        return val.value ().get_int64 ().value;
     }
     return -1;
 }
@@ -82,7 +82,7 @@ int64_t SerikBLDCore::Imar::MimariLog::mSecEpoch() const
 {
     auto val = this->element (keyMSecEpoch);
     if( val ){
-        return val.get ().get_int64 ().value;
+        return val.value ().get_int64 ().value;
     }
     return -1;
 }
@@ -91,7 +91,13 @@ std::string SerikBLDCore::Imar::MimariLog::ekleyen() const
 {
     auto val = this->element (keyEkleyen);
     if( val ){
-        return val.get ().get_utf8 ().value.to_string();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+
     }
     return "";
 }
@@ -179,7 +185,12 @@ std::string SerikBLDCore::Imar::DuzeltmeLog::duzeltme() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-        return val.get ().get_utf8 ().value.to_string();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -188,7 +199,7 @@ bool SerikBLDCore::Imar::DuzeltmeLog::duzeltildi() const
 {
     auto val = this->element (keyDuzeltildi);
     if( val ){
-        return val.get ().get_bool ().value;
+        return val.value ().get_bool ().value;
     }
     return false;
 }
@@ -208,7 +219,12 @@ std::string SerikBLDCore::Imar::AciklamaLog::aciklama() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-        return val.get ().get_utf8 ().value.to_string();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -250,7 +266,7 @@ std::string SerikBLDCore::Imar::DosyaLog::fileOid() const
 {
     auto val = this->element (keyDosyaOid);
     if( val ){
-        return val.get ().get_oid ().value.to_string();
+        return val.value ().get_oid ().value.to_string();
     }
     return "";
 }
@@ -259,7 +275,13 @@ std::string SerikBLDCore::Imar::DosyaLog::fileName() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-        return val.get ().get_utf8 ().value.to_string();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+
     }
     return "";
 }
@@ -279,7 +301,12 @@ std::string SerikBLDCore::Imar::IslemLog::log() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-        return val.get ().get_utf8 ().value.to_string();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }

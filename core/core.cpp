@@ -2,13 +2,13 @@
 
 
 
-SerikBLDCore::bsoncxx::core::core(const bool &isArray)
+MongoCore::bsoncxx::core::core(const bool &isArray)
     :mIsArray(isArray)
 {
 
 }
 
-SerikBLDCore::bsoncxx::core::core(const SerikBLDCore::bsoncxx::core &other)
+MongoCore::bsoncxx::core::core(const MongoCore::bsoncxx::core &other)
 {
     this->mMap.clear ();
     mIsArray = other.mIsArray;
@@ -17,7 +17,7 @@ SerikBLDCore::bsoncxx::core::core(const SerikBLDCore::bsoncxx::core &other)
     }
 }
 
-SerikBLDCore::bsoncxx::core::core(SerikBLDCore::bsoncxx::core &&other)
+MongoCore::bsoncxx::core::core(MongoCore::bsoncxx::core &&other)
 {
     this->mMap.clear ();
     mIsArray = other.mIsArray;
@@ -26,17 +26,7 @@ SerikBLDCore::bsoncxx::core::core(SerikBLDCore::bsoncxx::core &&other)
     }
 }
 
-SerikBLDCore::bsoncxx::core &SerikBLDCore::bsoncxx::core::operator=(const SerikBLDCore::bsoncxx::core &other)
-{
-    this->mMap.clear ();
-    mIsArray = other.mIsArray;
-    for( auto key : other.mMap.keys () ){
-        this->mMap.insert (key,other.mMap.value (key));
-    }
-    return *this;
-}
-
-SerikBLDCore::bsoncxx::core &SerikBLDCore::bsoncxx::core::operator=(SerikBLDCore::bsoncxx::core &&other)
+MongoCore::bsoncxx::core &MongoCore::bsoncxx::core::operator=(const MongoCore::bsoncxx::core &other)
 {
     this->mMap.clear ();
     mIsArray = other.mIsArray;
@@ -46,7 +36,17 @@ SerikBLDCore::bsoncxx::core &SerikBLDCore::bsoncxx::core::operator=(SerikBLDCore
     return *this;
 }
 
-bool SerikBLDCore::bsoncxx::core::operator==(const SerikBLDCore::bsoncxx::core &other)
+MongoCore::bsoncxx::core &MongoCore::bsoncxx::core::operator=(MongoCore::bsoncxx::core &&other)
+{
+    this->mMap.clear ();
+    mIsArray = other.mIsArray;
+    for( auto key : other.mMap.keys () ){
+        this->mMap.insert (key,other.mMap.value (key));
+    }
+    return *this;
+}
+
+bool MongoCore::bsoncxx::core::operator==(const MongoCore::bsoncxx::core &other)
 {
     if( mIsArray != other.mIsArray ){
         return false;
@@ -68,38 +68,38 @@ bool SerikBLDCore::bsoncxx::core::operator==(const SerikBLDCore::bsoncxx::core &
     return returnValue;
 }
 
-bool SerikBLDCore::bsoncxx::core::operator!=(const SerikBLDCore::bsoncxx::core &other)
+bool MongoCore::bsoncxx::core::operator!=(const MongoCore::bsoncxx::core &other)
 {
     if( *this == other ) return false;
     else return true;
 }
 
-QMap<QString, SerikBLDCore::bsoncxx::element> &SerikBLDCore::bsoncxx::core::map()
+QMap<QString, MongoCore::bsoncxx::element> &MongoCore::bsoncxx::core::map()
 {
     return mMap;
 }
 
-QMap<QString, SerikBLDCore::bsoncxx::element> &SerikBLDCore::bsoncxx::core::view() const
+QMap<QString, MongoCore::bsoncxx::element> MongoCore::bsoncxx::core::view() const
 {
     return mMap;
 }
 
-int SerikBLDCore::bsoncxx::core::count() const
+int MongoCore::bsoncxx::core::count() const
 {
     return this->mMap.count ();
 }
 
-bool SerikBLDCore::bsoncxx::core::isArray() const
+bool MongoCore::bsoncxx::core::isArray() const
 {
     return mIsArray;
 }
 
-void SerikBLDCore::bsoncxx::core::clear()
+void MongoCore::bsoncxx::core::clear()
 {
     this->mMap.clear ();
 }
 
-std::ostream &SerikBLDCore::bsoncxx::operator<<(std::ostream &stream, const SerikBLDCore::bsoncxx::core &object)
+std::ostream &MongoCore::bsoncxx::operator<<(std::ostream &stream, const MongoCore::bsoncxx::core &object)
 {
     if( object.mIsArray ){
 

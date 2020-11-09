@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include <fstream>
 #include <QDir>
-//#include "item.h"
+
 
 
 
@@ -111,7 +111,12 @@ QVector<QString> SerikBLDCore::DB::getMahalleler()
         for( auto doc : cursor.value () )
         {
             try {
+#ifdef Q_CC_MSVC
                 list.append (doc["Mahalle"].get_utf8 ().value.to_string().c_str ());
+#endif
+#ifdef Q_CC_GNU
+                list.append (doc["Mahalle"].get_utf8 ().value.data ());
+#endif
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
                 this->setLastError (str.c_str ());
@@ -160,7 +165,13 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
     auto file_length = downloader.file_length();
     std::int32_t bytes_counter = 0;
 
+#ifdef Q_CC_MSVC
     QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
+#endif
+#ifdef Q_CC_GNU
+    QFileInfo info( downloader.files_document()["filename"].get_utf8().value.data ());
+#endif
+
 
     QString fullFilename;
 
@@ -173,7 +184,13 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
     if( forceFilename )
     {
+#ifdef Q_CC_MSVC
         fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.to_string().c_str());
+#endif
+#ifdef Q_CC_GNU
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.data ());
+#endif
+
     }else{
         fullFilename = QString("tempfile/%2.%1").arg(info.suffix())
                 .arg(downloader.files_document()["_id"].get_oid().value.to_string().c_str());
@@ -239,7 +256,13 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     auto file_length = downloader.file_length();
     auto bytes_counter = 0;
 
-    QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
+#ifdef Q_CC_MSVC
+        QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
+#endif
+#ifdef Q_CC_GNU
+        QFileInfo info( downloader.files_document()["filename"].get_utf8().value.data ());
+#endif
+
 
     QString fullFilename;
 
@@ -254,7 +277,13 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
 
     if( forceFilename )
     {
+#ifdef Q_CC_MSVC
         fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.to_string().c_str());
+#endif
+#ifdef Q_CC_GNU
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.data ());
+#endif
+
     }else{
         fullFilename = QString("tempfile/%2.%1").arg(info.suffix())
                 .arg(downloader.files_document()["_id"].get_oid().value.to_string().c_str());
@@ -377,7 +406,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
         this->setLastError (str.c_str ());
-        return boost::none;
+        return mongocxx::stdx::nullopt;
     }
 
     auto doc = document{};
@@ -385,7 +414,12 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
     bool _errorOccured = false;
     for( auto element : item.view () )
     {
+#ifdef Q_CC_MSVC
         if( element.key ().to_string() != "_id" )
+#endif
+#ifdef Q_CC_GNU
+        if( element.key () != "_id" )
+#endif
         {
             try {
                 doc.append (kvp(element.key (),element.get_value ()));
@@ -399,7 +433,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
     }
 
 
-    if( _errorOccured ) return boost::none;
+    if( _errorOccured ) return mongocxx::stdx::nullopt;
 
     auto setDoc = document{};
 
@@ -409,7 +443,7 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
         this->setLastError (str.c_str ());
-        return boost::none;
+        return mongocxx::stdx::nullopt;
     }
 
 
@@ -509,7 +543,12 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
             for( auto __item : __view.value ().get_document ().value)
             {
                 try {
+#ifdef Q_CC_MSVC
                     doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
+#endif
+#ifdef Q_CC_GNU
+                    doc.append (kvp(__item.key (),__item.get_value ()));
+#endif
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
                     this->setLastError (str.c_str ());
@@ -528,7 +567,13 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
             for( auto __item : __view.value ().get_document ().value)
             {
                 try {
-                    doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
+#ifdef Q_CC_MSVC
+        doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
+#endif
+#ifdef Q_CC_GNU
+        doc.append (kvp(__item.key (),__item.get_value ()));
+#endif
+
                 } catch (bsoncxx::exception &e) {
                     std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
                     this->setLastError (str.c_str ());

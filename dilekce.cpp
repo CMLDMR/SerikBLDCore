@@ -164,7 +164,12 @@ QString SerikBLDCore::Dilekce::konu() const
     auto value = this->element (KeyKonu);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -186,7 +191,12 @@ QString SerikBLDCore::Dilekce::birim() const
     auto value = this->element (KeyBirim);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -197,7 +207,12 @@ QString SerikBLDCore::Dilekce::icerikTipi() const
     auto value = this->element (KeyIcerikTipi);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -208,7 +223,12 @@ QString SerikBLDCore::Dilekce::icerik() const
     auto value = this->element (KeyIcerik);
     if( value )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -263,7 +283,12 @@ QString SerikBLDCore::Dilekce::dilekceOid() const
     auto value = this->element (KeyDilekceOid);
     if( value )
     {
-        return  QString::fromStdString (value->get_utf8 ().value.to_string ());
+#ifdef Q_CC_MSVC
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -314,7 +339,13 @@ QVector<QString> SerikBLDCore::Dilekce::BilgiBirimList() const
         auto __list = _list.value ().get_array ().value;
         for( auto item : __list )
         {
-            list.push_back (std::move(item.get_utf8 ().value.to_string().c_str ()));
+#ifdef Q_CC_MSVC
+        list.push_back (std::move(item.get_utf8 ().value.to_string().c_str ()));
+#endif
+#ifdef Q_CC_GNU
+        list.push_back (std::move(item.get_utf8 ().value.data ()));
+#endif
+
         }
     }
     return list;
@@ -325,7 +356,12 @@ QString SerikBLDCore::Dilekce::Durum() const
     auto value = this->element (KeyDilekceDurum);
     if( value )
     {
-        return  QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifdef Q_CC_MSVC
+        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (value->get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }

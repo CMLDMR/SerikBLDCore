@@ -26,6 +26,7 @@ SerikBLDCore::TCManager::TCManager(mongocxx::database *_db) : DB(_db)
 }
 
 
+#ifdef Q_CC_MSVC
 boost::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
 {
     auto item = new SerikBLDCore::TC();
@@ -47,6 +48,162 @@ boost::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
 
 
 }
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTCNO(const std::string &tcno)
+{
+
+    SerikBLDCore::TC *item = new SerikBLDCore::TC();
+    item->setTCNO (tcno.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return (item);
+    }else{
+        return boost::none;
+    }
+
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTEL(const std::string &tel)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setCepTelefonu (tel.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const std::string &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bsoncxx::oid &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.to_string ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+
+#endif
+#ifdef Q_CC_GNU
+std::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
+{
+    auto item = new SerikBLDCore::TC();
+
+    try {
+        auto ins = this->db ()->collection (TC::Collection).insert_one (item->view ());
+        if( ins )
+        {
+            item->setOid (ins.value ().inserted_id ().get_oid ().value.to_string ());
+            return *item;
+        }else{
+            return std::nullopt;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return std::nullopt;
+    }
+
+
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTCNO(const std::string &tcno)
+{
+
+    SerikBLDCore::TC *item = new SerikBLDCore::TC();
+    item->setTCNO (tcno.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return (item);
+    }else{
+        return std::nullopt;
+    }
+
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTEL(const std::string &tel)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setCepTelefonu (tel.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const std::string &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bsoncxx::oid &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.to_string ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+
+#endif
+
+
+
+
 
 bool SerikBLDCore::TCManager::insertTC(SerikBLDCore::TC *item)
 {
@@ -129,67 +286,7 @@ bool SerikBLDCore::TCManager::updateTC(SerikBLDCore::TC *tcItem)
 
 }
 
-boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTCNO(const std::string &tcno)
-{
 
-    SerikBLDCore::TC *item = new SerikBLDCore::TC();
-    item->setTCNO (tcno.c_str ());
-
-    auto val = this->findOneItem (*item);
-    if( val )
-    {
-        item->setDocumentView (val.value ().view ());
-        return (item);
-    }else{
-        return boost::none;
-    }
-
-}
-
-boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byTEL(const std::string &tel)
-{
-    SerikBLDCore::TC* item = new SerikBLDCore::TC();
-    item->setCepTelefonu (tel.c_str ());
-
-    auto val = this->findOneItem (*item);
-    if( val )
-    {
-        item->setDocumentView (val.value ().view ());
-        return item;
-    }else{
-        return boost::none;
-    }
-}
-
-boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const std::string &oid)
-{
-    SerikBLDCore::TC* item = new SerikBLDCore::TC();
-    item->setOid (oid.c_str ());
-
-    auto val = this->findOneItem (*item);
-    if( val )
-    {
-        item->setDocumentView (val.value ().view ());
-        return item;
-    }else{
-        return boost::none;
-    }
-}
-
-boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bsoncxx::oid &oid)
-{
-    SerikBLDCore::TC* item = new SerikBLDCore::TC();
-    item->setOid (oid.to_string ());
-
-    auto val = this->findOneItem (*item);
-    if( val )
-    {
-        item->setDocumentView (val.value ().view ());
-        return item;
-    }else{
-        return boost::none;
-    }
-}
 
 
 
@@ -208,6 +305,9 @@ void SerikBLDCore::TCManagerV2::errorOccured(const std::string &errorText)
 {
 
 }
+
+#ifdef Q_CC_MSVC
+
 
 boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTCNO(const std::string &tcno)
 {
@@ -268,3 +368,68 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const 
         return boost::none;
     }
 }
+
+#endif
+#ifdef Q_CC_GNU
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTCNO(const std::string &tcno)
+{
+    SerikBLDCore::TC *item = new SerikBLDCore::TC();
+    item->setTCNO (tcno.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return (item);
+    }else{
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTEL(const std::string &tel)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setCepTelefonu (tel.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const std::string &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.c_str ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const bsoncxx::oid &oid)
+{
+    SerikBLDCore::TC* item = new SerikBLDCore::TC();
+    item->setOid (oid.to_string ());
+
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+#endif

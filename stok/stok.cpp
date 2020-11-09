@@ -110,9 +110,7 @@ int64_t SerikBLDCore::Stok::Stok::kalanMiktar() const
     return (this->miktar () - alinanToplam);
 }
 
-
-
-
+#ifdef Q_CC_MSVC
 boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kategori() const
 {
     auto val = this->element (StokKey::kategori);
@@ -121,16 +119,6 @@ boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kategori() const
         return val.value ().get_oid ().value;
     }
     return boost::none;
-}
-
-std::string SerikBLDCore::Stok::Stok::adi() const
-{
-    auto val = this->element (StokKey::adi);
-    if( val )
-    {
-        return val.value ().get_utf8 ().value.to_string();
-    }
-    return "";
 }
 
 boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kodu() const
@@ -143,6 +131,72 @@ boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kodu() const
     return boost::none;
 }
 
+boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::tcoid() const
+{
+    auto val = this->element (StokKey::tcoid);
+    if( val )
+    {
+        return val.value ().get_oid ().value;
+    }
+    return boost::none;
+}
+
+#endif
+#ifdef Q_CC_GNU
+
+std::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kategori() const
+{
+    auto val = this->element (StokKey::kategori);
+    if( val )
+    {
+        return val.value ().get_oid ().value;
+    }
+    return std::nullopt;
+}
+
+std::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::kodu() const
+{
+    auto val = this->element (StokKey::kodu);
+    if( val )
+    {
+        return val.value ().get_oid ().value;
+    }
+    return std::nullopt;
+}
+
+std::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::tcoid() const
+{
+    auto val = this->element (StokKey::tcoid);
+    if( val )
+    {
+        return val.value ().get_oid ().value;
+    }
+    return std::nullopt;
+}
+
+
+#endif
+
+
+
+
+std::string SerikBLDCore::Stok::Stok::adi() const
+{
+    auto val = this->element (StokKey::adi);
+    if( val )
+    {
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+    }
+    return "";
+}
+
+
+
 int64_t SerikBLDCore::Stok::Stok::miktar() const
 {
     auto val = this->element (StokKey::miktar);
@@ -153,15 +207,7 @@ int64_t SerikBLDCore::Stok::Stok::miktar() const
     return 0;
 }
 
-boost::optional<bsoncxx::oid> SerikBLDCore::Stok::Stok::tcoid() const
-{
-    auto val = this->element (StokKey::tcoid);
-    if( val )
-    {
-        return val.value ().get_oid ().value;
-    }
-    return boost::none;
-}
+
 
 
 
@@ -202,7 +248,12 @@ std::string SerikBLDCore::Stok::StokKategori::kategoriName() const
     auto val = this->element (StokKategoriKey::kategoriName);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val->get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val->get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -212,7 +263,13 @@ std::string SerikBLDCore::Stok::StokKategori::mudurlukName() const
     auto val = this->element (StokKategoriKey::mudurluk);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val->get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val->get_utf8 ().value.data ();
+#endif
+
     }
     return "";
 }
@@ -273,7 +330,12 @@ std::string SerikBLDCore::Stok::StokKodItem::adi() const
     auto val = this->element (StokKodKey::adi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -283,11 +345,18 @@ std::string SerikBLDCore::Stok::StokKodItem::birim() const
     auto val = this->element (StokKodKey::birimi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
 
+
+#ifdef Q_CC_MSVC
 boost::optional<bsoncxx::oid> SerikBLDCore::Stok::StokKodItem::kategoriOid() const
 {
     auto val = this->element (StokKodKey::kategoriOid);
@@ -297,6 +366,20 @@ boost::optional<bsoncxx::oid> SerikBLDCore::Stok::StokKodItem::kategoriOid() con
     }
     return boost::none;
 }
+#endif
+#ifdef Q_CC_GNU
+std::optional<bsoncxx::oid> SerikBLDCore::Stok::StokKodItem::kategoriOid() const
+{
+    auto val = this->element (StokKodKey::kategoriOid);
+    if( val )
+    {
+        return val.value ().get_oid ().value;
+    }
+    return std::nullopt;
+}
+#endif
+
+
 
 
 

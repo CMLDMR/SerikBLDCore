@@ -68,11 +68,20 @@ public:
     QVector<TeslimAlan> Teslimler() const;
     std::int64_t kalanMiktar() const;
 
+#ifdef Q_CC_MSVC
     boost::optional<bsoncxx::oid> kategori() const;
-    std::string adi() const;
     boost::optional<bsoncxx::oid> kodu() const;
-    std::int64_t miktar() const;
     boost::optional<bsoncxx::oid> tcoid() const;
+
+#endif
+#ifdef Q_CC_GNU
+    std::optional<bsoncxx::oid> kategori() const;
+    std::optional<bsoncxx::oid> kodu() const;
+    std::optional<bsoncxx::oid> tcoid() const;
+#endif
+
+    std::string adi() const;
+    std::int64_t miktar() const;
 
 
 };
@@ -121,7 +130,16 @@ public:
 
     std::string adi() const;
     std::string birim() const;
-    boost::optional<bsoncxx::oid> kategoriOid() const;
+
+
+
+#ifdef Q_CC_MSVC
+        boost::optional<bsoncxx::oid> kategoriOid() const;
+#endif
+#ifdef Q_CC_GNU
+        std::optional<bsoncxx::oid> kategoriOid() const;
+#endif
+
 };
 
 }

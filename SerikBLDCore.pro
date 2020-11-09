@@ -4,7 +4,7 @@ QT += core xml network
 TEMPLATE = lib
 DEFINES += SERIKBLDCORE_LIBRARY
 
-CONFIG += c++14
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -25,6 +25,11 @@ SOURCES += \
     Talep/talepsubitem.cpp \
     bilgiEdinme/bilgiedinmeitem.cpp \
     bilgiEdinme/bilgiedinmemanager.cpp \
+    calisma/calismaitem.cpp \
+    calisma/calismamanager.cpp \
+    core/core.cpp \
+    core/element.cpp \
+    core/object.cpp \
     db.cpp \
     dilekce.cpp \
     dilekceaciklama.cpp \
@@ -65,6 +70,11 @@ HEADERS += \
     Talep/talepsubitem.h \
     bilgiEdinme/bilgiedinmeitem.h \
     bilgiEdinme/bilgiedinmemanager.h \
+    calisma/calismaitem.h \
+    calisma/calismamanager.h \
+    core/core.h \
+    core/element.h \
+    core/object.h \
     db.h \
     dilekce.h \
     dilekceaciklama.h \
@@ -104,27 +114,36 @@ unix {
 
 
 windows{
+
+    gcc{
+    message("GCC Version")
+        win32: LIBS += -L$$PWD/../Mongo/gcc10.1x64/lib/ -llibbsoncxx.dll
+
+        INCLUDEPATH += $$PWD/../Mongo/gcc10.1x64/include/bsoncxx/v_noabi
+        DEPENDPATH += $$PWD/../Mongo/gcc10.1x64/include/bsoncxx/v_noabi
+
+
+
+        win32: LIBS += -L$$PWD/../Mongo/gcc10.1x64/lib/ -llibmongocxx.dll
+
+        INCLUDEPATH += $$PWD/../Mongo/gcc10.1x64/include/mongocxx/v_noabi
+        DEPENDPATH += $$PWD/../Mongo/gcc10.1x64/include/mongocxx/v_noabi
+    }
+
+
+    msvc{
     MSVC_VER = $$(VisualStudioVersion)
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        message("msvc 2015 x86")
-        msvc{
-            message ("Compiler MSVC")
+        message("msvc2017x86")
             win32: LIBS += -L$$PWD/../Mongo/msvc2017x86/lib/ -lbsoncxx
-
             INCLUDEPATH += $$PWD/../Mongo/msvc2017x86/include/bsoncxx/v_noabi
             DEPENDPATH += $$PWD/../Mongo/msvc2017x86/include/bsoncxx/v_noabi
-
             win32: LIBS += -L$$PWD/../Mongo/msvc2017x86/lib/ -lmongocxx
-
             INCLUDEPATH += $$PWD/../Mongo/msvc2017x86/include/mongocxx/v_noabi
             DEPENDPATH += $$PWD/../Mongo/msvc2017x86/include/mongocxx/v_noabi
-
             INCLUDEPATH += $$PWD/../boost/msvcx86/boost_1_71_0
             DEPENDPATH += $$PWD/../boost/msvcx86/boost_1_71_0
-
-        }
-
     } else {
 
             INCLUDEPATH += $$PWD/../boost/boost
@@ -163,7 +182,7 @@ windows{
         ## Windows x64 (64bit) specific build here
 
     }
-
+}
 
 }
 
@@ -304,6 +323,8 @@ DISTFILES += \
     docs/tab_h.png \
     docs/tab_s.png \
     docs/tabs.css
+
+
 
 
 

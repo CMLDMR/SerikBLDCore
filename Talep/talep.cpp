@@ -228,7 +228,7 @@ QString SerikBLDCore::Talep::mahalle() const
     auto val = this->element (TalepKey::Mahalle);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.to_string());
+        return QString::fromStdString (val->get_utf8 ().value.data ());
     }
     return "";
 }
@@ -238,7 +238,7 @@ QString SerikBLDCore::Talep::adres() const
     auto val = this->element (TalepKey::Adres);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.to_string());
+        return QString::fromStdString (val->get_utf8 ().value.data ());
     }
     return "";
 }
@@ -248,7 +248,7 @@ QString SerikBLDCore::Talep::konu() const
     auto val = this->element (TalepKey::Konu);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.to_string());
+        return QString::fromStdString (val->get_utf8 ().value.data ());
     }
     return "";
 }
@@ -298,7 +298,7 @@ QString SerikBLDCore::Talep::durum() const
     auto val = this->element (TalepKey::Durum);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
     }
     return "";
 }
@@ -327,7 +327,7 @@ QString SerikBLDCore::Talep::kaynak() const
     auto val = this->element (TalepKey::Kaynak);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
     }
     return "";}
 
@@ -355,7 +355,7 @@ QString SerikBLDCore::Talep::birim() const
     auto val = this->element (TalepKey::Birim);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data());
     }
     return "";
 }

@@ -22,14 +22,6 @@
 
 
 
-//////////////////////////////////
-// CHECK PLATFORM
-#ifdef Q_OS_WIN
-#define DESKTOP
-#endif
-
-
-
 
 
 #ifdef Q_OS_LINUX

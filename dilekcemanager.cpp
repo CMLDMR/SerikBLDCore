@@ -17,7 +17,7 @@ SerikBLDCore::DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
 
 }
 
-
+#ifdef Q_CC_MSVC
 
 boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
 {
@@ -38,6 +38,156 @@ boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Di
         return boost::none;
     }
 }
+
+boost::optional<bsoncxx::oid> SerikBLDCore::DilekceManager::insertCevap(const SerikBLDCore::DilekceCevap *cevap)
+{
+    try {
+        auto ins = this->insertItem (*cevap);
+        if( ins )
+        {
+            if( ins.value ().result ().inserted_count () )
+            {
+                return ins.value ().inserted_id ().get_oid ().value;
+            }else{
+                return boost::none;
+            }
+        }else{
+            return boost::none;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return boost::none;
+    }
+}
+
+
+boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::LoadDilekce(const std::string &oid)
+{
+    if( oid.size () == 24 )
+    {
+        Dilekce *item = new Dilekce();
+        item->SetOid (QString::fromStdString (oid));
+
+        item->printView ();
+
+        auto val = this->findOneItem (*item);
+        if( val )
+        {
+            item->setDocumentView (val.value ().view ());
+            return item;
+        }else{
+            return boost::none;
+        }
+    }else{
+        return boost::none;
+    }
+}
+
+
+boost::optional<SerikBLDCore::DilekceCevap *> SerikBLDCore::DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
+{
+    DilekceCevap* item = new DilekceCevap();
+    item->setOid (cevapOid);
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return boost::none;
+    }
+}
+
+
+
+#endif
+#ifdef Q_CC_GNU
+
+
+std::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
+{
+    auto item = new SerikBLDCore::Dilekce();
+    try {
+        auto ins = this->db ()->collection (SerikBLDCore::Dilekce::Collection).insert_one (item->view ());
+        if( ins )
+        {
+            item->append("_id",ins.value ().inserted_id ().get_oid ().value );
+            return item;
+        }else{
+            return std::nullopt;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        return std::nullopt;
+    }
+}
+
+
+std::optional<bsoncxx::oid> SerikBLDCore::DilekceManager::insertCevap(const SerikBLDCore::DilekceCevap *cevap)
+{
+    try {
+        auto ins = this->insertItem (*cevap);
+        if( ins )
+        {
+            if( ins.value ().result ().inserted_count () )
+            {
+                return ins.value ().inserted_id ().get_oid ().value;
+            }else{
+                return std::nullopt;
+            }
+        }else{
+            return std::nullopt;
+        }
+    } catch (mongocxx::exception &e) {
+        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+        std::cout << str << std::endl;
+        return std::nullopt;
+    }
+}
+
+std::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::LoadDilekce(const std::string &oid)
+{
+    if( oid.size () == 24 )
+    {
+        Dilekce *item = new Dilekce();
+        item->SetOid (QString::fromStdString (oid));
+
+        item->printView ();
+
+        auto val = this->findOneItem (*item);
+        if( val )
+        {
+            item->setDocumentView (val.value ().view ());
+            return item;
+        }else{
+            return std::nullopt;
+        }
+    }else{
+        return std::nullopt;
+    }
+}
+
+
+std::optional<SerikBLDCore::DilekceCevap *> SerikBLDCore::DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
+{
+    DilekceCevap* item = new DilekceCevap();
+    item->setOid (cevapOid);
+    auto val = this->findOneItem (*item);
+    if( val )
+    {
+        item->setDocumentView (val.value ().view ());
+        return item;
+    }else{
+        return std::nullopt;
+    }
+}
+
+
+
+#endif
+
+
 
 bool SerikBLDCore::DilekceManager::Update(SerikBLDCore::Dilekce *dilekce)
 {
@@ -105,27 +255,7 @@ bool SerikBLDCore::DilekceManager::insertDilekce(const SerikBLDCore::Dilekce *di
 
 }
 
-boost::optional<bsoncxx::oid> SerikBLDCore::DilekceManager::insertCevap(const SerikBLDCore::DilekceCevap *cevap)
-{
-    try {
-        auto ins = this->insertItem (*cevap);
-        if( ins )
-        {
-            if( ins.value ().result ().inserted_count () )
-            {
-                return ins.value ().inserted_id ().get_oid ().value;
-            }else{
-                return boost::none;
-            }
-        }else{
-            return boost::none;
-        }
-    } catch (mongocxx::exception &e) {
-        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-        std::cout << str << std::endl;
-        return boost::none;
-    }
-}
+
 
 bool SerikBLDCore::DilekceManager::updateDilekce(const SerikBLDCore::Dilekce *dilekce)
 {
@@ -170,7 +300,7 @@ QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findDilekce(const I
     auto cursor = this->find (itemFilter);
     if( cursor )
     {
-        for( auto doc : cursor.get () )
+        for( auto doc : cursor.value () )
         {
             SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
@@ -209,7 +339,7 @@ QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findByTelefon(const
     auto cursor = this->find (item);
     if( cursor )
     {
-        for( auto doc : cursor.get () )
+        for( auto doc : cursor.value () )
         {
             SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
@@ -248,7 +378,7 @@ QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findByTCNO(const QS
     auto cursor = this->find (item);
     if( cursor )
     {
-        for( auto doc : cursor.get () )
+        for( auto doc : cursor.value () )
         {
             SerikBLDCore::Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
@@ -267,7 +397,7 @@ QVector<SerikBLDCore::Dilekce> SerikBLDCore::DilekceManager::findBySayi(const in
     auto cursor = this->find (item);
     if( cursor )
     {
-        for( auto doc : cursor.get () )
+        for( auto doc : cursor.value () )
         {
             Dilekce _dilekce;
             _dilekce.setDocumentView (doc);
@@ -286,7 +416,7 @@ QVector<SerikBLDCore::DilekceAciklama> SerikBLDCore::DilekceManager::findAciklam
         auto cursor = this->find (item);
         if( cursor )
         {
-            for( auto doc : cursor.get () )
+            for( auto doc : cursor.value () )
             {
                 DilekceAciklama *_dilekce = new DilekceAciklama;
                 _dilekce->setDocumentView (doc);
@@ -317,42 +447,9 @@ bool SerikBLDCore::DilekceManager::deleteAciklama(const std::string &oid)
 
 }
 
-boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::LoadDilekce(const std::string &oid)
-{
-    if( oid.size () == 24 )
-    {
-        Dilekce *item = new Dilekce();
-        item->SetOid (QString::fromStdString (oid));
-
-        item->printView ();
-
-        auto val = this->findOneItem (*item);
-        if( val )
-        {
-            item->setDocumentView (val.value ().view ());
-            return item;
-        }else{
-            return boost::none;
-        }
-    }else{
-        return boost::none;
-    }
-}
 
 
-boost::optional<SerikBLDCore::DilekceCevap *> SerikBLDCore::DilekceManager::LoadDilekceCevap(const std::string &cevapOid)
-{
-    DilekceCevap* item = new DilekceCevap();
-    item->setOid (cevapOid);
-    auto val = this->findOneItem (*item);
-    if( val )
-    {
-        item->setDocumentView (val.value ().view ());
-        return item;
-    }else{
-        return boost::none;
-    }
-}
+
 
 
 QString SerikBLDCore::DilekceManager::TaranmisDilekcePath(const QString &taranmisdilekceOid)
@@ -399,7 +496,12 @@ QStringList SerikBLDCore::DilekceManager::Kategorilist()
     if( cursor ){
         for( auto doc : cursor.value () )
         {
-            list.append (doc["name"].get_utf8 ().value.to_string().c_str ());
+#ifdef Q_CC_MSVC
+        list.append (doc["name"].get_utf8 ().value.to_string().c_str ());
+#endif
+#ifdef Q_CC_GNU
+        list.append (doc["name"].get_utf8 ().value.data ());
+#endif
         }
     }
 

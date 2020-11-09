@@ -22,14 +22,26 @@ public:
 
     explicit DilekceManager( mongocxx::database *_db );
 
-    boost::optional<Dilekce*> Create_Dilekce();
+#ifdef Q_CC_MSVC
+        boost::optional<Dilekce*> Create_Dilekce();
+        boost::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
+        boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
+        boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
+#endif
+#ifdef Q_CC_GNU
+        std::optional<Dilekce*> Create_Dilekce();
+        std::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
+        std::optional<Dilekce*> LoadDilekce( const std::string &oid );
+        std::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
+#endif
+
 
     bool Update( Dilekce* dilekce );
 
 
     bool insertDilekce( const Dilekce* dilekce );
 
-    boost::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
+
 
     /**
      * @brief updateDilekce: Mevcut Dilekçeyi Günceller.
@@ -52,9 +64,7 @@ public:
 
     bool deleteAciklama( const std::string &oid );
 
-    boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
 
-    boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
 
     QString TaranmisDilekcePath( const QString &taranmisdilekceOid );
 

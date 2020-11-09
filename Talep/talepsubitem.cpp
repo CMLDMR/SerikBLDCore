@@ -86,7 +86,7 @@ QString SerikBLDCore::TalepSubItem::aciklama() const
     auto val = this->element (Aciklama);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data());
     }
     return "";
 }
@@ -102,7 +102,7 @@ QString SerikBLDCore::TalepSubItem::log() const
     auto val = this->element (Log);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val.value ().get_utf8 ().value.data());
     }
     return "";
 }
@@ -220,7 +220,14 @@ QString SerikBLDCore::TalepSubItem::sms() const
     auto val = this->element (Sms);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }
     return "";
 }
@@ -235,7 +242,13 @@ QString SerikBLDCore::TalepSubItem::personelName() const
     auto val = this->element (PersonelName);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -268,7 +281,13 @@ QString SerikBLDCore::TalepSubItem::tcName() const
     auto val = this->element (TCName);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifdef Q_CC_MSVC
+    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+
+#ifdef Q_CC_GNU
+    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }

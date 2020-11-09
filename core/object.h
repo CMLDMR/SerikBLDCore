@@ -5,7 +5,7 @@
 #include "core.h"
 
 
-namespace SerikBLDCore {
+namespace MongoCore {
 
 namespace bsoncxx {
 
@@ -15,11 +15,14 @@ class object : public core
 {
 public:
     explicit object();
-    SerikBLDCore::bsoncxx::object& append(const QString& key , const SerikBLDCore::bsoncxx::element& value );
-    SerikBLDCore::bsoncxx::object& append(const QString& key , const SerikBLDCore::bsoncxx::object& value );
-    SerikBLDCore::bsoncxx::object& append(const QString& key , const SerikBLDCore::bsoncxx::array& value );
+    MongoCore::bsoncxx::object& append(const QString& key , const MongoCore::bsoncxx::element& value );
+    MongoCore::bsoncxx::object& append(const QString& key , const MongoCore::bsoncxx::object& value );
+    MongoCore::bsoncxx::object& append(const QString& key , const MongoCore::bsoncxx::array& value );
 
     std::optional<element> element( const QString& key );
+
+    MongoCore::bsoncxx::object& setObject( const MongoCore::bsoncxx::object& object );
+    MongoCore::bsoncxx::object& setObject( const QMap<QString,MongoCore::bsoncxx::element>& elementList );
 
 };
 
@@ -28,9 +31,9 @@ class array : public core
 {
 public:
     explicit array();
-    SerikBLDCore::bsoncxx::array& append(const SerikBLDCore::bsoncxx::element& value );
-    SerikBLDCore::bsoncxx::array& append(const SerikBLDCore::bsoncxx::object& value );
-    SerikBLDCore::bsoncxx::array& append(const SerikBLDCore::bsoncxx::array& value );
+    MongoCore::bsoncxx::array& append(const MongoCore::bsoncxx::element& value );
+    MongoCore::bsoncxx::array& append(const MongoCore::bsoncxx::object& value );
+    MongoCore::bsoncxx::array& append(const MongoCore::bsoncxx::array& value );
 };
 
 }
@@ -38,8 +41,8 @@ public:
 
 }
 
-Q_DECLARE_METATYPE(SerikBLDCore::bsoncxx::object);
-Q_DECLARE_METATYPE(SerikBLDCore::bsoncxx::array);
+Q_DECLARE_METATYPE(MongoCore::bsoncxx::object);
+Q_DECLARE_METATYPE(MongoCore::bsoncxx::array);
 
 
 

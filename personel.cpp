@@ -45,7 +45,13 @@ QString SerikBLDCore::IK::Personel::AdSoyad() const
     auto val = this->element (KeyAdSoyad);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }else{
         return "";
     }
@@ -78,7 +84,13 @@ QString SerikBLDCore::IK::Personel::Birim() const
     auto val = this->element (KeyBirimi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
+
     }else{
         return "";
     }
@@ -89,7 +101,12 @@ QString SerikBLDCore::IK::Personel::statu() const
     auto val = this->element (KeyStatu);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -100,7 +117,12 @@ QString SerikBLDCore::IK::Personel::telefon() const
     auto val = this->element (KeyTelefon);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -111,7 +133,12 @@ QString SerikBLDCore::IK::Personel::sifre() const
     auto val = this->element (KeyPassword);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }else{
         return "";
     }
@@ -334,7 +361,12 @@ QString SerikBLDCore::IK::BirimItem::birimAdi() const
     auto val = this->element (BirimKey::birim);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }
@@ -362,7 +394,12 @@ QString SerikBLDCore::IK::AltBirimItem::name() const
     auto val = this->element (AltBirimKey::altBirimAdi);
     if( val )
     {
+#ifdef Q_CC_MSVC
         return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#endif
+#ifdef Q_CC_GNU
+        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#endif
     }
     return "";
 }

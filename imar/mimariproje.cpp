@@ -75,7 +75,12 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::adi() const
 {
     auto val = this->element (keyAdi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }
@@ -126,7 +131,12 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::mahalle() const
 {
     auto val = this->element (keyMahalle);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }else{
         return "";
     }
@@ -202,7 +212,12 @@ std::string SerikBLDCore::Imar::MimariProje::FileProject::projeAdi() const
 {
     auto val = this->element (keyProjeAdi);
     if( val ){
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -321,7 +336,12 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::title() const
 {
     auto val = this->element (keyProjeTitle);
     if( val ){
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "Bilinmeyen Proje Adı";
 }
@@ -359,7 +379,12 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::assignedPersonelName()
 {
     auto val = this->element (keyAssignPersonelName);
     if( val ){
+#ifdef Q_CC_MSVC
         return val.value ().get_utf8 ().value.to_string ();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
     }
     return "";
 }
@@ -375,6 +400,9 @@ int64_t SerikBLDCore::Imar::MimariProje::BaseProject::projeCount() const
     return count;
 }
 
+
+
+#ifdef Q_CC_MSVC
 boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::at(const int &index) const
 {
     FileProject project;
@@ -413,55 +441,6 @@ boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar
     return project;
 }
 
-bool SerikBLDCore::Imar::MimariProje::BaseProject::onaylanabilir() const
-{
-    bool _onaylanabilir = true;
-    for( auto i = 0 ; i < this->projeCount () ; i++ ){
-        auto fileProje = this->at (i);
-        if( fileProje ){
-            if( !fileProje->onay () ){
-                _onaylanabilir = false;
-            }
-        }
-    }
-    return _onaylanabilir;
-}
-
-SerikBLDCore::Imar::MimariProje::BaseProject::ProjectType SerikBLDCore::Imar::MimariProje::BaseProject::type() const
-{
-    auto val = this->element (keyProjectType);
-    if( val ){
-        return static_cast<ProjectType>(val->get_int32 ().value);
-    }
-    return ProjectType::Bilinmiyor;
-}
-
-std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerOid() const
-{
-    auto val = this->element (keyOwnerOid);
-    if( val ){
-        return val.value ().get_oid ().value.to_string ();
-    }
-    return "";
-}
-
-std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerAdSoyad() const
-{
-    auto val = this->element (keyOwnerAdSoyad);
-    if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
-    }
-    return "";
-}
-
-std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerTelefon() const
-{
-    auto val = this->element (keyOwnerTelefon);
-    if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
-    }
-    return "";
-}
 
 boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::operator[](const int &index) const
 {
@@ -500,6 +479,151 @@ boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar
     }
     return project;
 }
+
+
+#endif
+#ifdef Q_CC_GNU
+
+std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::at(const int &index) const
+{
+    FileProject project;
+    auto val = this->element (keyProje);
+    if( val ){
+        if( index >= this->projeCount () || index < 0 ) return std::nullopt;
+        int counter = 0;
+        for( auto item : val.value ().get_array ().value ){
+            if( counter == index ){
+                project.setDocumentView (item.get_document ().view ());
+                break;
+            }else{
+                counter++;
+            }
+        }
+    }else{
+        return std::nullopt;
+    }
+    return project;
+}
+
+std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::at(const bsoncxx::oid &fileoid) const
+{
+    FileProject project;
+    auto val = this->element (keyProje);
+    if( val ){
+        for( auto item : val.value ().get_array ().value ){
+            if( fileoid == item.get_document ().view ()[FileProject::keyFileOid].get_oid ().value ){
+                project.setDocumentView (item.get_document ().view ());
+                break;
+            }
+        }
+    }else{
+        return std::nullopt;
+    }
+    return project;
+}
+
+std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::operator[](const int &index) const
+{
+    FileProject project;
+    auto val = this->element (keyProje);
+    if( val ){
+        if( index >= this->projeCount () || index < 0 ) return std::nullopt;
+        int counter = 0;
+        for( auto item : val.value ().get_array ().value ){
+            if( counter == index ){
+                project.setDocumentView (item.get_document ().view ());
+                break;
+            }else{
+                counter++;
+            }
+        }
+    }else{
+        return std::nullopt;
+    }
+    return project;
+}
+
+std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::operator[](const bsoncxx::oid &fileoid) const
+{
+    FileProject project;
+    auto val = this->element (keyProje);
+    if( val ){
+        for( auto item : val.value ().get_array ().value ){
+            if( fileoid == item.get_document ().view ()[FileProject::keyFileOid].get_oid ().value ){
+                project.setDocumentView (item.get_document ().view ());
+                break;
+            }
+        }
+    }else{
+        return std::nullopt;
+    }
+    return project;
+}
+
+
+#endif
+
+
+bool SerikBLDCore::Imar::MimariProje::BaseProject::onaylanabilir() const
+{
+    bool _onaylanabilir = true;
+    for( auto i = 0 ; i < this->projeCount () ; i++ ){
+        auto fileProje = this->at (i);
+        if( fileProje ){
+            if( !fileProje->onay () ){
+                _onaylanabilir = false;
+            }
+        }
+    }
+    return _onaylanabilir;
+}
+
+SerikBLDCore::Imar::MimariProje::BaseProject::ProjectType SerikBLDCore::Imar::MimariProje::BaseProject::type() const
+{
+    auto val = this->element (keyProjectType);
+    if( val ){
+        return static_cast<ProjectType>(val->get_int32 ().value);
+    }
+    return ProjectType::Bilinmiyor;
+}
+
+std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerOid() const
+{
+    auto val = this->element (keyOwnerOid);
+    if( val ){
+        return val.value ().get_oid ().value.to_string ();
+    }
+    return "";
+}
+
+std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerAdSoyad() const
+{
+    auto val = this->element (keyOwnerAdSoyad);
+    if( val ){
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+    }
+    return "";
+}
+
+std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerTelefon() const
+{
+    auto val = this->element (keyOwnerTelefon);
+    if( val ){
+#ifdef Q_CC_MSVC
+        return val.value ().get_utf8 ().value.to_string();
+#endif
+#ifdef Q_CC_GNU
+        return val.value ().get_utf8 ().value.data ();
+#endif
+    }
+    return "";
+}
+
 
 SerikBLDCore::Imar::MimariProje::MimariProje SerikBLDCore::Imar::MimariProje::BaseProject::toMimariProje()
 {
