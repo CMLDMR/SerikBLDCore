@@ -62,6 +62,39 @@ SerikBLDCore::Calisma &SerikBLDCore::Calisma::addPhoto(const bsoncxx::oid &imgOi
     return *this;
 }
 
+SerikBLDCore::Calisma &SerikBLDCore::Calisma::setIsTipi(const std::string &isTipi)
+{
+    this->append(Key::isTipi,isTipi);
+    return *this;
+}
+
+std::string SerikBLDCore::Calisma::CalismaAdi() const
+{
+    auto val = this->element (Key::calismaAdi);
+    if( val ){
+        return val.value ().get_utf8 ().value.to_string();
+    }else{
+        return "";
+    }
+}
+
+std::string SerikBLDCore::Calisma::Mahalle() const
+{
+    auto val = this->element (Key::mahalle);
+    if( val ){
+        return val.value ().get_utf8 ().value.to_string();
+    }else{
+        return "";
+    }
+}
+
+void SerikBLDCore::Calisma::errorOccured(const std::string &errorText)
+{
+
+}
+
+
+
 SerikBLDCore::CalismaItem::CalismaItem()
     :SerikBLDCore::Item (KeyItem::Collection)
 {

@@ -23,6 +23,7 @@ static const std::string unitBirim{"unitBirim"};
 static const std::string calismaAdi{"calismaAdi"};
 static const std::string images{"images"};
 static const std::string miktar{"miktar"};
+static const std::string isTipi{"isTipi"};
 }
 
 namespace KeyItem{
@@ -48,6 +49,14 @@ public:
     Calisma& setisBirimi( const std::string& isBirimi );
     Calisma& setMiktar( const double& miktar );
     Calisma& addPhoto( const bsoncxx::oid& imgOid );
+    Calisma& setIsTipi( const std::string& isTipi );
+
+
+    std::string CalismaAdi() const;
+    std::string Mahalle() const;
+
+
+    void errorOccured(const std::string &errorText) override;
 };
 
 
