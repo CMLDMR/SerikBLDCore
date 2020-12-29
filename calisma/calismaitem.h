@@ -9,6 +9,8 @@
 
 namespace SerikBLDCore {
 
+namespace Calisma {
+
 
 namespace Key{
 static const std::string Collection{"CalismalarV2"};
@@ -38,7 +40,7 @@ static const std::string epochTime{"epoch"};
 class SERIKBLDCORE_EXPORT Calisma : public SerikBLDCore::Item
 {
 public:
-    Calisma();
+    explicit Calisma();
 
 
     Calisma& setCalimaAdi( const std::string& calismaAdi );
@@ -54,18 +56,43 @@ public:
 
     std::string CalismaAdi() const;
     std::string Mahalle() const;
+    std::string IsTipii() const;
+    std::string IsBirim() const;
+    std::string tarihText() const;
+    std::int64_t julianDay() const;
+    std::vector<bsoncxx::oid> imgOidList() const;
+    std::string Aciklama() const;
+    double Miktar() const;
 
 
     void errorOccured(const std::string &errorText) override;
 };
 
+namespace KategoriKey{
+    static const std::string Collection{"CalismalarV2Kategori"};
+    static const std::string kategoriAdi{"kategoriAdi"};
+    static const std::string kategoriMudurluk{"mudurluk"};
+    static const std::string kategoriBirim{"birim"};
+}
 
-
-class SERIKBLDCORE_EXPORT CalismaItem : public SerikBLDCore::Item
+class SERIKBLDCORE_EXPORT Kategori : public SerikBLDCore::Item
 {
 public:
-    CalismaItem();
+    explicit Kategori();
+
+    Kategori& setKategoriAdi( const std::string &kategoriName );
+    std::string getKategoriAdi() const;
+
+    Kategori& setKategoriMudurluk( const std::string &mudurluk);
+    std::string getKategoriMudurluk() const;
+
+    Kategori& setKategoriBirim( const std::string &birim);
+    std::string getKategoriBirimi() const;
 };
+
+
+
+}
 
 
 
