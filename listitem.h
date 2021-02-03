@@ -217,6 +217,28 @@ public:
         return __mlist;
     }
 
+    inline QVector<T>& List( const T& filter , const SerikBLDCore::FindOptions& options = SerikBLDCore::FindOptions() )
+    {
+
+        __mlist.clear ();
+        __count = this->countItem (filter);
+
+        __limit = options.limit ();
+        __skip = options.skip ();
+
+        auto cursor = this->find ( filter , options  );
+        if( cursor )
+        {
+            for( auto item : cursor.value() )
+            {
+                T _item;
+                _item.setDocumentView(item);
+                __mlist.append (_item);
+            }
+        }
+        return __mlist;
+    }
+
     virtual void errorOccured(const std::string &errorText) override
     {
 

@@ -68,6 +68,12 @@ SerikBLDCore::Calisma::Calisma &SerikBLDCore::Calisma::Calisma::setIsTipi(const 
     return *this;
 }
 
+SerikBLDCore::Calisma::Calisma &SerikBLDCore::Calisma::Calisma::setIsKategorisi(const std::string &isKategorisi)
+{
+    this->append(Key::isKategorisi,isKategorisi);
+    return *this;
+}
+
 std::string SerikBLDCore::Calisma::Calisma::CalismaAdi() const
 {
     auto val = this->element (Key::calismaAdi);
@@ -160,6 +166,16 @@ double SerikBLDCore::Calisma::Calisma::Miktar() const
         return val.value ().get_double ().value;
     }else{
         return 0;
+    }
+}
+
+std::string SerikBLDCore::Calisma::Calisma::isKategorisi() const
+{
+    auto val = this->element (Key::isKategorisi);
+    if( val ){
+        return val.value ().get_utf8 ().value.to_string();
+    }else{
+        return "";
     }
 }
 

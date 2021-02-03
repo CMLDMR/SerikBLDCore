@@ -35,6 +35,7 @@ SOURCES += \
     dilekceaciklama.cpp \
     dilekcecevap.cpp \
     dilekcemanager.cpp \
+    faaliyetrapor/faaliyetrapor.cpp \
     firma/firmaitem.cpp \
     firma/firmamanager.cpp \
     imar/mimarilog.cpp \
@@ -56,6 +57,8 @@ SOURCES += \
     sms/smsitem.cpp \
     stok/stok.cpp \
     stok/stokkategorimanager.cpp \
+    stok/stokv2.cpp \
+    stok/stokv2manager.cpp \
     tc.cpp \
     tcmanager.cpp \
     user.cpp
@@ -80,6 +83,7 @@ HEADERS += \
     dilekceaciklama.h \
     dilekcecevap.h \
     dilekcemanager.h \
+    faaliyetrapor/faaliyetrapor.h \
     firma/firmaitem.h \
     firma/firmamanager.h \
     imar/mimarilog.h \
@@ -102,6 +106,8 @@ HEADERS += \
     sms/smsitem.h \
     stok/stok.h \
     stok/stokkategorimanager.h \
+    stok/stokv2.h \
+    stok/stokv2manager.h \
     tc.h \
     tcmanager.h \
     user.h

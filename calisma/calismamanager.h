@@ -13,7 +13,6 @@ class SERIKBLDCORE_EXPORT CalismaManager : public SerikBLDCore::ListItem<SerikBL
 {
 public:
     explicit CalismaManager( DB* db );
-
     virtual void onList(const QVector<Calisma::Calisma> *mlist) override;
 
 };
@@ -22,7 +21,6 @@ class SERIKBLDCORE_EXPORT CalismaKategoriManager : public SerikBLDCore::ListItem
 {
 public:
     explicit CalismaKategoriManager( DB* db );
-
     virtual void onList(const QVector<Calisma::Kategori> *mlist) override;
 
 };

@@ -26,6 +26,7 @@ static const std::string calismaAdi{"calismaAdi"};
 static const std::string images{"images"};
 static const std::string miktar{"miktar"};
 static const std::string isTipi{"isTipi"};
+static const std::string isKategorisi{"isKategorisi"};
 }
 
 namespace KeyItem{
@@ -52,6 +53,7 @@ public:
     Calisma& setMiktar( const double& miktar );
     Calisma& addPhoto( const bsoncxx::oid& imgOid );
     Calisma& setIsTipi( const std::string& isTipi );
+    Calisma& setIsKategorisi( const std::string& isKategorisi );
 
 
     std::string CalismaAdi() const;
@@ -63,6 +65,7 @@ public:
     std::vector<bsoncxx::oid> imgOidList() const;
     std::string Aciklama() const;
     double Miktar() const;
+    std::string isKategorisi() const;
 
 
     void errorOccured(const std::string &errorText) override;
