@@ -371,6 +371,16 @@ QString SerikBLDCore::IK::BirimItem::birimAdi() const
     return "";
 }
 
+QString SerikBLDCore::IK::BirimItem::HaberlesmeKodu() const
+{
+    auto val = this->element (BirimKey::haberlesmeKodu);
+    if( val )
+    {
+        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+    }
+    return "";
+}
+
 SerikBLDCore::IK::AltBirimItem::AltBirimItem()
     :Item (AltBirimKey::Collection)
 {

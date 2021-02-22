@@ -84,6 +84,7 @@ namespace BirimKey {
 
 static const std::string Collection{"Müdürlükler"};
 static const std::string birim{"Birim"};
+static const std::string haberlesmeKodu{"Haberleşme Kodu"};
 
 }
 
@@ -101,6 +102,8 @@ public:
     BirimItem& setBirimAdi( const QString& birimAdi );
 
     QString birimAdi() const;
+
+    QString HaberlesmeKodu() const;
 
 };
 

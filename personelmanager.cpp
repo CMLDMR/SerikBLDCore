@@ -57,6 +57,41 @@ QVector<QString> SerikBLDCore::PersonelManager::birimList() const
     return list;
 }
 
+QVector<QString> SerikBLDCore::PersonelManager::birimListResmi()
+{
+    QVector<QString> list;
+    auto filter = document{};
+
+    mongocxx::options::find findOptions;
+
+    auto sortDoc = document{};
+    sortDoc.append(kvp("sira",-1));
+
+
+
+    filter.append(kvp("sira",make_document(kvp("$gte",bsoncxx::types::b_int32{0}))));
+
+    findOptions.limit (100);
+    findOptions.sort (sortDoc.view ());
+
+
+    try{
+        auto cursor = this->getDB ()->db ()->collection (SerikBLDCore::IK::BirimKey::Collection).find (filter.view (),findOptions);
+            for( auto item__ : cursor )
+            {
+                SerikBLDCore::IK::BirimItem __item;
+                __item.setDocumentView (item__);
+                    list.push_back (__item.birimAdi ());
+
+            }
+    }catch(mongocxx::exception &e){
+        errorOccured(e.what ());
+    }
+
+
+    return list;
+}
+
 QMap<QString, QString> SerikBLDCore::PersonelManager::altBirimList( const bsoncxx::oid& birimOid ) const
 {
     QMap<QString, QString> list;

@@ -26,27 +26,27 @@ SerikBLDCore::DB::DB()
 SerikBLDCore::DB::DB(const DB &db)
     :mDB(db.mDB)
 {
-    std::cout << "DB::DB(const DB &db): " << DBConnectionCount << std::endl;
+//    std::cout << "DB::DB(const DB &db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
 SerikBLDCore::DB::DB(SerikBLDCore::DB &&other)
     :mDB(other.mDB)
 {
-    std::cout << "DB::DB(DB &&db): " << DBConnectionCount << std::endl;
+//    std::cout << "DB::DB(DB &&db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
 SerikBLDCore::DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
-    std::cout << "DB::DB(mongocxx::database *_db): " << DBConnectionCount << std::endl;
+//    std::cout << "DB::DB(mongocxx::database *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
 SerikBLDCore::DB::DB(DB *_db) : mDB(_db->db ())
 {
-    std::cout << "DB::DB(DB *_db): " << DBConnectionCount << std::endl;
+//    std::cout << "DB::DB(DB *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
@@ -237,7 +237,7 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     } catch (bsoncxx::exception& e) {
         std::string str = "Error: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
         this->setLastError (str.c_str ());
-        return "NULL";
+        return "";
     }
 
 

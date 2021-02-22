@@ -19,6 +19,8 @@ public:
 
     QVector<QString> birimList() const;
 
+    QVector<QString> birimListResmi();
+
     QMap<QString,QString> altBirimList( const bsoncxx::oid &birimOid ) const;
 
     QMap<QString,QString> altBirimList( const std::string &birimName ) const;
