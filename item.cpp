@@ -154,7 +154,7 @@ boost::optional<QTime> SerikBLDCore::Item::getTime() const
         return boost::none;
     }
 
-    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+    auto dateTime = QDateTime::fromMSecsSinceEpoch (_oid.value ().get_time_t ());
 
     if( !dateTime.isValid () )
     {
@@ -173,7 +173,7 @@ boost::optional<QDate> SerikBLDCore::Item::getDate() const
         return boost::none;
     }
 
-    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+    auto dateTime = QDateTime::fromMSecsSinceEpoch (_oid.value ().get_time_t ());
 
     if( !dateTime.isValid () )
     {
