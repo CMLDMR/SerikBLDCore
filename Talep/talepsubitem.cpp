@@ -330,7 +330,7 @@ QString SerikBLDCore::TalepSubItem::tarih() const
     auto val = this->oid ();
     if( val )
     {
-        return QDateTime::fromTime_t (val.value ().get_time_t ()).date ().toString ("dd/MM/yyyy");
+        return QDateTime::fromMSecsSinceEpoch( val.value ().get_time_t ()).date ().toString ("dd/MM/yyyy");
     }
     return "";
 }
@@ -340,7 +340,7 @@ int SerikBLDCore::TalepSubItem::julianDay() const
     auto val = this->oid ();
     if( val )
     {
-        return QDateTime::fromTime_t (val.value ().get_time_t ()).date ().toJulianDay ();
+        return QDateTime::fromMSecsSinceEpoch (val.value ().get_time_t ()).date ().toJulianDay ();
     }
     return 0;
 }
@@ -350,7 +350,7 @@ QString SerikBLDCore::TalepSubItem::saat() const
     auto val = this->oid ();
     if( val )
     {
-        return QDateTime::fromTime_t (val.value ().get_time_t ()).time ().toString ("hh:mm");
+        return QDateTime::fromMSecsSinceEpoch (val.value ().get_time_t ()).time ().toString ("hh:mm");
     }
     return "";
 }
@@ -376,6 +376,7 @@ QString SerikBLDCore::TalepSubItem::typeColor() const
     default:
         break;
     }
+    return "white";
 }
 
 QString SerikBLDCore::TalepSubItem::typeStr() const

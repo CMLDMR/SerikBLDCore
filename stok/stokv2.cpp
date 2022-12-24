@@ -8,6 +8,21 @@ SerikBLDCore::Stokv2::Stok::Stok()
 
 }
 
+SerikBLDCore::Stokv2::Stok &SerikBLDCore::Stokv2::Stok::setBirimBirim(const double &fiyat)
+{
+    this->append(Key::birimFiyati,fiyat);
+    return *this;
+}
+
+double SerikBLDCore::Stokv2::Stok::getBirimFiyat() const
+{
+    auto val = this->element(Key::birimFiyati);
+    if( val ){
+        return val->get_double().value;
+    }
+    return 0;
+}
+
 //SerikBLDCore::Stokv2::Stok::Stok(const SerikBLDCore::Stokv2::Stok &other)
 //{
 //    this->setDocumentView (other.view ());

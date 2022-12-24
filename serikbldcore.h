@@ -3,10 +3,10 @@
 
 #include "SerikBLDCore_global.h"
 
-class SERIKBLDCORE_EXPORT SerikBLDCore
-{
-public:
-    SerikBLDCore();
-};
+//class SERIKBLDCORE_EXPORT SerikBLDCore
+//{
+//public:
+//    SerikBLDCore();
+//};
 
 #endif // SERIKBLDCORE_H

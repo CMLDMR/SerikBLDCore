@@ -74,7 +74,7 @@ QString SerikBLDCore::BilgiEdinmeItem::tarih() const
     auto _oid = this->oid ();
     if( _oid )
     {
-        return QDateTime::fromTime_t (_oid.value ().get_time_t ()).date ().toString ("dd/MM/yyyy");
+        return QDateTime::fromMSecsSinceEpoch (_oid.value ().get_time_t ()).date ().toString ("dd/MM/yyyy");
     }else{
         return "01/01/1970";
     }
@@ -85,7 +85,7 @@ QString SerikBLDCore::BilgiEdinmeItem::saat() const
     auto _oid = this->oid ();
     if( _oid )
     {
-        return QDateTime::fromTime_t (_oid.value ().get_time_t ()).time ().toString ("hh:mm");
+        return QDateTime::fromMSecsSinceEpoch (_oid.value ().get_time_t ()).time ().toString ("hh:mm");
     }else{
         return "00:00";
     }

@@ -1,5 +1,5 @@
 #include "serikbldcore.h"
 
-SerikBLDCore::SerikBLDCore()
-{
-}
+//SerikBLDCore::SerikBLDCore()
+//{
+//}
