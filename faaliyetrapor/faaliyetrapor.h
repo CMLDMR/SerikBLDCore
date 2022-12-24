@@ -39,6 +39,9 @@ public:
     bool getOnay() const;
     std::string getOnaylayan() const;
 
+    FaaliyetItem& setEnableViewMode(const bool &enableViewMode );
+    bool ViewModeisEnabled() const;
+
     std::vector<SerikBLDCore::Faaliyet::RaporItem> getFaaliyetList() const;
 };
 

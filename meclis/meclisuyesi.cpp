@@ -166,6 +166,18 @@ QString SerikBLDCore::Meclis::MeclisDonemi::donem() const
     return "";
 }
 
+SerikBLDCore::Meclis::MeclisDonemi &SerikBLDCore::Meclis::MeclisDonemi::setBaslangicDate(const int64_t &julianBaslangic)
+{
+    this->append(DonemKey::startJulianDate,bsoncxx::types::b_int64{julianBaslangic});
+    return *this;
+}
+
+SerikBLDCore::Meclis::MeclisDonemi &SerikBLDCore::Meclis::MeclisDonemi::setBitisDate(const int64_t &julianBitis)
+{
+    this->append(DonemKey::endJulianDate,bsoncxx::types::b_int64{julianBitis});
+    return *this;
+}
+
 SerikBLDCore::Meclis::PartiItem::PartiItem()
     :SerikBLDCore::Item (PartiKey::Collection)
 {

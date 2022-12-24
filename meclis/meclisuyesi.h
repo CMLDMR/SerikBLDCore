@@ -48,6 +48,8 @@ namespace DonemKey {
 static const std::string Collection{"MeclisDonemi"};
 static const std::string baslangicJulianDay{"baslangicJulianday"};
 static const std::string bitisJulianDay{"bitisJulianday"};
+static const std::string endJulianDate{"endJulianDate"};
+static const std::string startJulianDate{"startJulianDate"};
 }
 
 class SERIKBLDCORE_EXPORT MeclisDonemi : public SerikBLDCore::Item
@@ -56,6 +58,8 @@ public:
     explicit MeclisDonemi();
     MeclisDonemi& setDonem(const int& baslangicYear , const int& bitisYear );
     QString donem() const;
+    MeclisDonemi& setBaslangicDate( const std::int64_t &julianBaslangic );
+    MeclisDonemi& setBitisDate( const std::int64_t &julianBitis );
 };
 
 
