@@ -127,6 +127,38 @@ QVector<QString> SerikBLDCore::DB::getMahalleler()
 
 }
 
+QVector<QString> SerikBLDCore::DB::getBirimler()
+{
+    QVector<QString> list;
+
+
+    FindOptions options;
+
+    options.setSkip (0);
+    options.setLimit (0);
+//    options.setSort (Item("none").append("/*Müdürlükler*/",-1));
+
+    auto cursor = this->find (std::move(Item("Müdürlükler")),options);
+    if( cursor )
+    {
+        for( auto doc : cursor.value () )
+        {
+            try {
+#ifdef Q_CC_MSVC
+                list.append (doc["Birim"].get_utf8 ().value.to_string().c_str ());
+#endif
+#ifdef Q_CC_GNU
+                list.append (doc["Mahalle"].get_utf8 ().value.data ());
+#endif
+            } catch (bsoncxx::exception &e) {
+                std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
+                this->setLastError (str.c_str ());
+            }
+        }
+    }
+    return list;
+}
+
 
 
 mongocxx::database *SerikBLDCore::DB::db()
