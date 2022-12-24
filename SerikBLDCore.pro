@@ -122,15 +122,15 @@ INCLUDEPATH += $$PWD/../boost/boost
 DEPENDPATH += $$PWD/../boost/boost
 
 
-win32: LIBS += -L$$PWD/../Mongo/msvc2017x64/lib/ -lbsoncxx
+win32: LIBS += -L$$PWD/../Mongo/msvc2022x64/lib/ -lbsoncxx
 
-INCLUDEPATH += $$PWD/../Mongo/msvc2017x64/include/bsoncxx/v_noabi
-DEPENDPATH += $$PWD/../Mongo/msvc2017x64/include/bsoncxx/v_noabi
+INCLUDEPATH += $$PWD/../Mongo/msvc2022x64/include/bsoncxx/v_noabi
+DEPENDPATH += $$PWD/../Mongo/msvc2022x64/include/bsoncxx/v_noabi
 
-win32: LIBS += -L$$PWD/../Mongo/msvc2017x64/lib/ -lmongocxx
+win32: LIBS += -L$$PWD/../Mongo/msvc2022x64/lib/ -lmongocxx
 
-INCLUDEPATH += $$PWD/../Mongo/msvc2017x64/include/mongocxx/v_noabi
-DEPENDPATH += $$PWD/../Mongo/msvc2017x64/include/mongocxx/v_noabi
+INCLUDEPATH += $$PWD/../Mongo/msvc2022x64/include/mongocxx/v_noabi
+DEPENDPATH += $$PWD/../Mongo/msvc2022x64/include/mongocxx/v_noabi
 
 
 
