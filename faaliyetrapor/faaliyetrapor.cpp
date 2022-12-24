@@ -568,6 +568,21 @@ std::string SerikBLDCore::Faaliyet::FaaliyetItem::getOnaylayan() const
     return "";
 }
 
+SerikBLDCore::Faaliyet::FaaliyetItem &SerikBLDCore::Faaliyet::FaaliyetItem::setEnableViewMode(const bool &enableViewMode)
+{
+    this->append("viewMode",enableViewMode);
+    return *this;
+}
+
+bool SerikBLDCore::Faaliyet::FaaliyetItem::ViewModeisEnabled() const
+{
+    auto val = this->element ("viewMode");
+    if( val ){
+        return val.value ().get_bool().value;
+    }
+    return false;
+}
+
 std::vector<SerikBLDCore::Faaliyet::RaporItem> SerikBLDCore::Faaliyet::FaaliyetItem::getFaaliyetList() const
 {
     std::vector<SerikBLDCore::Faaliyet::RaporItem> list;
