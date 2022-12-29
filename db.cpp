@@ -275,7 +275,7 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
             }
         }
         if( !fileName.isEmpty() ){
-            return fileName.toStdString();
+            return "tempfile/"+fileName.toStdString();
         }
 
     }
