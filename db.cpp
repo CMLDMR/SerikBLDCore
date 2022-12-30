@@ -260,27 +260,6 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
 std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
 {
-
-    if( !forceFilename ){
-        QString fileName{""};
-        QDir dir;
-        if( dir.cd("docroot") ){
-            if( dir.cd("tempfile") ){
-                for( const auto &item : dir.entryInfoList() ){
-                    if( item.baseName() == fileOid ){
-                        fileName = item.fileName();
-                        break;
-                    }
-                }
-            }
-        }
-        if( !fileName.isEmpty() ){
-            return "tempfile/"+fileName.toStdString();
-        }
-
-    }
-
-
     auto bucket = this->mDB->gridfs_bucket ();
 
     auto doc = bsoncxx::builder::basic::document{};
