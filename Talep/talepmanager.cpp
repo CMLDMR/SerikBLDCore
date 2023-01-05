@@ -236,15 +236,15 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         std::cout << __LINE__ << " " << __FUNCTION__ << " docView: " << bsoncxx::to_json (doc) << std::endl;
 
         try {
-#ifdef Q_CC_MSVC
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Beklemede)
+#ifndef CPP17
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::Beklemede)
             {
                 result.Beklemede = doc["count"].get_int32 ().value;
             }
 #endif
 
-#ifdef Q_CC_GNU
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::Beklemede)
+#ifdef CPP17
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::Beklemede)
             {
                 result.Beklemede = doc["count"].get_int32 ().value;
             }
@@ -259,15 +259,15 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
 
         try {
 
-#ifdef Q_CC_MSVC
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::RedEdildi)
+#ifndef CPP17
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::RedEdildi)
             {
                 result.RedEdildi = doc["count"].get_int32 ().value;
             }
 #endif
 
-#ifdef Q_CC_GNU
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::RedEdildi)
+#ifdef CPP17
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::RedEdildi)
             {
                 result.RedEdildi = doc["count"].get_int32 ().value;
             }
@@ -280,15 +280,15 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-#ifdef Q_CC_MSVC
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Tamamlandi)
+#ifndef CPP17
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::Tamamlandi)
             {
                 result.Tamamlandi = doc["count"].get_int32 ().value;
             }
 #endif
 
-#ifdef Q_CC_GNU
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::Tamamlandi)
+#ifdef CPP17
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::Tamamlandi)
             {
                 result.Tamamlandi = doc["count"].get_int32 ().value;
             }
@@ -301,15 +301,15 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-#ifdef Q_CC_MSVC
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::DevamEdiyor)
+#ifndef CPP17
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::DevamEdiyor)
             {
                 result.DevamEdiyor = doc["count"].get_int32 ().value;
             }
 #endif
 
-#ifdef Q_CC_GNU
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::DevamEdiyor)
+#ifdef CPP17
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::DevamEdiyor)
             {
                 result.DevamEdiyor = doc["count"].get_int32 ().value;
             }
@@ -322,14 +322,14 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-#ifdef Q_CC_MSVC
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::TeyitEdilmemis){
+#ifndef CPP17
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::TeyitEdilmemis){
                 result.TeyitEdilmemis = doc["count"].get_int32 ().value;
             }
 #endif
 
-#ifdef Q_CC_GNU
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::TeyitEdilmemis){
+#ifdef CPP17
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::TeyitEdilmemis){
                 result.TeyitEdilmemis = doc["count"].get_int32 ().value;
             }
 #endif
@@ -345,7 +345,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
 
 SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPipeLine(const SerikBLDCore::Talep &filter)
 {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
 
     TalepKey::DurumPipelineResult result;
@@ -377,7 +377,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         std::cout << __LINE__ << " " << __FUNCTION__ << " docView: " << bsoncxx::to_json (doc) << std::endl;
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Beklemede)
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::Beklemede)
             {
                 result.Beklemede = doc["count"].get_int32 ().value;
             }
@@ -388,7 +388,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::RedEdildi)
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::RedEdildi)
             {
                 result.RedEdildi = doc["count"].get_int32 ().value;
             }
@@ -399,7 +399,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::Tamamlandi)
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::Tamamlandi)
             {
                 result.Tamamlandi = doc["count"].get_int32 ().value;
             }
@@ -410,7 +410,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::DevamEdiyor)
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::DevamEdiyor)
             {
                 result.DevamEdiyor = doc["count"].get_int32 ().value;
             }
@@ -421,7 +421,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::DurumKey::TeyitEdilmemis){
+            if( doc["_id"].get_string().value.data() == TalepKey::DurumKey::TeyitEdilmemis){
                 result.TeyitEdilmemis = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -435,7 +435,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
 
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
     TalepKey::DurumPipelineResult result;
     mongocxx::pipeline stage;
@@ -466,7 +466,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         std::cout << __LINE__ << " " << __FUNCTION__ << " docView: " << bsoncxx::to_json (doc) << std::endl;
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::Beklemede)
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::Beklemede)
             {
                 result.Beklemede = doc["count"].get_int32 ().value;
             }
@@ -477,7 +477,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::RedEdildi)
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::RedEdildi)
             {
                 result.RedEdildi = doc["count"].get_int32 ().value;
             }
@@ -488,7 +488,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::Tamamlandi)
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::Tamamlandi)
             {
                 result.Tamamlandi = doc["count"].get_int32 ().value;
             }
@@ -499,7 +499,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::DevamEdiyor)
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::DevamEdiyor)
             {
                 result.DevamEdiyor = doc["count"].get_int32 ().value;
             }
@@ -510,7 +510,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::DurumKey::TeyitEdilmemis){
+            if( doc["_id"].get_string ().value == TalepKey::DurumKey::TeyitEdilmemis){
                 result.TeyitEdilmemis = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -527,7 +527,7 @@ SerikBLDCore::TalepKey::DurumPipelineResult SerikBLDCore::TalepManager::durumPip
 SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakPipeLine(const QString &birim)
 {
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
     TalepKey::KaynakPipelineResult result;
     mongocxx::pipeline stage;
@@ -549,7 +549,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
     for( auto doc : cursor )
     {
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Sms)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Sms)
             {
                 result.Sms = doc["count"].get_int32 ().value;
             }
@@ -560,7 +560,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Web)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Web)
             {
                 result.Web = doc["count"].get_int32 ().value;
             }
@@ -571,7 +571,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Mobil)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Mobil)
             {
                 result.Mobil = doc["count"].get_int32 ().value;
             }
@@ -582,7 +582,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Telefon)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Telefon)
             {
                 result.Telefon = doc["count"].get_int32 ().value;
             }
@@ -593,7 +593,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Beyazmasa){
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Beyazmasa){
                 result.Beyazmasa = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -603,7 +603,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::SosyalMedya){
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::SosyalMedya){
                 result.SosyalMedya = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -618,7 +618,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
 
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
     TalepKey::KaynakPipelineResult result;
     mongocxx::pipeline stage;
@@ -640,7 +640,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
     for( auto doc : cursor )
     {
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Sms)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Sms)
             {
                 result.Sms = doc["count"].get_int32 ().value;
             }
@@ -651,7 +651,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Web)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Web)
             {
                 result.Web = doc["count"].get_int32 ().value;
             }
@@ -662,7 +662,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Mobil)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Mobil)
             {
                 result.Mobil = doc["count"].get_int32 ().value;
             }
@@ -673,7 +673,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Telefon)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Telefon)
             {
                 result.Telefon = doc["count"].get_int32 ().value;
             }
@@ -684,7 +684,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Beyazmasa){
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Beyazmasa){
                 result.Beyazmasa = doc["count"].get_int32 ().value;
             }
 
@@ -696,7 +696,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::SosyalMedya){
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::SosyalMedya){
                 result.SosyalMedya = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -718,7 +718,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
 SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakPipeLine(const SerikBLDCore::Talep &filter)
 {
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
     TalepKey::KaynakPipelineResult result;
     mongocxx::pipeline stage;
@@ -740,7 +740,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
     for( auto doc : cursor )
     {
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Sms)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Sms)
             {
                 result.Sms = doc["count"].get_int32 ().value;
             }
@@ -751,7 +751,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Web)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Web)
             {
                 result.Web = doc["count"].get_int32 ().value;
             }
@@ -762,7 +762,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Mobil)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Mobil)
             {
                 result.Mobil = doc["count"].get_int32 ().value;
             }
@@ -773,7 +773,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Telefon)
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Telefon)
             {
                 result.Telefon = doc["count"].get_int32 ().value;
             }
@@ -784,7 +784,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::Beyazmasa){
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::Beyazmasa){
                 result.Beyazmasa = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -794,7 +794,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value.to_string() == TalepKey::KaynakKey::SosyalMedya){
+            if( doc["_id"].get_string().value.data() == TalepKey::KaynakKey::SosyalMedya){
                 result.SosyalMedya = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -808,7 +808,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
 
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
     TalepKey::KaynakPipelineResult result;
     mongocxx::pipeline stage;
 
@@ -829,7 +829,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
     for( auto doc : cursor )
     {
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Sms)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Sms)
             {
                 result.Sms = doc["count"].get_int32 ().value;
             }
@@ -840,7 +840,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Web)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Web)
             {
                 result.Web = doc["count"].get_int32 ().value;
             }
@@ -851,7 +851,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Mobil)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Mobil)
             {
                 result.Mobil = doc["count"].get_int32 ().value;
             }
@@ -862,7 +862,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Telefon)
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Telefon)
             {
                 result.Telefon = doc["count"].get_int32 ().value;
             }
@@ -873,7 +873,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::Beyazmasa){
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::Beyazmasa){
                 result.Beyazmasa = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {
@@ -883,7 +883,7 @@ SerikBLDCore::TalepKey::KaynakPipelineResult SerikBLDCore::TalepManager::kaynakP
         }
 
         try {
-            if( doc["_id"].get_utf8 ().value == TalepKey::KaynakKey::SosyalMedya){
+            if( doc["_id"].get_string ().value == TalepKey::KaynakKey::SosyalMedya){
                 result.SosyalMedya = doc["count"].get_int32 ().value;
             }
         } catch (bsoncxx::exception &e) {

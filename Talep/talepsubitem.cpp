@@ -55,7 +55,7 @@ SerikBLDCore::TalepSubItem::ItemType SerikBLDCore::TalepSubItem::type() const
     auto val = this->element (Type);
     if( val )
     {
-        return static_cast<ItemType>(val.value ().get_int32 ().value);
+        return static_cast<ItemType>(val->view ().get_int32 ().value);
     }
     return ItemType::none;
 }
@@ -70,7 +70,7 @@ QString SerikBLDCore::TalepSubItem::talepOid() const
     auto val = this->element (TalepOid);
     if( val )
     {
-        return QString::fromStdString (val->get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -86,7 +86,7 @@ QString SerikBLDCore::TalepSubItem::aciklama() const
     auto val = this->element (Aciklama);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.data());
+        return QString::fromStdString (val->view ().get_string ().value.data());
     }
     return "";
 }
@@ -102,7 +102,7 @@ QString SerikBLDCore::TalepSubItem::log() const
     auto val = this->element (Log);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.data());
+        return QString::fromStdString (val->view ().get_string ().value.data());
     }
     return "";
 }
@@ -118,7 +118,7 @@ QString SerikBLDCore::TalepSubItem::fotografOid() const
     auto val = this->element (Fotograf);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -134,7 +134,7 @@ QString SerikBLDCore::TalepSubItem::pdfOid() const
     auto val = this->element (Pdf);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string());
     }
     return "";
 }
@@ -167,7 +167,7 @@ double SerikBLDCore::TalepSubItem::xCoordinate() const
     if( val )
     {
         try {
-            return val.value ().get_document ().value["x"].get_double ().value;
+            return val->view ().get_document ().value["x"].get_double ().value;
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
@@ -183,7 +183,7 @@ double SerikBLDCore::TalepSubItem::yCoordinate() const
     if( val )
     {
         try {
-            return val.value ().get_document ().value["y"].get_double ().value;
+            return val->view ().get_document ().value["y"].get_double ().value;
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
@@ -204,7 +204,7 @@ QString SerikBLDCore::TalepSubItem::videoOid() const
     auto val = this->element (Video);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -220,12 +220,12 @@ QString SerikBLDCore::TalepSubItem::sms() const
     auto val = this->element (Sms);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }
@@ -242,12 +242,12 @@ QString SerikBLDCore::TalepSubItem::personelName() const
     auto val = this->element (PersonelName);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -265,7 +265,7 @@ QString SerikBLDCore::TalepSubItem::personelOid() const
     auto val = this->element (PersonelOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -281,12 +281,12 @@ QString SerikBLDCore::TalepSubItem::tcName() const
     auto val = this->element (TCName);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -304,7 +304,7 @@ QString SerikBLDCore::TalepSubItem::tcOid() const
     auto val = this->element (TCOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string());
     }
     return "";
 }
@@ -320,7 +320,7 @@ SerikBLDCore::TalepSubItem::UserType SerikBLDCore::TalepSubItem::userType() cons
     auto val = this->element (UType);
     if( val )
     {
-        return static_cast<UserType>(val.value ().get_int32 ().value);
+        return static_cast<UserType>(val->view ().get_int32 ().value);
     }
     return NoUser;
 }

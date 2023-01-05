@@ -15,11 +15,11 @@
 #endif
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 #include <boost/optional.hpp>
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
 #include <optional>
 #endif
 
@@ -68,8 +68,8 @@ public:
 
     std::string downloadFile(const QString &fileOid , bool forceFilename = false);
     std::string downloadFileWeb( const QString &fileOid , bool forceFilename = false );
-    bsoncxx::types::value uploadfile(QString filepath );
-    bsoncxx::types::value uploadfile(QString filepath ) const;
+    bsoncxx::types::bson_value::value uploadfile(QString filepath );
+    bsoncxx::types::bson_value::value uploadfile(QString filepath ) const;
     bool deleteGridFS( const QString &fileOid );
 
     mongocxx::stdx::optional<mongocxx::result::insert_one> insertItem(const Item &item);

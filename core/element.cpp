@@ -151,6 +151,7 @@ bool MongoCore::bsoncxx::element::operator==(const MongoCore::bsoncxx::element &
     default:
         break;
     }
+    return false;
 }
 
 bool MongoCore::bsoncxx::element::operator!=(const MongoCore::bsoncxx::element &other)
@@ -320,6 +321,7 @@ bool MongoCore::bsoncxx::operator!=(const MongoCore::bsoncxx::element &element1,
     default:
         break;
     }
+    return false;
 }
 
 QVariant MongoCore::bsoncxx::element::value() const

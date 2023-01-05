@@ -79,7 +79,7 @@ QString SerikBLDCore::DilekceCevap::dilekceOid() const
     auto val = this->element (KeyDilekceOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }else{
         return "";
     }
@@ -90,7 +90,7 @@ QString SerikBLDCore::DilekceCevap::personelOid() const
     auto val = this->element (KeyPersonelOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }else{
         return "";
     }
@@ -101,11 +101,11 @@ QString SerikBLDCore::DilekceCevap::personelName() const
     auto val = this->element (KeyPersonelName);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -117,11 +117,11 @@ QString SerikBLDCore::DilekceCevap::saat() const
     auto val = this->element (KeySaat);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -133,7 +133,7 @@ int SerikBLDCore::DilekceCevap::julianDay() const
     auto val = this->element (JulianDay);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view ().get_int32 ().value;
     }else{
         return -1;
     }
@@ -144,7 +144,7 @@ QString SerikBLDCore::DilekceCevap::Tarih() const
     auto val = this->element (JulianDay);
     if( val )
     {
-        return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("dd/MM/yyyy");
+        return QDate::fromJulianDay (val->view ().get_int32 ().value).toString ("dd/MM/yyyy");
     }else{
         return "";
     }
@@ -155,7 +155,7 @@ QString SerikBLDCore::DilekceCevap::cevapOid() const
     auto val = this->element (KeyCevapOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }else{
         return "";
     }
@@ -166,11 +166,11 @@ QString SerikBLDCore::DilekceCevap::cevapIcerik() const
     auto val = this->element (KeyCevapIcerik);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -183,7 +183,7 @@ QVector<QString> SerikBLDCore::DilekceCevap::ekList() const
     auto cursor = this->element (KeyEkler);
     if( cursor )
     {
-        for( auto item : cursor.value ().get_array ().value )
+        for( auto item : cursor->view ().get_array ().value )
         {
             list.push_back (item.get_oid ().value.to_string ().c_str ());
         }

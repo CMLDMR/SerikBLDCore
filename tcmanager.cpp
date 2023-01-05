@@ -26,7 +26,7 @@ SerikBLDCore::TCManager::TCManager(mongocxx::database *_db) : DB(_db)
 }
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 boost::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
 {
     auto item = new SerikBLDCore::TC();
@@ -113,7 +113,7 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManager::Load_byOID(const bs
 
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 std::optional<SerikBLDCore::TC> SerikBLDCore::TCManager::Create_TC()
 {
     auto item = new SerikBLDCore::TC();
@@ -306,7 +306,7 @@ void SerikBLDCore::TCManagerV2::errorOccured(const std::string &errorText)
 
 }
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
 
 boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTCNO(const std::string &tcno)
@@ -370,7 +370,7 @@ boost::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byOID(const 
 }
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
 std::optional<SerikBLDCore::TC *> SerikBLDCore::TCManagerV2::Load_byTCNO(const std::string &tcno)
 {

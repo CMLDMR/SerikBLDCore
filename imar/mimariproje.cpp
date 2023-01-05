@@ -75,11 +75,11 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::adi() const
 {
     auto val = this->element (keyAdi);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }else{
         return "";
@@ -90,7 +90,7 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::firmaOid() const
 {
     auto val = this->element (keyFirmaOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }else{
         return "";
     }
@@ -100,7 +100,7 @@ int64_t SerikBLDCore::Imar::MimariProje::MainProje::basvuruJulianDay() const
 {
     auto val = this->element (keyBasvuruJulianDay);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return -1;
     }
@@ -110,7 +110,7 @@ int64_t SerikBLDCore::Imar::MimariProje::MainProje::ada() const
 {
     auto val = this->element (keyAda);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return -1;
     }
@@ -120,7 +120,7 @@ int64_t SerikBLDCore::Imar::MimariProje::MainProje::parsel() const
 {
     auto val = this->element (keyParsel);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return -1;
     }
@@ -131,11 +131,11 @@ std::string SerikBLDCore::Imar::MimariProje::MainProje::mahalle() const
 {
     auto val = this->element (keyMahalle);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }else{
         return "";
@@ -146,7 +146,7 @@ bool SerikBLDCore::Imar::MimariProje::MainProje::onay() const
 {
     auto val = this->element (keyOnay);
     if( val ){
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }else{
         return false;
     }
@@ -156,7 +156,7 @@ int64_t SerikBLDCore::Imar::MimariProje::MainProje::onaylamaJulianDay() const
 {
     auto val = this->element (keyOnaylamaTarihi);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return -1;
     }
@@ -194,7 +194,7 @@ std::string SerikBLDCore::Imar::MimariProje::FileProject::fileOid() const
 {
     auto val = this->element (keyFileOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -203,7 +203,7 @@ bool SerikBLDCore::Imar::MimariProje::FileProject::onay() const
 {
     auto val = this->element (keyOnay);
     if( val ){
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }
     return false;
 }
@@ -212,11 +212,11 @@ std::string SerikBLDCore::Imar::MimariProje::FileProject::projeAdi() const
 {
     auto val = this->element (keyProjeAdi);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
@@ -304,7 +304,7 @@ bool SerikBLDCore::Imar::MimariProje::BaseProject::removeProje(const bsoncxx::oi
     auto val = this->element (keyProje);
     if( val ){
         auto arr = array{};
-        for( auto item : val.value ().get_array ().value ){
+        for( auto item : val->view ().get_array ().value ){
             std::cout << "Type: " << bsoncxx::to_string (item.type ()) << " - " << bsoncxx::to_json (item.get_document ().view ()) << std::endl;
             if( projectOid != item.get_document ().view ()[FileProject::keyFileOid].get_oid ().value ){
                 arr.append (item.get_document ().view ());
@@ -336,11 +336,11 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::title() const
 {
     auto val = this->element (keyProjeTitle);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "Bilinmeyen Proje Adı";
@@ -350,7 +350,7 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::mainProjectOid() const
 {
     auto val = this->element (keyMainProjeOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -361,7 +361,7 @@ bool SerikBLDCore::Imar::MimariProje::BaseProject::onay() const
 {
     auto val = this->element (keyProjeOnay);
     if( val ){
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }
     return false;
 }
@@ -370,7 +370,7 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::assignedPersonelOid() 
 {
     auto val = this->element (keyAssignPersonelOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -379,11 +379,11 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::assignedPersonelName()
 {
     auto val = this->element (keyAssignPersonelName);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string ();
+#ifndef CPP17
+        return val.value ().get_string ().value.to_string ();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
@@ -394,15 +394,15 @@ int64_t SerikBLDCore::Imar::MimariProje::BaseProject::projeCount() const
     std::int64_t count = 0;
     auto val = this->element (keyProje);
     if( val ){
-        count = std::distance(val.value ().get_array ().value.begin (),
-                              val.value ().get_array ().value.end ());
+        count = std::distance(val->view ().get_array ().value.begin (),
+                              val->view ().get_array ().value.end ());
     }
     return count;
 }
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::at(const int &index) const
 {
     FileProject project;
@@ -482,7 +482,7 @@ boost::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar
 
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
 std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::MimariProje::BaseProject::at(const int &index) const
 {
@@ -491,7 +491,7 @@ std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::
     if( val ){
         if( index >= this->projeCount () || index < 0 ) return std::nullopt;
         int counter = 0;
-        for( auto item : val.value ().get_array ().value ){
+        for( auto item : val->view ().get_array ().value ){
             if( counter == index ){
                 project.setDocumentView (item.get_document ().view ());
                 break;
@@ -510,7 +510,7 @@ std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::
     FileProject project;
     auto val = this->element (keyProje);
     if( val ){
-        for( auto item : val.value ().get_array ().value ){
+        for( auto item : val->view ().get_array ().value ){
             if( fileoid == item.get_document ().view ()[FileProject::keyFileOid].get_oid ().value ){
                 project.setDocumentView (item.get_document ().view ());
                 break;
@@ -529,7 +529,7 @@ std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::
     if( val ){
         if( index >= this->projeCount () || index < 0 ) return std::nullopt;
         int counter = 0;
-        for( auto item : val.value ().get_array ().value ){
+        for( auto item : val->view ().get_array ().value ){
             if( counter == index ){
                 project.setDocumentView (item.get_document ().view ());
                 break;
@@ -548,7 +548,7 @@ std::optional<SerikBLDCore::Imar::MimariProje::FileProject> SerikBLDCore::Imar::
     FileProject project;
     auto val = this->element (keyProje);
     if( val ){
-        for( auto item : val.value ().get_array ().value ){
+        for( auto item : val->view ().get_array ().value ){
             if( fileoid == item.get_document ().view ()[FileProject::keyFileOid].get_oid ().value ){
                 project.setDocumentView (item.get_document ().view ());
                 break;
@@ -582,7 +582,7 @@ SerikBLDCore::Imar::MimariProje::BaseProject::ProjectType SerikBLDCore::Imar::Mi
 {
     auto val = this->element (keyProjectType);
     if( val ){
-        return static_cast<ProjectType>(val->get_int32 ().value);
+        return static_cast<ProjectType>(val->view().get_int32 ().value);
     }
     return ProjectType::Bilinmiyor;
 }
@@ -591,7 +591,7 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerOid() const
 {
     auto val = this->element (keyOwnerOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -600,11 +600,11 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerAdSoyad() const
 {
     auto val = this->element (keyOwnerAdSoyad);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
@@ -614,11 +614,11 @@ std::string SerikBLDCore::Imar::MimariProje::BaseProject::ownerTelefon() const
 {
     auto val = this->element (keyOwnerTelefon);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
