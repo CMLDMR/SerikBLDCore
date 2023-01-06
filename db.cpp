@@ -148,7 +148,7 @@ QVector<QString> SerikBLDCore::DB::getBirimler()
                 list.append (doc["Birim"].get_string().value.data().c_str ());
 #endif
 #ifdef CPP17
-                list.append (doc["Mahalle"].get_string().value.data ());
+                list.append (doc["Birim"].get_string().value.data ());
 #endif
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
