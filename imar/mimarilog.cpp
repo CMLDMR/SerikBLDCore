@@ -64,7 +64,7 @@ std::string SerikBLDCore::Imar::MimariLog::projeOid() const
 {
     auto val = this->element (keyprojeOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -73,7 +73,7 @@ int64_t SerikBLDCore::Imar::MimariLog::julianDay() const
 {
     auto val = this->element (keyJulianDay);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }
     return -1;
 }
@@ -82,7 +82,7 @@ int64_t SerikBLDCore::Imar::MimariLog::mSecEpoch() const
 {
     auto val = this->element (keyMSecEpoch);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }
     return -1;
 }
@@ -91,11 +91,11 @@ std::string SerikBLDCore::Imar::MimariLog::ekleyen() const
 {
     auto val = this->element (keyEkleyen);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
 
     }
@@ -106,7 +106,7 @@ SerikBLDCore::Imar::MimariLog::Type SerikBLDCore::Imar::MimariLog::LogType() con
 {
     auto val = this->element (keyType);
     if( val ){
-        return static_cast<Type>(val.value ().get_int64 ().value);
+        return static_cast<Type>(val->view ().get_int64 ().value);
 
 //        switch (val.value ().get_int64 ().value) {
 //        case 0:
@@ -185,11 +185,11 @@ std::string SerikBLDCore::Imar::DuzeltmeLog::duzeltme() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
@@ -199,7 +199,7 @@ bool SerikBLDCore::Imar::DuzeltmeLog::duzeltildi() const
 {
     auto val = this->element (keyDuzeltildi);
     if( val ){
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }
     return false;
 }
@@ -219,11 +219,11 @@ std::string SerikBLDCore::Imar::AciklamaLog::aciklama() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";
@@ -266,7 +266,7 @@ std::string SerikBLDCore::Imar::DosyaLog::fileOid() const
 {
     auto val = this->element (keyDosyaOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string();
+        return val->view ().get_oid ().value.to_string();
     }
     return "";
 }
@@ -275,11 +275,11 @@ std::string SerikBLDCore::Imar::DosyaLog::fileName() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
 
     }
@@ -301,11 +301,11 @@ std::string SerikBLDCore::Imar::IslemLog::log() const
 {
     auto val = this->element (keyAciklama);
     if( val ){
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view ().get_string ().value.data ();
 #endif
     }
     return "";

@@ -135,14 +135,14 @@ public:
     std::string assignedPersonelName() const;
     std::int64_t projeCount() const;
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     boost::optional<FileProject> at( const int& index ) const;
     boost::optional<FileProject> at( const bsoncxx::oid& fileoid ) const;
     boost::optional<FileProject> operator[]( const int& index ) const;
     boost::optional<FileProject> operator[]( const bsoncxx::oid& fileoid ) const;
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
     std::optional<FileProject> at( const int& index ) const;
     std::optional<FileProject> at( const bsoncxx::oid& fileoid ) const;
     std::optional<FileProject> operator[]( const int& index ) const;

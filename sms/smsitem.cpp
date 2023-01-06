@@ -41,11 +41,11 @@ QString SerikBLDCore::SMS::SMSItem::smsText() const
     auto val = this->element (sms);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -62,11 +62,11 @@ QString SerikBLDCore::SMS::SMSItem::numaraText() const
     auto val = this->element (numara);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -83,11 +83,11 @@ QString SerikBLDCore::SMS::SMSItem::idText() const
     auto val = this->element (smsID);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -104,7 +104,7 @@ int SerikBLDCore::SMS::SMSItem::secStartOfDay() const
     auto val = this->element (mSecStartDay);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view ().get_int32 ().value;
     }
     return -1;
 }
@@ -120,7 +120,7 @@ int SerikBLDCore::SMS::SMSItem::julianDay() const
     auto val = this->element (julianday);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view ().get_int32 ().value;
     }
     return -1;
 }
@@ -136,11 +136,11 @@ QString SerikBLDCore::SMS::SMSItem::rapor() const
     auto val = this->element (raporKey);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }
@@ -158,7 +158,7 @@ int SerikBLDCore::SMS::SMSItem::raporID() const
     auto val = this->element (smsIDRapor);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view ().get_int32 ().value;
     }
     return 0;
 }

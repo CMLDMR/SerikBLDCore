@@ -48,7 +48,7 @@ bool SerikBLDCore::BilgiEdinmeItem::geriDonus() const
     auto val = this->element (BilgiEdinme::Key::GeriDonus);
     if( val )
     {
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }
     return false;
 }
@@ -64,7 +64,7 @@ int SerikBLDCore::BilgiEdinmeItem::julianDay() const
     auto val = this->element (BilgiEdinme::Key::JulianDay);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view ().get_int32 ().value;
     }
     return 0;
 }
@@ -108,7 +108,7 @@ QString SerikBLDCore::BilgiEdinmeItem::tcOid() const
     auto val = this->element (BilgiEdinme::Key::TCOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -124,12 +124,12 @@ QString SerikBLDCore::BilgiEdinmeItem::konu() const
     auto val = this->element (BilgiEdinme::Key::Konu);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -146,12 +146,12 @@ QString SerikBLDCore::BilgiEdinmeItem::mesaj() const
     auto val = this->element (BilgiEdinme::Key::Mesaj);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -168,12 +168,12 @@ QString SerikBLDCore::BilgiEdinmeItem::birim() const
     auto val = this->element (BilgiEdinme::Key::Birim);
     if( val )
     {
-#ifdef Q_CC_MSVC
-    return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+    return QString::fromStdString (val.value ().get_string().value.data());
 #endif
 
-#ifdef Q_CC_GNU
-    return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+    return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -196,7 +196,7 @@ QString SerikBLDCore::BilgiEdinmeItem::cevapOid() const
     auto val = this->element (BilgiEdinme::Key::CevapOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }

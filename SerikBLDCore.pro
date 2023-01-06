@@ -4,8 +4,9 @@ QT += core xml network
 TEMPLATE = lib
 DEFINES += SERIKBLDCORE_LIBRARY
 
-CONFIG += c++17
+#CONFIG += c++17
 QMAKE_CXXFLAGS      += /Zc:__cplusplus
+QMAKE_CXXFLAGS += /std:c++latest
 #QMAKE_CXXFLAGS_CXX2A = -std:c++20
 
 # The following define makes your compiler emit warnings if you use
@@ -120,19 +121,19 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$PWD/../boost/boost
-DEPENDPATH += $$PWD/../boost/boost
+#INCLUDEPATH += $$PWD/../boost/boost
+#DEPENDPATH += $$PWD/../boost/boost
 
 
-win32: LIBS += -L$$PWD/../Mongo/msvc2022x64/lib/ -lbsoncxx
+win32: LIBS += -L$$PWD/../Mongo/mongo-msvc2022x64-noBoost/lib/ -lbsoncxx
 
-INCLUDEPATH += $$PWD/../Mongo/msvc2022x64/include/bsoncxx/v_noabi
-DEPENDPATH += $$PWD/../Mongo/msvc2022x64/include/bsoncxx/v_noabi
+INCLUDEPATH += $$PWD/../Mongo/mongo-msvc2022x64-noBoost/include/bsoncxx/v_noabi
+DEPENDPATH += $$PWD/../Mongo/mongo-msvc2022x64-noBoost/include/bsoncxx/v_noabi
 
-win32: LIBS += -L$$PWD/../Mongo/msvc2022x64/lib/ -lmongocxx
+win32: LIBS += -L$$PWD/../Mongo/mongo-msvc2022x64-noBoost/lib/ -lmongocxx
 
-INCLUDEPATH += $$PWD/../Mongo/msvc2022x64/include/mongocxx/v_noabi
-DEPENDPATH += $$PWD/../Mongo/msvc2022x64/include/mongocxx/v_noabi
+INCLUDEPATH += $$PWD/../Mongo/mongo-msvc2022x64-noBoost/include/mongocxx/v_noabi
+DEPENDPATH += $$PWD/../Mongo/mongo-msvc2022x64-noBoost/include/mongocxx/v_noabi
 
 
 

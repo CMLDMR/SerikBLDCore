@@ -22,13 +22,13 @@ public:
 
     explicit DilekceManager( mongocxx::database *_db );
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         boost::optional<Dilekce*> Create_Dilekce();
         boost::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
         boost::optional<Dilekce*> LoadDilekce( const std::string &oid );
         boost::optional<DilekceCevap*> LoadDilekceCevap( const std::string &cevapOid );
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
         std::optional<Dilekce*> Create_Dilekce();
         std::optional<bsoncxx::oid> insertCevap( const DilekceCevap* cevap );
         std::optional<Dilekce*> LoadDilekce( const std::string &oid );

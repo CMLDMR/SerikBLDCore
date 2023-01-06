@@ -59,7 +59,7 @@ SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::addKomisyo
 
 SerikBLDCore::Meclis::MeclisUyesi &SerikBLDCore::Meclis::MeclisUyesi::delKomisyonAdi(const std::string &komisyonAdi)
 {
-    this->pullArray(UyeKey::komisyonAdi,bsoncxx::types::value (bsoncxx::types::b_utf8{komisyonAdi}));
+    this->pullArray(UyeKey::komisyonAdi,bsoncxx::types::bson_value::value (bsoncxx::types::b_utf8{komisyonAdi}));
     return *this;
 }
 
@@ -76,7 +76,7 @@ QString SerikBLDCore::Meclis::MeclisUyesi::tcOid() const
     auto val = this->element (UyeKey::tcOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -86,11 +86,11 @@ QString SerikBLDCore::Meclis::MeclisUyesi::partiAdi() const
     auto val = this->element (UyeKey::partiAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }
@@ -102,11 +102,11 @@ QString SerikBLDCore::Meclis::MeclisUyesi::donemAdi() const
     auto val = this->element (UyeKey::donemAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }
@@ -122,15 +122,15 @@ QVector<QString> SerikBLDCore::Meclis::MeclisUyesi::komisyonUyelikleri() const
 //        std::transform(val.value ().get_array ().value.begin (),
 //                       val.value ().get_array ().value.end (),
 //                       val.value ().get_array ().value.begin (),
-//                       [&list](const bsoncxx::v_noabi::array::element &element){ list.push_back (QString::fromStdString (element.get_utf8 ().value.to_string ())); });
+//                       [&list](const bsoncxx::v_noabi::array::element &element){ list.push_back (QString::fromStdString (element.get_string ().value.to_string ())); });
 
-        for( auto item : val.value ().get_array ().value )
+        for( auto item : val->view ().get_array ().value )
         {
-#ifdef Q_CC_MSVC
-        list.push_back (QString::fromStdString (item.get_utf8 ().value.to_string ()));
+#ifndef CPP17
+        list.push_back (QString::fromStdString (item.get_string ().value.to_string ()));
 #endif
-#ifdef Q_CC_GNU
-        list.push_back (QString::fromStdString (item.get_utf8 ().value.data ()));
+#ifdef CPP17
+        list.push_back (QString::fromStdString (item.get_string ().value.data ()));
 #endif
 
         }
@@ -161,7 +161,7 @@ QString SerikBLDCore::Meclis::MeclisDonemi::donem() const
 
     if( bas && bit )
     {
-        return QString("%1 - %2").arg (bas.value ().get_int32 ().value).arg (bit.value().get_int32 ().value);
+        return QString("%1 - %2").arg (bas->view ().get_int32 ().value).arg (bit->view().get_int32 ().value);
     }
     return "";
 }
@@ -195,11 +195,11 @@ QString SerikBLDCore::Meclis::PartiItem::parti() const
     auto val = this->element (PartiKey::parti);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }
@@ -223,11 +223,11 @@ QString SerikBLDCore::Meclis::KomisyonItem::komisyonAdi() const
     auto val = this->element (KomisyonKey::komisyon);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }

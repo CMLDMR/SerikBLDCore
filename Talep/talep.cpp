@@ -208,7 +208,7 @@ QString SerikBLDCore::Talep::oid() const
     auto val = this->element ("_id");
     if( val )
     {
-        return QString::fromStdString (val->get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -218,7 +218,7 @@ QString SerikBLDCore::Talep::tcOid() const
     auto val = this->element (TalepKey::TCOID);
     if( val )
     {
-        return QString::fromStdString (val->get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -228,7 +228,7 @@ QString SerikBLDCore::Talep::mahalle() const
     auto val = this->element (TalepKey::Mahalle);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.data ());
+        return QString::fromStdString (val->view().get_string ().value.data ());
     }
     return "";
 }
@@ -238,7 +238,7 @@ QString SerikBLDCore::Talep::adres() const
     auto val = this->element (TalepKey::Adres);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.data ());
+        return QString::fromStdString (val->view().get_string ().value.data ());
     }
     return "";
 }
@@ -248,7 +248,7 @@ QString SerikBLDCore::Talep::konu() const
     auto val = this->element (TalepKey::Konu);
     if( val )
     {
-        return QString::fromStdString (val->get_utf8 ().value.data ());
+        return QString::fromStdString (val->view().get_string ().value.data ());
     }
     return "";
 }
@@ -258,7 +258,7 @@ QString SerikBLDCore::Talep::saat() const
     auto val = this->element (TalepKey::SecStartOfDay);
     if( val )
     {
-        return QTime::fromMSecsSinceStartOfDay (val->get_int32 ().value).toString ("hh:mm");
+        return QTime::fromMSecsSinceStartOfDay (val->view().get_int32 ().value).toString ("hh:mm");
     }
     return "";
 }
@@ -268,7 +268,7 @@ QString SerikBLDCore::Talep::tarih() const
     auto val = this->element (TalepKey::JulianDay);
     if( val )
     {
-        return QDate::fromJulianDay (val->get_int32 ().value).toString ("dd/MM/yyyy");
+        return QDate::fromJulianDay (val->view().get_int32 ().value).toString ("dd/MM/yyyy");
     }
     return "";
 }
@@ -278,7 +278,7 @@ int SerikBLDCore::Talep::julianDay() const
     auto val = this->element (TalepKey::JulianDay);
     if( val )
     {
-        return  (val->get_int32 ().value);
+        return  (val->view().get_int32 ().value);
     }
     return -1;
 }
@@ -288,7 +288,7 @@ int SerikBLDCore::Talep::mSecStartOfDay() const
     auto val = this->element (TalepKey::SecStartOfDay);
     if( val )
     {
-        return  (val->get_int32 ().value);
+        return  (val->view().get_int32 ().value);
     }
     return -1;
 }
@@ -298,7 +298,7 @@ QString SerikBLDCore::Talep::durum() const
     auto val = this->element (TalepKey::Durum);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+        return QString::fromStdString (val->view().get_string ().value.data ());
     }
     return "";
 }
@@ -327,7 +327,7 @@ QString SerikBLDCore::Talep::kaynak() const
     auto val = this->element (TalepKey::Kaynak);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+        return QString::fromStdString (val->view ().get_string ().value.data ());
     }
     return "";}
 
@@ -355,7 +355,7 @@ QString SerikBLDCore::Talep::birim() const
     auto val = this->element (TalepKey::Birim);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.data());
+        return QString::fromStdString (val->view().get_string ().value.data());
     }
     return "";
 }
@@ -368,7 +368,7 @@ QVector<SerikBLDCore::IK::Personel> SerikBLDCore::Talep::GorevliList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view().get_array ().value;
         for( auto item : __list )
         {
             IK::Personel personelItem;
@@ -384,7 +384,7 @@ QString SerikBLDCore::Talep::fotoOid() const
     auto val = this->element (TalepKey::FotoOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+        return QString::fromStdString (val->view().get_oid ().value.to_string());
     }
     return "";
 }
@@ -394,7 +394,7 @@ bool SerikBLDCore::Talep::kisiGizli() const
     auto val = this->element (TalepKey::KisiGizle);
     if( val )
     {
-        return val.value ().get_bool ().value;
+        return val->view().get_bool ().value;
     }
     return false;
 }
@@ -404,7 +404,7 @@ QString SerikBLDCore::Talep::kategoriOid() const
     auto val = this->element (TalepKey::KategoriOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+        return QString::fromStdString (val->view().get_oid ().value.to_string());
     }
     return "";
 }

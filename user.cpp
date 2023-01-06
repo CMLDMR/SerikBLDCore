@@ -63,7 +63,7 @@ std::string SerikBLDCore::User::PhotoFilePath()
     auto element = this->element (KeyFotoid);
     if( element )
     {
-        auto url = this->downloadFile (element->get_oid ().value.to_string ().c_str ());
+        auto url = this->downloadFile (element->view().get_oid ().value.to_string ().c_str ());
         return url;
     }else{
         return "";
@@ -75,7 +75,7 @@ std::string SerikBLDCore::User::PhotoFilePathWeb()
     auto element = this->element (KeyFotoid);
     if( element )
     {
-        auto url = this->downloadFileWeb (element->get_oid ().value.to_string ().c_str ());
+        auto url = this->downloadFileWeb (element->view().get_oid ().value.to_string ().c_str ());
         return url;
     }else{
         return "";
@@ -88,11 +88,11 @@ std::string SerikBLDCore::User::AdSoyad()
 
     if( element )
     {
-#ifdef Q_CC_MSVC
-        return (element->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return (element->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return (element->get_utf8 ().value.data ());
+#ifdef CPP17
+        return (element->view().get_string ().value.data ());
 #endif
     }else{
         return (KeyAdSoyad + " Bilgisi Eksik");
@@ -105,11 +105,11 @@ std::string SerikBLDCore::User::Statu()
 
     if( element )
     {
-#ifdef Q_CC_MSVC
-        return  (element->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return  (element->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return  (element->get_utf8 ().value.data ());
+#ifdef CPP17
+        return  (element->view().get_string ().value.data ());
 #endif
     }else{
         return (KeyStatu + " Bilgisi Eksik");
@@ -122,11 +122,11 @@ std::string SerikBLDCore::User::Birimi()
 
     if( element )
     {
-#ifdef Q_CC_MSVC
-        return  (element->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return  (element->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return  (element->get_utf8 ().value.data ());
+#ifdef CPP17
+        return  (element->view().get_string ().value.data ());
 #endif
 
     }else{
@@ -140,11 +140,11 @@ std::string SerikBLDCore::User::Telefon() const
 
     if( element )
     {
-#ifdef Q_CC_MSVC
-        return  (element->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return  (element->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return  (element->get_utf8 ().value.data ());
+#ifdef CPP17
+        return  (element->view().get_string ().value.data ());
 #endif
     }else{
         return ("");
@@ -156,7 +156,7 @@ QString SerikBLDCore::User::UserOid() const
     auto element = this->element ("_id");
     if( element )
     {
-        return  QString::fromStdString (element->get_oid ().value.to_string());
+        return  QString::fromStdString (element->view().get_oid ().value.to_string());
     }
     return ("");
 
@@ -176,7 +176,7 @@ QVector<bsoncxx::oid> SerikBLDCore::User::mudurlukList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view().get_array ().value;
         for( auto item : __list )
         {
             list.push_back (item.get_oid ().value);

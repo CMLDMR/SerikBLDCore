@@ -45,11 +45,11 @@ QString SerikBLDCore::IK::Personel::AdSoyad() const
     auto val = this->element (KeyAdSoyad);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }else{
@@ -62,7 +62,7 @@ bool SerikBLDCore::IK::Personel::BuroPersoneli() const
     auto val = this->element (KeyBuroPersonel);
     if( val )
     {
-        return  val.value ().get_bool ().value;
+        return  val->view ().get_bool ().value;
     }else{
         return false;
     }
@@ -73,7 +73,7 @@ QString SerikBLDCore::IK::Personel::FotoOid() const
     auto val = this->element (KeyFotoOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string());
     }else{
         return "";
     }
@@ -84,11 +84,11 @@ QString SerikBLDCore::IK::Personel::Birim() const
     auto val = this->element (KeyBirimi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
 
     }else{
@@ -101,11 +101,11 @@ QString SerikBLDCore::IK::Personel::statu() const
     auto val = this->element (KeyStatu);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -117,11 +117,11 @@ QString SerikBLDCore::IK::Personel::telefon() const
     auto val = this->element (KeyTelefon);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -133,11 +133,11 @@ QString SerikBLDCore::IK::Personel::sifre() const
     auto val = this->element (KeyPassword);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -152,7 +152,7 @@ QVector<bsoncxx::oid> SerikBLDCore::IK::Personel::mudurlukList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view ().get_array ().value;
         for( auto item : __list )
         {
             list.push_back (item.get_oid ().value);
@@ -170,7 +170,7 @@ QVector<bsoncxx::oid> SerikBLDCore::IK::Personel::altBirimOidList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view ().get_array ().value;
         for( auto item : __list )
         {
             list.push_back (item.get_oid ().value);
@@ -185,7 +185,7 @@ bool SerikBLDCore::IK::Personel::altBirimContains(const bsoncxx::oid &altBirimOi
     auto _list = this->element (KeyAltBirim);
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view ().get_array ().value;
         for( auto item : __list )
         {
             if( altBirimOid.to_string () == item.get_oid ().value.to_string () )
@@ -361,11 +361,11 @@ QString SerikBLDCore::IK::BirimItem::birimAdi() const
     auto val = this->element (BirimKey::birim);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -376,7 +376,7 @@ QString SerikBLDCore::IK::BirimItem::HaberlesmeKodu() const
     auto val = this->element (BirimKey::haberlesmeKodu);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+        return QString::fromStdString (val->view ().get_string().value.data());
     }
     return "";
 }
@@ -404,11 +404,11 @@ QString SerikBLDCore::IK::AltBirimItem::name() const
     auto val = this->element (AltBirimKey::altBirimAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string().value.data());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }
     return "";
@@ -419,7 +419,7 @@ std::string SerikBLDCore::IK::AltBirimItem::birimOid() const
     auto val = this->element (AltBirimKey::birimOid);
     if( val )
     {
-        return  (val.value ().get_oid ().value.to_string());
+        return  (val->view ().get_oid ().value.to_string());
     }
     return "";
 }

@@ -15,8 +15,8 @@
 #  define SERIKBLDCORE_EXPORT Q_DECL_IMPORT
 #endif
 
-
-
+// no boost required
+#define CPP17
 
 
 

@@ -13,16 +13,16 @@ namespace Stok {
 
 
 namespace StokKey {
-static const std::string Collection{"StokGiris"};
-static const std::string CollectionCikis{"StokCikis"};
-static const std::string mudurluk{"mudurluk"};
-static const std::string kategori{"kategori"};
-static const std::string adi{"adi"};
-static const std::string kodu{"kodu"};
-static const std::string miktar{"miktar"};
-static const std::string giris{"giris"};
-static const std::string tcoid{"tcoid"};
-static const std::string teslimAlan{"teslimAlan"};
+inline const std::string Collection{"StokGiris"};
+inline const std::string CollectionCikis{"StokCikis"};
+inline const std::string mudurluk{"mudurluk"};
+inline const std::string kategori{"kategori"};
+inline const std::string adi{"adi"};
+inline const std::string kodu{"kodu"};
+inline const std::string miktar{"miktar"};
+inline const std::string giris{"giris"};
+inline const std::string tcoid{"tcoid"};
+inline const std::string teslimAlan{"teslimAlan"};
 }
 class SERIKBLDCORE_EXPORT Stok : public SerikBLDCore::Item
 {
@@ -68,13 +68,13 @@ public:
     QVector<TeslimAlan> Teslimler() const;
     std::int64_t kalanMiktar() const;
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     boost::optional<bsoncxx::oid> kategori() const;
     boost::optional<bsoncxx::oid> kodu() const;
     boost::optional<bsoncxx::oid> tcoid() const;
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
     std::optional<bsoncxx::oid> kategori() const;
     std::optional<bsoncxx::oid> kodu() const;
     std::optional<bsoncxx::oid> tcoid() const;
@@ -91,9 +91,9 @@ public:
 
 
 namespace StokKategoriKey {
-static const std::string Collection{"stokyardimKat"};
-static const std::string kategoriName{"kategori"};
-static const std::string mudurluk{"mudurluk"};
+inline const std::string Collection{"stokyardimKat"};
+inline const std::string kategoriName{"kategori"};
+inline const std::string mudurluk{"mudurluk"};
 }
 class SERIKBLDCORE_EXPORT StokKategori : public SerikBLDCore::Item
 {
@@ -108,10 +108,10 @@ public:
 
 
 namespace StokKodKey {
-static const std::string Collection{"stokKod"};
-static const std::string adi{"adi"};
-static const std::string birimi{"birimi"};
-static const std::string kategoriOid{"kategoriOid"};
+inline const std::string Collection{"stokKod"};
+inline const std::string adi{"adi"};
+inline const std::string birimi{"birimi"};
+inline const std::string kategoriOid{"kategoriOid"};
 }
 
 class SERIKBLDCORE_EXPORT StokKodItem : public SerikBLDCore::Item
@@ -133,10 +133,10 @@ public:
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         boost::optional<bsoncxx::oid> kategoriOid() const;
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
         std::optional<bsoncxx::oid> kategoriOid() const;
 #endif
 

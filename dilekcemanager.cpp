@@ -17,7 +17,7 @@ SerikBLDCore::DilekceManager::DilekceManager(mongocxx::database *_db) : DB(_db)
 
 }
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
 boost::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
 {
@@ -102,7 +102,7 @@ boost::optional<SerikBLDCore::DilekceCevap *> SerikBLDCore::DilekceManager::Load
 
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
 
 std::optional<SerikBLDCore::Dilekce *> SerikBLDCore::DilekceManager::Create_Dilekce()
@@ -197,7 +197,7 @@ bool SerikBLDCore::DilekceManager::Update(SerikBLDCore::Dilekce *dilekce)
     if( oid )
     {
         try {
-            filter.append (kvp("_id",oid->get_oid ()));
+            filter.append (kvp("_id",oid->view().get_oid ()));
         } catch (bsoncxx::exception &e) {
             std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
             std::cout << str << std::endl;
@@ -496,11 +496,11 @@ QStringList SerikBLDCore::DilekceManager::Kategorilist()
     if( cursor ){
         for( auto doc : cursor.value () )
         {
-#ifdef Q_CC_MSVC
-        list.append (doc["name"].get_utf8 ().value.to_string().c_str ());
+#ifndef CPP17
+        list.append (doc["name"].get_string().value.data().c_str ());
 #endif
-#ifdef Q_CC_GNU
-        list.append (doc["name"].get_utf8 ().value.data ());
+#ifdef CPP17
+        list.append (doc["name"].get_string ().value.data ());
 #endif
         }
     }

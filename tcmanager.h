@@ -15,7 +15,7 @@ public:
     explicit TCManager( mongocxx::database* _db );
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
     boost::optional<SerikBLDCore::TC> Create_TC();
     boost::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );
@@ -24,7 +24,7 @@ public:
     boost::optional<SerikBLDCore::TC*> Load_byOID( const bsoncxx::oid &oid );
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
     std::optional<SerikBLDCore::TC> Create_TC();
     std::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );
@@ -55,7 +55,7 @@ public:
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 
     boost::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );
     boost::optional<SerikBLDCore::TC*> Load_byTEL( const std::string &tel );
@@ -64,7 +64,7 @@ public:
     boost::optional<SerikBLDCore::TC*> Load_byOID( const bsoncxx::oid &oid );
 
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
 
     std::optional<SerikBLDCore::TC> Create_TC();
     std::optional<SerikBLDCore::TC*> Load_byTCNO( const std::string &tcno );

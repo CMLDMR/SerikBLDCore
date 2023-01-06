@@ -18,7 +18,7 @@ double SerikBLDCore::Stokv2::Stok::getBirimFiyat() const
 {
     auto val = this->element(Key::birimFiyati);
     if( val ){
-        return val->get_double().value;
+        return val->view().get_double().value;
     }
     return 0;
 }
@@ -58,7 +58,7 @@ double SerikBLDCore::Stokv2::Stok::getMiktar() const
 {
     auto val = this->element (Key::miktar);
     if( val ){
-        return val.value ().get_double ().value;
+        return val->view ().get_double ().value;
     }
     return 0;
 }
@@ -73,7 +73,7 @@ std::string SerikBLDCore::Stokv2::Stok::getKategoriOid() const
 {
     auto val = this->element (Key::kategoriOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -88,7 +88,7 @@ std::string SerikBLDCore::Stokv2::Stok::getMalzemeAdi() const
 {
     auto val = this->element (Key::malzemeAdi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -103,7 +103,7 @@ std::string SerikBLDCore::Stokv2::Stok::getMudurluk() const
 {
     auto val = this->element (Key::mudurluk);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -118,7 +118,7 @@ std::string SerikBLDCore::Stokv2::Stok::getMetric() const
 {
     auto val = this->element (Key::metric);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -133,40 +133,40 @@ std::string SerikBLDCore::Stokv2::Stok::getTeslimOid() const
 {
     auto val = this->element (Key::teslimOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
 
-boost::optional<SerikBLDCore::Stokv2::Giris> SerikBLDCore::Stokv2::Stok::toGiris()
+std::optional<SerikBLDCore::Stokv2::Giris> SerikBLDCore::Stokv2::Stok::toGiris()
 {
     auto val = this->element ("type");
     if( val ){
-        if( val.value ().get_utf8 ().value.to_string() == "giris" ){
+        if( val->view ().get_string().value.data() == "giris" ){
             SerikBLDCore::Stokv2::Giris girisItem(*this);
             girisItem.append("type","giris");
             return girisItem;
         }else{
-            return boost::none;
+            return std::nullopt;
         }
     }else{
-        return boost::none;
+        return std::nullopt;
     }
 }
 
-boost::optional<SerikBLDCore::Stokv2::Cikis> SerikBLDCore::Stokv2::Stok::toCikis()
+std::optional<SerikBLDCore::Stokv2::Cikis> SerikBLDCore::Stokv2::Stok::toCikis()
 {
     auto val = this->element ("type");
     if( val ){
-        if( val.value ().get_utf8 ().value.to_string() == "giris" ){
+        if( val->view ().get_string().value.data() == "giris" ){
             SerikBLDCore::Stokv2::Cikis cikisItem(*this);
             cikisItem.append("type","cikis");
             return cikisItem;
         }else{
-            return boost::none;
+            return std::nullopt;
         }
     }else{
-        return boost::none;
+        return std::nullopt;
     }
 }
 
@@ -187,7 +187,7 @@ std::string SerikBLDCore::Stokv2::Kategori::getKategoriAdi() const
 {
     auto val = this->element (KeyKategori::kategoriAdi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();// ().value.to_string ();
     }
     return "";
 }
@@ -202,7 +202,7 @@ std::string SerikBLDCore::Stokv2::Kategori::getBirim() const
 {
     auto val = this->element (KeyKategori::birim);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -217,7 +217,7 @@ std::string SerikBLDCore::Stokv2::Kategori::getMetric() const
 {
     auto val = this->element (KeyKategori::metric);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -265,7 +265,7 @@ int64_t SerikBLDCore::Stokv2::Giris::getTeslimAlimJulianDay() const
 {
     auto val = this->element (Key::teslimAlimJulianDay);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }
     return 0;
 }
@@ -311,7 +311,7 @@ int64_t SerikBLDCore::Stokv2::Cikis::getTeslimEtJulianDay() const
 {
     auto val = this->element (Key::teslimEtJulianDay);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return 0;
     }
@@ -328,7 +328,7 @@ std::string SerikBLDCore::Stokv2::Cikis::getPersonelOid() const
 {
     auto val = this->element (Key::teslimEdilenPersonelOid);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }else{
         return "";
     }
@@ -338,7 +338,7 @@ std::string SerikBLDCore::Stokv2::Cikis::getPersonelAdSoyad() const
 {
     auto val = this->element (Key::teslimEdilenPersonelAdSoyad);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -354,7 +354,7 @@ std::string SerikBLDCore::Stokv2::Cikis::getAciklama() const
 {
     auto val = this->element (Key::cikisAciklamasi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string ();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }

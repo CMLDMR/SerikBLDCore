@@ -51,11 +51,11 @@ QString SerikBLDCore::Meclis::MeclisItem::gundem() const
     auto val = this->element (Key::gundem);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val->get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val->get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string().value.data ());
 #endif
     }
     return "";
@@ -66,11 +66,11 @@ QString SerikBLDCore::Meclis::MeclisItem::ay() const
     auto val = this->element (Key::ay);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val->get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val->get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string ().value.data ());
 #endif
 
     }
@@ -82,7 +82,7 @@ int32_t SerikBLDCore::Meclis::MeclisItem::yil() const
     auto val = this->element (Key::yil);
     if( val )
     {
-        return val->get_int32 ().value;
+        return val->view().get_int32 ().value;
     }
     return -1;
 }
@@ -92,7 +92,7 @@ std::int64_t SerikBLDCore::Meclis::MeclisItem::julianDay() const
     auto val = this->element (Key::julianDate);
     if( val )
     {
-        return val->get_int64 ().value;
+        return val->view().get_int64 ().value;
     }
     return -1;
 }
@@ -102,7 +102,7 @@ bool SerikBLDCore::Meclis::MeclisItem::yayinda() const
     auto val = this->element (Key::yayinda);
     if( val )
     {
-        return val->get_bool ().value;
+        return val->view().get_bool ().value;
     }
     return false;
 }
@@ -112,7 +112,7 @@ long SerikBLDCore::Meclis::MeclisItem::saat() const
     auto val = this->element (Key::saat);
     if( val )
     {
-        return static_cast<long>(val->get_int64 ().value);
+        return static_cast<long>(val->view().get_int64 ().value);
     }
     return -1;
 }
@@ -146,11 +146,11 @@ std::string SerikBLDCore::Meclis::YouTubeLink::videoid() const
     auto val = this->element (LinkKey::VideoID);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view().get_string ().value.data ();
 #endif
     }
     return "";
@@ -191,11 +191,11 @@ std::string SerikBLDCore::Meclis::YouTubeLink::meclisoid() const
     auto val = this->element (LinkKey::MeclisOid);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string();
+#ifndef CPP17
+        return val.value ().get_string().value.data();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view().get_string ().value.data ();
 #endif
     }
     return "";
@@ -236,7 +236,7 @@ int32_t SerikBLDCore::Meclis::KararItem::sayi() const
     auto val = this->element (KararKey::Sayi);
     if( val )
     {
-        return val.value ().get_int32 ().value;
+        return val->view().get_int32 ().value;
     }
     return 0;
 }
@@ -246,7 +246,7 @@ std::string SerikBLDCore::Meclis::KararItem::kararOid() const
     auto val = this->element (KararKey::KararOid);
     if( val )
     {
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -256,7 +256,7 @@ std::string SerikBLDCore::Meclis::KararItem::meclisOid() const
     auto val = this->element (KararKey::MeclisOid);
     if( val )
     {
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -309,7 +309,7 @@ QString SerikBLDCore::Meclis::RaporItem::meclisOid() const
     auto val = this->element (RaporKey::meclisOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -319,11 +319,11 @@ QString SerikBLDCore::Meclis::RaporItem::raporAdi() const
     auto val = this->element (RaporKey::raporAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string ().value.data ());
 #endif
 
     }
@@ -335,7 +335,7 @@ QString SerikBLDCore::Meclis::RaporItem::raporOid() const
     auto val = this->element (RaporKey::raporOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -345,11 +345,11 @@ QString SerikBLDCore::Meclis::RaporItem::kimden() const
     auto val = this->element (RaporKey::kimden);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string ().value.data ());
 #endif
 
     }
@@ -403,7 +403,7 @@ QString SerikBLDCore::Meclis::TeklifItem::meclisOid() const
     auto val = this->element (TeklifKey::meclisOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -413,11 +413,11 @@ QString SerikBLDCore::Meclis::TeklifItem::teklifAdi() const
     auto val = this->element (TeklifKey::teklifAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string ().value.data ());
 #endif
 
     }
@@ -429,7 +429,7 @@ QString SerikBLDCore::Meclis::TeklifItem::teklifOid() const
     auto val = this->element (TeklifKey::teklifOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -439,11 +439,11 @@ QString SerikBLDCore::Meclis::TeklifItem::kimden() const
     auto val = this->element (TeklifKey::kimden);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view().get_string ().value.data ());
 #endif
 
     }
@@ -485,7 +485,7 @@ std::string SerikBLDCore::Meclis::GundemItem::meclisOid() const
     auto val = this->element (GundemKey::meclisOid);
     if( val )
     {
-        return val.value ().get_oid ().value.to_string ();
+        return val->view().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -495,11 +495,11 @@ std::string SerikBLDCore::Meclis::GundemItem::gundemAdi() const
     auto val = this->element (GundemKey::gundemAdi);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return val.value ().get_utf8 ().value.to_string ();
+#ifndef CPP17
+        return val.value ().get_string ().value.to_string ();
 #endif
-#ifdef Q_CC_GNU
-        return val.value ().get_utf8 ().value.data ();
+#ifdef CPP17
+        return val->view().get_string ().value.data ();
 #endif
 
     }
@@ -521,7 +521,7 @@ std::string SerikBLDCore::Meclis::GundemItem::gundemDosyasi() const
     auto val = this->element (GundemKey::gundemFileOid);
     if( val )
     {
-        return val.value ().get_oid ().value.to_string ();
+        return val->view().get_oid ().value.to_string ();
     }
     return "";
 }

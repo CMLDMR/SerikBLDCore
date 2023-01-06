@@ -73,7 +73,7 @@ QString SerikBLDCore::DilekceAciklama::PersonelOid() const
     auto val = this->element (KeypersonelOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }else{
         return "";
     }
@@ -84,11 +84,11 @@ QString SerikBLDCore::DilekceAciklama::Aciklama() const
     auto val = this->element (Keyaciklama);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -100,7 +100,7 @@ QString SerikBLDCore::DilekceAciklama::DilekceOid() const
     auto val = this->element (KeydilekceOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view ().get_oid ().value.to_string ());
     }else{
         return "";
     }
@@ -111,7 +111,7 @@ bool SerikBLDCore::DilekceAciklama::Gorunur() const
     auto val = this->element (KeyGorunur);
     if( val )
     {
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }else{
         return false;
     }
@@ -122,7 +122,7 @@ QString SerikBLDCore::DilekceAciklama::Tarih() const
     auto val = this->element (JulianDay);
     if( val )
     {
-        return QDate::fromJulianDay (val.value ().get_int32 ().value).toString ("dd/MM/yyyy");
+        return QDate::fromJulianDay (val->view ().get_int32 ().value).toString ("dd/MM/yyyy");
     }else{
         return "";
     }
@@ -133,11 +133,11 @@ QString SerikBLDCore::DilekceAciklama::PersonelName() const
     auto val = this->element (KeyPersonelName);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -149,11 +149,11 @@ QString SerikBLDCore::DilekceAciklama::Saat() const
     auto val = this->element (KeySaat);
     if( val )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (val.value ().get_utf8 ().value.to_string ());
+#ifndef CPP17
+        return QString::fromStdString (val.value ().get_string ().value.to_string ());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (val.value ().get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (val->view ().get_string ().value.data ());
 #endif
     }else{
         return "";

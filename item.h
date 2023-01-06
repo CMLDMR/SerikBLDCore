@@ -17,11 +17,11 @@
 #include "mongoheaders.h"
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 #include <boost/optional.hpp>
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
 #include <optional>
 #endif
 
@@ -62,7 +62,7 @@ public:
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     boost::optional<bsoncxx::types::value> element(std::string key) const;
     boost::optional<bsoncxx::oid> oid() const;
     boost::optional<bsoncxx::types::value> element(std::string key);
@@ -72,10 +72,10 @@ public:
     boost::optional<QDate> getDate() const;
 #endif
 
-#ifdef Q_CC_GNU
-    std::optional<bsoncxx::types::value> element(std::string key) const;
+#ifdef CPP17
+    std::optional<bsoncxx::types::bson_value::value> element(std::string key) const;
     std::optional<bsoncxx::oid> oid() const;
-    std::optional<bsoncxx::types::value> element(std::string key);
+    std::optional<bsoncxx::types::bson_value::value> element(std::string key);
     std::optional<bsoncxx::oid> oid();
     std::optional<document> ItemFilter();
     std::optional<QTime> getTime() const;
@@ -98,11 +98,11 @@ public:
     void setCollection( const std::string& collection );
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     void removeElement( const std::string &key );
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
     void removeElement( const std::string_view &key );
 #endif
 
@@ -117,7 +117,7 @@ public:
         {
             this->removeElement ( key );
 
-            for( auto item : existArray.value ().get_array ().value )
+            for( auto item : existArray->view ().get_array ().value )
             {
                 try {
                     arr.append (item.get_value ());
@@ -153,7 +153,7 @@ public:
         {
             this->removeElement ( key );
 
-            for( auto item : existArray.value ().get_array ().value )
+            for( auto item : existArray->view().get_array ().value )
             {
                 try {
                     arr.append (item.get_value ());
@@ -182,7 +182,7 @@ public:
 
 
 
-    void pullArray( const std::string& key , const bsoncxx::types::value &value )
+    void pullArray( const std::string& key , const bsoncxx::types::bson_value::value &value )
     {
         auto arr = array{};
         auto existArray = this->element (key);
@@ -190,7 +190,7 @@ public:
         if( existArray )
         {
             this->removeElement ( key );
-            for( auto item : existArray.value ().get_array ().value )
+            for( auto item : existArray->view().get_array ().value )
             {
 
                 if( value != item.get_value ())
@@ -217,7 +217,7 @@ public:
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     template<typename T>
     Item& append( const std::string &key ,const T &value ){
         this->removeElement (key);
@@ -231,7 +231,7 @@ public:
     }
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
     template<typename T>
     Item& append( const std::string_view &key ,const T &value ){
         this->removeElement (key);
@@ -247,7 +247,7 @@ public:
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
     template<>
     Item& append( const std::string &key ,const Item &value ){
         this->removeElement (key);
@@ -261,7 +261,7 @@ public:
     }
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
     template<>
     Item& append( const std::string_view &key ,const Item &value ){
         this->removeElement (key);

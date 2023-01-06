@@ -153,7 +153,7 @@ int SerikBLDCore::Dilekce::sayi() const
     auto sayi = this->element (KeySayi);
     if( sayi )
     {
-        return sayi->get_int32 ().value;
+        return sayi->view().get_int32 ().value;
     }else{
         return -1;
     }
@@ -164,11 +164,11 @@ QString SerikBLDCore::Dilekce::konu() const
     auto value = this->element (KeyKonu);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -180,7 +180,7 @@ QString SerikBLDCore::Dilekce::tcoid() const
     auto value = this->element (KeyTCOid);
     if( value )
     {
-        return QString::fromStdString (value->get_oid ().value.to_string());
+        return QString::fromStdString (value->view().get_oid ().value.to_string());
     }else{
         return "";
     }
@@ -191,11 +191,11 @@ QString SerikBLDCore::Dilekce::birim() const
     auto value = this->element (KeyBirim);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -207,11 +207,11 @@ QString SerikBLDCore::Dilekce::icerikTipi() const
     auto value = this->element (KeyIcerikTipi);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -223,11 +223,11 @@ QString SerikBLDCore::Dilekce::icerik() const
     auto value = this->element (KeyIcerik);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -239,7 +239,7 @@ int SerikBLDCore::Dilekce::tarihJulian() const
     auto value = this->element (KeyTarihJulian);
     if( value )
     {
-        return  (value->get_int32 ().value);
+        return  (value->view().get_int32 ().value);
     }else{
         return -1;
     }
@@ -250,7 +250,7 @@ QString SerikBLDCore::Dilekce::tarihText() const
     auto value = this->element (KeyTarihJulian);
     if( value )
     {
-        return QDate::fromJulianDay (value->get_int32 ().value).toString ("dd/MM/yyyy");
+        return QDate::fromJulianDay (value->view().get_int32 ().value).toString ("dd/MM/yyyy");
     }else{
         return "Tarih Yok";
     }
@@ -261,7 +261,7 @@ int SerikBLDCore::Dilekce::saatMSecStartofDay() const
     auto value = this->element (KeySaat);
     if( value )
     {
-        return  (value->get_int32 ().value);
+        return  (value->view().get_int32 ().value);
     }else{
         return -1;
     }
@@ -272,7 +272,7 @@ QString SerikBLDCore::Dilekce::saatText() const
     auto value = this->element (KeySaat);
     if( value )
     {
-        return  QTime::fromMSecsSinceStartOfDay ((value->get_int32 ().value)).toString ("hh:mm");
+        return  QTime::fromMSecsSinceStartOfDay ((value->view().get_int32 ().value)).toString ("hh:mm");
     }else{
         return "Saat Yok";
     }
@@ -283,11 +283,11 @@ QString SerikBLDCore::Dilekce::dilekceOid() const
     auto value = this->element (KeyDilekceOid);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -300,7 +300,7 @@ QStringList SerikBLDCore::Dilekce::EkOidList() const
     auto _list_ = this->element (KeyEkler);
     if( _list_ )
     {
-        auto _list = _list_.value ().get_array ().value;
+        auto _list = _list_->view ().get_array ().value;
         for( auto item : _list )
         {
             list.push_back (item.get_oid ().value.to_string ().c_str ());
@@ -317,7 +317,7 @@ QVector<SerikBLDCore::IK::Personel> SerikBLDCore::Dilekce::GorevliList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view ().get_array ().value;
         for( auto item : __list )
         {
             IK::Personel personelItem;
@@ -336,14 +336,14 @@ QVector<QString> SerikBLDCore::Dilekce::BilgiBirimList() const
 
     if( _list )
     {
-        auto __list = _list.value ().get_array ().value;
+        auto __list = _list->view ().get_array ().value;
         for( auto item : __list )
         {
-#ifdef Q_CC_MSVC
-        list.push_back (std::move(item.get_utf8 ().value.to_string().c_str ()));
+#ifndef CPP17
+        list.push_back (std::move(item.get_string ().value.to_string().c_str ()));
 #endif
-#ifdef Q_CC_GNU
-        list.push_back (std::move(item.get_utf8 ().value.data ()));
+#ifdef CPP17
+        list.push_back (std::move(item.get_string ().value.data ()));
 #endif
 
         }
@@ -356,11 +356,11 @@ QString SerikBLDCore::Dilekce::Durum() const
     auto value = this->element (KeyDilekceDurum);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -372,7 +372,7 @@ QString SerikBLDCore::Dilekce::cevapOid() const
     auto value = this->element (KeyCevapOid);
     if( value )
     {
-        return  QString::fromStdString (value->get_oid ().value.to_string());
+        return  QString::fromStdString (value->view().get_oid ().value.to_string());
     }else{
         return "";
     }

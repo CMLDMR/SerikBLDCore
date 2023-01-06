@@ -19,11 +19,11 @@ SerikBLDCore::Item& SerikBLDCore::Item::setDocumentView(const bsoncxx::document:
     mDoc.clear ();
     for( auto item : view )
     {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         this->append(item.key ().to_string().c_str (),item.get_value ());
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
         this->append(item.key (),item.get_value ());
 #endif
     }
@@ -46,11 +46,11 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::builder::basic:
 
     for( auto item : value.view () )
     {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         this->append(item.key ().to_string().c_str (),item.get_value ());
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
         this->append(item.key (),item.get_value ());
 #endif
     }
@@ -62,11 +62,11 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::document::view 
     mDoc.clear ();
     for( auto item : view )
     {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         this->append(item.key ().to_string().c_str (),item.get_value ());
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
         this->append(item.key (),item.get_value ());
 #endif
     }
@@ -76,7 +76,7 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const bsoncxx::document::view 
 
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 boost::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
 {
     try {
@@ -185,11 +185,11 @@ boost::optional<QDate> SerikBLDCore::Item::getDate() const
 
 #endif
 
-#ifdef Q_CC_GNU
-std::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key) const
+#ifdef CPP17
+std::optional<bsoncxx::types::bson_value::value> SerikBLDCore::Item::element(std::string key) const
 {
     try {
-        return mDoc.view ()[key].get_value ();
+        return bsoncxx::types::bson_value::value(mDoc.view ()[key].get_value ());
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
         const_cast<SerikBLDCore::Item*>(this)->errorOccured (str);
@@ -211,10 +211,10 @@ std::optional<bsoncxx::oid> SerikBLDCore::Item::oid() const
 
 
 
-std::optional<bsoncxx::types::value> SerikBLDCore::Item::element(std::string key)
+std::optional<bsoncxx::types::bson_value::value> SerikBLDCore::Item::element(std::string key)
 {
     try {
-        return mDoc.view ()[key].get_value ();
+        return bsoncxx::types::bson_value::value(mDoc.view ()[key].get_value ());
     } catch (bsoncxx::exception &e) {
         std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() + " Key: " + key;
         errorOccured (str);
@@ -266,7 +266,7 @@ std::optional<QTime> SerikBLDCore::Item::getTime() const
         return std::nullopt;
     }
 
-    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+    auto dateTime = QDateTime::fromMSecsSinceEpoch(_oid.value ().get_time_t ());
 
     if( !dateTime.isValid () )
     {
@@ -285,7 +285,7 @@ std::optional<QDate> SerikBLDCore::Item::getDate() const
         return std::nullopt;
     }
 
-    auto dateTime = QDateTime::fromTime_t (_oid.value ().get_time_t ());
+    auto dateTime = QDateTime::fromMSecsSinceEpoch (_oid.value ().get_time_t ());
 
     if( !dateTime.isValid () )
     {
@@ -323,7 +323,7 @@ SerikBLDCore::Item& SerikBLDCore::Item::operator=(const Item &value)
 
     for( auto item : value.view () )
     {
-        this->append(item.key ().to_string().c_str (),item.get_value ());
+        this->append(item.key ().data(),item.get_value ());
     }
     return *this;
 }
@@ -333,7 +333,7 @@ SerikBLDCore::Item &SerikBLDCore::Item::operator=(Item &&other)
     mDoc.clear ();
     for( auto item : other.view () )
     {
-        this->append(item.key ().to_string().c_str (),item.get_value ());
+        this->append(item.key ().data(),item.get_value ());
     }
     return *this;
 }
@@ -377,7 +377,7 @@ void SerikBLDCore::Item::setCollection(const std::string &collection)
 }
 
 
-#ifdef Q_CC_MSVC
+#ifndef CPP17
 void SerikBLDCore::Item::removeElement(const std::string &key)
 {
     auto tempDoc = document{};
@@ -402,7 +402,7 @@ void SerikBLDCore::Item::removeElement(const std::string &key)
 }
 #endif
 
-#ifdef Q_CC_GNU
+#ifdef CPP17
 void SerikBLDCore::Item::removeElement(const std::string_view &key)
 {
     auto tempDoc = document{};
@@ -492,7 +492,7 @@ int SerikBLDCore::FindOptions::limit() const
 
     if( val )
     {
-        return static_cast<int>(val.value ().get_int64 ().value);
+        return static_cast<int>(val->view().get_int64().value);
     }else{
         return 20;
     }
@@ -508,7 +508,7 @@ int SerikBLDCore::FindOptions::skip() const
 
     if( val )
     {
-        return static_cast<int>(val.value ().get_int64 ().value);
+        return static_cast<int>(val->view().get_int64().value);
     }else{
         return 0;
     }
@@ -524,7 +524,7 @@ SerikBLDCore::Item SerikBLDCore::FindOptions::sort() const
     auto val = this->element ("sort");
     if( val )
     {
-        return SerikBLDCore::Item(val.value ().get_document (),"none");
+        return SerikBLDCore::Item(val->view ().get_document (),"none");
     }
     return SerikBLDCore::Item("none");
 }
@@ -538,7 +538,7 @@ SerikBLDCore::Item SerikBLDCore::FindOptions::projection() const
 {    auto val = this->element ("projection");
      if( val )
      {
-         SerikBLDCore::Item item(val.value ().get_document ().value,"none");
+         SerikBLDCore::Item item(val->view().get_document ().value,"none");
          return item;
      }
      return SerikBLDCore::Item("none");

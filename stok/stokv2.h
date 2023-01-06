@@ -12,20 +12,20 @@ namespace Stokv2 {
 
 
 namespace Key {
-static const std::string Collection{"Stokv2"};
-static const std::string kategoriOid{"kategoriOid"};
-static const std::string malzemeAdi{"malzemeAdi"};
-static const std::string metric{"metric"};
-static const std::string mudurluk{"mudurluk"};
-static const std::string miktar{"miktar"};
-static const std::string teslimOid{"teslimOid"};
-static const std::string teslimAlimJulianDay{"teslimAlimJulianDay"};
-static const std::string teslimEtJulianDay{"teslimEtJulianDay"};
-static const std::string teslimEdilenPersonelOid{"teslimEdilenPersonelOid"};
-static const std::string teslimEdilenPersonelAdSoyad{"teslimEdilenPersonelAdSoyad"};
-static const std::string cikisAciklamasi{"cikisAciklamasi"};
-static const std::string birimFiyati{"birimFiyati"};
-static const std::string calismaOid{"calismaOid"}; // TODO:  Malzeme Çıkışı Çalışmalara Bağlanacak.
+inline const std::string Collection{"Stokv2"};
+inline const std::string kategoriOid{"kategoriOid"};
+inline const std::string malzemeAdi{"malzemeAdi"};
+inline const std::string metric{"metric"};
+inline const std::string mudurluk{"mudurluk"};
+inline const std::string miktar{"miktar"};
+inline const std::string teslimOid{"teslimOid"};
+inline const std::string teslimAlimJulianDay{"teslimAlimJulianDay"};
+inline const std::string teslimEtJulianDay{"teslimEtJulianDay"};
+inline const std::string teslimEdilenPersonelOid{"teslimEdilenPersonelOid"};
+inline const std::string teslimEdilenPersonelAdSoyad{"teslimEdilenPersonelAdSoyad"};
+inline const std::string cikisAciklamasi{"cikisAciklamasi"};
+inline const std::string birimFiyati{"birimFiyati"};
+inline const std::string calismaOid{"calismaOid"}; // TODO:  Malzeme Çıkışı Çalışmalara Bağlanacak.
 }
 
 
@@ -68,13 +68,13 @@ public:
     /// \brief toGiris : eğer Stok, Giris item ise return yapar yoksa boost::none
     /// \return
     ///
-    boost::optional<Giris> toGiris();
+    std::optional<Giris> toGiris();
 
     ///
     /// \brief toCikis : eğer Stok, Cikis item ise return yapar yoksa boost::none
     /// \return
     ///
-    boost::optional<Cikis> toCikis();
+    std::optional<Cikis> toCikis();
 
 };
 
@@ -129,10 +129,10 @@ public:
 
 
 namespace KeyKategori {
-static const std::string Collection{"stokv2Kategori"};
-static const std::string kategoriAdi{"kategoriAdi"};
-static const std::string birim{"birim"};
-static const std::string metric{"metric"};
+inline const std::string Collection{"stokv2Kategori"};
+inline const std::string kategoriAdi{"kategoriAdi"};
+inline const std::string birim{"birim"};
+inline const std::string metric{"metric"};
 }
 
 

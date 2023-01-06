@@ -36,7 +36,7 @@ std::string SerikBLDCore::Faaliyet::RaporItem::getText() const
 {
     auto val = this->element (Key::text);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -45,7 +45,7 @@ std::string SerikBLDCore::Faaliyet::RaporItem::uuid() const
 {
     auto val = this->element (Key::uuid);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -60,7 +60,7 @@ std::string SerikBLDCore::Faaliyet::RaporItem::parentUuid() const
 {
     auto val = this->element (Key::parentuuid);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -70,7 +70,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isBaslik() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::baslik);
+        return (val->view ().get_string().value.data() == Key::Type::baslik);
     }
     return false;
 }
@@ -79,7 +79,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isAltBaslik() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::altBaslik);
+        return (val->view ().get_string().value.data() == Key::Type::altBaslik);
     }
     return false;
 }
@@ -88,7 +88,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isParagraf() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::paragraf);
+        return (val->view ().get_string().value.data() == Key::Type::paragraf);
     }
     return false;
 }
@@ -97,7 +97,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isImg() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::img);
+        return (val->view ().get_string().value.data() == Key::Type::img);
     }
     return false;
 }
@@ -106,7 +106,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isTable() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::table);
+        return (val->view ().get_string().value.data() == Key::Type::table);
     }
     return false;
 }
@@ -115,7 +115,7 @@ bool SerikBLDCore::Faaliyet::RaporItem::isPageBreak() const
 {
     auto val = this->element (Key::type);
     if( val ){
-        return (val.value ().get_utf8 ().value.to_string() == Key::Type::pageBreak);
+        return (val->view ().get_string().value.data() == Key::Type::pageBreak);
     }
     return false;
 }
@@ -156,7 +156,7 @@ std::string SerikBLDCore::Faaliyet::ImgItem::getImgOid() const
 {
     auto val = this->element ("imgoid");
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -184,14 +184,14 @@ std::vector<std::string> SerikBLDCore::Faaliyet::TableItem::headers() const
 
     auto val = this->element ("header");
     if( val ){
-        auto arr = val.value ().get_array ().value;
+        auto arr = val->view ().get_array ().value;
 
 //        std::transform(arr.begin (),arr.end (),header.begin (),[](const bsoncxx::array::element &element ){
-//            return element.get_utf8 ().value.to_string();
+//            return element.get_string ().value.to_string();
 //        });
 
         for(const auto &item : arr ){
-            header.push_back (item.get_utf8 ().value.to_string());
+            header.push_back (item.get_string().value.data());
         }
     }
     return header;
@@ -222,12 +222,12 @@ std::string SerikBLDCore::Faaliyet::TableItem::cell(const int &row, const int &c
     if( val ){
 
         try{
-            auto arrayView = val.value ().get_array ().value;
+            auto arrayView = val->view ().get_array ().value;
             for( auto item : arrayView ){
                 auto doc = item.get_document ().value;
                 if( doc["row"].get_int32 ().value == row ){
                     if( doc["col"].get_int32 ().value == col ){
-                        returnValue = doc["data"].get_utf8 ().value.to_string();
+                        returnValue = doc["data"].get_string().value.data();
                         break;
                     }
                 }
@@ -258,7 +258,7 @@ int SerikBLDCore::Faaliyet::TableItem::row() const
     if( val ){
 
         try{
-            auto arrayView = val.value ().get_array ().value;
+            auto arrayView = val->view ().get_array ().value;
             for( auto item : arrayView ){
                 auto doc = item.get_document ().value;
                 _row = std::max(doc["row"].get_int32 ().value,_row);
@@ -279,7 +279,7 @@ int SerikBLDCore::Faaliyet::TableItem::column() const
     if( val ){
 
         try{
-            auto arrayView = val.value ().get_array ().value;
+            auto arrayView = val->view ().get_array ().value;
             for( auto item : arrayView ){
                 auto doc = item.get_document ().value;
                 _col = std::max(doc["col"].get_int32 ().value,_col);
@@ -298,13 +298,13 @@ bool SerikBLDCore::Faaliyet::TableItem::_appendCell(const int &row, const int &c
         try{
 
 
-            auto arrayView = val.value ().get_array ().value;
+            auto arrayView = val->view ().get_array ().value;
 
             for( auto item : arrayView ){
                 auto doc = item.get_document ().value;
                 if( doc["row"].get_int32 ().value == row ){
                     if( doc["col"].get_int32 ().value == col ){
-                        this->pullArray ("table",item.get_value () );
+                        this->pullArray ("table",bsoncxx::types::bson_value::value(item.get_value()) );
                         break;
                     }
                 }
@@ -506,7 +506,7 @@ std::string SerikBLDCore::Faaliyet::FaaliyetItem::getBirim() const
 {
     auto val = this->element ("birim");
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }
     return "";
 }
@@ -521,7 +521,7 @@ int64_t SerikBLDCore::Faaliyet::FaaliyetItem::getYil() const
 {
     auto val = this->element ("yil");
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }
     return 0;
 }
@@ -536,7 +536,7 @@ bsoncxx::array::view SerikBLDCore::Faaliyet::FaaliyetItem::getFaaliyetView() con
 {
     auto val = this->element ("faaliyet");
     if( val ){
-        return val.value ().get_array ().value;
+        return val->view ().get_array ().value;
     }
     return bsoncxx::builder::basic::array{}.view ();
 }
@@ -554,7 +554,7 @@ bool SerikBLDCore::Faaliyet::FaaliyetItem::getOnay() const
 {
     auto val = this->element (Key::onayli);
     if( val ){
-        return val.value ().get_bool ().value;
+        return val->view ().get_bool ().value;
     }
     return false;
 }
@@ -563,7 +563,7 @@ std::string SerikBLDCore::Faaliyet::FaaliyetItem::getOnaylayan() const
 {
     auto val = this->element (Key::onaylayan);
     if( val ){
-        return val.value ().get_oid ().value.to_string ();
+        return val->view ().get_oid ().value.to_string ();
     }
     return "";
 }
@@ -578,7 +578,7 @@ bool SerikBLDCore::Faaliyet::FaaliyetItem::ViewModeisEnabled() const
 {
     auto val = this->element ("viewMode");
     if( val ){
-        return val.value ().get_bool().value;
+        return val->view ().get_bool().value;
     }
     return false;
 }

@@ -111,11 +111,11 @@ QVector<QString> SerikBLDCore::DB::getMahalleler()
         for( auto doc : cursor.value () )
         {
             try {
-#ifdef Q_CC_MSVC
-                list.append (doc["Mahalle"].get_utf8 ().value.to_string().c_str ());
+#ifndef CPP17
+                list.append (doc["Mahalle"].get_string().value.data().c_str ());
 #endif
-#ifdef Q_CC_GNU
-                list.append (doc["Mahalle"].get_utf8 ().value.data ());
+#ifdef CPP17
+                list.append (doc["Mahalle"].get_string().value.data ());
 #endif
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
@@ -144,11 +144,11 @@ QVector<QString> SerikBLDCore::DB::getBirimler()
         for( auto doc : cursor.value () )
         {
             try {
-#ifdef Q_CC_MSVC
-                list.append (doc["Birim"].get_utf8 ().value.to_string().c_str ());
+#ifndef CPP17
+                list.append (doc["Birim"].get_string().value.data().c_str ());
 #endif
-#ifdef Q_CC_GNU
-                list.append (doc["Mahalle"].get_utf8 ().value.data ());
+#ifdef CPP17
+                list.append (doc["Birim"].get_string().value.data ());
 #endif
             } catch (bsoncxx::exception &e) {
                 std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what() ;
@@ -197,11 +197,11 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
     auto file_length = downloader.file_length();
     std::int32_t bytes_counter = 0;
 
-#ifdef Q_CC_MSVC
-    QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
+#ifndef CPP17
+    QFileInfo info( downloader.files_document()["filename"].get_string().value.to_string().c_str() );
 #endif
-#ifdef Q_CC_GNU
-    QFileInfo info( downloader.files_document()["filename"].get_utf8().value.data ());
+#ifdef CPP17
+    QFileInfo info( downloader.files_document()["filename"].get_string().value.data ());
 #endif
 
 
@@ -216,11 +216,11 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
     if( forceFilename )
     {
-#ifdef Q_CC_MSVC
-        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.to_string().c_str());
+#ifndef CPP17
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_string().value.to_string().c_str());
 #endif
-#ifdef Q_CC_GNU
-        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.data ());
+#ifdef CPP17
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_string().value.data ());
 #endif
 
     }else{
@@ -260,6 +260,49 @@ std::string SerikBLDCore::DB::downloadFile(const QString &fileOid, bool forceFil
 
 std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool forceFilename)
 {
+
+    std::string file__Name{""};
+    bool fileDownloadedBefore=true;
+
+    auto filter = document{};
+
+    try {
+        filter.append(kvp("_id",bsoncxx::oid{fileOid.toStdString()}));
+    } catch (bsoncxx::exception &e) {
+        std::cout << "\nLOG: " << e.what() << "\n";
+    }
+
+    auto val = this->mDB->collection("fs.files").find_one(filter.view());
+
+    if( val ){
+        QFileInfo file_info;
+        try {
+            file_info = QFileInfo(val.value().view()["filename"].get_string().value.data());
+        } catch (bsoncxx::exception &e) {
+            fileDownloadedBefore = false;
+        }
+        if( fileDownloadedBefore ){
+            if( forceFilename ){
+                file__Name = "tempfile/"+file_info.baseName().toStdString()+"."+file_info.suffix().toStdString();
+            }else{
+                file__Name = "tempfile/"+fileOid.toStdString()+"."+file_info.suffix().toStdString();
+            }
+
+            if( QFile::exists(QString("docroot/")+file__Name.c_str()) ){
+                std::cout << "\nFile Exist: " << file__Name << "\n";
+            }else{
+                std::cout << "\nFile NOT Exist: " << file__Name << "\n";
+                fileDownloadedBefore = false;
+            }
+        }
+    }else{
+        fileDownloadedBefore = false;
+    }
+
+    if( fileDownloadedBefore ){
+        return file__Name;
+    }
+
     auto bucket = this->mDB->gridfs_bucket ();
 
     auto doc = bsoncxx::builder::basic::document{};
@@ -288,11 +331,11 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     auto file_length = downloader.file_length();
     auto bytes_counter = 0;
 
-#ifdef Q_CC_MSVC
-        QFileInfo info( downloader.files_document()["filename"].get_utf8().value.to_string().c_str() );
+#ifndef CPP17
+        QFileInfo info( downloader.files_document()["filename"].get_string().value.to_string().c_str() );
 #endif
-#ifdef Q_CC_GNU
-        QFileInfo info( downloader.files_document()["filename"].get_utf8().value.data ());
+#ifdef CPP17
+        QFileInfo info( downloader.files_document()["filename"].get_string().value.data ());
 #endif
 
 
@@ -309,11 +352,11 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
 
     if( forceFilename )
     {
-#ifdef Q_CC_MSVC
-        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.to_string().c_str());
+#ifndef CPP17
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_string().value.to_string().c_str());
 #endif
-#ifdef Q_CC_GNU
-        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_utf8().value.data ());
+#ifdef CPP17
+        fullFilename = QString("tempfile/%1").arg(downloader.files_document()["filename"].get_string().value.data ());
 #endif
 
     }else{
@@ -356,7 +399,7 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
     return fullFilename.toStdString ();
 }
 
-bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
+bsoncxx::types::bson_value::value SerikBLDCore::DB::uploadfile(QString filepath)
 {
     auto bucket = this->db ()->gridfs_bucket ();
     QFile file( filepath );
@@ -369,14 +412,15 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath)
 
         uploader.write((std::uint8_t*)ar.data(),ar.size());
         auto res = uploader.close();
-        return res.id();
+        return bsoncxx::types::bson_value::value(res.id());
     }else{
         std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + filepath.toStdString() ;
         this->setLastError (str.c_str ());
+        return bsoncxx::types::bson_value::value(nullptr);
     }
 }
 
-bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
+bsoncxx::types::bson_value::value SerikBLDCore::DB::uploadfile(QString filepath) const
 {
     auto bucket = mDB->gridfs_bucket ();
     mongocxx::gridfs::uploader uploader;
@@ -390,17 +434,18 @@ bsoncxx::types::value SerikBLDCore::DB::uploadfile(QString filepath) const
 
         uploader.write((std::uint8_t*)ar.data(),ar.size());
         auto res = uploader.close();
-        return res.id();
+        return bsoncxx::types::bson_value::value(res.id());
     }else{
         std::string str = "Error Can Not Open File: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + filepath.toStdString() ;
         const_cast<SerikBLDCore::DB*>(this)->setLastError (str.c_str ());
-        return uploader.close ().id ();
+        return bsoncxx::types::bson_value::value(uploader.close ().id ());
+
     }
 }
 
 bool SerikBLDCore::DB::deleteGridFS(const QString &fileOid)
 {
-    bsoncxx::types::value id(bsoncxx::types::b_oid{bsoncxx::oid{fileOid.toStdString ()}});
+    bsoncxx::types::bson_value::value id(bsoncxx::types::b_oid{bsoncxx::oid{fileOid.toStdString ()}});
     try {
         mDB->gridfs_bucket ().delete_file (id);
         return true;
@@ -446,10 +491,10 @@ mongocxx::stdx::optional<mongocxx::result::update> SerikBLDCore::DB::updateItem(
     bool _errorOccured = false;
     for( auto element : item.view () )
     {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         if( element.key ().to_string() != "_id" )
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
         if( element.key () != "_id" )
 #endif
         {
@@ -572,13 +617,13 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
         auto __view = options.element ("projection");
         if( __view )
         {
-            for( auto __item : __view.value ().get_document ().value)
+            for( auto __item : __view->view ().get_document ().value)
             {
                 try {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
                     doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
                     doc.append (kvp(__item.key (),__item.get_value ()));
 #endif
                 } catch (bsoncxx::exception &e) {
@@ -596,13 +641,13 @@ mongocxx::stdx::optional<mongocxx::cursor> SerikBLDCore::DB::find(const SerikBLD
         auto __view = options.element ("sort");
         if( __view )
         {
-            for( auto __item : __view.value ().get_document ().value)
+            for( auto __item : __view->view ().get_document ().value)
             {
                 try {
-#ifdef Q_CC_MSVC
+#ifndef CPP17
         doc.append (kvp(__item.key ().to_string(),__item.get_value ()));
 #endif
-#ifdef Q_CC_GNU
+#ifdef CPP17
         doc.append (kvp(__item.key (),__item.get_value ()));
 #endif
 

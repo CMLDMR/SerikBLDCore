@@ -150,11 +150,11 @@ QString SerikBLDCore::TC::TCNO()const
     auto value = this->element (KeyTC);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -166,11 +166,11 @@ QString SerikBLDCore::TC::AdSoyad()const
     auto value = this->element (KeyAdSoyad);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
 
     }else{
@@ -183,11 +183,11 @@ QString SerikBLDCore::TC::CepTelefonu()const
     auto value = this->element (KeyCepTelefonu);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -199,11 +199,11 @@ QString SerikBLDCore::TC::Mahalle()const
     auto value = this->element (KeyMahalle);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -215,11 +215,11 @@ QString SerikBLDCore::TC::TamAdres()const
     auto value = this->element (KeyAdres);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->view().get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -231,11 +231,11 @@ QString SerikBLDCore::TC::Password()const
     auto value = this->element (KeyPassword);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -247,11 +247,11 @@ QString SerikBLDCore::TC::NormalTelefon()const
     auto value = this->element (KeyNormalTelefon);
     if( value )
     {
-#ifdef Q_CC_MSVC
-        return QString::fromStdString (value->get_utf8 ().value.to_string());
+#ifndef CPP17
+        return QString::fromStdString (value->get_string ().value.to_string());
 #endif
-#ifdef Q_CC_GNU
-        return QString::fromStdString (value->get_utf8 ().value.data ());
+#ifdef CPP17
+        return QString::fromStdString (value->view().get_string ().value.data ());
 #endif
     }else{
         return "";
@@ -263,7 +263,7 @@ QString SerikBLDCore::TC::FotoOid() const
     auto val = this->element (KeyFotoOid);
     if( val )
     {
-        return QString::fromStdString (val.value ().get_oid ().value.to_string ());
+        return QString::fromStdString (val->view().get_oid ().value.to_string ());
     }
     return "";
 }
@@ -273,7 +273,7 @@ bool SerikBLDCore::TC::CalismaSMS()const
     auto value = this->element (KeyCalismaSMS);
     if( value )
     {
-        return value->get_bool ().value;
+        return value->view().get_bool ().value;
     }else{
         return false;
     }

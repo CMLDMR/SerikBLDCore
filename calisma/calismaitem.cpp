@@ -78,7 +78,7 @@ std::string SerikBLDCore::Calisma::Calisma::CalismaAdi() const
 {
     auto val = this->element (Key::calismaAdi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -88,7 +88,7 @@ std::string SerikBLDCore::Calisma::Calisma::Mahalle() const
 {
     auto val = this->element (Key::mahalle);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -98,7 +98,7 @@ std::string SerikBLDCore::Calisma::Calisma::IsTipii() const
 {
     auto val = this->element (Key::isTipi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -108,7 +108,7 @@ std::string SerikBLDCore::Calisma::Calisma::IsBirim() const
 {
     auto val = this->element (Key::unitBirim);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -123,7 +123,7 @@ int64_t SerikBLDCore::Calisma::Calisma::julianDay() const
 {
     auto val = this->element (Key::julianDate);
     if( val ){
-        return val.value ().get_int64 ().value;
+        return val->view ().get_int64 ().value;
     }else{
         return 0;
     }
@@ -136,7 +136,7 @@ std::vector<bsoncxx::oid> SerikBLDCore::Calisma::Calisma::imgOidList() const
     auto val = this->element (Key::images);
     if( val ){
 
-        auto arr = val->get_array ().value;
+        auto arr = val->view().get_array ().value;
         //bsoncxx::v_noabi::array::element
 //        std::transform(arr.begin (),arr.end (),arr.begin (),[&oidList](const bsoncxx::document::value item ){ oidList.push_back (item.get_oid().value);});
 
@@ -153,7 +153,7 @@ std::string SerikBLDCore::Calisma::Calisma::Aciklama() const
 {
     auto val = this->element (Key::aciklama);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -163,7 +163,7 @@ double SerikBLDCore::Calisma::Calisma::Miktar() const
 {
     auto val = this->element (Key::miktar);
     if( val ){
-        return val.value ().get_double ().value;
+        return val->view ().get_double ().value;
     }else{
         return 0;
     }
@@ -173,7 +173,7 @@ std::string SerikBLDCore::Calisma::Calisma::isKategorisi() const
 {
     auto val = this->element (Key::isKategorisi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -203,7 +203,7 @@ std::string SerikBLDCore::Calisma::Kategori::getKategoriAdi() const
 {
     auto val = this->element (KategoriKey::kategoriAdi);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -219,7 +219,7 @@ std::string SerikBLDCore::Calisma::Kategori::getKategoriMudurluk() const
 {
     auto val = this->element (KategoriKey::kategoriMudurluk);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
@@ -235,7 +235,7 @@ std::string SerikBLDCore::Calisma::Kategori::getKategoriBirimi() const
 {
     auto val = this->element (KategoriKey::kategoriBirim);
     if( val ){
-        return val.value ().get_utf8 ().value.to_string();
+        return val->view ().get_string().value.data();
     }else{
         return "";
     }
