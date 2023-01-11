@@ -85,7 +85,7 @@ namespace BirimKey {
 inline constexpr std::string Collection{"Müdürlükler"};
 inline constexpr std::string birim{"Birim"};
 static const std::string haberlesmeKodu{"Haberleşme Kodu"};
-inline constexpr std::string sirano{"sirano"};
+inline constexpr std::string sirano{"sira"};
 }
 
 
