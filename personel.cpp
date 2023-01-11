@@ -381,6 +381,21 @@ QString SerikBLDCore::IK::BirimItem::HaberlesmeKodu() const
     return "";
 }
 
+SerikBLDCore::IK::BirimItem &SerikBLDCore::IK::BirimItem::setSiraNo(const int32_t &sirano)
+{
+    this->append(BirimKey::sirano,sirano);
+    return *this;
+}
+
+int32_t SerikBLDCore::IK::BirimItem::SiraNo() const
+{
+    auto val = this->element(BirimKey::sirano);
+    if( val ){
+        return val->view().get_int32().value;
+    }
+    return -1;
+}
+
 SerikBLDCore::IK::AltBirimItem::AltBirimItem()
     :Item (AltBirimKey::Collection)
 {

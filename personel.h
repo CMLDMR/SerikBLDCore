@@ -82,10 +82,10 @@ public:
 
 namespace BirimKey {
 
-static const std::string Collection{"Müdürlükler"};
-static const std::string birim{"Birim"};
+inline constexpr std::string Collection{"Müdürlükler"};
+inline constexpr std::string birim{"Birim"};
 static const std::string haberlesmeKodu{"Haberleşme Kodu"};
-
+inline constexpr std::string sirano{"sirano"};
 }
 
 
@@ -104,6 +104,10 @@ public:
     QString birimAdi() const;
 
     QString HaberlesmeKodu() const;
+
+    BirimItem& setSiraNo( const std::int32_t &sirano);
+
+    std::int32_t SiraNo() const;
 
 };
 
