@@ -66,6 +66,7 @@ public:
 namespace PartiKey {
 static const std::string Collection{"Partiler"};
 static const std::string parti{"parti"};
+inline constexpr std::string sira{"sira"};
 }
 
 class SERIKBLDCORE_EXPORT PartiItem : public SerikBLDCore::Item
@@ -76,6 +77,10 @@ public:
     PartiItem& setParti( const std::string& parti );
 
     QString parti() const;
+
+    PartiItem& setSira( const std::int32_t &sira );
+
+    std::int32_t Sira() const;
 };
 
 

@@ -206,6 +206,21 @@ QString SerikBLDCore::Meclis::PartiItem::parti() const
     return "";
 }
 
+SerikBLDCore::Meclis::PartiItem &SerikBLDCore::Meclis::PartiItem::setSira(const int32_t &sira)
+{
+    this->append(PartiKey::sira,sira);
+    return *this;
+}
+
+int32_t SerikBLDCore::Meclis::PartiItem::Sira() const
+{
+    auto val = this->element(PartiKey::sira);
+    if( val ){
+        return val->view().get_int32().value;
+    }
+    return 999999;
+}
+
 SerikBLDCore::Meclis::KomisyonItem::KomisyonItem()
     :SerikBLDCore::Item (KomisyonKey::Collection)
 {
