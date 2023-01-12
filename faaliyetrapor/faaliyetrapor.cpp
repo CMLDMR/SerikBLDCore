@@ -186,9 +186,9 @@ std::vector<std::string> SerikBLDCore::Faaliyet::TableItem::headers() const
     if( val ){
         auto arr = val->view ().get_array ().value;
 
-//        std::transform(arr.begin (),arr.end (),header.begin (),[](const bsoncxx::array::element &element ){
-//            return element.get_string ().value.to_string();
-//        });
+        //        std::transform(arr.begin (),arr.end (),header.begin (),[](const bsoncxx::array::element &element ){
+        //            return element.get_string ().value.to_string();
+        //        });
 
         for(const auto &item : arr ){
             header.push_back (item.get_string().value.data());
@@ -357,7 +357,7 @@ bool SerikBLDCore::Faaliyet::Manager::insertFaaliyetItem(const SerikBLDCore::Faa
     }
     auto ins = this->getDB ()->insertItem (faaliyetItem);
     if( ins.value ().result ().inserted_count () ){
-         return true;
+        return true;
     }else{
         this->errorOccured ("Faaliyet Oluşturulamadı");
         return false;
@@ -438,15 +438,15 @@ std::vector<SerikBLDCore::Faaliyet::FaaliyetItem> SerikBLDCore::Faaliyet::Manage
 std::vector<SerikBLDCore::Faaliyet::FaaliyetItem> SerikBLDCore::Faaliyet::Manager::ListFaaliyetItem(const int64_t &yil)
 {
     std::vector<SerikBLDCore::Faaliyet::FaaliyetItem> itemList;
-        auto cursor = this->getDB ()->find (SerikBLDCore::Faaliyet::FaaliyetItem().setYil (yil),SerikBLDCore::FindOptions().setLimit (100));
-        if( cursor ){
-            for(const auto &view : cursor.value () ){
-                SerikBLDCore::Faaliyet::FaaliyetItem item;
-                item.setDocumentView (view);
-                itemList.push_back (item);
-            }
+    auto cursor = this->getDB ()->find (SerikBLDCore::Faaliyet::FaaliyetItem().setYil (yil),SerikBLDCore::FindOptions().setLimit (100));
+    if( cursor ){
+        for(const auto &view : cursor.value () ){
+            SerikBLDCore::Faaliyet::FaaliyetItem item;
+            item.setDocumentView (view);
+            itemList.push_back (item);
         }
-        return itemList;
+    }
+    return itemList;
 }
 
 std::unique_ptr<SerikBLDCore::Faaliyet::FaaliyetItem> SerikBLDCore::Faaliyet::Manager::FaaliyetItem(const std::string &birim, const int64_t &yil)
@@ -602,5 +602,75 @@ std::vector<SerikBLDCore::Faaliyet::RaporItem> SerikBLDCore::Faaliyet::FaaliyetI
 SerikBLDCore::Faaliyet::PageBreak::PageBreak()
 {
     this->append(Key::type,Key::Type::pageBreak);
+
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::GirisBilgileri()
+    :SerikBLDCore::Item(Key::Collection)
+{
+
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setYil(const int32_t &yil)
+{
+    this->append(Key::yil,bsoncxx::types::b_int32{yil});
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setBelediyeLogoFile(const bsoncxx::oid &oid)
+{
+    this->append(Key::belediyeLogoFile,oid);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setAtaturkFile(const bsoncxx::oid &oid)
+{
+    this->append(Key::ataturkImageFile,oid);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setCumhurBaskaniFile(const bsoncxx::oid &oid)
+{
+    this->append(Key::cumhurbaskaniFile,oid);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setBelediyeBaskaniFile(const bsoncxx::oid &oid)
+{
+    this->append(Key::belediyebaskaniFile,oid);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setUstYoneticiSunumuBaskan(const std::string &sunum)
+{
+    this->append(Key::ustYoneticiSunumuBaskan,sunum);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setUstYoneticiSunumuBaskanBeyan(const std::string &beyan)
+{
+    this->append(Key::icKontrolGuvenceBaskan,beyan);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri &SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileri::setUstYoneticiSunumuMali(const std::string &sunum)
+{
+    this->append(Key::ustYoneticiSunumuMali,sunum);
+    return *this;
+}
+
+SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileriManager::GirisBilgileriManager(DB *_mdb)
+    :SerikBLDCore::ListItem<GirisBilgileri>(_mdb)
+{
+
+}
+
+void SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileriManager::onList(const QVector<GirisBilgileri> *mlist)
+{
+
+}
+
+void SerikBLDCore::Faaliyet::GirisBilgileri::GirisBilgileriManager::errorOccured(const std::string &error)
+{
 
 }

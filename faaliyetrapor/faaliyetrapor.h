@@ -164,14 +164,6 @@ private:
 };
 
 
-
-
-
-
-
-
-
-
 class SERIKBLDCORE_EXPORT Manager : public SerikBLDCore::ListItem<SerikBLDCore::Faaliyet::RaporItem>{
 public:
     explicit Manager( SerikBLDCore::DB* _mDB );
@@ -200,9 +192,54 @@ public:
 
 
 
+namespace GirisBilgileri {
+
+namespace Key {
+inline const std::string Collection{"faaliyetGirisBilgileri"};
+inline const std::string yil{"yil"};
+inline const std::string belediyeLogoFile{"belediyeLogoFile"};
+inline const std::string ataturkImageFile{"ataturkImageFile"};
+inline const std::string cumhurbaskaniFile{"cumhurbaskaniFile"};
+inline const std::string belediyebaskaniFile{"belediyebaskaniFile"};
+inline const std::string ustYoneticiSunumuBaskan{"ustYoneticiSunumuBaskan"};
+inline const std::string icKontrolGuvenceBaskan{"icKontrolGuvenceBaskan"};
+inline const std::string ustYoneticiSunumuMali{"ustYoneticiSunumuMali"};
+}
+
+class SERIKBLDCORE_EXPORT GirisBilgileri : public SerikBLDCore::Item
+{
+public:
+    GirisBilgileri();
+
+    GirisBilgileri& setYil( const std::int32_t &yil );
+
+
+    GirisBilgileri& setBelediyeLogoFile( const bsoncxx::oid &oid );
+    GirisBilgileri& setAtaturkFile( const bsoncxx::oid &oid );
+    GirisBilgileri& setCumhurBaskaniFile( const bsoncxx::oid &oid );
+    GirisBilgileri& setBelediyeBaskaniFile( const bsoncxx::oid &oid );
+
+    GirisBilgileri& setUstYoneticiSunumuBaskan( const std::string &sunum );
+    GirisBilgileri& setUstYoneticiSunumuBaskanBeyan( const std::string &beyan );
+    GirisBilgileri& setUstYoneticiSunumuMali( const std::string &sunum );
+
+};
+
+
+class SERIKBLDCORE_EXPORT GirisBilgileriManager : public SerikBLDCore::ListItem<GirisBilgileri>
+{
+public:
+    GirisBilgileriManager( SerikBLDCore::DB* _mdb );
+
+    virtual void onList( const QVector<GirisBilgileri> *mlist ) override;
+
+    virtual void errorOccured( const std::string &error ) override;
+
+};
 
 }
 
+}
 
 }
 
