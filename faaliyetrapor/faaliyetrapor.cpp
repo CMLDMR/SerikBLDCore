@@ -169,10 +169,15 @@ SerikBLDCore::Faaliyet::TableItem::TableItem()
 
 SerikBLDCore::Faaliyet::TableItem &SerikBLDCore::Faaliyet::TableItem::setHeaders(const std::vector<std::string> &headers)
 {
-
+    bsoncxx::builder::basic::array ar{};
     for( const auto &item : headers ){
-        this->pushArray ("header",item);
+        try {
+            ar.append(item);
+        } catch (bsoncxx::exception &e) {
+            errorOccured("Faaliyer Rapor Table Item : setHeaders  " + std::string(e.what()));
+        }
     }
+    this->append("header",ar);
     return *this;
 }
 
