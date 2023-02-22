@@ -32,6 +32,7 @@ namespace SerikBLDCore {
 class Item;
 class FindOptions;
 
+
 class SERIKBLDCORE_EXPORT DB
 {
 public:

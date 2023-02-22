@@ -270,6 +270,8 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
         filter.append(kvp("_id",bsoncxx::oid{fileOid.toStdString()}));
     } catch (bsoncxx::exception &e) {
         std::cout << "\nLOG: " << e.what() << "\n";
+        this->setLastError(e.what());
+        return "img/error.png";
     }
 
     auto val = this->mDB->collection("fs.files").find_one(filter.view());
@@ -297,6 +299,8 @@ std::string SerikBLDCore::DB::downloadFileWeb(const QString &fileOid, bool force
         }
     }else{
         fileDownloadedBefore = false;
+        this->setLastError("Dosya Bulunamadı");
+        return "img/error.png";
     }
 
     if( fileDownloadedBefore ){

@@ -1,0 +1,25 @@
+var class_serik_b_l_d_core_1_1_dilekce_cevap =
+[
+    [ "DilekceCevap", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a337d5bb5675eb8b12bbe3a4b93e1dfd5", null ],
+    [ "DilekceCevap", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a9b02606d10ca9c3fde0ab6a0adc187e1", null ],
+    [ "DilekceCevap", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a636f1b1e9d4df2bf2765ea148736263d", null ],
+    [ "addEkOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a378d31c00b7dc6eaac47213e178ecdbc", null ],
+    [ "cevapIcerik", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#ae78aa539a383f0c35e279ac3595497bc", null ],
+    [ "cevapOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a76fb6c5ffa13a81cbab53f769db2f554", null ],
+    [ "dilekceOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a88e35143d44320b511d000ac23ccc3d6", null ],
+    [ "ekList", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a3f9a468b231413e4923d091d1ee62d00", null ],
+    [ "julianDay", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a5e017291ba14a720f806f9489ca6d336", null ],
+    [ "operator=", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#ab27c69d7d6d41b024fdbe4598f020d95", null ],
+    [ "operator=", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a806c38d34411bdcc2e31c6041a2023e7", null ],
+    [ "personelName", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a184ecb864590eb5e86f5e975113e36e1", null ],
+    [ "personelOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a1d64bf52d8266a2b5db9c9d4a043de03", null ],
+    [ "saat", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a877e89e0041d841e9347cd65ff08f893", null ],
+    [ "setCevapIcerik", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#afae8ad9f3ab03e954b877e8e6c86e974", null ],
+    [ "setCevapOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a29a30ff69e2d3263bf88de6b25c8965f", null ],
+    [ "setDilekceOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#abb1afbb9ea360eb24893bdbbfdc353a3", null ],
+    [ "setJulianDay", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a1d9006d61f67971377422cde62c3b88a", null ],
+    [ "setPersonelName", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a5a0a8b8bbb5c15853b5ec94c4bc30e9f", null ],
+    [ "setPersonelOid", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a436d07b3cf3071656c75bca3ceb506f9", null ],
+    [ "setSaat", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a0a5bf04370282363ca17d23e188c4d34", null ],
+    [ "Tarih", "dc/dd3/class_serik_b_l_d_core_1_1_dilekce_cevap.html#a252d64eaaca0ae50047b3f953249eb8d", null ]
+];
