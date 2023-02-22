@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SerikBLDCore: C:/SerikBLDCore/sms/smsitem.h Kaynak Dosyası</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SerikBLDCore
+   </div>
+   <div id="projectbrief">Serik Belediyesi Uygulama Çekirdeği</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Oluşturan Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "../../search",false,'Ara');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',true,false,'search.php','Ara');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('d4/d2f/smsitem_8h_source.html','../../');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">smsitem.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SMSITEM_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SMSITEM_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Config.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;item.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QByteArray&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QXmlStreamWriter&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="../../d1/d36/class_serik_b_l_d_core.html">SerikBLDCore</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>SMS {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string Collection{<span class="stringliteral">&quot;SMSCollection&quot;</span>};</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string sms{<span class="stringliteral">&quot;sms&quot;</span>};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string numara{<span class="stringliteral">&quot;telefon&quot;</span>};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string smsID{<span class="stringliteral">&quot;smsid&quot;</span>};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string mSecStartDay{<span class="stringliteral">&quot;mSecStartDay&quot;</span>};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> std::string julianday{<span class="stringliteral">&quot;julianDay&quot;</span>};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">   27</a></span>&#160;<span class="keyword">class </span>SERIKBLDCORE_EXPORT <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a> : <span class="keyword">public</span> <a class="code" href="../../d8/dc7/class_serik_b_l_d_core_1_1_item.html">SerikBLDCore::Item</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>( <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>* other = <span class="keyword">nullptr</span> );</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>( <span class="keyword">const</span> <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; other );</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>( <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp;&amp; other );</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; operator=( <span class="keyword">const</span> <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; other );</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; operator=( <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp;&amp; other );</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; setSMS( <span class="keyword">const</span> QString &amp;smsText );</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    QString smsText() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; setNumara( <span class="keyword">const</span> QString&amp; numaraText );</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    QString numaraText() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; setID( <span class="keyword">const</span> QString&amp; smsIDText );</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QString idText() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; setmSecStartOfDay( <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; mSecStartOfDay );</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">int</span> secStartOfDay() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; setJulianDay( <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; julianday );</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">int</span> julianDay() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; operator &lt;&lt; (std::ostream&amp; streamer, <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; item);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; operator &lt;&lt; (std::ostream&amp; streamer, <span class="keyword">const</span> <a class="code" href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SMSItem</a>&amp; item);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif // SMSITEM_H</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item_html"><div class="ttname"><a href="../../db/d6c/class_serik_b_l_d_core_1_1_s_m_s_1_1_s_m_s_item.html">SerikBLDCore::SMS::SMSItem</a></div><div class="ttdoc">The SMSItem class : Gönderilecek SMS Item.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d2f/smsitem_8h_source.html#l00027">smsitem.h:27</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_1_1_item_html"><div class="ttname"><a href="../../d8/dc7/class_serik_b_l_d_core_1_1_item.html">SerikBLDCore::Item</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d1f/item_8h_source.html#l00023">item.h:23</a></div></div>
+<div class="ttc" id="aclass_serik_b_l_d_core_html"><div class="ttname"><a href="../../d1/d36/class_serik_b_l_d_core.html">SerikBLDCore</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d92/serikbldcore_8h_source.html#l00006">serikbldcore.h:6</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_8e035d9dc690856fa4bdaf6316e5efd9.html">SerikBLDCore</a></li><li class="navelem"><a class="el" href="../../dir_af9522bf52b639a9d2a6e718f378e42b.html">sms</a></li><li class="navelem"><b>smsitem.h</b></li>
+    <li class="footer">Oluşturan
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
+  </ul>
+</div>
+</body>
+</html>
