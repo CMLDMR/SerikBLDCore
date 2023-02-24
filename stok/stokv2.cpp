@@ -142,7 +142,7 @@ std::optional<SerikBLDCore::Stokv2::Giris> SerikBLDCore::Stokv2::Stok::toGiris()
 {
     auto val = this->element ("type");
     if( val ){
-        if( val->view ().get_string().value.data() == "giris" ){
+        if( strcmp(val->view ().get_string().value.data() , "giris" ) == 0 ){
             SerikBLDCore::Stokv2::Giris girisItem(*this);
             girisItem.append("type","giris");
             return girisItem;
@@ -158,7 +158,7 @@ std::optional<SerikBLDCore::Stokv2::Cikis> SerikBLDCore::Stokv2::Stok::toCikis()
 {
     auto val = this->element ("type");
     if( val ){
-        if( val->view ().get_string().value.data() == "giris" ){
+        if( strcmp(val->view ().get_string().value.data() , "giris" ) != 0 ){
             SerikBLDCore::Stokv2::Cikis cikisItem(*this);
             cikisItem.append("type","cikis");
             return cikisItem;
