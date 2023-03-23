@@ -65,6 +65,21 @@ std::string SerikBLDCore::Faaliyet::RaporItem::parentUuid() const
     return "";
 }
 
+SerikBLDCore::Faaliyet::RaporItem &SerikBLDCore::Faaliyet::RaporItem::setDelete(const bool &deleted)
+{
+    this->append(Key::deleted,deleted);
+    return *this;
+}
+
+bool SerikBLDCore::Faaliyet::RaporItem::isDeleted() const
+{
+    auto val = this->element (Key::deleted);
+    if( val ){
+        return val->view ().get_bool().value;
+    }
+    return false;
+}
+
 
 bool SerikBLDCore::Faaliyet::RaporItem::isBaslik() const
 {
