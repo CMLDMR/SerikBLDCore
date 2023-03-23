@@ -55,6 +55,8 @@ static const std::string uuid{"uuid"};
 static const std::string parentuuid{"parentUuid"};
 static const std::string onayli{"onayli"};
 static const std::string onaylayan{"onaylayan"};
+inline const std::string deleted{"deleted"};
+
 
 namespace Type {
 static const std::string baslik{"baslik"};
@@ -89,6 +91,8 @@ public:
     RaporItem& setParentUuid( const std::string &uuid );
     std::string parentUuid() const;
 
+    RaporItem& setDelete( const bool &deleted = true );
+    bool isDeleted() const ;
 
 
 
