@@ -12,12 +12,12 @@ SerikBLDCore::PersonelManager::PersonelManager(mongocxx::database *_db) : ListIt
 
 }
 
-QVector<SerikBLDCore::IK::Personel> SerikBLDCore::PersonelManager::PersonelList(const std::string &birim)
+QVector<SerikBLDCore::IK::Personel> SerikBLDCore::PersonelManager::PersonelList(const std::string &birim  , const int limit , const int skip )
 {
     QVector<IK::Personel> list;
     IK::Personel personel;
     personel.setBirim (birim.c_str ());
-    auto cursor = this->find (personel);
+    auto cursor = this->find (personel,limit,skip);
     if( cursor )
     {
         for( auto item : cursor.value () )
