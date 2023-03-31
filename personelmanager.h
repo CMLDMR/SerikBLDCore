@@ -11,7 +11,7 @@ public:
     explicit PersonelManager( DB* _mDB );
     explicit PersonelManager( mongocxx::database* _db );
 
-    QVector<IK::Personel> PersonelList( const std::string &birim );
+    QVector<IK::Personel> PersonelList( const std::string &birim , const int limit = 20 , const int skip = 0 );
 
     void onList(const QVector<IK::Personel> *mlist) override;
 
