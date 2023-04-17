@@ -16,6 +16,7 @@ class ListItem : public DB
 {
 public:
     ListItem(DB* db) : DB(db),__limit(20),__skip(0){}
+    ListItem():DB(DB::instance()),__limit(20),__skip(0){}
 
     inline const T &itemAt(const QString &byOid)
     {

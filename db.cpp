@@ -4,53 +4,71 @@
 #include <QFileInfo>
 #include <fstream>
 #include <QDir>
+#include <mutex>
+#include <string>
 
 
 
 
 static int DBConnectionCount = 0;
 
+std::once_flag db_once_flag;
+SerikBLDCore::DB* SerikBLDCore::DB::mDataBase = nullptr;
+std::string SerikBLDCore::DB::mUrl{};
+
 SerikBLDCore::DB::DB()
 {
-//    std::cout << "New Connect: Connection Count: " << ++DBConnectionCount << std::endl;
-//    mConstructWithNewClient = true;
-//    try {
-//        mClient = new mongocxx::client(mongocxx::uri(_url));
-//    } catch (mongocxx::exception &e) {
-//        std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
-//        std::cout << str << std::endl;
-//    }
-//    _mDB = mClient->database (DB__);
+    if( !mUrl.empty() ){
+        std::cout << "New Connect: Connection Count: " << ++DBConnectionCount << std::endl;
+        mConstructWithNewClient = true;
+        try {
+            mClient = new mongocxx::client(mongocxx::uri(mUrl));
+        } catch (mongocxx::exception &e) {
+            std::string str = "ERROR: " + std::to_string(__LINE__) + " " + __FUNCTION__ + " " + e.what();
+            std::cout << str << std::endl;
+        }
+        _mDB = mClient->database (DB__);
+        mDB = &_mDB;
+    }else{
+        std::cout << "\nURL EMPTY. Connection URL Required\n";
+    }
+
 }
 
 SerikBLDCore::DB::DB(const DB &db)
-    :mDB(db.mDB)
+    :mLastError(db.mLastError),
+    mConstructWithNewClient(db.mConstructWithNewClient),
+    mDB(db.mDB)
 {
-//    std::cout << "DB::DB(const DB &db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
 SerikBLDCore::DB::DB(SerikBLDCore::DB &&other)
-    :mDB(other.mDB)
+    :mLastError(other.mLastError),
+    mConstructWithNewClient(other.mConstructWithNewClient),
+    mDB(other.mDB)
 {
-//    std::cout << "DB::DB(DB &&db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
 SerikBLDCore::DB::DB(mongocxx::database *_db)
     :mDB( _db )
 {
-//    std::cout << "DB::DB(mongocxx::database *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
-SerikBLDCore::DB::DB(DB *_db) : mDB(_db->db ())
+SerikBLDCore::DB::DB(DB *_db)
+    :mLastError(_db->mLastError),
+    mConstructWithNewClient(_db->mConstructWithNewClient),
+    mDB(_db->mDB)
 {
-//    std::cout << "DB::DB(DB *_db): " << DBConnectionCount << std::endl;
     mConstructWithNewClient = false;
 }
 
-SerikBLDCore::DB::DB(const DB *_db) : mDB( _db->getDB ()->mDB )
+SerikBLDCore::DB::DB(const DB *_db)
+    :mLastError(_db->mLastError),
+    mConstructWithNewClient(_db->mConstructWithNewClient),
+    mDB(_db->mDB)
 {
 
 }
@@ -63,6 +81,10 @@ SerikBLDCore::DB::~DB()
     if( mConstructWithNewClient )
     {
         std::cout << "Delete DB Connection, CurrentConnection Count: " <<  --DBConnectionCount << std::endl;
+    }
+
+    if( mClient ){
+        delete mClient;
     }
     std::cout << "DB Destructor End" << std::endl;
 }
@@ -863,3 +885,21 @@ void SerikBLDCore::DB::setLastError(const QString &lastError)
 }
 
 
+
+
+namespace SerikBLDCore {
+DB *DB::instance()
+{
+    std::call_once(db_once_flag, [=](){
+        mDataBase = new DB();
+    });
+    return mDataBase;
+}
+
+void DB::setUrl(const std::string _url)
+{
+    mUrl = _url;
+}
+
+
+}
