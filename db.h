@@ -14,14 +14,7 @@
 #include "mongoheaders.h"
 #endif
 
-
-#ifndef CPP17
-#include <boost/optional.hpp>
-#endif
-
-#ifdef CPP17
 #include <optional>
-#endif
 
 
 #include "item.h"
@@ -168,13 +161,19 @@ public:
     QString getLastError();
     void setLastError(const QString &lastError);
 
+    static DB *instance() ;
+
+    static void setUrl(const std::string _url );
+
 private:
-    //    mongocxx::database _mDB;
-    //    mongocxx::client* mClient;
+        mongocxx::database _mDB;
+        mongocxx::client* mClient = nullptr;
 
     QString mLastError;
     bool mConstructWithNewClient;
     mongocxx::database* mDB;
+    static DB* mDataBase;
+    static std::string mUrl;
 };
 
 
